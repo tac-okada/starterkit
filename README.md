@@ -25,6 +25,12 @@ npm install
 ```
 gulp
 ```
+スプライト画像とCSSの生成は以下コマンドで実行可能です。
+```
+gulp sprite
+```
+* 画像生成：`src/images/sprite/` ⇒ `src/images/sprite.png`
+* scss生成： ⇒ `src/styles/_sprite.scss`
 
 ## 対応ブラウザ
 * 各種モダンブラウザ最新バージョン・IE11以上
