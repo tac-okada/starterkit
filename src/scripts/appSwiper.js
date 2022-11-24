@@ -1,13 +1,39 @@
-import Swiper from 'swiper';
+import { Core } from './libs/core.js';
+import Swiper, { Navigation, Pagination } from 'swiper';
 
+class AppSwiper extends Core {
 /*
-
-app.swiper.js  -----------------------------------------------
-
+  使用可能な定数・変数一覧  -----------------------------------------------
+  ● UAなど：this.USER
+  ● 画面サイズなど：this.win
+  ● メディアクエリ：this.mql（現在のデバイス：pc/tb/sp）
+  ● transitionEndイベント：this.transitionEnd
+  ● animationEndイベント：this.animationEnd
 */
-app.swiper = (() => {
 
-  const setSwiper = () => {
+  /* スクロール時に実行 */
+  scrollHandler () {
+    //console.info(this.win.scrollTop,this.win.scrollBottom);
+  }
+
+  /* 画面リサイズ時に実行 */
+  resetHandler () {
+    //console.info(this.win.width,this.mql);
+  }
+
+  /* ページ読み込み時に実行 */
+  loadHandler () {
+
+    /* ここでブラウザイベントを有効にする */
+    this.enableScroll();
+    this.win.response = true;
+
+    this.setSwiper();
+  }
+
+  setSwiper () {
+    Swiper.use([Navigation, Pagination]);
+
     const swiper = new Swiper('.swiper', {
       //loop: true,
       centeredSlides: true,
@@ -21,6 +47,7 @@ app.swiper = (() => {
       pagination: {
         el: '.swiper-pagination',
         type: 'bullets',
+        clickable: true
       },
       breakpoints: {// レスポンシブ：スマホファースト
         1000: {// 1000px以上
@@ -53,30 +80,9 @@ app.swiper = (() => {
         }
       }
     });
-  };
+  }
+};
 
-  /* 画面リサイズ時に実行 */
-  const resizeHandler = () => {
-    //console.info(app.win.width,app.mql);
-  };
-
-  /* スクロール時に実行 */
-  const scrollHandler = () => {
-    //console.info(app.win.scrollTop,app.win.scrollBottom);
-  };
-
-  /* ページ読み込み時に実行 */
-  const initialize = () => {
-    //console.info(app.USER,app.mql,app.win)
-    /* ここでブラウザイベントを有効にする */
-    app.core.enableScroll();
-    app.win.response = true;
-    setSwiper();
-  };
-
-  return {
-    resizeHandler,
-    scrollHandler,
-    initialize
-  };
-})();
+window.appSwiper = window.appSwiper || new AppSwiper;
+/* ブレイクポイント指定：タブレット,スマホ */
+appSwiper.initialize(1024,767);

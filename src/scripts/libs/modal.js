@@ -4,6 +4,7 @@ youtubeAPI.initialize();
 export class Modal {
 
   constructor () {
+    this.core = {},
     this.$window = $(window),
     this.$html = $('html'),
     this.$btn = $('.js-modalOpen'),
@@ -32,11 +33,14 @@ export class Modal {
     }
   }
 
-  initialize () {
+  initialize ( core ) {
+    this.core = core;
     this.setTrigger();
     this.state.response = true;
     let _timer;
     let that = this;
+
+    //console.info(this.core)
 
     this.$window.on({
       'resize' : function(){
@@ -90,9 +94,8 @@ export class Modal {
 
   setBody = {
     fixed (that) {
-      //console.info(that);
       /* for andrid ver4.4 under */
-      if( app.USER.os === 'android' && app.USER.osVersion < 4.4 ){
+      if( that.core.USER.os === 'android' && that.core.USER.osVersion < 4.4 ){
         that.$body.addClass('absolute').css({
           'position': 'absolute',
           'width': '100%'
@@ -139,7 +142,7 @@ export class Modal {
 
     /* for iOS iframeScroll */
     if ( this.proto.$obj.hasClass('modal_iframe') ) {
-      if( app.USER.os === 'ios' ){
+      if( this.core.USER.os === 'ios' ){
         this.proto.$obj.css({
           'overflow-y': 'auto',
           '-webkit-overflow-scrolling': 'touch'
@@ -158,7 +161,7 @@ export class Modal {
       this.$bg = $('#modal_bg');
       this.$close_btn = $('#modal_close');
 
-      if( app.USER.device === 'ipad' || app.USER.device === 'androidtablet' || app.USER.device === 'kindle' ){// タブレット時のみ位置調整
+      if( this.core.USER.device === 'ipad' || this.core.USER.device === 'androidtablet' || this.core.USER.device === 'kindle' ){// タブレット時のみ位置調整
         this.$close_btn.addClass('tb');
       }
     }
@@ -176,7 +179,7 @@ export class Modal {
     /* iOS15用：ここから */
     let activeHeightDiff;
     //alert(window.navigator.userAgent.toLowerCase())
-    if( app.USER.os === 'ios' ){
+    if( this.core.USER.os === 'ios' ){
       activeHeightDiff = 100;
     } else {
       activeHeightDiff = 70;
@@ -186,35 +189,35 @@ export class Modal {
     // for modalActive
     if( $active[0] ){
       if ( $active.hasClass('modal_yt') ) {
-        //console.info(app.mql)
-        if ( app.mql === 'pc' ) {
+        //console.info(this.core.mql)
+        if ( this.core.mql === 'pc' ) {
           /* PC時横幅固定 */
           this.state.width = Math.round( 960 );
         } else {
-          this.state.width = app.win.width;
+          this.state.width = this.core.win.width;
         }
         this.state.height = Math.round( this.state.width * 0.5625 );
 
-        if ( this.state.height >= app.win.height ) {
-          this.state.height = app.win.height;
-          this.state.width = app.win.height * 1.777777;
+        if ( this.state.height >= this.core.win.height ) {
+          this.state.height = this.core.win.height;
+          this.state.width = this.core.win.height * 1.777777;
         }
         $active.css({
           'height' : this.state.height,
           'width' : this.state.width,
-          'left' : ( ( app.win.width - this.state.width ) / 2 ) + 'px',
-          'top' : ( ( app.win.height - this.state.height ) / 2 ) + 'px'
+          'left' : ( ( this.core.win.width - this.state.width ) / 2 ) + 'px',
+          'top' : ( ( this.core.win.height - this.state.height ) / 2 ) + 'px'
         });
       } else if( $active.hasClass('modal_iframe') ) {
         $active.css({ 
-          'height' : app.win.height - activeHeightDiff,
+          'height' : this.core.win.height - activeHeightDiff,
           'top' : '60px',
-          'left' : ( ( app.win.width - this.state.width ) / 2 ) + 'px'
+          'left' : ( ( this.core.win.width - this.state.width ) / 2 ) + 'px'
         });
       } else {
         $active.css({
-          'left' : ( ( app.win.width - this.state.width ) / 2 ) + 'px',
-          'top' : ( ( app.win.height - this.state.height ) / 2 ) + 'px'
+          'left' : ( ( this.core.win.width - this.state.width ) / 2 ) + 'px',
+          'top' : ( ( this.core.win.height - this.state.height ) / 2 ) + 'px'
         });
       }
     }
@@ -225,11 +228,11 @@ export class Modal {
     open ( that, obj ) {
       that.state.response = false;
       //console.info(that.proto.$obj,that.state.next)
-      that.$bg.removeClass('hdn out').addClass('active in').on(app.animationEnd, () => {
-        that.$bg.off(app.animationEnd);
+      that.$bg.removeClass('hdn out').addClass('active in').on(that.core.animationEnd, () => {
+        that.$bg.off(that.core.animationEnd);
         if( obj.bg_click ){/* パラメータ「bg_click」がtrueの場合 */
-          that.$close_btn.removeClass('hdn out').addClass('active in').on(app.transitionEnd, () => {
-            that.$close_btn.off(app.transitionEnd);
+          that.$close_btn.removeClass('hdn out').addClass('active in').on(that.core.transitionEnd, () => {
+            that.$close_btn.off(that.core.transitionEnd);
           });
         } else { /* パラメータ「bg_click」がfalseの場合 */
         }
@@ -237,8 +240,8 @@ export class Modal {
           /* iframeのスクロール位置をTOPに */
           that.proto.$obj.children('iframe').contents().find('html,body').scrollTop(0);
         }
-        that.proto.$obj.removeClass('hdn out').addClass('in').on(app.animationEnd, () => {
-          that.proto.$obj.off(app.animationEnd);
+        that.proto.$obj.removeClass('hdn out').addClass('in').on(that.core.animationEnd, () => {
+          that.proto.$obj.off(that.core.animationEnd);
           that.state.response = true;
         });
 
@@ -255,14 +258,14 @@ export class Modal {
       /* iOSでfixed要素のバグ（チラツキ）のためここに移動 */
       that.setBody.relative( that );
 
-      that.$bg.removeClass('in').addClass('out').on(app.animationEnd, function() {
-        that.$bg.off(app.animationEnd).removeClass('active out').addClass('hdn');
+      that.$bg.removeClass('in').addClass('out').on(that.core.animationEnd, function() {
+        that.$bg.off(that.core.animationEnd).removeClass('active out').addClass('hdn');
       });
-      that.$close_btn.removeClass('in').addClass('out').on(app.transitionEnd, function() {
-        that.$close_btn.off(app.transitionEnd).removeClass('active out').addClass('hdn');
+      that.$close_btn.removeClass('in').addClass('out').on(that.core.transitionEnd, function() {
+        that.$close_btn.off(that.core.transitionEnd).removeClass('active out').addClass('hdn');
       });
-      _obj.target.removeClass('in').addClass('out').on(app.animationEnd, function() {
-        _obj.target.off(app.animationEnd).removeClass('active out').removeAttr('style');
+      _obj.target.removeClass('in').addClass('out').on(that.core.animationEnd, function() {
+        _obj.target.off(that.core.animationEnd).removeClass('active out').removeAttr('style');
         that.state.response = true;
       });
     }
@@ -396,7 +399,7 @@ export class Modal {
       that.$close.off('click').on({ 
         'click' : function(e){
           e.preventDefault();
-          //console.info(this.state.response)
+          //console.info(that.state.response)
           if( that.state.response ){
             that.setCloseBtn.setupEvent( that, obj );
           }

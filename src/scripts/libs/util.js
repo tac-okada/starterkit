@@ -162,13 +162,13 @@ export class UserAgent {
 */
 export class MediaQueries {
 
-  constructor ( tb, sp ) {
-    //this.device = '';
-    this.mqlTb ='';
-    this.mqlSp = '';
+  constructor ( tb, sp, core ) {
+    //this.device = '',
+    this.mqlTb ='',
+    this.mqlSp = ''
   }
 
-  initialize ( tb, sp ) {
+  initialize ( tb, sp, core ) {
     let that = this;
     if( typeof tb !== 'undefined' ){
       this.mqlTb = tb;
@@ -180,21 +180,21 @@ export class MediaQueries {
     } else {
       this.mqlSp = 767;
     }
-    window.matchMedia('screen and (max-width:' + this.mqlTb + 'px)').addListener( function() { that.responsive(); });
-    window.matchMedia('screen and (max-width:' + this.mqlSp + 'px)').addListener( function() { that.responsive(); });
-    this.responsive();
+    window.matchMedia('screen and (max-width:' + this.mqlTb + 'px)').addListener( function() { that.responsive(core); });
+    window.matchMedia('screen and (max-width:' + this.mqlSp + 'px)').addListener( function() { that.responsive(core); });
+    this.responsive(core);
   }
 
-  responsive () {
+  responsive (core) {
     if( window.matchMedia('screen and (max-width:' + this.mqlTb + 'px)').matches ){
       if( window.matchMedia('screen and (max-width:' + this.mqlSp + 'px)').matches ) {
-        app.mql = 'sp';
+        core.mql = 'sp';
         return false;
       }
-      app.mql = 'tb';
+      core.mql = 'tb';
       return false;
     } else {
-      app.mql = 'pc';
+      core.mql = 'pc';
       return false;
     }
   }

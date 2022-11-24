@@ -1,3 +1,6 @@
+import gsap from 'gsap';
+import $ from 'jquery';
+
 import { UserAgent, MediaQueries } from './util.js';
 import { setConsoleIe, setScroll, setToggle, setTelCall } from './functions.js';
 
@@ -9,13 +12,14 @@ import { setConsoleIe, setScroll, setToggle, setTelCall } from './functions.js';
 export class Core {
 
   constructor () {
-    this.appMethodes = ['core','USER','win','mql','transitionEnd','animationEnd','initialize'],
-    this.pages = [],
+    this.setGlobal(),
     this.scroll = 'onwheel' in document ? 'wheel' : 'onmousewheel' in document ? 'mousewheel' : 'DOMMouseScroll',
     this.ua = new UserAgent,
-    //this.USER = this.ua.initialize(),
-    this.mql = new MediaQueries(),
-    //this.mql = '',
+    this.USER = {},
+    this.mediaQueries = new MediaQueries(),
+    this.transitionEnd = 'webkitTransitionEnd mozTransitionEnd oTransitionEnd transitionend',
+    this.animationEnd = 'webkitAnimationEnd mozAnimationEnd oAnimationEnd animationend',
+    this.mql = '',
     this.win = {
       width : 0,
       height : 0,
@@ -28,40 +32,12 @@ export class Core {
     }
   }
 
-  setPages () {
-    //console.info(app,Object.keys(app),app.methodes)
-    let that = this;
-    //this.pages = this.appMethodes.filter(i => Object.keys( app ).indexOf(i) == -1);
-    //console.info(this.appMethodes,Object.keys(app),this.pages)
-
-    Object.keys( app ).map( function (key) {
-      console.info(app)
-      /* appMethodesにあるメソッドは除外する */
-      for( let i = 0, len = that.appMethodes.length; i <= len; i++ ){
-        console.info(i, len, key,that.appMethodes[i]);
-        if( key !== that.appMethodes[i] ){
-          console.info(key,that.appMethodes[i],len,i)
-          if( i >= len ){
-            console.info(key)
-            that.pages.push(key);
-          }
-        } else {
-          return false;
-        }
-      }
-    });
-    //console.info(that.pages)
-  }
-
   initialize ( tb, sp ) {
 
     /* 基本情報セット */
-    app.USER = this.ua.initialize();
-    this.mql.initialize(tb,sp);
-    app.win = this.win;
-
-    /* 個別ページを配列pagesに挿入 */
-    this.setPages();
+    this.USER = this.ua.initialize();
+    this.mediaQueries.initialize(tb,sp,this);
+    this.win = this.win;
 
     /* browser情報をhtmlへ */
     document.documentElement.classList.add(this.ua.USER.css.join(','));
@@ -70,10 +46,26 @@ export class Core {
     this.disableScroll();
     this.setupEvents();
 
+    /* windowイベント */
     window.addEventListener('scroll', () => { this.scrollEvents(this) }, false);
     window.addEventListener('resize', () => { this.resetEvents(this) }, false);
 
     this.loadEvents();
+  }
+
+  setGlobal () {
+    /*
+    
+      グローバル変数  -----------------------------------------------
+    
+    */
+
+    /* GSAP */
+    window.gsap = gsap;
+    
+    /* jQuery */
+    window.$ = $;
+    window.jQuery = $;
   }
 
   setupEvents () {
@@ -101,10 +93,8 @@ export class Core {
       this.win.isScrolling = false;
 
       /* 個別JSハンドラ */
-      for( let i = 0; i < this.pages.length; i++ ){
-        if ( typeof( app[this.pages[i]] ) !== 'undefined' ){
-          app[this.pages[i]].scrollHandler();
-        }
+      if ( typeof( this.scrollHandler ) !== 'undefined' ){
+        this.scrollHandler();
       }
     }, 10);
   }
@@ -112,39 +102,32 @@ export class Core {
   resetEvents () {
     //console.info(this,that)
     if ( this.ua.USER.device != 'desktop' && this.win.width == window.innerWidth ) return false;
-    if ( this.win.timer !== false ) clearTimeout(this.win.timer);
     //this.win.timer = setTimeout(() => {
       this.setupEvents();
       //console.info(this.win)
 
       /* 個別JSハンドラ */
-      for( let i = 0; i < this.pages.length; i++ ){
-        if ( typeof( app[this.pages[i]] ) !== 'undefined' ){
-          app[this.pages[i]].resizeHandler();
-        }
+      if ( typeof( this.resetHandler ) !== 'undefined' ){
+        this.resetHandler();
       }
-
     //}, 1);
   }
 
   loadEvents () {
-
+    //console.info(this)
     /* よく使う関数ここで実行 */
     setConsoleIe();
     setScroll();
     setToggle();
-    setTelCall();
+    setTelCall(this);
 
     /* 個別JSハンドラ */
-    for( let i = 0; i < this.pages.length; i++ ){
-      if ( typeof( app[this.pages[i]] ) !== 'undefined' ){
-        app[this.pages[i]].initialize();
-      } else {/* 個別JSが無い場合 */
-        if( i === pages.length - 1 ){
-          this.enableScroll();
-          this.win.response = true;
-        }
-      }
+    if ( typeof( this.loadHandler ) !== 'undefined' ){
+      this.loadHandler();
+    } else {
+      /* 個別JS無い場合ここでブラウザイベントを有効にする */
+      this.enableScroll();
+      this.win.response = true;
     }
   }
 

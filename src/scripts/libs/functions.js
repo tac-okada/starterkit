@@ -151,11 +151,11 @@ const setScTrigger = ( _sc_top, _w_h ) => {
 // リンクさせる：<p class="js-telCall" x-ms-format-detection="none">0120-00-0000</p>
 // リンクさせない：<p class="disableTel" x-ms-format-detection="none">0120-00-0000</p>
 // app.USER.deviceでUA判定し「SP」or「TB」のみ以下実行
-const setTelCall = () => {
+const setTelCall = core => {
   let telCall = document.querySelectorAll('.js-telCall'),
   txt, num;
-  //console.info(app.USER)
-  if ( app.USER.device !== 'desktop'){
+  //console.info(core.USER)
+  if ( core.USER.device !== 'desktop'){
     for (let i = 0; i < telCall.length; i++) {
       //console.info(telCall[i])
       txt = telCall[i].textContent;

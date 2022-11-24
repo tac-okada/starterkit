@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+<meta charset="UTF-8">
+<title></title>
+
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width,maximum-scale=1,user-scalable=yes">
+<meta name="format-detection" content="telephone=yes">
+
+<meta name="keywords" content="" > 
+<meta name="description" content="" >
+<link href="styles/contents.css" rel="stylesheet">
+<style type="text/css" media="screen">
+  main{
+    margin: 0 auto;
+    text-align: center;
+    padding: 80px;
+  }
+  h1{
+    margin-bottom: 60px;
+    font-size: 32px;
+    font-weight: bold;
+  }
+  h2{
+    font-size: 24px;
+    font-weight: bold;
+  }
+  section{
+    margin-bottom: 60px;
+  }
+  .toggleTest{
+    max-width: 640px;
+    background: #efefef;
+    margin: 10px auto 0;
+  }
+  .toggleTest .js-toggleBtn{
+    padding: 10px;
+  }
+  .toggleTest .js-toggleArea .inner{
+    padding: 0 15px 15px;
+  }
+
+  .grp_list{
+    letter-spacing: -1em;
+    word-spacing: 0.1em;
+    font-size: 0;
+  }
+  .grp_list li{
+    display: inline-block;
+    letter-spacing: normal;
+    font-size: 16px;
+    margin-left: 20px;
+  }
+</style>
+</head>
+<body>
+
+<section id="sec1">
+  <h2>1：電話番号リンク</h2>
+  <p>▼ 電話番号リンクと非リンクを混在させるテスト ▼</p>
+  <p>スマホ・タブレット時にリンクさせる ⇒ <span class="js-telCall" x-ms-format-detection="none">00-0000-0000</span></p>
+  <p>スマホ・タブレット時でもリンクさせない ⇒ <span class="disableTel" x-ms-format-detection="none">00-0000-0000</span></p>
+</section>
+
+<section>
+  <h2>2：アコーディオン</h2>
+  <dl class="toggleTest">
+    <dt class="js-toggleBtn">アコーディオンを開く<span class="toggle_ico"></span></dt>
+    <dd class="js-toggleArea">
+      <p class="inner">テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+    </dd>
+  </dl>
+  <dl class="toggleTest">
+    <dt class="js-toggleBtn">アコーディオンを開く<span class="toggle_ico"></span></dt>
+    <dd class="js-toggleArea">
+      <p class="inner">テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+    </dd>
+  </dl>
+</section>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<section>
+  <h2>3：アンカーリンク</h2>
+  <a href="#">TOPへ戻る</a>
+</section>
+<br><br><br><br>
+
+<script type="text/javascript" src="scripts/app.min.js"></script><!--通常js-->
+</body>
+</html>
