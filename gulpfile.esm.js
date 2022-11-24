@@ -43,7 +43,7 @@ const options = minimist(process.argv.slice(2), {
 
 /* ie11以上、android4以上、その他は2バージョン前まで */
 const AUTOPREFIXER_BROWSERS = [
-  'last 10 versions',
+  'last 2 versions',
   'ie >= 11',
   'Android >= 4'
 ];

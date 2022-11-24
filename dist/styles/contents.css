@@ -441,7 +441,6 @@ img {
 }
 .js-toggleBtn.open .toggle_ico:after {
   -webkit-transform: rotateZ(90deg);
-      -ms-transform: rotate(90deg);
           transform: rotateZ(90deg);
 }
 
@@ -793,7 +792,6 @@ br.spS {
 #modal_close.active.in {
   opacity: 1;
   -webkit-transform: scale(1);
-      -ms-transform: scale(1);
           transform: scale(1);
 }
 #modal_close.active.in:hover {
@@ -848,7 +846,6 @@ br.spS {
   cursor: pointer;
   opacity: 0;
   -webkit-transform: scale(1.2);
-      -ms-transform: scale(1.2);
           transform: scale(1.2);
   -webkit-transition: opacity cubic-bezier(0.15, 0.29, 0.62, 0.99) 0.3s, -webkit-transform cubic-bezier(0.15, 0.29, 0.62, 0.99) 0.3s;
   transition: opacity cubic-bezier(0.15, 0.29, 0.62, 0.99) 0.3s, -webkit-transform cubic-bezier(0.15, 0.29, 0.62, 0.99) 0.3s;
@@ -864,7 +861,6 @@ br.spS {
   height: 2px;
   border-radius: 2px;
   -webkit-transform: rotateZ(45deg);
-      -ms-transform: rotate(45deg);
           transform: rotateZ(45deg);
   position: absolute;
   left: calc(50% - 20px);
@@ -877,7 +873,6 @@ br.spS {
   height: 2px;
   border-radius: 2px;
   -webkit-transform: rotateZ(-45deg);
-      -ms-transform: rotate(-45deg);
           transform: rotateZ(-45deg);
   position: absolute;
   left: calc(50% - 20px);
@@ -1319,12 +1314,10 @@ html.active #loader {
 }
 .cm_gallery_thumb:hover > .cm_gallery_ico {
   -webkit-transform: scale(1.2);
-      -ms-transform: scale(1.2);
           transform: scale(1.2);
 }
 .cm_gallery_thumb:hover > .cm_gallery_bg {
   -webkit-transform: scale(1.05);
-      -ms-transform: scale(1.05);
           transform: scale(1.05);
   opacity: 0.6;
 }
@@ -1397,7 +1390,6 @@ html.active #loader {
   width: 11px;
   height: auto;
   -webkit-transform: rotateZ(180deg);
-      -ms-transform: rotate(180deg);
           transform: rotateZ(180deg);
   position: absolute;
   left: -20px;
