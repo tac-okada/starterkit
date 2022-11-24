@@ -9,8 +9,6 @@
 ```
 npm install
 ```
-## サーバー起動
-
 ## ファイル構成
 * `package.json`
   * 依存するnpmパッケージに関する設定ファイルです。
@@ -21,9 +19,13 @@ npm install
 * `dist/`
   * Web公開されるファイルの置き場所です。
 * `src/`, `src/images`, `src/scripts`, `src/styles`
-  * ビルドに必要な各種ソースコード・画像などです。
+  * ビルドに必要な各種ソースコード・画像ファイルなどです。
 ## 開発手順
 開発時に必要なタスクは、gulpfile.esm.jsおよびwebpack.config.jsで管理されています。 shellから以下のコマンドを実行することで、各種ビルド・タスク実行が可能です。
 ```
 gulp
 ```
+
+## 対応ブラウザ
+* 各種モダンブラウザ最新バージョン・IE11以上
+  * 対応ブラウザを変更する場合、gulpfile.esm.jsとwebpack.config.jsの当該箇所を修正します。
