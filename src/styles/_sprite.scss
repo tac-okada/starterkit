@@ -1,0 +1,112 @@
+// SCSS variables are information about icon's compiled state, stored under its original file name
+//
+// .icon-home {
+//   width: $icon-home-width;
+// }
+//
+// The large array-like variables contain all information about a single icon
+// $icon-home: x y offset_x offset_y width height total_width total_height image_path;
+//
+// At the bottom of this section, we provide information about the spritesheet itself
+// $spritesheet: width height image $spritesheet-sprites;
+$sprite-modal-ar-next-name: 'sprite-modal_ar_next';
+$sprite-modal-ar-next-x: 0px;
+$sprite-modal-ar-next-y: 0px;
+$sprite-modal-ar-next-offset-x: 0px;
+$sprite-modal-ar-next-offset-y: 0px;
+$sprite-modal-ar-next-width: 92px;
+$sprite-modal-ar-next-height: 92px;
+$sprite-modal-ar-next-total-width: 344px;
+$sprite-modal-ar-next-total-height: 344px;
+$sprite-modal-ar-next-image: '/images/sprite.png';
+$sprite-modal-ar-next: (0px, 0px, 0px, 0px, 92px, 92px, 344px, 344px, '/images/sprite.png', 'sprite-modal_ar_next', );
+$sprite-modal-ar-prev-name: 'sprite-modal_ar_prev';
+$sprite-modal-ar-prev-x: 92px;
+$sprite-modal-ar-prev-y: 92px;
+$sprite-modal-ar-prev-offset-x: -92px;
+$sprite-modal-ar-prev-offset-y: -92px;
+$sprite-modal-ar-prev-width: 92px;
+$sprite-modal-ar-prev-height: 92px;
+$sprite-modal-ar-prev-total-width: 344px;
+$sprite-modal-ar-prev-total-height: 344px;
+$sprite-modal-ar-prev-image: '/images/sprite.png';
+$sprite-modal-ar-prev: (92px, 92px, -92px, -92px, 92px, 92px, 344px, 344px, '/images/sprite.png', 'sprite-modal_ar_prev', );
+$sprite-modal-close-name: 'sprite-modal_close';
+$sprite-modal-close-x: 184px;
+$sprite-modal-close-y: 184px;
+$sprite-modal-close-offset-x: -184px;
+$sprite-modal-close-offset-y: -184px;
+$sprite-modal-close-width: 160px;
+$sprite-modal-close-height: 160px;
+$sprite-modal-close-total-width: 344px;
+$sprite-modal-close-total-height: 344px;
+$sprite-modal-close-image: '/images/sprite.png';
+$sprite-modal-close: (184px, 184px, -184px, -184px, 160px, 160px, 344px, 344px, '/images/sprite.png', 'sprite-modal_close', );
+$spritesheet-width: 344px;
+$spritesheet-height: 344px;
+$spritesheet-image: '/images/sprite.png';
+$spritesheet-sprites: ($sprite-modal-ar-next, $sprite-modal-ar-prev, $sprite-modal-close, );
+$spritesheet: (344px, 344px, '/images/sprite.png', $spritesheet-sprites, );
+
+// The provided mixins are intended to be used with the array-like variables
+//
+// .icon-home {
+//   @include sprite-width($icon-home);
+// }
+//
+// .icon-email {
+//   @include sprite($icon-email);
+// }
+//
+// Example usage in HTML:
+//
+// `display: block` sprite:
+// <div class="icon-home"></div>
+//
+// To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+//
+// // CSS
+// .icon {
+//   display: inline-block;
+// }
+//
+// // HTML
+// <i class="icon icon-home"></i>
+@mixin sprite-width($sprite) {
+  width: nth($sprite, 5);
+}
+
+@mixin sprite-height($sprite) {
+  height: nth($sprite, 6);
+}
+
+@mixin sprite-position($sprite) {
+  $sprite-offset-x: nth($sprite, 3);
+  $sprite-offset-y: nth($sprite, 4);
+  background-position: $sprite-offset-x  $sprite-offset-y;
+}
+
+@mixin sprite-image($sprite) {
+  $sprite-image: nth($sprite, 9);
+  background-image: url(#{$sprite-image});
+}
+
+@mixin sprite($sprite) {
+  @include sprite-image($sprite);
+  @include sprite-position($sprite);
+  @include sprite-width($sprite);
+  @include sprite-height($sprite);
+}
+
+// The `sprites` mixin generates identical output to the CSS template
+//   but can be overridden inside of SCSS
+//
+// @include sprites($spritesheet-sprites);
+@mixin sprites($sprites) {
+  @each $sprite in $sprites {
+    $sprite-name: nth($sprite, 10);
+    .#{$sprite-name} {
+      @include sprite($sprite);
+    }
+  }
+}

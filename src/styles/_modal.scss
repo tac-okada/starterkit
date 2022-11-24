@@ -1,0 +1,434 @@
+@use "setting";
+
+/*============================================================
+  modal
+============================================================*/
+
+// transiton
+@keyframes fade_in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes fade_out {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes slide_in_bg {
+  0% { transform: translateX(-100vw); }
+  100% { transform: translateX(0); }
+}
+@keyframes slide_in_bg_ie {
+  0% { transform: translateX(-100rem); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes slide_out_bg {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100vw); }
+}
+@keyframes slide_out_bg_ie {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100rem); }
+}
+
+@keyframes slide_in_contents {
+  0% { transform: translateY(40px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes zoom_out_contents {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.2); }
+}
+
+@keyframes zoom_in_btn {
+  0% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+// animation
+#modal_bg.active.in{
+  animation: .3s cubic-bezier(.15,.29,.62,.99) both;
+  animation-name: fade_in, slide_in_bg;
+}
+.ie11 #modal_bg.active.in,
+.ie10 #modal_bg.active.in{
+  animation: .3s cubic-bezier(.15,.29,.62,.99) both;
+  animation-name: fade_in, slide_in_bg_ie;
+}
+
+#modal_bg.active.out{
+  animation: .3s cubic-bezier(.15,.29,.62,.99) both;
+  animation-name: fade_out, slide_out_bg;
+}
+.ie11 #modal_bg.active.out,
+.ie10 #modal_bg.active.out{
+  animation: .3s cubic-bezier(.15,.29,.62,.99) both;
+  animation-name: fade_out, slide_out_bg_ie;
+}
+
+#modal_close.active.in{
+  opacity: 1;
+  transform: scale(1);
+
+  &:hover{
+    opacity: .7;
+  }
+}
+
+#modal_close.active.out{
+  opacity: 0;
+}
+
+.modal_contents.active.in{
+  animation: .3s cubic-bezier(.15,.29,.62,.99) both;
+  animation-name: fade_in, slide_in_contents;
+}
+
+.modal_contents.active.out{
+  animation: .3s cubic-bezier(.15,.29,.62,.99) both;
+  animation-name: fade_out, zoom_out_contents;
+}
+
+
+// 表示エリア-共通
+.modal_contents {
+  display: none;
+  opacity: 0;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  color: #666666;
+  position:fixed;
+  z-index: 2;
+
+  iframe{
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+  }
+}
+.modal_contents.active {
+  display: block;
+}
+
+// 閉じるボタン
+#modal_close {
+  position: fixed;
+  width: 80px;
+  height: 80px;
+  right: 10px;
+  top: 10px;
+  z-index: 10;
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(1.2);
+  transition: opacity cubic-bezier(.15,.29,.62,.99) .3s,
+    transform cubic-bezier(.15,.29,.62,.99) .3s;
+
+  &:hover{
+    opacity: .7;
+  }
+
+  &:before {
+    content: '';
+    width: 40px;
+    height: 2px;
+    border-radius: 2px;
+    transform: rotateZ(45deg);
+    position: absolute;
+    left: calc( 50% - 20px );
+    top: calc( 50% - 1px );
+    background: #fff;
+  }
+  &:after {
+    content: '';
+    width: 40px;
+    height: 2px;
+    border-radius: 2px;
+    transform: rotateZ(-45deg);
+    position: absolute;
+    left: calc( 50% - 20px );
+    top: calc( 50% - 1px );
+    background: #fff;
+  }
+}
+
+// 背景
+#modal_bg {
+  //transform: translateX(-100vw);
+  width: 100%;
+  height: 120%;
+  background-color: rgba(0,0,0,0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  
+  &:before{
+    content: '';
+    animation: rotate .8s linear infinite;
+    background: transparent;
+    border: 4px solid #222222;
+    border-bottom-color: #616161;
+    border-radius: 50%;
+    height: 50px;
+    left: 50%;
+    margin: -25px 0 0 -25px;
+    padding: 0;
+    position: absolute;
+    top: 40%;
+    width: 50px;
+  }
+}
+
+#modal_loading {
+  width: 50px;
+  position: absolute;
+  left: 50%;
+  top: 42%;// 120%のセンター
+  margin: -25px 0 0 -25px;
+  display: none;
+  
+  img{
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+// 個別設定：Youtubeの場合
+.modal_yt{
+  background-color: #000000;
+}
+#player1,
+#player2,
+#player3,
+#player4,
+#player5{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+// 個別設定：写真の場合
+.modal_img{
+  img{
+    width: 100%;
+    height: auto;
+  }
+}
+
+// グループの場合
+.modal_grp{
+  img,
+  iframe{
+    position: relative;
+    display: none;
+    width: 100%;
+    height: auto;
+  }
+  .show{
+    display: block;
+  }
+}
+
+.modal_ar{
+  display: none;
+  cursor: pointer;
+  position: absolute;
+  height: 100%;
+  width: 35%;
+  z-index: 3;
+  background: url(../images/blank.gif) repeat left top;
+
+  .ar{
+    width: 46px;
+    height: 46px;
+    position: absolute;
+    margin-top: -23px;
+    opacity: 0;
+    transition: all .3s;
+    backface-visibility: hidden;
+  }
+}
+
+.modal_ar.show{
+  display: block;
+}
+
+.modal_ar_prev{
+  left: 0;
+  top: 0;
+  
+  .ar{
+    background: url(../images/modal_ar_prev.png) no-repeat left top;
+    background-size: 46px;
+    left: 20px;
+    top: 50%;
+  }
+}
+.modal_ar_prev:hover{
+  .ar{
+    opacity: 1;
+  }
+}
+
+.modal_ar_next{	
+  right: 0;
+  top: 0;
+
+  .ar{
+    background: url(../images/modal_ar_next.png) no-repeat left top;
+    background-size: 46px;
+    right: 20px;
+    top: 50%;
+  }
+}
+.modal_ar_next:hover{
+  .ar{
+    opacity: 1;
+  }
+}
+
+.modal_grp_num{
+  position: absolute;
+  right: 0;
+  bottom: -30px;
+  color: #ffffff;
+  font-size: setting.$px16;
+}
+
+.modal_1{
+  max-width: 619px;
+  width: 95%;
+  height: auto;
+}
+
+.modal_5-1,
+.modal_6-1,
+.modal_7-1{
+  max-width: 800px;
+  width: 95%;
+  height: auto;
+}
+
+.modal_5-2,
+.modal_6-2{
+  max-width: 600px;
+  width: 95%;
+  height: auto;
+}
+
+.modal_5-3,
+.modal_6-3{
+  max-width: 900px;
+  width: 95%;
+  height: auto;
+}
+
+// スクロールありコンテンツの場合
+.modal_2{
+  width: 800px;
+  height: 400px;
+  overflow-y: scroll;
+}
+
+// iframeの場合
+.modal_3{
+  width: 800px;
+  height: 600px;
+}
+
+
+@media screen and (max-width:980px) {
+  #modal_bg {
+    &:before{
+      border-width: 2px;
+      height: 26px;
+      margin: -13px 0 0 -13px;
+      width: 26px;
+    }
+  }
+
+  #modal_close:hover{
+    opacity: 1;
+  }
+
+  .modal_ar{
+    display: none;
+
+    .ar{
+      width: 23px;
+      height: 23px;
+      position: absolute;
+      margin-top: -11px;
+      opacity: .7;
+    }
+  }
+
+  .modal_ar_prev{
+    .ar{
+      background: url(../images/modal_ar_prev.png) no-repeat left top;
+      background-size: 23px;
+      left: 10px;
+      top: 50%;
+    }
+  }
+  .modal_ar_prev:hover{
+    .ar{
+      opacity: .7;
+    }
+  }
+  
+  .modal_ar_next{
+    .ar{
+      background: url(../images/modal_ar_next.png) no-repeat left top;
+      background-size: 23px;
+      right: 10px;
+      top: 50%;
+    }
+  }
+  .modal_ar_next:hover{
+    .ar{
+      opacity: .7;
+    }
+  }
+}
+
+@media screen and (max-width:767px) {
+  #modal_close {
+    background-size: 40px;
+    width: 40px;
+    height: 40px;
+    right: 10px;
+    top: 10px;
+    z-index: 10;
+    cursor: pointer;
+  }
+  #modal_close:before {
+    width: 20px;
+    left: calc( 50% - 10px );
+  }
+  #modal_close:after {
+    width: 20px;
+    left: calc( 50% - 10px );
+  }
+
+  // スクロールありコンテンツの場合
+  .modal_2{
+    width: 95%;
+    height: 60%;
+    overflow-y: scroll;
+  }
+
+  // iframeの場合
+  .modal_3{
+    width: 95%;
+    height: 60%;
+  }
+}

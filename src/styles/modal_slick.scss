@@ -1,0 +1,157 @@
+@import "setting";
+@import "reset";
+
+/*============================================================
+  common
+============================================================*/
+
+
+/*  web font
+------------------------------------------------*/
+// CDNにて読み込み
+// Noto Sans
+//@import url(//fonts.googleapis.com/earlyaccess/notosansjapanese.css);
+// fontawesome
+//@import url(//use.fontawesome.com/releases/v5.1.0/css/all.css);
+
+// サーバー設置から読み込み
+// NotoSansJP
+@font-face {
+  font-family: 'Noto Sans Japanese';
+  font-weight: 400;
+  font-style: normal;
+  src: url('fonts/NotoSansCJKjp-Regular.woff') format('woff'),
+    url('fonts/NotoSansCJKjp-Regular.eot') format('eot');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Noto Sans Japanese';
+  font-weight: 700;
+  font-style: bold;
+  src: url('fonts/NotoSansCJKjp-Bold.woff') format('woff'),
+    url('fonts/NotoSansCJKjp-Bold.eot') format('eot');
+  font-display: swap;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+  //overflow-y: scroll;
+  font-size: 100%;
+  font-family: $fontset_noto;
+
+  @media (min-width: 1400px) {
+    font-size: calc( 16 / 1400 * 100vw );
+  }
+
+  @media (max-width: 767px) {
+    font-size: calc( 16 / 767 * 100vw );
+  }
+}
+body {
+  color: #000000;
+  width: 100%;
+  height: 100%;
+  line-height: 1.6;
+  text-align: center;
+  //font-size: 16px;
+  //font-size: 1.6rem;
+  -webkit-text-size-adjust: 100%;
+     -moz-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+
+  &.fixed{
+    position: fixed;
+  }
+  &.absolute{
+    position: absolute;
+  }
+}
+
+section{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+  width: 100%;
+  background: #efefef;
+}
+
+.col{
+  width: 70%;
+  box-sizing: border-box;
+  padding: 0 6rem;
+}
+
+.img{
+  width: 30%;
+  >img{
+    width: 100%;
+    height: auto;
+    font-size: 0;
+  }
+}
+
+h1{
+  font-size: $px40;
+  line-height: 1.4;
+}
+ul{
+  >li{
+    text-indent: -1em;
+    padding-left: 1em;
+    font-size: $px16;
+    line-height: 1.4;
+    margin-top: 1rem;
+
+    &:not(:first-child){
+      margin-top: .5rem;
+    }
+  }
+}
+
+@media screen and (max-width:1399px) {
+  h1{
+    font-size: $px36;
+  }
+  ul{
+    >li{
+      font-size: $px14;
+    }
+  }
+}
+
+@media screen and (max-width:1024px) {
+  section{
+    max-width: 767px;
+    width: 100%;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .col{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 2rem;
+  }
+
+  .img{
+    width: 100%;
+  }
+
+  h1{
+    font-size: $px60;
+  }
+  ul{
+    >li{
+      font-size: $px24;
+    }
+  }
+}
+
+@media screen and (max-width:767px) {
+}

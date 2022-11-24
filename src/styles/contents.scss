@@ -1,0 +1,273 @@
+@use "setting";
+@use "reset";
+@use "common";
+@use "modal";
+
+#loader {
+  display: table;
+  width: 120%;
+  height: 120%;
+  background-color: #fff;
+  overflow: hidden;
+  position: fixed;
+  left: -10%;
+  top: -10%;
+  z-index: 20;
+}
+
+
+@keyframes loader_out {
+  0% { opacity: 1; left: -10%; }
+  99% { opacity: 0; left: -10%; }
+  100% { opacity: 0; left: -120%; }
+}
+
+html.active #loader {
+  animation: loader_out 0.4s both;
+}
+
+#loader .block-loader {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#loader .block-loader .txt-loader {
+  line-height: 1;
+}
+
+#loader .block-loader .txt-number {
+  letter-spacing: 0.02em;
+  line-height: 1;
+  margin-right: 0.4rem;
+}
+
+#loader .block-loader .txt-catch {
+  margin-bottom: 2.4rem;
+}
+
+#loader .block-loader .bar-loader {
+  display: block;
+  width: 20%;
+  text-align: left;
+  border-radius: 1.5px;
+  background-color: #f4f2f0;
+  margin: 2.4rem auto;
+}
+
+#loader .block-loader .bar-loader .bar {
+  display: block;
+  width: 0;
+  height: 3px;
+  background-color: rgba(235,92,1,1);
+    transition: width 0.4s linear;
+}
+
+.block-video{
+  width: 100%;
+  height: 0;
+  position: relative;
+  padding-top: 56.25%;
+  video{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.fruits{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 60px;
+
+  li{
+    width: 25%;
+    
+    img{
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+.svg_hotel01{
+  width: 100px;
+  height: auto;
+  
+  svg{
+    display: block;
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+  }
+
+  .wall{
+    fill: none;
+    stroke: #000000;
+    stroke-dasharray: 200;
+    stroke-dashoffset: -200;
+    transition: stroke-dashoffset ease-out 1s;
+  }
+  
+  .window{
+    fill: #ff0000;
+  }
+}
+
+.svg_hotel01:hover{
+  .wall{
+    stroke-dashoffset: 0;
+  }
+}
+
+.twitter{
+  width: 100px;
+}
+
+.svgImage{
+  width: 100%;
+  height: 0;
+  position: relative;
+  padding-top: 46.33%;
+  
+  svg{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+  image{
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.cm{
+  background: #262626;
+  padding: 100px 0;
+}
+
+.cm_head{
+  font-size: setting.$px32;
+  line-height: 1;
+  color: #fff;
+}
+
+.cm_lists{
+  max-width: 940px;
+  width: 94%;
+  margin: 40px auto 0;
+}
+
+.cm_gallery{
+  width: 32%;
+}
+
+.cm_gallery_thumb{
+  display: block;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+  background: #262626;
+
+  &:hover{
+    >.cm_gallery_ico{
+      transform: scale(1.2);
+    }
+
+    >.cm_gallery_bg{
+      transform: scale(1.05);
+      opacity: .6;
+    }
+  }
+}
+
+.cm_gallery_ico{
+  position: absolute;
+  top: calc( 50% - 20px );
+  left: calc( 50% - 20px );
+  width: 40px;
+  height: 40px;
+  transition: transform ease-out .2s;
+}
+
+.cm_gallery_bg{
+  position: relative;
+  transition: transform ease-out .2s, opacity ease-out .2s;
+}
+
+.cm_gallery_cap{
+  font-size: setting.$px10;
+  line-height: 1.4;
+  color: #fff;
+  margin-top: 5px;
+
+  .cat{
+    display: inline-block;
+    vertical-align: top;
+    font-size: setting.$px10;
+    line-height: 1;
+    letter-spacing: 0;
+    color: #fff;
+    border-radius: 3px;
+    margin-right: 5px;
+    padding: 2px 4px;
+
+    &.-tv{
+      background: #cfa200;
+    }
+
+    &.-web{
+      background: #dc6800;
+    }
+
+    &.-radio{
+      background: #7ea000;
+    }
+  }
+
+  .txt{
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+    font-size: setting.$px10;
+    line-height: 1.4;
+    letter-spacing: 0.05em;
+  }
+}
+
+.slick-slide{
+  margin: 0 10px;
+}
+
+@media screen and (max-width: 767px){
+  .slick-slide{
+    margin: 0 5px;
+  }
+}
+
+.prev-arrow-cm{
+  width: 11px;
+  height: auto;
+  transform: rotateZ(180deg);
+  position: absolute;
+  left: -20px;
+  top: calc( 50% - 25px );
+  cursor: pointer;
+}
+.next-arrow-cm{
+  width: 11px;
+  height: auto;
+  position: absolute;
+  right: -20px;
+  top: calc( 50% - 25px );
+  cursor: pointer;
+}
+
+
+@media screen and (min-width:0px) and (max-width:767px) {
+}
