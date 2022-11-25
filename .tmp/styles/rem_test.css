@@ -113,6 +113,7 @@ input[type=button] {
   border: none;
   border-radius: 0;
   -webkit-appearance: none;
+     -moz-appearance: none;
           appearance: none;
 }
 
@@ -130,6 +131,7 @@ select {
   outline: none;
   vertical-align: middle;
   -webkit-appearance: none;
+     -moz-appearance: none;
           appearance: none;
 }
 
@@ -145,6 +147,7 @@ textarea {
   border-radius: 0;
   outline: none;
   -webkit-appearance: none;
+     -moz-appearance: none;
           appearance: none;
 }
 
@@ -158,6 +161,7 @@ button {
   padding: 0;
   vertical-align: middle;
   -webkit-appearance: none;
+     -moz-appearance: none;
           appearance: none;
   cursor: pointer;
 }
@@ -254,17 +258,14 @@ body.absolute {
 }
 
 section {
-  display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
   text-align: left;
   width: 100%;
   background: #efefef;

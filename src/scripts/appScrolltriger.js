@@ -1,12 +1,17 @@
 import { Core } from './libs/core.js';
 import { ScrollTrigger } from 'gsap/ScrollTrigger.js';
 
+window.addEventListener('load', () => {
+  /* ブレイクポイント指定：タブレット,スマホ */
+  appScrolltriger.initialize(1024,767);
+});
+
 class AppScrolltriger extends Core {
 /*
   使用可能な定数・変数一覧  -----------------------------------------------
   ● UAなど：this.USER
   ● 画面サイズなど：this.win
-  ● メディアクエリ：this.mql（現在のデバイス：pc/tb/sp）
+  ● メディアクエリ：this.mql（指定したブレイクポイントに基づく現在のデバイスを返す：pc/tb/sp）
   ● transitionEndイベント：this.transitionEnd
   ● animationEndイベント：this.animationEnd
 */
@@ -25,7 +30,7 @@ class AppScrolltriger extends Core {
   loadHandler () {
     gsap.registerPlugin(ScrollTrigger);
 
-    /* ここでブラウザイベントを有効にする */
+    /* ここでスクロールとブラウザイベントを有効にする */
     this.enableScroll();
     this.win.response = true;
 
@@ -46,5 +51,3 @@ class AppScrolltriger extends Core {
 };
 
 window.appScrolltriger = window.appScrolltriger || new AppScrolltriger;
-/* ブレイクポイント指定：タブレット,スマホ */
-appScrolltriger.initialize(1024,767);

@@ -1,4 +1,9 @@
 {
+  "browserslist": [
+    "defaults",
+    "ie >= 11"
+  ],
+  "_path": "/",
   "devDependencies": {
     "@babel/cli": "^7.19.3",
     "@babel/core": "^7.19.6",

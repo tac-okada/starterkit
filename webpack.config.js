@@ -1,6 +1,7 @@
 import path from 'path';
 import glob from 'glob';
 import TerserPlugin from 'terser-webpack-plugin';
+import { browserslist } from './package.json';
 
 const jsBasePath = path.resolve(__dirname, 'src/scripts/');
 
@@ -17,7 +18,7 @@ module.exports = {
   mode: 'production',
 
   optimization: {
-    minimize: true,/* 圧縮 */
+    minimize: false,/* 圧縮 */
     minimizer: [new TerserPlugin({
       extractComments: false,/* ライセンステキスト出力しない */
     })],
@@ -39,7 +40,7 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: [
-              ['@babel/preset-env', { targets: ['defaults', 'ie >= 11'] }]
+              ['@babel/preset-env', { targets: browserslist }]
             ]
           }
         }

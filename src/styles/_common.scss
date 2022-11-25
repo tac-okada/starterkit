@@ -221,12 +221,12 @@ img {
 
 /*  アコーディオン
 ------------------------------------------------*/
-.js-toggleBtn{
+.js-accorBtn{
   cursor: pointer;
   position: relative;
 
   &.open{
-    .toggle_ico{
+    .accorIco{
 /*
       transform: rotateZ(45deg);
 
@@ -242,7 +242,7 @@ img {
   }
 }
 
-.js-toggleArea{
+.js-accorArea{
   height: 0;
   &.open{
     .inner{
@@ -256,7 +256,7 @@ img {
   }
 }
 
-.toggle_ico{
+.accorIco{
   position: absolute;
   width: 12px;
   height: 12px;

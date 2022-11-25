@@ -1,5 +1,7 @@
-// ie対応consolelog/setConsoleIe/開始
-// consoleを仕込むとIEでエラーが出るのを回避
+/*
+  ie対応consolelog/setConsoleIe/  -----------------------------------------------
+  consoleを仕込むとIEでエラーが出るのを回避
+*/
 const setConsoleIe = () => {
   if( ! ( 'console' in window ) ){
     window.console = {};
@@ -11,77 +13,84 @@ const setConsoleIe = () => {
     };
   };
 };
-// ie対応consolelog/setConsoleIe/終了
 
-// ポップアップ制御/setPopupWin/開始
-// ポップアップ時のサイズなどの制御
-// スマホ・タブレット時はtarget='_blank'に置換する
-const setPopupWin = () => {
-  const w_n = 'popup_win';// ウィンドウネーム
-  const w_w = 700;// 横幅
-  const w_h = 800;// 高さ
-  const $popup = $( 'a.js-popup' );
-  if( app.mql === 'pc' ){// PCのみ
-    $popup.on({
-      'click' : e => {
-        const _this = e.currentTarget;
-        const w = window.open(_this.href, w_n, 'toolbar=0,location=0,status=0,menubar=0,scrollbars=yes,resizable=1,width=' + w_w + ',height=' + w_h );
+
+/*
+  ポップアップ制御/setPopupWin/  -----------------------------------------------
+  ポップアップ時のサイズなどの制御
+  スマホ・タブレット時はtarget='_blank'に置換する
+*/
+const setPopupWin = core => {
+  const winName = 'popup_win';/* ウィンドウネーム */
+  const winWidth = 700;// 横幅
+  const winHeight = 800;// 高さ
+  const popup = document.querySelectorAll('.js-popup');
+  if( core.mql === 'pc' ){// PCのみ
+    for (let i = 0; i < popup.length; i++) {
+      popup[i].addEventListener('click', function(e){
+        e.preventDefault();
+        const w = window.open(this.href, winName, 'toolbar=0,location=0,status=0,menubar=0,scrollbars=yes,resizable=1,width=' + winWidth + ',height=' + winHeight );
         w.focus();
-        return false;
-      }
-    });
-  }else{// SP・Tabletは通常のtarget_blankで開く
-    $popup.each((idx, value) => {
-      //const _this = e.currentTarget;
-      //console.info(idx, value)
-      $(value).removeClass( 'js-popup' );
-      $(value).attr( 'target', '_blank' );
-    });
+      })
+    };
+  }else{/* SP・Tabletは通常のtarget_blankで開く */
+    for (let i = 0; i < popup.length; i++) {
+      popup[i].classList.remove('js-popup');
+      popup[i].setAttribute( 'target', '_blank' );
+    }
   }
 };
-// ポップアップ制御/setPopupWin/終了
 
-// スムーススクロール設定/setScroll/開始
-// aタグのhref属性冒頭に「#」が付く場合、アニメーション
-// して指定位置までスクロールする
-const setScroll = () => {
-  const $trigger = $( 'a[href*="#"],area[href*="#"]' );
-  const $html = $( 'html,body' );
-  const scrollSpeed = 500;// スクロール速度
-  let $target, targetOffset;
 
-  const scroll = _hash => {
-    $target = $(_hash);
-    if ( $target.length ) {
-      targetOffset = $target.offset().top;
+/*
+  スムーススクロール設定/setScroll/  -----------------------------------------------
+  aタグのhref属性冒頭に「#」が付く場合、アニメーションして指定位置までスクロールする
+  URLに「#」が付く場合も、ディレイ後にアニメーションして指定位置までスクロールする
+*/
+const setScrollTo = core => {
+  const trigger = document.querySelectorAll('a[href*="#"],area[href*="#"]');
+  const scrollSpeed = .5;// スクロール速度
+  let targetOffset;
+
+  const scroll = hash => {
+    const targetName = hash.replace('#', '');
+
+    if ( targetName.length ) {
+      const target = document.getElementById(targetName);
+      const targetRect = target.getBoundingClientRect();
+      targetOffset = targetRect.top + core.win.scrollTop;
+      //console.info(targetOffset)
     } else {
       targetOffset = 0;
     }
-    $html.animate( {scrollTop: targetOffset}, scrollSpeed );
+    gsap.to(window, {duration: scrollSpeed, scrollTo: targetOffset});
     return false;
   }
 
-  $trigger.on({
-    'click' : function() {  
+  for (let i = 0; i < trigger.length; i++) {
+    trigger[i].addEventListener('click', function(e){
+      e.preventDefault();
       if ( location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
       && location.hostname == this.hostname ) {
         scroll(this.hash);
       }
-    }
-  });
+    })
+  }
 
-  // URLにハッシュが含まれる場合
+  /* URLにハッシュが含まれる場合 */
   if( location.hash ){
     setTimeout(function(){
       scroll(location.hash);
     }, 100)
   }
 };
-// スムーススクロール設定/setScroll/終了
 
-// アコーディオン/setToggle/開始
-const setToggle = () => {
-  let toggleButton = document.querySelectorAll('.js-toggleBtn');
+
+/*
+  アコーディオン/setAccordion/  -----------------------------------------------
+*/
+const setAccordion = () => {
+  let toggleButton = document.querySelectorAll('.js-accorBtn');
   for (let i = 0; i < toggleButton.length; i++) {
     toggleButton[i].addEventListener('click', function(){
       let target = this.nextElementSibling;
@@ -108,9 +117,12 @@ const setToggle = () => {
     })
   }
 };
-// アコーディオン/setToggle/終了
 
-// スクロール演出/setScTrigger/開始
+
+/*
+  スクロール演出/setScTrigger/  -----------------------------------------------
+*/
+/*
 const setScTrigger = ( _sc_top, _w_h ) => {
   const $target = $('.js-scTrigger');
   const speed = 1;
@@ -140,17 +152,19 @@ const setScTrigger = ( _sc_top, _w_h ) => {
       );
       $(this).addClass('disp');
     }
-    //console.info($(this),taget_offset,trigger)
     }
   });
 };
-// スクロール演出/setScTrigger/終了
+*/
 
-// SP時にTELリンク/setTelCall/開始
-// head内に設置：<meta name="format-detection" content="telephone=yes">
-// リンクさせる：<p class="js-telCall" x-ms-format-detection="none">0120-00-0000</p>
-// リンクさせない：<p class="disableTel" x-ms-format-detection="none">0120-00-0000</p>
-// app.USER.deviceでUA判定し「SP」or「TB」のみ以下実行
+
+/*
+  SP時にTELリンク/setTelCall/  -----------------------------------------------
+  head内に設置：<meta name="format-detection" content="telephone=yes">
+  リンクさせる：<p class="js-telCall" x-ms-format-detection="none">0120-00-0000</p>
+  リンクさせない：<p class="disableTel" x-ms-format-detection="none">0120-00-0000</p>
+  core.USER.deviceでUA判定し「sp」or「tb」のみ実行
+*/
 const setTelCall = core => {
   let telCall = document.querySelectorAll('.js-telCall'),
   txt, num;
@@ -165,6 +179,6 @@ const setTelCall = core => {
     };
   };
 };
-// SP時にTELリンク/setTelCall/終了
 
-export { setConsoleIe, setPopupWin, setScroll, setToggle, setScTrigger, setTelCall }
+
+export { setConsoleIe, setPopupWin, setScrollTo, setAccordion, setTelCall }

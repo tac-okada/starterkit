@@ -1,8 +1,10 @@
 import gsap from 'gsap';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin.js';
+gsap.registerPlugin(ScrollToPlugin);
 import $ from 'jquery';
 
 import { UserAgent, MediaQueries } from './util.js';
-import { setConsoleIe, setScroll, setToggle, setTelCall } from './functions.js';
+import { setConsoleIe, setPopupWin, setScrollTo, setAccordion, setTelCall } from './functions.js';
 
 /*
 
@@ -82,7 +84,6 @@ export class Core {
   }
 
   scrollEvents () {
-    //console.info(this,this)
     if ( ! this.win.response ) return false; 
     this.win.scrollTop = window.pageYOffset;
     this.win.scrollBottom = this.win.scrollTop + this.win.height;
@@ -117,8 +118,9 @@ export class Core {
     //console.info(this)
     /* よく使う関数ここで実行 */
     setConsoleIe();
-    setScroll();
-    setToggle();
+    setPopupWin(this)
+    setScrollTo(this);
+    setAccordion();
     setTelCall(this);
 
     /* 個別JSハンドラ */
@@ -131,17 +133,18 @@ export class Core {
     }
   }
 
-  disableEvents () {
+  disableEvents (e) {
     e.preventDefault();
   }
 
   // スクロールオフ
   disableScroll () {
-    window.addEventListener(this.scrollEvents, this.disableEvents, { passive: false });
+    window.addEventListener(this.scroll, this.disableEvents, { passive: false });
   }
 
   // スクロールオン
   enableScroll () {
-    window.removeEventListener(this.scrollEvents, this.disableEvents, { passive: false });
+    const that = this;
+    window.removeEventListener(this.scroll, this.disableEvents, { passive: false });
   }
 }

@@ -1,12 +1,18 @@
 import { Core } from './libs/core.js';
 import imagesLoaded from 'imagesloaded';
 
+window.addEventListener('load', () => {
+  /* ブレイクポイント指定：タブレット,スマホ */
+  appIndex.initialize(1024,767);
+  
+});
+
 class AppIndex extends Core {
 /*
   使用可能な定数・変数一覧  -----------------------------------------------
   ● UAなど：this.USER
   ● 画面サイズなど：this.win
-  ● メディアクエリ：this.mql（現在のデバイス：pc/tb/sp）
+  ● メディアクエリ：this.mql（指定したブレイクポイントに基づく現在のデバイスを返す：pc/tb/sp）
   ● transitionEndイベント：this.transitionEnd
   ● animationEndイベント：this.animationEnd
 */
@@ -55,7 +61,7 @@ class AppIndex extends Core {
         $('html').addClass('active');
         $loader.on(this.animationEnd, () => {
           $(this).off(this.animationEnd).remove();
-          /* ここでブラウザイベントを有効にする */
+          /* ここでスクロールとブラウザイベントを有効にする */
           this.enableScroll();
           this.win.response = true;
         });
@@ -65,5 +71,3 @@ class AppIndex extends Core {
 };
 
 window.appIndex = window.appIndex || new AppIndex;
-/* ブレイクポイント指定：タブレット,スマホ */
-appIndex.initialize(1024,767);
