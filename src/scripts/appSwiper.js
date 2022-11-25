@@ -31,7 +31,6 @@ class AppSwiper extends Core {
 
     /* ここでスクロールとブラウザイベントを有効にする */
     this.enableScroll();
-    this.win.response = true;
 
     this.setSwiper();
   }

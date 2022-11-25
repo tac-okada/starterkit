@@ -32,7 +32,6 @@ class AppScrolltriger extends Core {
 
     /* ここでスクロールとブラウザイベントを有効にする */
     this.enableScroll();
-    this.win.response = true;
 
     console.info(gsap,ScrollTrigger)
     const scenes = gsap.utils.toArray('.sec');

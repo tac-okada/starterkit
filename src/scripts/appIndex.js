@@ -63,7 +63,6 @@ class AppIndex extends Core {
           $(this).off(this.animationEnd).remove();
           /* ここでスクロールとブラウザイベントを有効にする */
           this.enableScroll();
-          this.win.response = true;
         });
       });
     });

@@ -42,7 +42,7 @@ export class Core {
     this.win = this.win;
 
     /* browser情報をhtmlへ */
-    document.documentElement.classList.add(this.ua.USER.css.join(','));
+    document.documentElement.classList.add(this.USER.css.join(','));
 
     /* 初期状態スクロールオフ */
     this.disableScroll();
@@ -102,7 +102,7 @@ export class Core {
 
   resetEvents () {
     //console.info(this,that)
-    if ( this.ua.USER.device != 'desktop' && this.win.width == window.innerWidth ) return false;
+    if ( this.USER.device != 'desktop' && this.win.width == window.innerWidth ) return false;
     //this.win.timer = setTimeout(() => {
       this.setupEvents();
       //console.info(this.win)
@@ -129,7 +129,6 @@ export class Core {
     } else {
       /* 個別JS無い場合ここでブラウザイベントを有効にする */
       this.enableScroll();
-      this.win.response = true;
     }
   }
 
@@ -144,7 +143,7 @@ export class Core {
 
   // スクロールオン
   enableScroll () {
-    const that = this;
+    this.win.response = true;
     window.removeEventListener(this.scroll, this.disableEvents, { passive: false });
   }
 }

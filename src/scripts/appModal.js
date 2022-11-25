@@ -31,7 +31,6 @@ class AppModal extends Core {
 
     /* ここでスクロールとブラウザイベントを有効にする */
     this.enableScroll();
-    this.win.response = true;
 
     /* モーダルJS実行 */
     let modal = new Modal;
