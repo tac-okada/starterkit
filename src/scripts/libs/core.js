@@ -8,7 +8,7 @@ import { setConsoleIe, setPopupWin, setScrollTo, setAccordion, setTelCall } from
 
 /*
 
-  UserAgent  -----------------------------------------------
+  Core  -----------------------------------------------
 
 */
 export class Core {
