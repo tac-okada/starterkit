@@ -108,7 +108,7 @@
     "webpack-stream": "^7.0.0"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=12.22.12"
   },
   "private": true,
   "scripts": {
