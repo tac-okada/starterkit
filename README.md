@@ -6,7 +6,7 @@
 * gulp 4.0.2
 
 ## はじめに
-nodeとnpmのバージョン管理としてvoltaを導入しています。
+nodeとnpmのバージョン管理としてvoltaを導入しています。  
 未インストールの場合は以下コマンドを実行してvoltaをインストールしてください。
 ```
 curl https://get.volta.sh | bash
@@ -30,7 +30,8 @@ npm install
 * `src/`, `src/images`, `src/scripts`, `src/styles`
   * ビルドに必要な各種ソースコード・画像ファイルなどです。
 ## 開発手順
-開発時に必要なタスクは、gulpfile.esm.js（task/）およびwebpack.config.jsで管理されています。shellから以下のコマンドを実行することで、各種ビルド・タスク実行が可能です。
+開発時に必要なタスクは、gulpfile.esm.js（task/）およびwebpack.config.jsで管理されています。  
+shellから以下のコマンドを実行することで、各種ビルド・タスク実行が可能です。
 ```
 gulp
 ```
