@@ -116,5 +116,9 @@
   },
   "dependencies": {
     "save-dev": "0.0.1-security"
+  },
+  "volta": {
+    "node": "14.21.1",
+    "npm": "6.14.17"
   }
 }
