@@ -19,16 +19,16 @@
   font-family: 'Noto Sans Japanese';
   font-weight: 400;
   font-style: normal;
-  src: url('fonts/NotoSansCJKjp-Regular.woff') format('woff'),
-    url('fonts/NotoSansCJKjp-Regular.eot') format('eot');
+  src: url('fonts/NotoSansCJKjp-Regular.woff2') format('woff2'),
+    url('fonts/NotoSansCJKjp-Regular.woff') format('woff');
   font-display: swap;
 }
 @font-face {
   font-family: 'Noto Sans Japanese';
   font-weight: 700;
   font-style: bold;
-  src: url('fonts/NotoSansCJKjp-Bold.woff') format('woff'),
-    url('fonts/NotoSansCJKjp-Bold.eot') format('eot');
+  src: url('fonts/NotoSansCJKjp-Bold.woff2') format('woff2'),
+    url('fonts/NotoSansCJKjp-Bold.woff') format('woff');
   font-display: swap;
 }
 // fontawesome
