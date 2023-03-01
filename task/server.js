@@ -37,9 +37,9 @@ export const serve = (done) => {
       // ファイル読み込み
       let absPath = '';
       if(req.url === _path){
-        absPath = path.join(__dirname, '../src' + _path, 'index.html' );
+        absPath = path.join(__dirname, '../' + options.dir, 'index.html' );
       }else{
-        absPath = path.join(__dirname, '../src' + _path, req.url);
+        absPath = path.join(__dirname, '../' + options.dir, req.url);
       }
       let data = fs.readFileSync(absPath);
       // 文字コード判定
