@@ -80,11 +80,14 @@ export class Modal {
   }
 
   setPlayer ( _obj ) {
-    //console.info( _obj.event, _obj.player )
+    //console.info( _obj.player )
     if ( _obj.event === 'play' ) {
-      _obj.player.playVideo();
+      if( _obj.player ){
+        _obj.player.playVideo();
+      }
     } else if ( _obj.event === 'stop' ) {
       /* ステータス / -1:未開始 / 0:終了 / 1:再生中 / 2:一時停止 / 3:バッファリング中 / 4:頭出し済み */
+      //console.info(_obj.player)
       if( _obj.player.getPlayerState() === ( 0 || 1 || 2 || 3 ) ){
         _obj.player.pauseVideo();
         _obj.player.seekTo(0);
@@ -130,10 +133,13 @@ export class Modal {
 
     /* for Youtube setAutoPlay */
     if ( this.autoPlay ) {
-      this.setPlayer({
-        player : youtubeAPI.ytPlayer[ _obj.player_num - 1 ],
-        event : 'play'
-      });
+      //console.info(this.core.USER.device)
+      if( this.core.USER.device === 'desktop' ){
+        this.setPlayer({
+          player : youtubeAPI.ytPlayer[ obj.player_num - 1 ],
+          event : 'play'
+        });
+      }
     }
 
     if( !this.$body.hasClass('fixed') ){
@@ -284,7 +290,7 @@ export class Modal {
       let _num = Number($(this).attr('data-modal').split( '__' )[1]),
         _type = $(this).attr('data-modal').split( '__' )[2],
         _src = $(this).attr('data-modal').split( '__' )[3],
-        _player_num = 0,
+        _player_num = $(this).attr('data-ytnum'),
         _yt_id = '',
         _cts_txt_in = '',
         _flg_exist = false;
@@ -293,6 +299,7 @@ export class Modal {
       /* すでにモーダル作成済の場合dom生成しない */
       for( let x = 0; x < that.proto.num.length; x++ ){
         if( that.proto.num[x] === _num ){
+          console.info('exist')
           _flg_exist = true;
           break;
         }
@@ -301,10 +308,9 @@ export class Modal {
       /* モーダル未作成の場合のみdom生成 */
       if( !_flg_exist ){
         that.proto.num.push(_num);
-        //console.info(modal_num)
+        //console.info(that.proto)
         if ( _type === 'yt' ){
           _yt_id = $(this).attr('data-modal').split( '__' )[3];	
-          _player_num = $(this).attr('data-ytnum');
           youtubeAPI.youtubeData.push({
             num: Number(_player_num),
             youtubeId: _yt_id,
@@ -340,17 +346,18 @@ export class Modal {
           if( !that.proto.setdom[_num - 1] ){
             that.$body.prepend(that.proto.contents[_num - 1]);
             that.proto.setdom[_num - 1] = true;
-          }
 
-          /* youtube埋め込み */
-          if ( _type === 'yt' ){
-            youtubeAPI.playerNum = $(this).attr('data-ytnum') - 1;
-            //console.info(youtubeAPI.playerNum,_player_num)
-            //console.info(youtubeAPI.youtubeData[playerNum].playerReady)
-            youtubeAPI.setYoutube();
+            /* youtube埋め込み */
+            if ( _type === 'yt' ){
+              youtubeAPI.playerNum = $(this).attr('data-ytnum') - 1;
+              //console.info(youtubeAPI.playerNum,_player_num)
+              //console.info(youtubeAPI.youtubeData[playerNum].playerReady)
+              youtubeAPI.setYoutube(that.autoPlay);
+            }
           }
 
           if( that.state.response ){
+            console.info(_num,_player_num,youtubeAPI.ytPlayer)
             that.openEvent({
               target : $(this),
               event : 'click',
@@ -417,6 +424,7 @@ export class Modal {
 
       // Youtube stop
       if ( obj.type === 'yt' ) {
+        console.info(obj.player_num)
         that.setPlayer({
           player : youtubeAPI.ytPlayer[ obj.player_num - 1 ],
           event : 'stop'

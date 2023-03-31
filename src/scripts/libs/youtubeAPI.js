@@ -38,8 +38,10 @@ export const youtubeAPI = {
     setYoutube  -----------------------------------------------
   
   */
-  setYoutube () {
-    //console.info(playerNum)
+  setYoutube ( flg ) {
+    if( flg ){
+      this.autoPlay = 1;
+    }
     if( this.flgYtTag ){
       onYouTubeIframeAPIReady();
     } else {
@@ -74,7 +76,8 @@ export const youtubeAPI = {
         // controls：コントロールバー表示設定 0:非表示、1:表示、2:動画再生後に表示
         // wmode: transparent,
         rel: 0,
-        autoplay: 0,
+        autoplay: this.autoPlay,// autoPlayはiOSで機能しないので、onPlayerReadyでかつsetTimeoutでやる
+        mute: this.autoPlay,// iOSで自動再生時必須。setVolume(0)だと自動再生しない
         showinfo: 0,
         loop: 0,
         controls: 1
@@ -96,7 +99,14 @@ export const youtubeAPI = {
   */
   onPlayerReady ( _num ) {
     this.youtubeData[_num].playerReady = true;
-    //console.info(youtubeData,_num)
-  }
+  },
 
+  /*
+  
+    onPlayerStateChange  -----------------------------------------------
+  
+  */
+  onPlayerStateChange ( e ) {
+    //console.info(e)
+  }
 };
