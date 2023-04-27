@@ -45,3 +45,8 @@ gulp sprite
 ## 対応ブラウザ
 * 各種モダンブラウザ最新バージョン・IE11以上
   * 対応ブラウザを変更する場合、package.jsonの`browserslist`を修正します。
+
+## 使い方
+# modal.js
+    `let modal = new Modal;`
+    `modal.initialize(this);`
