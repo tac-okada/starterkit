@@ -48,5 +48,6 @@ gulp sprite
 
 ## 使い方
 # modal.js
-    `let modal = new Modal;`
-    `modal.initialize(this);`
+* JS読み込み時に以下を実行
+let modal = new Modal;
+modal.initialize(this);
