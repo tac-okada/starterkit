@@ -47,7 +47,35 @@ gulp sprite
   * 対応ブラウザを変更する場合、package.jsonの`browserslist`を修正します。
 
 ## 使い方
-# modal.js
+### modal.js
+レスポンシブ対応のモーダルウィンドウを生成します。
 * JS読み込み時に以下を実行
+```
 let modal = new Modal;
 modal.initialize(this);
+```
+* 仕組みについて
+  * 上記実行時にhtml内のclass`js-modalOpen`をソートし、`data-modal`からモーダル用のDOMを生成します
+* トリガー`js-modalOpen`について
+  * `data-modal`に左から「__」区切りで、
+  * [0]：固有番号【必須】 ※スライダーなどでトリガーが複製された場合の対応
+  * [1]：種類：img/yt/iframe/dom【必須】
+  * [2]：パラメータ【必須】：画像のパス／YoutubeID／iframeのパス／domのクラス名
+  * youtube時のみdata-ytnumに固有番号【必須】
+* トリガー`js-modalOpen`の使用例
+```
+<!--画像-->
+<a class="js-modalOpen" data-modal="1__img__images/modal_dummy.gif" href="">→モーダルを開く</a>
+
+<!--html内のdom要素（クラス「modal_dom」を取得して開く）-->
+<a class="js-modalOpen" data-modal="2__dom__modal_dom" href="">→モーダルを開く</a><br>
+
+<!--iframe（iframe_sample.htmlをiframeとして開く）-->
+<a class="js-modalOpen" data-modal="3__iframe__iframe_sample.html" href="">→モーダルを開く</a>
+
+<!--youtube（youtubeiframeAPIを使用してiframeとして開く）-->
+<a class="js-modalOpen" data-modal="4__yt__t1rFmJMFdKw" data-ytnum="1" href="">→モーダルを開く</a>
+```
+* モーダル内に閉じるボタンを実装する場合はクラス`js-modalClose`を付与してください
+* [0]：固有番号はhtml内に一つだけです。重複するとエラーになります。スライダー系のプラグインでトリガーが複製された場合を考慮しています。
+* スライダー系プラグイン内に実装する場合、プラグインのinitコマンド内`modal.initialize(this);`
