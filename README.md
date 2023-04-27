@@ -47,8 +47,8 @@ gulp sprite
   * 対応ブラウザを変更する場合、package.jsonの`browserslist`を修正します。
 
 ## 使い方
-### core.js
-Core`scripts/libs/core.js`という名称で、従来のいわゆる「サイト共通JS」の役割となるクラスを一つ作成し、それを各JSファイルで継承しつつ、必要に応じて追加機能を実装する、という形にしています。
+### `scripts/libs/core.js`
+Coreという名称で、従来のいわゆる「サイト共通JS」の役割となるクラスを一つ作成し、それを各JSファイルで継承しつつ、必要に応じて追加機能を実装する、という形にしています。
 メソッドの一覧です。
 * loadHandler
   * ページ読み込み時に実行
@@ -62,8 +62,8 @@ Core`scripts/libs/core.js`という名称で、従来のいわゆる「サイト
 * this.win
   * 画面サイズなどの情報を返します。リサイズ・スクロール時に随時更新されます。
 
-### modal.js
-`scripts/libs/modal.js`レスポンシブ対応のモーダルウィンドウを生成します。
+### `scripts/libs/modal.js`
+レスポンシブ対応のモーダルウィンドウを生成します。
 * JS読み込み時に以下を実行
 ```
 let modal = new Modal;
