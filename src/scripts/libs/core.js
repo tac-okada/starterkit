@@ -34,15 +34,15 @@ export class Core {
     }
   }
 
-  initialize ( tb, sp ) {
+  async initialize ( tb, sp ) {
 
     /* 基本情報セット */
-    this.USER = this.ua.initialize();
+    this.USER = await this.ua.initialize();
     this.mediaQueries.initialize(tb,sp,this);
-    this.win = this.win;
+    console.info(this.USER);
 
     /* browser情報をhtmlへ */
-    document.documentElement.classList.add(this.USER.css.join(','));
+    document.documentElement.classList.add(...this.USER.css);
 
     /* 初期状態スクロールオフ */
     this.disableScroll();
@@ -102,7 +102,7 @@ export class Core {
 
   resetEvents () {
     //console.info(this,that)
-    if ( this.USER.device != 'desktop' && this.win.width == window.innerWidth ) return false;
+    if ( this.USER.isMobile && this.win.width == window.innerWidth ) return false;
     //this.win.timer = setTimeout(() => {
       this.setupEvents();
       //console.info(this.win)

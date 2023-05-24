@@ -63,6 +63,7 @@ export const serve = (done) => {
   browserSync.init({
     notify: false,
     server: {
+      https: true,
       baseDir: _dir,// ['.tmp', 'src'],
       middleware: [
         function (req, res, next) {

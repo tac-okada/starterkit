@@ -120,56 +120,17 @@ const setAccordion = () => {
 
 
 /*
-  スクロール演出/setScTrigger/  -----------------------------------------------
-*/
-/*
-const setScTrigger = ( _sc_top, _w_h ) => {
-  const $target = $('.js-scTrigger');
-  const speed = 1;
-  let trigger, taget_offset;
-
-  $target.each( function(){
-    if( !$(this).hasClass('disp') ){
-    $(this).css({'opacity':'0'});
-
-    // 表示開始する位置を算出
-    trigger = _sc_top + _w_h - 200;
-    // ターゲットの位置を取得
-    taget_offset = $(this).offset().top;
-
-    if( taget_offset < trigger ){
-      TweenMax.fromTo( $(this), speed,
-        {
-          opacity : 0,
-          scale : 1.2
-        },
-        {
-          opacity : 1,
-          scale : 1,
-          transformOrigin: origin,
-          ease: Power2.easeIn
-        }
-      );
-      $(this).addClass('disp');
-    }
-    }
-  });
-};
-*/
-
-
-/*
   SP時にTELリンク/setTelCall/  -----------------------------------------------
   head内に設置：<meta name="format-detection" content="telephone=yes">
   リンクさせる：<p class="js-telCall" x-ms-format-detection="none">0120-00-0000</p>
   リンクさせない：<p class="disableTel" x-ms-format-detection="none">0120-00-0000</p>
-  core.USER.deviceでUA判定し「sp」or「tb」のみ実行
+  core.USER.isMobileでUA判定し「sp」or「tb」のみ実行
 */
 const setTelCall = core => {
   let telCall = document.querySelectorAll('.js-telCall'),
   txt, num;
   //console.info(core.USER)
-  if ( core.USER.device !== 'desktop'){
+  if ( core.USER.isMobile ){
     for (let i = 0; i < telCall.length; i++) {
       //console.info(telCall[i])
       txt = telCall[i].textContent;

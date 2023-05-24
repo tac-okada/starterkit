@@ -63,16 +63,16 @@ export class Modal {
 
     /* for singleImage */
     } else if ( _obj.type === 'img' ){
-      _html = '<img src="' + _obj.src + '" alt="" />';
+      _html = '<img src="' + _obj.param + '" alt="" />';
 
     /* for iframe */
     } else if ( _obj.type === 'iframe' ){
-      _html = '<iframe src="' + this.iframepath + _obj.src + '" frameborder="no"></iframe>';
+      _html = '<iframe src="' + this.iframepath + _obj.param + '" frameborder="no"></iframe>';
 
     /* for freeContents */
     } else if ( _obj.type === 'dom' ){
-      _html = $('.js-modal_dom').html();
-      $('.js-modal_dom').remove();
+      _html = $('.' + _obj.param).html();
+      $('.' + _obj.param).remove();
     }
 
     //console.info(_html)
@@ -133,8 +133,8 @@ export class Modal {
 
     /* for Youtube setAutoPlay */
     if ( this.autoPlay ) {
-      //console.info(this.core.USER.device)
-      if( this.core.USER.device === 'desktop' ){
+      //console.info(this.core.USER.isMobile)
+      if( !this.core.USER.isMobile ){
         this.setPlayer({
           player : youtubeAPI.ytPlayer[ obj.player_num - 1 ],
           event : 'play'
@@ -166,8 +166,7 @@ export class Modal {
       this.$body.append( this.proto.bg ).prepend( this.proto.close );
       this.$bg = $('#modal_bg');
       this.$close_btn = $('#modal_close');
-
-      if( this.core.USER.device === 'ipad' || this.core.USER.device === 'androidtablet' || this.core.USER.device === 'kindle' ){// タブレット時のみ位置調整
+      if( this.core.mql === 'tb' ){// タブレット時のみ位置調整
         this.$close_btn.addClass('tb');
       }
     }
@@ -287,9 +286,8 @@ export class Modal {
     const $btn = $('.js-modalOpen');
     let that = this;
     $btn.each( function(i) {
-      let _num = Number($(this).attr('data-modal').split( '__' )[1]),
-        _type = $(this).attr('data-modal').split( '__' )[2],
-        _src = $(this).attr('data-modal').split( '__' )[3],
+      let _type = $(this).attr('data-modal').split( '__' )[1],
+        _param = $(this).attr('data-modal').split( '__' )[2],
         _player_num = $(this).attr('data-ytnum'),
         _yt_id = '',
         _cts_txt_in = '',
@@ -298,7 +296,7 @@ export class Modal {
       //console.info(that)
       /* すでにモーダル作成済の場合dom生成しない */
       for( let x = 0; x < that.proto.num.length; x++ ){
-        if( that.proto.num[x] === _num ){
+        if( that.proto.num[x] === Number($(this).attr('data-modal').split( '__' )[0]) ){
           console.info('exist')
           _flg_exist = true;
           break;
@@ -307,10 +305,10 @@ export class Modal {
 
       /* モーダル未作成の場合のみdom生成 */
       if( !_flg_exist ){
-        that.proto.num.push(_num);
+        that.proto.num.push(Number($(this).attr('data-modal').split( '__' )[0]));
         //console.info(that.proto)
         if ( _type === 'yt' ){
-          _yt_id = $(this).attr('data-modal').split( '__' )[3];	
+          _yt_id = $(this).attr('data-modal').split( '__' )[2];	
           youtubeAPI.youtubeData.push({
             num: Number(_player_num),
             youtubeId: _yt_id,
@@ -320,19 +318,19 @@ export class Modal {
         }
 
         _cts_txt_in = that.setHtml({
-          num : _num,
+          num : Number($(this).attr('data-modal').split( '__' )[0]),
           type : _type,
-          src : _src,
+          param : _param,
           player_num : _player_num,
           yt_id : _yt_id
         });
 
         /* iframe個別埋め込みに変更 */
-        that.proto.contents[_num - 1] = String()
-        + '<div class="modal_contents modal_' + _num + ' modal_' + _type + '">'
+        that.proto.contents[Number($(this).attr('data-modal').split( '__' )[0]) - 1] = String()
+        + '<div class="modal_contents modal_' + Number($(this).attr('data-modal').split( '__' )[0]) + ' modal_' + _type + '">'
           + _cts_txt_in
         + '</div>';
-        that.proto.setdom[_num - 1] = false;
+        that.proto.setdom[Number($(this).attr('data-modal').split( '__' )[0]) - 1] = false;
       //console.info(that.proto.contents[i])
       }
       //console.info(that.proto.setdom[_num - 1],i,_num)
@@ -343,9 +341,9 @@ export class Modal {
           that.state.scrollPos = window.pageYOffset;
 
           /* dom埋め込みここで */
-          if( !that.proto.setdom[_num - 1] ){
-            that.$body.prepend(that.proto.contents[_num - 1]);
-            that.proto.setdom[_num - 1] = true;
+          if( !that.proto.setdom[Number($(this).attr('data-modal').split( '__' )[0]) - 1] ){
+            that.$body.prepend(that.proto.contents[Number($(this).attr('data-modal').split( '__' )[0]) - 1]);
+            that.proto.setdom[Number($(this).attr('data-modal').split( '__' )[0]) - 1] = true;
 
             /* youtube埋め込み */
             if ( _type === 'yt' ){
@@ -357,11 +355,11 @@ export class Modal {
           }
 
           if( that.state.response ){
-            console.info(_num,_player_num,youtubeAPI.ytPlayer)
+            //console.info(_num,_player_num,youtubeAPI.ytPlayer)
             that.openEvent({
               target : $(this),
               event : 'click',
-              num : _num,
+              num : Number($(this).attr('data-modal').split( '__' )[0]),
               type : _type,
               player_num : _player_num,
               bg_click : true
