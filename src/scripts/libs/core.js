@@ -39,7 +39,8 @@ export class Core {
     /* 基本情報セット */
     this.USER = await this.ua.initialize();
     this.mediaQueries.initialize(tb,sp,this);
-    console.info(this.USER);
+    //alert(this.USER.css)
+    //console.info(this.USER);
 
     /* browser情報をhtmlへ */
     document.documentElement.classList.add(...this.USER.css);

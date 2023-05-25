@@ -17,7 +17,8 @@ export class UserAgent {
       isTouch : false,
       isHighResolution : false,
       isMobile : true,
-      model : null
+      model : null,
+      webView : null
     }
   }
 
@@ -56,8 +57,12 @@ export class UserAgent {
         }
         if (_this.USER.os == 'ios' && _this.USER.osVersion < 9) _this.USER.css.push('ios' + _this.USER.osVersion);
         if (_this.USER.isLegacy) _this.USER.css.push('legacy');
-        if (_this.USER.agent.indexOf('line') != -1) _this.USER.css.push('line');
 
+        /* WebView  ---------------- */
+        if (_this.USER.agent.indexOf('line') != -1){
+          _this.USER.webView = 'line';
+          _this.USER.css.push('line');
+        }
         resolve(_this.USER);
       };
 
@@ -116,7 +121,6 @@ export class UserAgent {
         setUA();
 
       } else {
-
         /* Device  ---------------- */
         if (_this.USER.agent.indexOf('ipad') != -1) _this.USER.device = 'ipad';
         else if (_this.USER.agent.indexOf('ipod') != -1) _this.USER.device = 'ipod';
