@@ -57,8 +57,8 @@ class AppIndex extends Core {
         /* 念の為再度this.setupEvents実行（現在のwindowサイズなどを取得のため） */
         this.setupEvents();
 
-        $('body').toggleClass('loading active');
-        $('html').addClass('active');
+        //$('body').toggleClass('loading active');
+        //$('html').addClass('active');
         $loader.on(this.animationEnd, () => {
           $(this).off(this.animationEnd).remove();
           /* ここでスクロールとブラウザイベントを有効にする */
