@@ -1,5 +1,5 @@
-import { Core } from './libs/core.js';
-import { Modal } from './libs/modal.js';
+import { Core } from '/src/scripts/libs/core.js';
+import { Modal } from '/src/scripts/libs/modal.js';
 
 window.addEventListener('load', () => {
   /* ブレイクポイント指定：タブレット,スマホ */

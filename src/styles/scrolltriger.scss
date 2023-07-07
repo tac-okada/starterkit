@@ -117,20 +117,15 @@ body {
     }
   }
 
-  &.-sec6,
-  &.-sec8{
+  &.-sec6{
     height: 50vh;
   }
 
-.pin-spacer {
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); //四角形
-}
-
   &.-sec7,
+  &.-sec8,
   &.-sec9,
-  &.-sec11,
-  &.-sec13,
-  &.-sec14{
+  &.-sec10,
+  &.-sec11{
     height: 50vh;
     background: #efefef;
   }
@@ -145,11 +140,8 @@ body {
   left: 0;
   top: 0;
 
-  &.-obj2,
-  &.-obj4,
-  &.-obj6,
-  &.-obj8,
-  &.-obj10{
+  &.-obj1,
+  &.-obj3{
     left: auto;
     right: 0;
   }

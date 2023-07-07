@@ -4,7 +4,7 @@ gsap.registerPlugin(ScrollToPlugin);
 import $ from 'jquery';
 
 import { UserAgent, MediaQueries } from './util.js';
-import { setConsoleIe, setPopupWin, setScrollTo, setAccordion, setTelCall } from './functions.js';
+import { setConsoleIe, setPopupWin, setScrollTo, setAccordion, setTelCall, setCrsl } from './functions.js';
 
 /*
 
@@ -40,7 +40,7 @@ export class Core {
     this.USER = await this.ua.initialize();
     this.mediaQueries.initialize(tb,sp,this);
     //alert(this.USER.css)
-    console.info(this.USER);
+    //console.info(this.USER);
 
     /* browser情報をhtmlへ */
     document.documentElement.classList.add(...this.USER.css);
@@ -123,6 +123,7 @@ export class Core {
     setScrollTo(this);
     setAccordion();
     setTelCall(this);
+    //setCrsl(this);
 
     /* 個別JSハンドラ */
     if ( typeof( this.loadHandler ) !== 'undefined' ){

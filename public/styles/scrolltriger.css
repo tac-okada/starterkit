@@ -234,7 +234,7 @@ html {
   width: 100%;
   height: 100%;
   font-size: 100%;
-  font-family: "Noto Sans Japanese", -apple-system, BlinkMacSystemFont, "Helvetica Neue", YuGothic, "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif;
+  font-family: "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Helvetica Neue", YuGothic, "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif;
 }
 @media (min-width: 1400px) {
   html {
@@ -316,14 +316,10 @@ body.absolute {
 .sec.-sec5 > div:nth-of-type(2n) {
   background: #efefef;
 }
-.sec.-sec6, .sec.-sec8 {
+.sec.-sec6 {
   height: 50vh;
 }
-.sec .pin-spacer {
-  -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
-          clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
-}
-.sec.-sec7, .sec.-sec9, .sec.-sec11, .sec.-sec13, .sec.-sec14 {
+.sec.-sec7, .sec.-sec8, .sec.-sec9, .sec.-sec10, .sec.-sec11 {
   height: 50vh;
   background: #efefef;
 }
@@ -337,7 +333,7 @@ body.absolute {
   left: 0;
   top: 0;
 }
-.obj.-obj2, .obj.-obj4, .obj.-obj6, .obj.-obj8, .obj.-obj10 {
+.obj.-obj1, .obj.-obj3 {
   left: auto;
   right: 0;
 }

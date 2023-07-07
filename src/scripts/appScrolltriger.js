@@ -44,8 +44,23 @@ class AppScrolltriger extends Core {
         scrollTrigger: {
           trigger: _this,
           start: 'top center+=300',
+          markers: true,
+        }
+      })
+    });
+
+    gsap.utils.toArray('.js-trigger-reverse').forEach( (_this) => {
+      gsap.fromTo(_this, {
+        y: '60px',
+        autoAlpha: 0,
+      },{
+        y: '0',
+        autoAlpha: 1,
+
+        scrollTrigger: {
+          trigger: _this,
+          start: 'top center+=300',
           end: 'top top-=99999',
-          //scrub: false,
           markers: true,
           toggleActions: 'play pause resume reverse'
         }
@@ -99,14 +114,18 @@ class AppScrolltriger extends Core {
         autoAlpha: 1,
         stagger: 0.15,
       }),
+/*
       onLeave: batch => gsap.set(batch, {
         y: '100px',
         autoAlpha: 0
       }),
+*/
+/*
       onEnterBack: batch => gsap.set(batch, {
         y: '0',
         autoAlpha: 1
       }),
+*/
       onLeaveBack: batch => gsap.to(batch, {
         y: '100px',
         autoAlpha: 0,
@@ -117,44 +136,26 @@ class AppScrolltriger extends Core {
       markers: true,
     });
 
-// if(  )
-    const scenes = gsap.utils.toArray('.js-sec');
-    //console.info(1 / (scenes.length - 1))
-    ScrollTrigger.create({
-      trigger: '.-sec7',
-      snap: {
-        snapTo: 0.1,
-        duration: { min: 0.2, max: 1 },
-        delay: 0.1
-      },
-      animation: gsap.to('.-sec7 div', {
-        rotation: 720,
-        x: '-50vw',
-        y: '40vh'
-      }),
-      scrub: 1,
-      pin: true,
-      markers: true,
-      start: 'top center',
-      end: 'bottom center',
-    });
 
-    ScrollTrigger.create({
-      trigger: '.-sec8',
-      snap: {
-        snapTo: 1 / (scenes.length - 1),
-        duration: { min: 0.2, max: 1 },
-        delay: 0.1
-      },
-      animation: gsap.to('.-sec8 div', {
-        rotation: 1800,
-        x: '90vw',
-      }),
-      scrub: 1,
-      pin: true,
-      markers: true,
-      start: 'top center',
-      end: 'bottom center',
+    gsap.utils.toArray('.js-trigger-pin').forEach( (_this) => {
+      console.info($(_this.querySelector('.obj')))
+      let _x = window.innerWidth - _this.querySelector('.obj').clientWidth;
+      if( _this.classList.contains('-sec7') || _this.classList.contains('-sec9') ){
+        _x = - _x
+      }
+      gsap.to(_this.querySelector('.obj'), {
+        x: _x,
+
+        scrollTrigger: {
+          trigger: _this,
+          start: 'top center',
+          end: 'bottom center',
+          scrub: 1,
+          pin: true,
+          markers: true,
+          toggleActions: 'play pause reverse pause'
+        }
+      })
     });
   }
 };

@@ -56,31 +56,7 @@
 </style>
 </head>
 <body>
-<div class="loader -ball">
-  <div class="ico">
-    <div></div><div></div><div></div>
-  </div>
-</div>
-<!--
-<div class="loader -rotateCirc">
-  <svg class="ico" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><circle class="circ" cx="40" cy="40" r="36"/></svg>
-</div>
--->
-<!--
-<div class="loader -slideBar">
-  <div class="bar"></div>
-</div>
--->
-<!--
-<div class="loader -gear">
-  <div class="ico">
-    <svg class="gear1" xmlns="http://www.w3.org/2000/svg" width="127.95" height="137.46" viewBox="0 0 127.95 137.46"><path d="m124.67,85.37l-9.08-8.1c.45-2.78.7-5.65.7-8.55s-.25-5.77-.7-8.55l9.08-8.1.08.04c2.91-2.58,4.05-6.63,2.54-10.23-.94-2.17-1.96-4.3-3.11-6.34l-1.27-2.21c-1.23-2.05-2.58-4.05-4.01-5.97-2.33-3.11-6.42-4.13-10.11-2.91l-11.54,3.81c-4.38-3.6-9.41-6.55-14.81-8.55l-2.5-11.87c-.78-3.81-3.72-6.83-7.57-7.28-2.7-.37-5.44-.53-8.23-.53h-.29c-2.78,0-5.52.16-8.23.49-3.85.45-6.79,3.52-7.57,7.28l-2.5,11.91c-5.44,2.05-10.44,4.95-14.81,8.55l-11.58-3.76c-3.68-1.23-7.78-.2-10.11,2.91-1.43,1.92-2.78,3.93-4.05,5.97l-1.23,2.17c-1.15,2.05-2.17,4.17-3.11,6.38-1.51,3.56-.37,7.61,2.54,10.23l9.08,8.1c-.45,2.74-.7,5.61-.7,8.51s.25,5.77.7,8.55l-9.08,8.1c-2.91,2.58-4.05,6.63-2.54,10.23.94,2.17,1.96,4.3,3.11,6.38l1.23,2.13c1.23,2.09,2.58,4.05,4.05,5.97,2.33,3.11,6.42,4.13,10.11,2.91l11.54-3.81c4.38,3.6,9.41,6.55,14.81,8.55l2.5,11.91c.78,3.81,3.72,6.83,7.57,7.28,2.74.33,5.52.49,8.35.49s5.61-.16,8.35-.49c3.85-.45,6.79-3.52,7.57-7.28l2.5-11.91c5.44-2.05,10.44-4.95,14.81-8.55l11.54,3.81c3.68,1.23,7.78.2,10.11-2.91,1.43-1.92,2.78-3.89,4.01-5.97l1.27-2.21c1.15-2.05,2.17-4.17,3.11-6.34,1.51-3.56.37-7.61-2.54-10.23Zm-60.69,3.03c-10.85,0-19.64-8.79-19.64-19.64s8.79-19.64,19.64-19.64,19.64,8.79,19.64,19.64-8.79,19.64-19.64,19.64Z"/></svg>
-    <svg class="gear2" xmlns="http://www.w3.org/2000/svg" width="127.95" height="137.46" viewBox="0 0 127.95 137.46"><path d="m124.67,85.37l-9.08-8.1c.45-2.78.7-5.65.7-8.55s-.25-5.77-.7-8.55l9.08-8.1.08.04c2.91-2.58,4.05-6.63,2.54-10.23-.94-2.17-1.96-4.3-3.11-6.34l-1.27-2.21c-1.23-2.05-2.58-4.05-4.01-5.97-2.33-3.11-6.42-4.13-10.11-2.91l-11.54,3.81c-4.38-3.6-9.41-6.55-14.81-8.55l-2.5-11.87c-.78-3.81-3.72-6.83-7.57-7.28-2.7-.37-5.44-.53-8.23-.53h-.29c-2.78,0-5.52.16-8.23.49-3.85.45-6.79,3.52-7.57,7.28l-2.5,11.91c-5.44,2.05-10.44,4.95-14.81,8.55l-11.58-3.76c-3.68-1.23-7.78-.2-10.11,2.91-1.43,1.92-2.78,3.93-4.05,5.97l-1.23,2.17c-1.15,2.05-2.17,4.17-3.11,6.38-1.51,3.56-.37,7.61,2.54,10.23l9.08,8.1c-.45,2.74-.7,5.61-.7,8.51s.25,5.77.7,8.55l-9.08,8.1c-2.91,2.58-4.05,6.63-2.54,10.23.94,2.17,1.96,4.3,3.11,6.38l1.23,2.13c1.23,2.09,2.58,4.05,4.05,5.97,2.33,3.11,6.42,4.13,10.11,2.91l11.54-3.81c4.38,3.6,9.41,6.55,14.81,8.55l2.5,11.91c.78,3.81,3.72,6.83,7.57,7.28,2.74.33,5.52.49,8.35.49s5.61-.16,8.35-.49c3.85-.45,6.79-3.52,7.57-7.28l2.5-11.91c5.44-2.05,10.44-4.95,14.81-8.55l11.54,3.81c3.68,1.23,7.78.2,10.11-2.91,1.43-1.92,2.78-3.89,4.01-5.97l1.27-2.21c1.15-2.05,2.17-4.17,3.11-6.34,1.51-3.56.37-7.61-2.54-10.23Zm-60.69,3.03c-10.85,0-19.64-8.79-19.64-19.64s8.79-19.64,19.64-19.64,19.64,8.79,19.64,19.64-8.79,19.64-19.64,19.64Z"/></svg>
-    <svg class="gear3" xmlns="http://www.w3.org/2000/svg" width="127.95" height="137.46" viewBox="0 0 127.95 137.46"><path d="m124.67,85.37l-9.08-8.1c.45-2.78.7-5.65.7-8.55s-.25-5.77-.7-8.55l9.08-8.1.08.04c2.91-2.58,4.05-6.63,2.54-10.23-.94-2.17-1.96-4.3-3.11-6.34l-1.27-2.21c-1.23-2.05-2.58-4.05-4.01-5.97-2.33-3.11-6.42-4.13-10.11-2.91l-11.54,3.81c-4.38-3.6-9.41-6.55-14.81-8.55l-2.5-11.87c-.78-3.81-3.72-6.83-7.57-7.28-2.7-.37-5.44-.53-8.23-.53h-.29c-2.78,0-5.52.16-8.23.49-3.85.45-6.79,3.52-7.57,7.28l-2.5,11.91c-5.44,2.05-10.44,4.95-14.81,8.55l-11.58-3.76c-3.68-1.23-7.78-.2-10.11,2.91-1.43,1.92-2.78,3.93-4.05,5.97l-1.23,2.17c-1.15,2.05-2.17,4.17-3.11,6.38-1.51,3.56-.37,7.61,2.54,10.23l9.08,8.1c-.45,2.74-.7,5.61-.7,8.51s.25,5.77.7,8.55l-9.08,8.1c-2.91,2.58-4.05,6.63-2.54,10.23.94,2.17,1.96,4.3,3.11,6.38l1.23,2.13c1.23,2.09,2.58,4.05,4.05,5.97,2.33,3.11,6.42,4.13,10.11,2.91l11.54-3.81c4.38,3.6,9.41,6.55,14.81,8.55l2.5,11.91c.78,3.81,3.72,6.83,7.57,7.28,2.74.33,5.52.49,8.35.49s5.61-.16,8.35-.49c3.85-.45,6.79-3.52,7.57-7.28l2.5-11.91c5.44-2.05,10.44-4.95,14.81-8.55l11.54,3.81c3.68,1.23,7.78.2,10.11-2.91,1.43-1.92,2.78-3.89,4.01-5.97l1.27-2.21c1.15-2.05,2.17-4.17,3.11-6.34,1.51-3.56.37-7.61-2.54-10.23Zm-60.69,3.03c-10.85,0-19.64-8.79-19.64-19.64s8.79-19.64,19.64-19.64,19.64,8.79,19.64,19.64-8.79,19.64-19.64,19.64Z"/></svg>
-  </div>
-</div>
--->
-<!--
+<div id="crsl"></div>
 <div id="loader">
   <div class="block-loader">
     <p class="txt-loader txt orn bold overpass"><span class="txt-number txt lv1">0</span>%</p>
@@ -88,7 +64,6 @@
     <p class="txt-catch txt lv4 orn bold">おいしいフルーツ</p>
   </div>
 </div>
--->
 <ul class="fruits">
   <li>
     <picture>
@@ -202,13 +177,13 @@
 <section>
   <h2>2：アコーディオン</h2>
   <dl class="accorTest">
-    <dt class="js-accorBtn">アコーディオンを開く<span class="accorIco"></span></dt>
+    <dt class="js-accorBtn js-crslArea">アコーディオンを開く<span class="accorIco"></span></dt>
     <dd class="js-accorArea">
       <p class="inner">テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
     </dd>
   </dl>
   <dl class="accorTest">
-    <dt class="js-accorBtn">アコーディオンを開く<span class="accorIco"></span></dt>
+    <dt class="js-accorBtn js-crslArea">アコーディオンを開く<span class="accorIco"></span></dt>
     <dd class="js-accorArea">
       <p class="inner">テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
     </dd>
@@ -216,7 +191,112 @@
 </section>
 
 <section>
+  <h2>3：スライドイメージ</h2>
+  <div class="ticker">
+    <ul class="fruits">
+      <li>
+        <picture>
+          <source type="image/webp" srcset="/images/webp/dummy01.webp">
+          <img src="/images/legacy/dummy01.jpg" alt="">
+        </picture>
+      </li>
+      <li>
+        <picture>
+          <source type="image/webp" srcset="/images/webp/dummy02.webp">
+          <img src="/images/legacy/dummy02.jpg" alt="">
+        </picture>
+      </li>
+      <li>
+        <picture>
+          <source type="image/webp" srcset="/images/webp/dummy03.webp">
+          <img src="/images/legacy/dummy03.jpg" alt="">
+        </picture>
+      </li>
+      <li>
+        <picture>
+          <source type="image/webp" srcset="/images/webp/dummy04.webp">
+          <img src="/images/legacy/dummy04.jpg" alt="">
+        </picture>
+      </li>
+      <li>
+        <picture>
+          <source type="image/webp" srcset="/images/webp/dummy05.webp">
+          <img src="/images/legacy/dummy05.jpg" alt="">
+        </picture>
+      </li>
+      <li>
+        <picture>
+          <source type="image/webp" srcset="/images/webp/dummy06.webp">
+          <img src="/images/legacy/dummy06.jpg" alt="">
+        </picture>
+      </li>
+      <li>
+        <picture>
+          <source type="image/webp" srcset="/images/webp/dummy07.webp">
+          <img src="/images/legacy/dummy07.jpg" alt="">
+        </picture>
+      </li>
+      <li>
+        <picture>
+          <source type="image/webp" srcset="/images/webp/dummy08.webp">
+          <img src="/images/legacy/dummy08.jpg" alt="">
+        </picture>
+      </li>
+      <li>
+        <picture>
+          <source type="image/webp" srcset="/images/webp/dummy01.webp">
+          <img src="/images/legacy/dummy01.jpg" alt="">
+        </picture>
+      </li>
+      <li>
+        <picture>
+          <source type="image/webp" srcset="/images/webp/dummy02.webp">
+          <img src="/images/legacy/dummy02.jpg" alt="">
+        </picture>
+      </li>
+      <li>
+        <picture>
+          <source type="image/webp" srcset="/images/webp/dummy03.webp">
+          <img src="/images/legacy/dummy03.jpg" alt="">
+        </picture>
+      </li>
+      <li>
+        <picture>
+          <source type="image/webp" srcset="/images/webp/dummy04.webp">
+          <img src="/images/legacy/dummy04.jpg" alt="">
+        </picture>
+      </li>
+      <li>
+        <picture>
+          <source type="image/webp" srcset="/images/webp/dummy05.webp">
+          <img src="/images/legacy/dummy05.jpg" alt="">
+        </picture>
+      </li>
+      <li>
+        <picture>
+          <source type="image/webp" srcset="/images/webp/dummy06.webp">
+          <img src="/images/legacy/dummy06.jpg" alt="">
+        </picture>
+      </li>
+      <li>
+        <picture>
+          <source type="image/webp" srcset="/images/webp/dummy07.webp">
+          <img src="/images/legacy/dummy07.jpg" alt="">
+        </picture>
+      </li>
+      <li>
+        <picture>
+          <source type="image/webp" srcset="/images/webp/dummy08.webp">
+          <img src="/images/legacy/dummy08.jpg" alt="">
+        </picture>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section>
   <h2>3：アンカーリンク</h2>
+  <p>テキストテキストテキストテキストテキストテキスト<a class="txtLink" href="">テキストテキスト</a>テキストテキストテキストテキストテキストテキストテキスト</p>
 <!--   <a class="js-popup" href="iframe_sample.html">ポップアップ</a><br><br> -->
   <a href="#">TOPへ戻る</a>
 </section>

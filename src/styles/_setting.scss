@@ -1,11 +1,11 @@
 @use "sass:math";
 @use "sass:meta";
 // 画像パス
-$imgPath : "/imagges/";
+$imgPath : "/images/";
 
 // フォントファミリー
 // NotoSansを使用する場合
-$fontset_noto:"Noto Sans Japanese",-apple-system, BlinkMacSystemFont, "Helvetica Neue", YuGothic, "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif;
+$fontset_noto: /* YakuHanJP,  */'Noto Sans JP',-apple-system, BlinkMacSystemFont, "Helvetica Neue", YuGothic, "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif;
 // 最新ゴシック-游ゴシック
 $fontset1:-apple-system, BlinkMacSystemFont, "Helvetica Neue", YuGothic, "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif;
 // 旧ゴシック
@@ -247,6 +247,56 @@ $bpSpS : 374px;
   @return round-decimal( math.percentage( $px / $parent_width ) , 2);
 }
 // width: px-to-per(100px,950px);
+
+// 三角形 生成
+@mixin sankaku($width, $color, $dir, $isHalf:false){
+  background-color: $color;
+
+  @if ($dir == 'up'){
+    width: $width;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+
+    @if ($isHalf){
+      height: calc($width / 2);
+    } @else {
+      height: calc($width / 2 * tan(60deg));
+    }
+  }
+
+  @if ($dir == 'right'){
+    height: $width;
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+
+    @if ($isHalf){
+      width: calc($width / 2);
+    } @else {
+      width: calc($width / 2 * tan(60deg));
+    }
+  }
+
+  @if ($dir == 'down'){
+    width: $width;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+
+    @if ($isHalf){
+      height: calc($width / 2);
+    } @else {
+      height: calc($width / 2 * tan(60deg));
+    }
+  }
+
+  @if ($dir == 'left'){
+    height: $width;
+    clip-path: polygon(0 50%, 100% 0, 100% 100%);
+
+    @if ($isHalf){
+      width: calc($width / 2);
+    } @else {
+      width: calc($width / 2 * tan(60deg));
+    }
+  }
+}
+// @include setting.sankaku(10px, #000, 'right', true);
 
 @mixin ibBox {
   letter-spacing: -1em;
