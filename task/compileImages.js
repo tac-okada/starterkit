@@ -1,5 +1,5 @@
 'use strict';
-import imagemin from 'imagemin';
+import imagemin from 'imagemin-keep-folder';
 import imageminMozjpeg from 'imagemin-mozjpeg';
 import imageminPngquant from 'imagemin-pngquant';
 import imageminGifsicle from 'imagemin-gifsicle';
@@ -13,14 +13,15 @@ import { _path } from '../package.json';
 
 */
 export const compileImages = async (done) => {
-  await imagemin( ['src' + _path + 'images/legacy/**/*'], {
-    destination: 'src' + _path + 'images/webp/',
-    plugins: [
+  await imagemin( ['src' + _path + '**/images/legacy/*.{gif,jpg,png}'], {
+    use: [
       imageminWebp({ quality: 50 })
-    ]
+    ],
+    replaceOutputDir: output => {
+      return output.replace(/legacy\//, 'webp/')
+    }
   });
-  await imagemin( ['src' + _path + 'images/**/*'], {
-    destination: 'public' + _path + 'images',
+  await imagemin( ['src' + _path + '**/images/*.{gif,jpg,png,webp,svg}'], {
     plugins: [
       imageminMozjpeg({ quality: 75 }),
       imageminPngquant({ quality: [0.3, 0.5] }),
@@ -30,7 +31,10 @@ export const compileImages = async (done) => {
           { removeViewBox: false}
         ]
       })
-    ]
+    ],
+    replaceOutputDir: output => {
+      return output.replace(/src\//, 'public/')
+    }
   });
   done();
 };

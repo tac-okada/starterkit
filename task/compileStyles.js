@@ -9,9 +9,20 @@ import autoprefixer from 'autoprefixer';
 import stylelint from 'stylelint';
 import size from 'gulp-size';
 import changed from 'gulp-changed';
+import path from 'path';
 import { _path } from '../package.json';
 import { browserslist } from '../package.json';
+let pubricPath;
 
+const getPath = file => {
+  //console.info(file)
+  // 書き出し先のパスをfile.pathから抽出しsrc/styles以下を__pathに切り出し
+  let __path = file.path.split('/').reverse().slice(1).reverse().join('/');
+    __path = __path.substring(__path.indexOf('src/')).replace('src/', '');
+    __path = __path.substring(__path.indexOf('styles')).replace('styles', '');
+  //console.info(__path)
+  return __path
+}
 
 /*
 
@@ -21,11 +32,16 @@ import { browserslist } from '../package.json';
 export const compileStyles = (done) => {
   // For best performance, don't add Sass partials to `gulp.src`
   return src([
-    'src' + _path + 'styles/*.scss',
-    'src' + _path + 'styles/**/*.css'
+    'src' + _path + '**/*.scss',
+    'src' + _path + '**/*.css'
   ], { sourcemaps: true })
-    .pipe(plumber())
-    .pipe(changed('.tmp' + _path + 'styles', {extension: '.css'}))
+    .pipe(plumber({
+      errorHandler: function(err) {
+        console.log(err.messageFormatted);
+        this.emit('end');
+      }
+    }))
+    //.pipe(changed('.tmp' + _path + 'styles', {extension: '.css'}))
     .pipe(sass({
       outputStyle: 'expanded',
       precision: 10,
@@ -50,8 +66,10 @@ export const compileStyles = (done) => {
         }
       })
     ]))
-    .pipe(dest('.tmp' + _path + 'styles'))
-    .pipe(dest('public' + _path + 'styles'))
+    //.pipe(dest('.tmp' + _path + 'styles'))
+    .pipe(dest( file => {
+      return 'public' + _path + getPath(file);
+    }))
     .pipe(size({title: 'styles'}));
   done();
 };

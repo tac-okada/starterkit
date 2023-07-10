@@ -12,9 +12,9 @@ export const compileCopy = (done) => {
   return src([
     'src' + _path + '**/*',
     '!src' + _path + '**/*.ejs',
-    '!src' + _path + 'scripts/*',
-    '!src' + _path + 'scripts/libs/**/*',
-    '!src' + _path + 'styles/*'
+    '!src' + _path + '**/scripts/**/*',
+    '!src' + _path + '**/images/**/*',
+    '!src' + _path + '**/styles/*'// font/があるので一階層のみ
 /*,
     'node_modules/apache-server-configs/public/.htaccess'
 */
