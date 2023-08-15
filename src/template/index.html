@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+<meta charset="UTF-8">
+<title>.util</title>
+
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width,maximum-scale=1,user-scalable=yes">
+<meta name="format-detection" content="telephone=yes">
+
+<meta name="keywords" content="" > 
+<meta name="description" content="" >
+<link href="styles/template.css" rel="stylesheet">
+<link href="styles/monokai-sublime.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="wrap util">
+  <nav>
+    <ul class="fsize16">
+      <li><a class="txtLink hover" href="#sec1">使い方</a></li>
+      <li><a class="txtLink hover" href="#sec2">クラス名について</a></li>
+      <li><a class="txtLink hover" href="#sec3">レスポンシブ対応</a></li>
+      <li><a class="txtLink hover" href="#sec4">フォントサイズ</a></li>
+      <li><a class="txtLink hover" href="#sec5">余白</a></li>
+      <li><a class="txtLink hover" href="#sec6">見出し</a></li>
+      <li><a class="txtLink hover" href="#sec7">テキストの装飾</a></li>
+      <li><a class="txtLink hover" href="#sec8">ブロック</a></li>
+      <li><a class="txtLink hover" href="#sec9">リスト・注釈</a></li>
+      <li><a class="txtLink hover" href="#sec10">配置</a></li>
+      <li><a class="txtLink hover" href="#sec11">テキストリンク</a></li>
+      <li><a class="txtLink hover" href="#sec12">ボタン</a></li>
+      <li><a class="txtLink hover" href="#sec13">フォーム</a></li>
+      <li><a class="txtLink hover" href="#sec14">確認画面</a></li>
+      <li><a class="txtLink hover" href="#sec15">応募要項・お問い合わせ</a></li>
+      <li><a class="txtLink hover" href="#sec16">テーブル</a></li>
+      <li><a class="txtLink hover" href="#sec17">アコーディオン・Q&A</a></li>
+      <li><a class="txtLink hover" href="#sec18">電話番号</a></li>
+    </ul>
+  </nav>
+  <p class="ptop fsize16"><a class="txtLink -up" href="#">ページの先頭へ</a></p>
+
+  <main class="inner">
+    <section class="left pt20">
+      <h1 class="head06 rem lh10">.util<span class="fsize14"> templateCSS</span></h1>
+      <p class="fsize12 rem mb40">update：230815</p>
+      <p class="fsize16">応募フォームや応募要項など、キャンペーンサイト等でよく使うパーツを中心にユーティリティ化しました。基本的にCSSを触らずに実装・修正できることを目指してします。<br>クライアントサイトの一部に適用するケースを考慮し、クラス<span class="code">.util</span>で囲った範囲のみに適用されます。</p>
+    </section>
+    <section class="left mt40">
+      <ul class="list fsize16">
+        <li>制作物のクオリティアップ
+          <ul class="list fsize16">
+            <li>時間をかけるべきところに時間を使えるようにしたい</li>
+          </ul>
+        </li>
+        <li>コーディングのスピードアップ
+          <ul class="list fsize16">
+            <li>極力CSSを触らずにコーディングできること</li>
+            <li>定期的にメンテナンスし検証不要な状態を保つ</li>
+          </ul>
+        </li>
+        <li>誰でも理解できること
+          <ul class="list fsize16">
+            <li>当ページにサンプルを網羅します</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+    <section class="left pt100" id="sec1">
+      <h2 class="head03 mb20">使い方</h2>
+      <p class="fsize16 mb10">CSSの冒頭で以下4つを読み込み、サイトに応じて拡張して使うことを想定しています。</p>
+      <pre class="fsize14"><code class="css">@use &quot;setting&quot;;
+@use &quot;reset&quot;;
+@use &quot;common&quot;;
+@use &quot;util&quot;;
+
+.util{
+〜〜 ここで拡張します（サイトに応じたデザイン調整など） 〜〜
+}</code></pre>
+      <p class="fsize16 mt20 mb10">html内の任意の箇所を<span class="code">.util</span>で囲います。</p>
+      <pre class="fsize14"><code class="html">&lt;div class=&quot;util&quot;&gt;
+〜〜 ここに適用されます 〜〜
+&lt;/div&gt;</code></pre>
+    </section>
+  
+    <section class="left pt100" id="sec2">
+      <h2 class="head03 mb20">クラス名について</h2>
+      <ul class="list fsize16">
+        <li>通常のクラス名（ハイフンから始まらないもの）
+          <ul class="list fsize16">
+            <li>基本的にどこにでも適用可能(utility)です</li>
+          </ul>
+        </li>
+        <li>ハイフンから始まるクラス名
+          <ul class="list fsize16">
+            <li>特定のクラスに依存するスタイル(modifier)です</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section class="left pt100" id="sec3">
+      <h2 class="head03 mb20">レスポンシブ対応</h2>
+      <ul class="list fsize16">
+        <li>768px以上（PC・タブレット）
+          <ul class="list fsize16">
+            <li>pxでサイズ固定されます</li>
+          </ul>
+        </li>
+        <li>767px以下（スマホ）
+          <ul class="list fsize16">
+            <li>vwで画面サイズに応じてリサイズされます（PC時のpx値の関係性は維持します）</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section class="left pt100" id="sec4">
+      <h2 class="head03 mb20">フォントサイズ</h2>
+      <p class="fsize16 mb10">クラス<span class="code">fsize○○</span>で指定します。<br>デフォルトは16pxですが、10px〜22pxまで1px単位で指定可能です。<br><span class="bold">見出しを除き、各要素にフォントサイズは定義していない</span>ので、全てこのクラスを付与して個別に指定します。<br>またline-heightはクラス<span class="code">lh○○</span>で指定します。デフォルトは1.8ですが、1〜2.2まで0.2刻みで<span class="code">lh10</span>〜<span class="code">lh22</span>の記述で個別に指定できます。</p>
+      <pre class="fsize14"><code class="html">&lt;p class=&quot;fsize16 lh18&quot;&gt;テキスト&lt;/p&gt;</code></pre>
+      <p class="fsize16 mt10 mb10">↓↓↓↓</p>
+      <pre class="fsize14"><code class="css">font-size: 1rem !important;
+line-height: 1.8 !important;</code></pre>
+    </section>
+  
+    <section class="left pt100" id="sec5">
+      <h2 class="head03 mb20">余白</h2>
+      <p class="fsize16 mb10">余白（padding/margin）は縦のみ定義しています。クラス<span class="code">mt○○</span><span class="code">mb○○</span><span class="code">pt○○</span><span class="code">pb○○</span>で指定します。0〜100pxまで5px単位で指定可能です。<br><span class="bold">基本的に各要素に縦の余白は定義していない</span>ので、全てこのクラスを付与して個別に指定します。<br>またmargin-topのみマイナス値も指定可能です（-0〜-100px）。</p>
+      <pre class="fsize14"><code class="html">&lt;div class=&quot;mt-10 mb0 pt20 pb15&quot;&gt;&lt;/div&gt;</code></pre>
+      <p class="fsize16 mt10 mb10">↓↓↓↓</p>
+      <pre class="fsize14"><code class="css">margin-top: -10px !important;
+margin-bottom: 0px !important;
+padding-top: 20px !important;
+padding-bottom: 15px !important;</code></pre>
+    </section>
+  
+    <section class="left pt100" id="sec6">
+      <h2 class="head03 mb20">見出し</h2>
+      <p class="fsize16 mb40">クラス<span class="code">head0○</span>で指定します。サイズは以下6段階で定義しています。改行を考慮しline-heightはデフォルト1.4で定義しています。</p>
+      <h1 class="head06">見出し：レベル6（48px）</h1>
+      <h2 class="head05 mt40">見出し：レベル5（42px）</h2>
+      <h3 class="head04 mt40">見出し：レベル4（36px）</h3>
+      <h4 class="head03 mt40">見出し：レベル3（30px）</h4>
+      <h5 class="head02 mt40">見出し：レベル2（24px）</h5>
+      <h6 class="head01 mt40">見出し：レベル1（18px）</h6>
+      <pre class="fsize14 mt40"><code class="html">&lt;h1 class=&quot;head06&quot;&gt;見出し：レベル6（48px）&lt;/h1&gt;
+&lt;h2 class=&quot;head05 mt40&quot;&gt;見出し：レベル5（42px）&lt;/h2&gt;
+&lt;h3 class=&quot;head04 mt40&quot;&gt;見出し：レベル4（36px）&lt;/h3&gt;
+&lt;h4 class=&quot;head03 mt40&quot;&gt;見出し：レベル3（30px）&lt;/h4&gt;
+&lt;h5 class=&quot;head02 mt40&quot;&gt;見出し：レベル2（24px）&lt;/h5&gt;
+&lt;h6 class=&quot;head01 mt40&quot;&gt;見出し：レベル1（18px）&lt;/h6&gt;</code></pre>
+      <p class="fsize16 mt60">装飾はデフォルトで罫線<span class="code">-underLine</span>と丸アイコン<span class="code">-dot</span>のみ定義しています。デザインに応じて適宜拡張して使う想定です。</p>
+      <h4 class="head03 -underLine mt20 pb10">見出し：装飾1（罫線）</h4>
+      <h4 class="head02 -dot mt20 mb10">見出し：装飾2（丸アイコン）</h4>
+      <pre class="fsize14 mt20"><code class="html">&lt;h4 class=&quot;head03 -underLine mt20 pb10&quot;&gt;見出し：装飾1（罫線）&lt;/h4&gt;
+&lt;h4 class=&quot;head02 -dot mt20 mb10&quot;&gt;見出し：装飾2（丸アイコン）&lt;/h4&gt;</code></pre>
+    </section>
+  
+    <section class="left pt100" id="sec7">
+      <h2 class="head03 mb20">テキストの装飾</h2>
+      <p class="fsize16 mb10">太字は<span class="code">bold</span>で、右上配置（注釈など）は<span class="code">supTxt</span>で指定できます。</p>
+      <p class="fsize16"><span class="bold">太字です。</span>注釈です<span class="supTxt">※</span>。</p>
+      <pre class="fsize14 mt20"><code class="html">&lt;p class=&quot;fsize16&quot;&gt;&lt;span class=&quot;bold&quot;&gt;太字です。&lt;/span&gt;注釈です&lt;span class=&quot;supTxt&quot;&gt;※&lt;/span&gt;&lt;/p&gt;</code></pre>
+    </section>
+  
+    <section class="left pt100" id="sec8">
+      <h2 class="head03 mb20">ブロック</h2>
+      <p class="fsize16 mb20">クラス<span class="code">block</span>で指定します。デフォルトで灰色の背景色とpaddingだけ定義しています。</p>
+  
+      <section class="block">
+        <h2 class="head01 mb10">グレー背景のブロックです</h2>
+        <p class="fsize14">本文テキストです。本文テキストです。本文テキストです。本文テキストです。</p>
+      </section>
+  
+      <section class="block -border mt20">
+        <h2 class="head01 mb10">グレー罫線のブロックです</h2>
+        <p class="fsize14">本文テキストです。本文テキストです。本文テキストです。本文テキストです。</p>
+      </section>
+  
+      <section class="block -alert mt20">
+        <h2 class="head01 mb10 colorAlert">アラート用のブロックです</h2>
+        <p class="fsize14 colorAlert">本文テキストです。本文テキストです。本文テキストです。本文テキストです。</p>
+      </section>
+      <pre class="fsize14 mt20"><code class="html">&lt;section class=&quot;block&quot;&gt;
+  &lt;h2 class=&quot;head01 mb10&quot;&gt;グレー背景のブロックです&lt;/h2&gt;
+  &lt;p class=&quot;fsize14&quot;&gt;本文テキストです。本文テキストです。本文テキストです。本文テキストです。&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section class=&quot;block -border mt20&quot;&gt;
+  &lt;h2 class=&quot;head01 mb10&quot;&gt;グレー罫線のブロックです&lt;/h2&gt;
+  &lt;p class=&quot;fsize14&quot;&gt;本文テキストです。本文テキストです。本文テキストです。本文テキストです。&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section class=&quot;block -alert mt20&quot;&gt;
+  &lt;h2 class=&quot;head01 mb10 colorAlert&quot;&gt;アラート用のブロックです&lt;/h2&gt;
+  &lt;p class=&quot;fsize14 colorAlert&quot;&gt;本文テキストです。本文テキストです。本文テキストです。本文テキストです。&lt;/p&gt;
+&lt;/section&gt;</code></pre>
+    </section>
+
+    <section class="left pt100" id="sec9">
+      <h2 class="head03 mb20">リスト・注釈</h2>
+      <p class="fsize16 mb20">クラス<span class="code">list</span>で指定します。改行を考慮し、line-heightはデフォルト1.4に、またli間に若干のmarginを定義しています。</p>
+  
+      <ul class="list fsize18">
+        <li>親リストです。文字の大きさは10px〜22pxで指定できます。注釈です<span class="supTxt">※</span>。量、字間、行間等を確認するために入れています。
+          <ul class="list fsize18">
+            <li>子リストです。文字の大きさは10px〜22pxで指定できます。注釈です<span class="supTxt">※</span>。量、字間、行間等を確認するために入れています。</li>
+          </ul>
+        </li>
+        <li>親リストです。文字の大きさは10px〜22pxで指定できます。注釈です<span class="supTxt">※</span>。量、字間、行間等を確認するために入れています。</li>
+      </ul>
+      <ul class="list -notes fsize12 mt40">
+        <li>注釈の受けです。<span class="code">-notes</span>を付与すると「※」になります。量、字間、行間等を確認するために入れています。
+          <ul class="list -asterisk fsize12">
+            <li>注釈の受けです。<span class="code">-asterisk</span>を付与すると「＊」になります。量、字間、行間等を確認するために入れています。</li>
+          </ul>
+        </li>
+        <li>注釈の受けです。文字の大きさは10px〜22pxで指定できます。注釈です量、字間、行間等を確認するために入れています。</li>
+      </ul>
+      <ul class="list -noMarker fsize12 mt40">
+        <li>・注釈の受けです。<span class="code">-noMarker</span>を付与すると冒頭になにも付きません。直接「・」を記述しています。
+          <ul class="list -noMarker fsize12">
+            <li>※注釈の受けです。<span class="code">-noMarker</span>を付与すると冒頭になにも付きません。直接「※」を記述しています。</li>
+          </ul>
+        </li>
+        <li>・注釈の受けです。<span class="code">-noMarker</span>を付与すると冒頭になにも付きません。直接「・」を記述しています。</li>
+      </ul>
+      <pre class="fsize14 mt40"><code class="html">&lt;ul class=&quot;list fsize18&quot;&gt;
+  &lt;li&gt;親リストです。文字の大きさは10px〜22pxで指定できます。注釈です&lt;span class=&quot;supTxt&quot;&gt;※&lt;/span&gt;。量、字間、行間等を確認するために入れています。
+    &lt;ul class=&quot;list fsize18&quot;&gt;
+      &lt;li&gt;子リストです。文字の大きさは10px〜22pxで指定できます。注釈です&lt;span class=&quot;supTxt&quot;&gt;※&lt;/span&gt;。量、字間、行間等を確認するために入れています。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;親リストです。文字の大きさは10px〜22pxで指定できます。注釈です&lt;span class=&quot;supTxt&quot;&gt;※&lt;/span&gt;。量、字間、行間等を確認するために入れています。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ul class=&quot;list -notes fsize12 mt40&quot;&gt;
+  &lt;li&gt;注釈の受けです。&lt;span class=&quot;code&quot;&gt;-notes&lt;/span&gt;を付与すると「※」になります。量、字間、行間等を確認するために入れています。
+    &lt;ul class=&quot;list -asterisk fsize10&quot;&gt;
+      &lt;li&gt;注釈の受けです。&lt;span class=&quot;code&quot;&gt;-asterisk&lt;/span&gt;を付与すると「＊」になります。量、字間、行間等を確認するために入れています。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;注釈の受けです。&lt;span class=&quot;code&quot;&gt;-notes&lt;/span&gt;を付与すると「※」になります。注釈です量、字間、行間等を確認するために入れています。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ul class=&quot;list -noMarker fsize12 mt40&quot;&gt;
+  &lt;li&gt;・注釈の受けです。&lt;span class=&quot;code&quot;&gt;-noMarker&lt;/span&gt;を付与すると冒頭になにも付きません。直接「・」を記述しています。
+    &lt;ul class=&quot;list -noMarker fsize12&quot;&gt;
+      &lt;li&gt;※注釈の受けです。&lt;span class=&quot;code&quot;&gt;-noMarker&lt;/span&gt;を付与すると冒頭になにも付きません。直接「※」を記述しています。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;・注釈の受けです。&lt;span class=&quot;code&quot;&gt;-noMarker&lt;/span&gt;を付与すると冒頭になにも付きません。直接「・」を記述しています。&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+    </section>
+  
+    <section class="left pt100" id="sec10">
+      <h2 class="head03 mb20">配置</h2>
+      <p class="fsize16 mb20">クラス<span class="code">left</span><span class="code">center</span><span class="code">right</span>で指定します。<br>親要素に<span class="code">centerParent</span>を指定すると中央寄せの左揃えなどが実装できます。</p>
+  
+      <section class="block">
+        <ul class="list -notes fsize12 left">
+          <li>左揃えです。</li>
+          <li>左揃えです。左揃えです。左揃えです。</li>
+        </ul>
+      </section>
+      <section class="block mt20">
+        <ul class="list fsize12 center">
+          <li>※中央揃えです。中央揃え時はマーカー（※など）は非表示なのでhtmlに直接記述します。</li>
+          <li>※中央揃えです。中央揃えです。中央揃えです。</li>
+        </ul>
+      </section>
+      <section class="block mt20">
+        <ul class="list fsize12 right">
+          <li>※右揃えです。右揃え時はマーカー（※など）は非表示なのでhtmlに直接記述します。</li>
+          <li>※右揃えです。右揃えです。右揃えです。</li>
+        </ul>
+      </section>
+      <section class="block mt20 centerParent">
+        <ul class="list -notes fsize12 left">
+          <li>中央寄せの左揃えです。親要素に<span class="code">centerParent</span>を指定し子要素に<span class="code">left</span>を指定します。</li>
+          <li>中央寄せの左揃えです。中央寄せの左揃えです。</li>
+        </ul>
+      </section>
+      <section class="block mt20 centerParent">
+        <ul class="list -notes fsize12 right">
+          <li>※中央寄せの右揃えです。親要素に<span class="code">centerParent</span>を指定し子要素に<span class="code">right</span>を指定します。</li>
+          <li>※右揃え時はマーカー（※など）は非表示なのでhtmlに直接記述します。</li>
+        </ul>
+      </section>
+      <pre class="fsize14 mt40"><code class="html">&lt;section class=&quot;block&quot;&gt;
+  &lt;ul class=&quot;list -notes fsize12 left&quot;&gt;
+    &lt;li&gt;左揃えです。&lt;/li&gt;
+    &lt;li&gt;左揃えです。左揃えです。左揃えです。&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/section&gt;
+&lt;section class=&quot;block mt20&quot;&gt;
+  &lt;ul class=&quot;list fsize12 center&quot;&gt;
+    &lt;li&gt;※中央揃えです。中央揃え時はマーカー（※など）は非表示なのでhtmlに直接記述します。&lt;/li&gt;
+    &lt;li&gt;※中央揃えです。中央揃えです。中央揃えです。&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/section&gt;
+&lt;section class=&quot;block mt20&quot;&gt;
+  &lt;ul class=&quot;list fsize12 right&quot;&gt;
+    &lt;li&gt;※右揃えです。右揃え時はマーカー（※など）は非表示なのでhtmlに直接記述します。&lt;/li&gt;
+    &lt;li&gt;※右揃えです。右揃えです。右揃えです。&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/section&gt;
+&lt;section class=&quot;block mt20 centerParent&quot;&gt;
+  &lt;ul class=&quot;list -notes fsize12 left&quot;&gt;
+    &lt;li&gt;中央寄せの左揃えです。親要素に&lt;span class=&quot;code&quot;&gt;centerParent&lt;/span&gt;を指定し子要素に&lt;span class=&quot;code&quot;&gt;left&lt;/span&gt;を指定します。&lt;/li&gt;
+    &lt;li&gt;中央寄せの左揃えです。中央寄せの左揃えです。&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/section&gt;
+&lt;section class=&quot;block mt20 centerParent&quot;&gt;
+  &lt;ul class=&quot;list -notes fsize12 right&quot;&gt;
+    &lt;li&gt;※中央寄せの右揃えです。親要素に&lt;span class=&quot;code&quot;&gt;centerParent&lt;/span&gt;を指定し子要素に&lt;span class=&quot;code&quot;&gt;right&lt;/span&gt;を指定します。&lt;/li&gt;
+    &lt;li&gt;※右揃え時はマーカー（※など）は非表示なのでhtmlに直接記述します。&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/section&gt;</code></pre>
+    </section>
+  
+    <section class="left pt100" id="sec11">
+      <h2 class="head03 mb20">テキストリンク</h2>
+      <p class="fsize16 mb20">クラス<span class="code">txtLink</span>で指定します。</p>
+      <ul class="list fsize16 left">
+        <li>ダミーテキスト<a class="txtLink hover" href="">通常のテキストリンクです。デフォルトで矢印ありです</a>ダミーテキスト</li>
+        <li>ダミーテキスト<a class="txtLink -noar hover" href="">矢印を取る場合は「-noar」を指定します</a>ダミーテキスト</li>
+        <li>ダミーテキスト<a class="txtLink -blank hover" href="" target="_blank">ブランクの場合は「-blank」を指定します</a>ダミーテキスト</li>
+        <li>ダミーテキスト<a class="txtLink -file hover" href="" target="_blank">ファイルの場合は「-file」を指定します</a>ダミーテキスト</li>
+      </ul>
+      <pre class="fsize14 mt40"><code class="html">&lt;ul class=&quot;list fsize16 left&quot;&gt;
+  &lt;li&gt;ダミーテキスト&lt;a class=&quot;txtLink hover&quot; href=&quot;&quot;&gt;通常のテキストリンクです。デフォルトで矢印ありです&lt;/a&gt;ダミーテキスト&lt;/li&gt;
+  &lt;li&gt;ダミーテキスト&lt;a class=&quot;txtLink -noar hover&quot; href=&quot;&quot;&gt;矢印を取る場合は「-noar」を指定します&lt;/a&gt;ダミーテキスト&lt;/li&gt;
+  &lt;li&gt;ダミーテキスト&lt;a class=&quot;txtLink -blank hover&quot; href=&quot;&quot; target=&quot;_blank&quot;&gt;ブランクの場合は「-blank」を指定します&lt;/a&gt;ダミーテキスト&lt;/li&gt;
+  &lt;li&gt;ダミーテキスト&lt;a class=&quot;txtLink -file hover&quot; href=&quot;&quot; target=&quot;_blank&quot;&gt;ファイルの場合は「-file」を指定します&lt;/a&gt;ダミーテキスト&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+    </section>
+  
+    <section class="center pt100" id="sec12">
+      <h2 class="head03 mb20">ボタン</h2>
+      <p class="fsize16 left">クラス<span class="code">btn</span>で指定します。フォントサイズは<span class="code">fsize◯◯</span>で指定してください。line-heightは1.2に設定しているので、小さいフォントサイズにして改行することも可能です。</p>
+      <a class="btn mt40 fsize20 bold" href="">通常のボタン</a>
+      <a class="btn -sizeS -sub mt40" href=""><span class="fsize18 bold">小さいボタン<br><span class="fsize14">テキストを改行する例</span></span></a>
+      <a class="btn -sizeL mt40 fsize22 bold" href="">大きいボタン</a>
+      <pre class="fsize14 mt40 left"><code class="html">&lt;a class=&quot;btn mt60 fsize20 bold&quot; href=&quot;&quot;&gt;通常のボタン&lt;/a&gt;
+&lt;a class=&quot;btn -sizeS -sub mt60&quot; href=&quot;&quot;&gt;&lt;span class=&quot;fsize18 bold&quot;&gt;小さいボタン&lt;br&gt;&lt;span class=&quot;fsize14&quot;&gt;テキストを改行する例&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&quot;btn -sizeL mt60 fsize22 bold&quot; href=&quot;&quot;&gt;大きいボタン&lt;/a&gt;</code></pre>
+      <h2 class="head02 mt60 mb20">文字サイズに合わせた小さいボタン</h2>
+      <a class="btn -sizeSS -blank fsize14 bold" href="">小さいボタン</a>
+      <pre class="fsize14 mt20 left"><code class="html">&lt;a class=&quot;btn -sizeSS -blank fsize14 bold&quot; href=&quot;&quot;&gt;小さいボタン&lt;/a&gt;</code></pre>
+      <h2 class="head02 mt60 mb20">buttonタグの場合</h2>
+      <p class="fsize16 left">buttonタグの場合はタグを内包できるので、使い勝手を考慮して一般的な応募フォームなどではbuttonタグの使用をおすすめします。</p>
+      <button type="submit" class="btn mt20"><span class="fsize20 bold">buttonで実装したボタン</span></button>
+      <pre class="fsize14 mt20 left"><code class="html">&lt;button type=&quot;submit&quot; class=&quot;btn mt20&quot;&gt;&lt;span class=&quot;fsize20 bold&quot;&gt;buttonで実装したボタン&lt;/span&gt;&lt;/button&gt;</code></pre>
+      <h2 class="head02 mt60 mb20">inputタグの場合（非推奨）</h2>
+      <p class="fsize16 left">inputタグを使用する場合タグを内包できないので、必ずボタン自体にフォントサイズを指定します。改行もできません。</p>
+      <input class="btn fsize20 mt20" type="submit" value="inputで実装したボタン">
+      <pre class="fsize14 mt20 left"><code class="html">&lt;input class=&quot;btn fsize20 mt20&quot; type=&quot;submit&quot; value=&quot;inputで実装したボタン&quot;&gt;</code></pre>
+      <h2 class="head02 mt60 mb20">横並び</h2>
+      <p class="fsize16 left">親要素に「.btnArea」を指定することでPC時に横並びになります。<span class="bold">SP時は左のボタンが下、右のボタンが上になります。</span></p>
+      <div class="btnArea mt20">
+        <a class="btn -sizeS -nega" href=""><span class="fsize20 bold">戻る</span></a>
+        <a class="btn" href=""><span class="fsize20 bold">進む</span></a>
+      </div>
+      <pre class="fsize14 mt20 left"><code class="html">&lt;div class=&quot;btnArea mt20&quot;&gt;
+  &lt;a class=&quot;btn -sizeS -nega&quot; href=&quot;&quot;&gt;&lt;span class=&quot;fsize20 bold&quot;&gt;戻る&lt;/span&gt;&lt;/a&gt;
+  &lt;a class=&quot;btn&quot; href=&quot;&quot;&gt;&lt;span class=&quot;fsize20 bold&quot;&gt;進む&lt;/span&gt;&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+      <h2 class="head02 mt60 mb20">ブランクとファイル</h2>
+      <div class="btnArea mt20">
+        <a class="btn -sub -blank" href=""><span class="fsize20 bold">外部サイトへ</span></a>
+        <a class="btn -sub -sizeS -nega -file" href=""><span class="fsize20 bold">詳しく読む</span></a>
+      </div>
+      <pre class="fsize14 mt20 left"><code class="html">&lt;div class=&quot;btnArea mt20&quot;&gt;
+  &lt;a class=&quot;btn -sub -blank&quot; href=&quot;&quot;&gt;&lt;span class=&quot;fsize20 bold&quot;&gt;外部サイトへ&lt;/span&gt;&lt;/a&gt;
+  &lt;a class=&quot;btn -sub -sizeS -nega -file&quot; href=&quot;&quot;&gt;&lt;span class=&quot;fsize20 bold&quot;&gt;詳しく読む&lt;/span&gt;&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+      <h2 class="head02 mt60 mb20">閉じるボタン</h2>
+      <a class="btn -close -sizeS -sub mt20" href=""><span class="fsize20 bold">閉じる</span></a>
+      <pre class="fsize14 mt20 left"><code class="html">&lt;a class=&quot;btn -close -sizeS -sub mt20&quot; href=&quot;&quot;&gt;&lt;span class=&quot;fsize20 bold&quot;&gt;閉じる&lt;/span&gt;&lt;/a&gt;</code></pre>
+      <h2 class="head02 mt60 mb20">非アクティブ</h2>
+      <a class="btn -nega -blank -disabled" href=""><span class="fsize20 bold">外部サイトへ</span></a>
+      <pre class="fsize14 mt20 left"><code class="html">&lt;a class=&quot;btn -nega -blank -disabled&quot; href=&quot;&quot;&gt;&lt;span class=&quot;fsize20 bold&quot;&gt;外部サイトへ&lt;/span&gt;&lt;/a&gt;</code></pre>
+    </section>
+  
+    <form action="test" method="post">
+      <section class="center pt100" id="sec13">
+        <h2 class="head03 mb20">フォーム</h2>
+        <div class="alerthead mb40">未入力または正しく入力<br>されていない項目があります</div>
+        <p class="fsize20 mb10">以下の必要項目を<br class="sp">全て入力してください。</p>
+        <p class="fsize14 mb20"><span class="required">必須</span>は必須項目です。</p>
+        <pre class="fsize14 mt20 mb40 left"><code class="html">&lt;div class=&quot;alerthead mb40&quot;&gt;未入力または正しく入力&lt;br&gt;されていない項目があります&lt;/div&gt;
+&lt;p class=&quot;fsize20 mb10&quot;&gt;以下の必要項目を&lt;br class=&quot;sp&quot;&gt;全て入力してください。&lt;/p&gt;
+&lt;p class=&quot;fsize14 mb20&quot;&gt;&lt;span class=&quot;required&quot;&gt;必須&lt;/span&gt;は必須項目です。&lt;/p&gt;</code></pre>
+        <dl class="column">
+          <dt><label for="nameSei" class="head01 mb10">お名前<span class="fsize14">（全角）</span><span class="required">必須</span></label></dt>
+          <dd>
+            <label class="columnInner -noGap mb10">
+             <span class="nameLabel fsize14">姓</span> 
+             <input id="nameSei" class="formName" type="text">
+             <span class="alertmessage -name">姓を入力してください</span>
+            </label>
+            <label class="columnInner -noGap">
+             <span class="nameLabel fsize14">名</span> 
+             <input id="nameMei" class="formName" type="text">
+             <span class="alertmessage -name">名を入力してください</span>
+            </label>
+            <pre class="fsize14 mt20 left"><code class="html">&lt;dl class=&quot;column&quot;&gt;
+  &lt;dt&gt;&lt;label for=&quot;nameSei&quot; class=&quot;head01 mb10&quot;&gt;お名前&lt;span class=&quot;fsize14&quot;&gt;（全角）&lt;/span&gt;&lt;span class=&quot;required&quot;&gt;必須&lt;/span&gt;&lt;/label&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;label class=&quot;columnInner -noGap mb10&quot;&gt;
+     &lt;span class=&quot;nameLabel fsize14&quot;&gt;姓&lt;/span&gt; 
+     &lt;input id=&quot;nameSei&quot; class=&quot;formName&quot; type=&quot;text&quot;&gt;
+     &lt;span class=&quot;alertmessage -name&quot;&gt;姓を入力してください&lt;/span&gt;
+    &lt;/label&gt;
+    &lt;label class=&quot;columnInner -noGap&quot;&gt;
+     &lt;span class=&quot;nameLabel fsize14&quot;&gt;名&lt;/span&gt; 
+     &lt;input id=&quot;nameMei&quot; class=&quot;formName&quot; type=&quot;text&quot;&gt;
+     &lt;span class=&quot;alertmessage -name&quot;&gt;名を入力してください&lt;/span&gt;
+    &lt;/label&gt;
+  &lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+
+            <ul class="list fsize14 mt15">
+              <li>フォームのパーツ類は基本的に<span class="code">columnInner</span>で囲みます</li>
+              <li>クラス<span class="code">columnInner</span>について
+                <ul class="list fsize14">
+                  <li>クラス<span class="code">columnInner</span>にはdisplay:flex;が定義してあり、子要素に横幅を指定することで横並びになります。</li>
+                  <li>クラス<span class="code">-noGap</span>でgap:0;になります</li>
+                </ul>
+              </li>
+            </ul>
+          </dd>
+        </dl>
+        <dl class="column">
+          <dt><label for="nameSeiKana" class="head01 mb10">フリガナ<span class="fsize14">（全角カナ）</span><span class="required">必須</span></label></dt>
+          <dd>
+            <label class="columnInner -noGap -right mb10">
+             <span class="nameLabel fsize14">セイ</span> 
+             <input id="nameSeiKana" class="formName" type="text">
+             <span class="alertmessage -name">セイを入力してください</span>
+            </label>
+            <label class="columnInner -noGap -right">
+             <span class="nameLabel fsize14">メイ</span> 
+             <input id="nameMeiKana" class="formName" type="text">
+             <span class="alertmessage -name">メイを入力してください</span>
+            </label>
+            <pre class="fsize14 mt20 left"><code class="html">&lt;dl class=&quot;column&quot;&gt;
+  &lt;dt&gt;&lt;label for=&quot;nameSeiKana&quot; class=&quot;head01 mb10&quot;&gt;フリガナ&lt;span class=&quot;fsize14&quot;&gt;（全角カナ）&lt;/span&gt;&lt;span class=&quot;required&quot;&gt;必須&lt;/span&gt;&lt;/label&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;label class=&quot;columnInner -noGap -right mb10&quot;&gt;
+     &lt;span class=&quot;nameLabel fsize14&quot;&gt;セイ&lt;/span&gt; 
+     &lt;input id=&quot;nameSeiKana&quot; class=&quot;formName&quot; type=&quot;text&quot;&gt;
+     &lt;span class=&quot;alertmessage -name&quot;&gt;セイを入力してください&lt;/span&gt;
+    &lt;/label&gt;
+    &lt;label class=&quot;columnInner -noGap -right&quot;&gt;
+     &lt;span class=&quot;nameLabel fsize14&quot;&gt;メイ&lt;/span&gt; 
+     &lt;input id=&quot;nameMeiKana&quot; class=&quot;formName&quot; type=&quot;text&quot;&gt;
+     &lt;span class=&quot;alertmessage -name&quot;&gt;メイを入力してください&lt;/span&gt;
+    &lt;/label&gt;
+  &lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+          </dd>
+        </dl>
+        <dl class="column">
+          <dt><label for="renraku1" class="head01 mb10">ラジオボタンのサンプルです。PC時に2つ並び、SP時に縦積みなります。<span class="required">必須</span></label></dt>
+          <dd>
+            <div class="columnInner">
+             <label class="btnLabel -radio -col2 -spFull"><input id="renraku1" type="radio" class="js-labelchange" name="renraku" checked><span class="fsize16">メール</span></label>
+             <label class="btnLabel -radio -col2 -spFull"><input id="renraku2" type="radio" class="js-labelchange" name="renraku"><span class="fsize16">お電話</span></label>
+            </div>
+            <span class="alertmessage">選択してください</span>
+            <pre class="fsize14 mt20 left"><code class="html">&lt;dl class=&quot;column&quot;&gt;
+  &lt;dt&gt;&lt;label for=&quot;renraku1&quot; class=&quot;head01 mb10&quot;&gt;ラジオボタンのサンプルです。PC時に2つ並び、SP時に縦積みなります。&lt;span class=&quot;required&quot;&gt;必須&lt;/span&gt;&lt;/label&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;div class=&quot;columnInner&quot;&gt;
+     &lt;label class=&quot;btnLabel -radio -col2 -spFull&quot;&gt;&lt;input id=&quot;renraku1&quot; type=&quot;radio&quot; class=&quot;js-labelchange&quot; name=&quot;renraku&quot; checked&gt;&lt;span class=&quot;fsize16&quot;&gt;メール&lt;/span&gt;&lt;/label&gt;
+     &lt;label class=&quot;btnLabel -radio -col2 -spFull&quot;&gt;&lt;input id=&quot;renraku2&quot; type=&quot;radio&quot; class=&quot;js-labelchange&quot; name=&quot;renraku&quot;&gt;&lt;span class=&quot;fsize16&quot;&gt;お電話&lt;/span&gt;&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;span class=&quot;alertmessage&quot;&gt;選択してください&lt;/span&gt;
+  &lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+            <ul class="list fsize14 mt15">
+              <li>checkedの切り替えをクラス<span class="code">js-labelchange</span>をトリガーにJSで制御しています。</li>
+              <li>クラス<span class="code">btnLabel</span>について
+                <ul class="list fsize14">
+                  <li>クラス<span class="code">-radio</span>はラジオボタンのUI</li>
+                  <li>クラス<span class="code">-col2</span>は2個並び</li>
+                  <li>クラス<span class="code">-spFull</span>はSP時に横100%表示</li>
+                </ul>
+              </li>
+            </ul>
+          </dd>
+        </dl>
+        <dl class="column">
+          <dt><label for="drink1" class="head01 mb10">チェックボックスのサンプルです。PC時に3つ並び、SP時に2つ並びになります。<span class="fsize14">（複数選択可）</span><span class="required">必須</span></label></dt>
+          <dd>
+            <div class="columnInner">
+             <label class="btnLabel -check -col3 -spCol2"><input id="drink1" type="checkbox" class="js-labelchange" name="drink"><span class="fsize14">ダミーテキストダミーテキストダミーテキストダミーテキストダミーテキスト</span></label>
+             <label class="btnLabel -check -col3 -spCol2"><input id="drink2" type="checkbox" class="js-labelchange" name="drink"><span class="fsize14">ダミーテキスト</span></label>
+             <label class="btnLabel -check -col3 -spCol2"><input id="drink3" type="checkbox" class="js-labelchange" name="drink"><span class="fsize14">ダミーテキスト</span></label>
+             <label class="btnLabel -check -col3 -spCol2"><input id="drink4" type="checkbox" class="js-labelchange" name="drink"><span class="fsize14">ダミーテキスト</span></label>
+             <label class="btnLabel -check -col3 -spCol2"><input id="drink5" type="checkbox" class="js-labelchange" name="drink"><span class="fsize14">ダミーテキスト</span></label>
+             <label class="btnLabel -check -col3 -spCol2"><input id="drink6" type="checkbox" class="js-labelchange" name="drink"><span class="fsize14">ダミーテキスト</span></label>
+            </div>
+            <span class="alertmessage">選択してください</span>
+            <pre class="fsize14 mt20 left"><code class="html">&lt;dl class=&quot;column&quot;&gt;
+  &lt;dt&gt;&lt;label for=&quot;drink1&quot; class=&quot;head01 mb10&quot;&gt;チェックボックスのサンプルです。PC時に3つ並び、SP時に2つ並びになります。&lt;span class=&quot;fsize14&quot;&gt;（複数選択可）&lt;/span&gt;&lt;span class=&quot;required&quot;&gt;必須&lt;/span&gt;&lt;/label&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;div class=&quot;columnInner&quot;&gt;
+     &lt;label class=&quot;btnLabel -check -col3 -spCol2&quot;&gt;&lt;input id=&quot;drink1&quot; type=&quot;checkbox&quot; class=&quot;js-labelchange&quot; name=&quot;drink&quot;&gt;&lt;span class=&quot;fsize14&quot;&gt;ダミーテキストダミーテキストダミーテキストダミーテキストダミーテキスト&lt;/span&gt;&lt;/label&gt;
+     &lt;label class=&quot;btnLabel -check -col3 -spCol2&quot;&gt;&lt;input id=&quot;drink2&quot; type=&quot;checkbox&quot; class=&quot;js-labelchange&quot; name=&quot;drink&quot;&gt;&lt;span class=&quot;fsize14&quot;&gt;ダミーテキスト&lt;/span&gt;&lt;/label&gt;
+     &lt;label class=&quot;btnLabel -check -col3 -spCol2&quot;&gt;&lt;input id=&quot;drink3&quot; type=&quot;checkbox&quot; class=&quot;js-labelchange&quot; name=&quot;drink&quot;&gt;&lt;span class=&quot;fsize14&quot;&gt;ダミーテキスト&lt;/span&gt;&lt;/label&gt;
+     &lt;label class=&quot;btnLabel -check -col3 -spCol2&quot;&gt;&lt;input id=&quot;drink4&quot; type=&quot;checkbox&quot; class=&quot;js-labelchange&quot; name=&quot;drink&quot;&gt;&lt;span class=&quot;fsize14&quot;&gt;ダミーテキスト&lt;/span&gt;&lt;/label&gt;
+     &lt;label class=&quot;btnLabel -check -col3 -spCol2&quot;&gt;&lt;input id=&quot;drink5&quot; type=&quot;checkbox&quot; class=&quot;js-labelchange&quot; name=&quot;drink&quot;&gt;&lt;span class=&quot;fsize14&quot;&gt;ダミーテキスト&lt;/span&gt;&lt;/label&gt;
+     &lt;label class=&quot;btnLabel -check -col3 -spCol2&quot;&gt;&lt;input id=&quot;drink6&quot; type=&quot;checkbox&quot; class=&quot;js-labelchange&quot; name=&quot;drink&quot;&gt;&lt;span class=&quot;fsize14&quot;&gt;ダミーテキスト&lt;/span&gt;&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;span class=&quot;alertmessage&quot;&gt;選択してください&lt;/span&gt;
+  &lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+            <ul class="list fsize14 mt15">
+              <li>クラス<span class="code">btnLabel</span>について
+                <ul class="list fsize14">
+                  <li>クラス<span class="code">-check</span>はチェックボックスのUI</li>
+                  <li>クラス<span class="code">-col3</span>は3個並び</li>
+                  <li>クラス<span class="code">-spCol2</span>はSP時に2個並び</li>
+                </ul>
+              </li>
+            </ul>
+          </dd>
+        </dl>
+        <dl class="column">
+          <dt><label for="freq1" class="head01 mb10">ラジオボタンのサンプルです。<span class="required">必須</span></label></dt>
+          <dd>
+            <div class="columnInner">
+             <label class="btnLabel -radio"><input id="freq1" type="radio" class="js-labelchange" name="freq"><span class="fsize14">ダミーテキストダミーテキストダミーテキスト</span></label>
+             <label class="btnLabel -radio"><input id="freq2" type="radio" class="js-labelchange" name="freq"><span class="fsize14">ダミーテキストダミーテキストダミーテキスト</span></label>
+             <label class="btnLabel -radio"><input id="freq3" type="radio" class="js-labelchange" name="freq"><span class="fsize14">ダミーテキストダミーテキストダミーテキスト</span></label>
+            </div>
+            <span class="alertmessage">選択してください</span>
+            <pre class="fsize14 mt20 left"><code class="html">&lt;dl class=&quot;column&quot;&gt;
+  &lt;dt&gt;&lt;label for=&quot;freq1&quot; class=&quot;head01 mb10&quot;&gt;ラジオボタンのサンプルです。&lt;span class=&quot;required&quot;&gt;必須&lt;/span&gt;&lt;/label&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;div class=&quot;columnInner&quot;&gt;
+     &lt;label class=&quot;btnLabel -radio&quot;&gt;&lt;input id=&quot;freq1&quot; type=&quot;radio&quot; class=&quot;js-labelchange&quot; name=&quot;freq&quot;&gt;&lt;span class=&quot;fsize14&quot;&gt;ダミーテキストダミーテキストダミーテキスト&lt;/span&gt;&lt;/label&gt;
+     &lt;label class=&quot;btnLabel -radio&quot;&gt;&lt;input id=&quot;freq2&quot; type=&quot;radio&quot; class=&quot;js-labelchange&quot; name=&quot;freq&quot;&gt;&lt;span class=&quot;fsize14&quot;&gt;ダミーテキストダミーテキストダミーテキスト&lt;/span&gt;&lt;/label&gt;
+     &lt;label class=&quot;btnLabel -radio&quot;&gt;&lt;input id=&quot;freq3&quot; type=&quot;radio&quot; class=&quot;js-labelchange&quot; name=&quot;freq&quot;&gt;&lt;span class=&quot;fsize14&quot;&gt;ダミーテキストダミーテキストダミーテキスト&lt;/span&gt;&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;span class=&quot;alertmessage&quot;&gt;選択してください&lt;/span&gt;
+  &lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+          </dd>
+        </dl>
+        <dl class="column">
+          <dt><label for="year" class="head01 mb10">selectタグのサンプルです。PC時に3つ並び、SP時に縦積みになります。<span class="required">必須</span></label></dt>
+          <dd>
+            <div class="columnInner">
+              <label class="selectCol -col3 -spFull">
+                <select name="year" id="year">
+                  <option value="1923">1923年</option>
+                  <option value="1924">1924年</option>
+                  <option value="1925">1925年</option>
+                  <option value="1926">1926年</option>
+                  <option value="1927">1927年</option>
+                  <option value="1928">1928年</option>
+                  <option value="1929">1929年</option>
+                  <option value="1930">1930年</option>
+                  <option value="1931">1931年</option>
+                  <option value="1932">1932年</option>
+                  <option value="1933">1933年</option>
+                  <option value="1934">1934年</option>
+                  <option value="1935">1935年</option>
+                  <option value="1936">1936年</option>
+                  <option value="1937">1937年</option>
+                  <option value="1938">1938年</option>
+                  <option value="1939">1939年</option>
+                  <option value="1940">1940年</option>
+                  <option value="1941">1941年</option>
+                  <option value="1942">1942年</option>
+                  <option value="1943">1943年</option>
+                  <option value="1944">1944年</option>
+                  <option value="1945">1945年</option>
+                  <option value="1946">1946年</option>
+                  <option value="1947">1947年</option>
+                  <option value="1948">1948年</option>
+                  <option value="1949">1949年</option>
+                  <option value="1950">1950年</option>
+                  <option value="1951">1951年</option>
+                  <option value="1952">1952年</option>
+                  <option value="1953">1953年</option>
+                  <option value="1954">1954年</option>
+                  <option value="1955">1955年</option>
+                  <option value="1956">1956年</option>
+                  <option value="1957">1957年</option>
+                  <option value="1958">1958年</option>
+                  <option value="1959">1959年</option>
+                  <option value="1960">1960年</option>
+                  <option value="1961">1961年</option>
+                  <option value="1962">1962年</option>
+                  <option value="1963">1963年</option>
+                  <option value="1964">1964年</option>
+                  <option value="1965">1965年</option>
+                  <option value="1966">1966年</option>
+                  <option value="1967">1967年</option>
+                  <option value="1968">1968年</option>
+                  <option value="1969">1969年</option>
+                  <option value="1970">1970年</option>
+                  <option value="1971">1971年</option>
+                  <option value="1972">1972年</option>
+                  <option value="1973">1973年</option>
+                  <option value="1974">1974年</option>
+                  <option value="1975">1975年</option>
+                  <option value="1976">1976年</option>
+                  <option value="1977">1977年</option>
+                  <option value="1978">1978年</option>
+                  <option value="1979">1979年</option>
+                  <option value="" selected="">選択してください</option>
+                  <option value="1980">1980年</option>
+                  <option value="1981">1981年</option>
+                  <option value="1982">1982年</option>
+                  <option value="1983">1983年</option>
+                  <option value="1984">1984年</option>
+                  <option value="1985">1985年</option>
+                  <option value="1986">1986年</option>
+                  <option value="1987">1987年</option>
+                  <option value="1988">1988年</option>
+                  <option value="1989">1989年</option>
+                  <option value="1990">1990年</option>
+                  <option value="1991">1991年</option>
+                  <option value="1992">1992年</option>
+                  <option value="1993">1993年</option>
+                  <option value="1994">1994年</option>
+                  <option value="1995">1995年</option>
+                  <option value="1996">1996年</option>
+                  <option value="1997">1997年</option>
+                  <option value="1998">1998年</option>
+                  <option value="1999">1999年</option>
+                  <option value="2000">2000年</option>
+                  <option value="2001">2001年</option>
+                  <option value="2002">2002年</option>
+                  <option value="2003">2003年</option>
+                </select>
+              </label>
+              <label class="selectCol -col3 -spFull">
+                <select name="month" id="month">
+                  <option value="" selected="">選択してください</option>
+                  <option value="1月">1月</option>
+                  <option value="2月">2月</option>
+                  <option value="3月">3月</option>
+                  <option value="4月">4月</option>
+                  <option value="5月">5月</option>
+                  <option value="6月">6月</option>
+                  <option value="7月">7月</option>
+                  <option value="8月">8月</option>
+                  <option value="9月">9月</option>
+                  <option value="10月">10月</option>
+                  <option value="11月">11月</option>
+                  <option value="12月">12月</option>
+                </select>
+              </label>
+              <label class="selectCol -col3 -spFull">
+                <select name="day" id="day">
+                  <option value="" selected="">選択してください</option>
+                  <option value="1日">1日</option>
+                  <option value="2日">2日</option>
+                  <option value="3日">3日</option>
+                  <option value="4日">4日</option>
+                  <option value="5日">5日</option>
+                  <option value="6日">6日</option>
+                  <option value="7日">7日</option>
+                  <option value="8日">8日</option>
+                  <option value="9日">9日</option>
+                  <option value="10日">10日</option>
+                  <option value="11日">11日</option>
+                  <option value="12日">12日</option>
+                  <option value="13日">13日</option>
+                  <option value="14日">14日</option>
+                  <option value="15日">15日</option>
+                  <option value="16日">16日</option>
+                  <option value="17日">17日</option>
+                  <option value="18日">18日</option>
+                  <option value="19日">19日</option>
+                  <option value="20日">20日</option>
+                  <option value="21日">21日</option>
+                  <option value="22日">22日</option>
+                  <option value="23日">23日</option>
+                  <option value="24日">24日</option>
+                  <option value="25日">25日</option>
+                  <option value="26日">26日</option>
+                  <option value="27日">27日</option>
+                  <option value="28日">28日</option>
+                  <option value="29日">29日</option>
+                  <option value="30日">30日</option>
+                  <option value="31日">31日</option>
+                </select>
+              </label>
+            </div>
+            <span class="alertmessage">生年月日を選択してください</span>
+            <pre class="fsize14 mt20 left"><code class="html">&lt;dl class=&quot;column&quot;&gt;
+  &lt;dt&gt;&lt;label for=&quot;year&quot; class=&quot;head01 mb10&quot;&gt;selectタグのサンプルです。PC時に3つ並び、SP時に縦積みになります。&lt;span class=&quot;required&quot;&gt;必須&lt;/span&gt;&lt;/label&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;div class=&quot;columnInner&quot;&gt;
+      &lt;label class=&quot;selectCol -col3 -spFull&quot;&gt;
+        &lt;select name=&quot;year&quot; id=&quot;year&quot;&gt;
+          &lt;option value=&quot;1923&quot;&gt;1923年&lt;/option&gt;
+          &lt;option value=&quot;1924&quot;&gt;1924年&lt;/option&gt;
+          &lt;option value=&quot;1925&quot;&gt;1925年&lt;/option&gt;
+          &lt;option value=&quot;1926&quot;&gt;1926年&lt;/option&gt;
+          &lt;option value=&quot;1927&quot;&gt;1927年&lt;/option&gt;
+          &lt;option value=&quot;1928&quot;&gt;1928年&lt;/option&gt;
+          &lt;option value=&quot;1929&quot;&gt;1929年&lt;/option&gt;
+          &lt;option value=&quot;1930&quot;&gt;1930年&lt;/option&gt;
+          &lt;option value=&quot;1931&quot;&gt;1931年&lt;/option&gt;
+          &lt;option value=&quot;1932&quot;&gt;1932年&lt;/option&gt;
+          &lt;option value=&quot;1933&quot;&gt;1933年&lt;/option&gt;
+          &lt;option value=&quot;1934&quot;&gt;1934年&lt;/option&gt;
+          &lt;option value=&quot;1935&quot;&gt;1935年&lt;/option&gt;
+          &lt;option value=&quot;1936&quot;&gt;1936年&lt;/option&gt;
+          &lt;option value=&quot;1937&quot;&gt;1937年&lt;/option&gt;
+          &lt;option value=&quot;1938&quot;&gt;1938年&lt;/option&gt;
+          &lt;option value=&quot;1939&quot;&gt;1939年&lt;/option&gt;
+          &lt;option value=&quot;1940&quot;&gt;1940年&lt;/option&gt;
+          &lt;option value=&quot;1941&quot;&gt;1941年&lt;/option&gt;
+          &lt;option value=&quot;1942&quot;&gt;1942年&lt;/option&gt;
+          &lt;option value=&quot;1943&quot;&gt;1943年&lt;/option&gt;
+          &lt;option value=&quot;1944&quot;&gt;1944年&lt;/option&gt;
+          &lt;option value=&quot;1945&quot;&gt;1945年&lt;/option&gt;
+          &lt;option value=&quot;1946&quot;&gt;1946年&lt;/option&gt;
+          &lt;option value=&quot;1947&quot;&gt;1947年&lt;/option&gt;
+          &lt;option value=&quot;1948&quot;&gt;1948年&lt;/option&gt;
+          &lt;option value=&quot;1949&quot;&gt;1949年&lt;/option&gt;
+          &lt;option value=&quot;1950&quot;&gt;1950年&lt;/option&gt;
+          &lt;option value=&quot;1951&quot;&gt;1951年&lt;/option&gt;
+          &lt;option value=&quot;1952&quot;&gt;1952年&lt;/option&gt;
+          &lt;option value=&quot;1953&quot;&gt;1953年&lt;/option&gt;
+          &lt;option value=&quot;1954&quot;&gt;1954年&lt;/option&gt;
+          &lt;option value=&quot;1955&quot;&gt;1955年&lt;/option&gt;
+          &lt;option value=&quot;1956&quot;&gt;1956年&lt;/option&gt;
+          &lt;option value=&quot;1957&quot;&gt;1957年&lt;/option&gt;
+          &lt;option value=&quot;1958&quot;&gt;1958年&lt;/option&gt;
+          &lt;option value=&quot;1959&quot;&gt;1959年&lt;/option&gt;
+          &lt;option value=&quot;1960&quot;&gt;1960年&lt;/option&gt;
+          &lt;option value=&quot;1961&quot;&gt;1961年&lt;/option&gt;
+          &lt;option value=&quot;1962&quot;&gt;1962年&lt;/option&gt;
+          &lt;option value=&quot;1963&quot;&gt;1963年&lt;/option&gt;
+          &lt;option value=&quot;1964&quot;&gt;1964年&lt;/option&gt;
+          &lt;option value=&quot;1965&quot;&gt;1965年&lt;/option&gt;
+          &lt;option value=&quot;1966&quot;&gt;1966年&lt;/option&gt;
+          &lt;option value=&quot;1967&quot;&gt;1967年&lt;/option&gt;
+          &lt;option value=&quot;1968&quot;&gt;1968年&lt;/option&gt;
+          &lt;option value=&quot;1969&quot;&gt;1969年&lt;/option&gt;
+          &lt;option value=&quot;1970&quot;&gt;1970年&lt;/option&gt;
+          &lt;option value=&quot;1971&quot;&gt;1971年&lt;/option&gt;
+          &lt;option value=&quot;1972&quot;&gt;1972年&lt;/option&gt;
+          &lt;option value=&quot;1973&quot;&gt;1973年&lt;/option&gt;
+          &lt;option value=&quot;1974&quot;&gt;1974年&lt;/option&gt;
+          &lt;option value=&quot;1975&quot;&gt;1975年&lt;/option&gt;
+          &lt;option value=&quot;1976&quot;&gt;1976年&lt;/option&gt;
+          &lt;option value=&quot;1977&quot;&gt;1977年&lt;/option&gt;
+          &lt;option value=&quot;1978&quot;&gt;1978年&lt;/option&gt;
+          &lt;option value=&quot;1979&quot;&gt;1979年&lt;/option&gt;
+          &lt;option value=&quot;&quot; selected=&quot;&quot;&gt;選択してください&lt;/option&gt;
+          &lt;option value=&quot;1980&quot;&gt;1980年&lt;/option&gt;
+          &lt;option value=&quot;1981&quot;&gt;1981年&lt;/option&gt;
+          &lt;option value=&quot;1982&quot;&gt;1982年&lt;/option&gt;
+          &lt;option value=&quot;1983&quot;&gt;1983年&lt;/option&gt;
+          &lt;option value=&quot;1984&quot;&gt;1984年&lt;/option&gt;
+          &lt;option value=&quot;1985&quot;&gt;1985年&lt;/option&gt;
+          &lt;option value=&quot;1986&quot;&gt;1986年&lt;/option&gt;
+          &lt;option value=&quot;1987&quot;&gt;1987年&lt;/option&gt;
+          &lt;option value=&quot;1988&quot;&gt;1988年&lt;/option&gt;
+          &lt;option value=&quot;1989&quot;&gt;1989年&lt;/option&gt;
+          &lt;option value=&quot;1990&quot;&gt;1990年&lt;/option&gt;
+          &lt;option value=&quot;1991&quot;&gt;1991年&lt;/option&gt;
+          &lt;option value=&quot;1992&quot;&gt;1992年&lt;/option&gt;
+          &lt;option value=&quot;1993&quot;&gt;1993年&lt;/option&gt;
+          &lt;option value=&quot;1994&quot;&gt;1994年&lt;/option&gt;
+          &lt;option value=&quot;1995&quot;&gt;1995年&lt;/option&gt;
+          &lt;option value=&quot;1996&quot;&gt;1996年&lt;/option&gt;
+          &lt;option value=&quot;1997&quot;&gt;1997年&lt;/option&gt;
+          &lt;option value=&quot;1998&quot;&gt;1998年&lt;/option&gt;
+          &lt;option value=&quot;1999&quot;&gt;1999年&lt;/option&gt;
+          &lt;option value=&quot;2000&quot;&gt;2000年&lt;/option&gt;
+          &lt;option value=&quot;2001&quot;&gt;2001年&lt;/option&gt;
+          &lt;option value=&quot;2002&quot;&gt;2002年&lt;/option&gt;
+          &lt;option value=&quot;2003&quot;&gt;2003年&lt;/option&gt;
+        &lt;/select&gt;
+      &lt;/label&gt;
+      &lt;label class=&quot;selectCol -col3 -spFull&quot;&gt;
+        &lt;select name=&quot;month&quot; id=&quot;month&quot;&gt;
+          &lt;option value=&quot;&quot; selected=&quot;&quot;&gt;選択してください&lt;/option&gt;
+          &lt;option value=&quot;1月&quot;&gt;1月&lt;/option&gt;
+          &lt;option value=&quot;2月&quot;&gt;2月&lt;/option&gt;
+          &lt;option value=&quot;3月&quot;&gt;3月&lt;/option&gt;
+          &lt;option value=&quot;4月&quot;&gt;4月&lt;/option&gt;
+          &lt;option value=&quot;5月&quot;&gt;5月&lt;/option&gt;
+          &lt;option value=&quot;6月&quot;&gt;6月&lt;/option&gt;
+          &lt;option value=&quot;7月&quot;&gt;7月&lt;/option&gt;
+          &lt;option value=&quot;8月&quot;&gt;8月&lt;/option&gt;
+          &lt;option value=&quot;9月&quot;&gt;9月&lt;/option&gt;
+          &lt;option value=&quot;10月&quot;&gt;10月&lt;/option&gt;
+          &lt;option value=&quot;11月&quot;&gt;11月&lt;/option&gt;
+          &lt;option value=&quot;12月&quot;&gt;12月&lt;/option&gt;
+        &lt;/select&gt;
+      &lt;/label&gt;
+      &lt;label class=&quot;selectCol -col3 -spFull&quot;&gt;
+        &lt;select name=&quot;day&quot; id=&quot;day&quot;&gt;
+          &lt;option value=&quot;&quot; selected=&quot;&quot;&gt;選択してください&lt;/option&gt;
+          &lt;option value=&quot;1日&quot;&gt;1日&lt;/option&gt;
+          &lt;option value=&quot;2日&quot;&gt;2日&lt;/option&gt;
+          &lt;option value=&quot;3日&quot;&gt;3日&lt;/option&gt;
+          &lt;option value=&quot;4日&quot;&gt;4日&lt;/option&gt;
+          &lt;option value=&quot;5日&quot;&gt;5日&lt;/option&gt;
+          &lt;option value=&quot;6日&quot;&gt;6日&lt;/option&gt;
+          &lt;option value=&quot;7日&quot;&gt;7日&lt;/option&gt;
+          &lt;option value=&quot;8日&quot;&gt;8日&lt;/option&gt;
+          &lt;option value=&quot;9日&quot;&gt;9日&lt;/option&gt;
+          &lt;option value=&quot;10日&quot;&gt;10日&lt;/option&gt;
+          &lt;option value=&quot;11日&quot;&gt;11日&lt;/option&gt;
+          &lt;option value=&quot;12日&quot;&gt;12日&lt;/option&gt;
+          &lt;option value=&quot;13日&quot;&gt;13日&lt;/option&gt;
+          &lt;option value=&quot;14日&quot;&gt;14日&lt;/option&gt;
+          &lt;option value=&quot;15日&quot;&gt;15日&lt;/option&gt;
+          &lt;option value=&quot;16日&quot;&gt;16日&lt;/option&gt;
+          &lt;option value=&quot;17日&quot;&gt;17日&lt;/option&gt;
+          &lt;option value=&quot;18日&quot;&gt;18日&lt;/option&gt;
+          &lt;option value=&quot;19日&quot;&gt;19日&lt;/option&gt;
+          &lt;option value=&quot;20日&quot;&gt;20日&lt;/option&gt;
+          &lt;option value=&quot;21日&quot;&gt;21日&lt;/option&gt;
+          &lt;option value=&quot;22日&quot;&gt;22日&lt;/option&gt;
+          &lt;option value=&quot;23日&quot;&gt;23日&lt;/option&gt;
+          &lt;option value=&quot;24日&quot;&gt;24日&lt;/option&gt;
+          &lt;option value=&quot;25日&quot;&gt;25日&lt;/option&gt;
+          &lt;option value=&quot;26日&quot;&gt;26日&lt;/option&gt;
+          &lt;option value=&quot;27日&quot;&gt;27日&lt;/option&gt;
+          &lt;option value=&quot;28日&quot;&gt;28日&lt;/option&gt;
+          &lt;option value=&quot;29日&quot;&gt;29日&lt;/option&gt;
+          &lt;option value=&quot;30日&quot;&gt;30日&lt;/option&gt;
+          &lt;option value=&quot;31日&quot;&gt;31日&lt;/option&gt;
+        &lt;/select&gt;
+      &lt;/label&gt;
+    &lt;/div&gt;
+    &lt;span class=&quot;alertmessage&quot;&gt;生年月日を選択してください&lt;/span&gt;
+  &lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+            <ul class="list fsize14 mt15">
+              <li>selectタグはクラス<span class="code">selectCol</span>で囲みます
+              <li>横並びの制御は<span class="code">btnLabel</span>同様です（<span class="code">-col2</span><span class="code">-col3</span><span class="code">-full</span><span class="code">-spCol2</span><span class="code">-spFull</span>）</li>
+            </ul>
+          </dd>
+        </dl>
+        <dl class="column">
+          <dt><label for="mail" class="head01 mb10">メールアドレス<span class="fsize14">（半角英数字）</span><span class="required">必須</span></label></dt>
+          <dd>
+            <label class="columnInner">
+              <input id="mail" class="full" type="email" placeholder="test＠testdomain.co.jp">
+            </label>
+            <span class="alertmessage">入力してください</span>
+            <pre class="fsize14 mt20 left"><code class="html">&lt;dl class=&quot;column&quot;&gt;
+  &lt;dt&gt;&lt;label for=&quot;mail&quot; class=&quot;head01 mb10&quot;&gt;メールアドレス&lt;span class=&quot;fsize14&quot;&gt;（半角英数字）&lt;/span&gt;&lt;span class=&quot;required&quot;&gt;必須&lt;/span&gt;&lt;/label&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;label class=&quot;columnInner&quot;&gt;
+      &lt;input id=&quot;mail&quot; class=&quot;full&quot; type=&quot;email&quot; placeholder=&quot;test＠testdomain.co.jp&quot;&gt;
+    &lt;/label&gt;
+    &lt;span class=&quot;alertmessage&quot;&gt;入力してください&lt;/span&gt;
+  &lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+          </dd>
+        </dl>
+        <dl class="column">
+          <dt><label for="zip" class="head01 mb10">郵便番号<span class="fsize14">（半角数字）</span><span class="required">必須</span></label></dt>
+          <dd>
+            <label class="columnInner -noStretch">
+              <input id="zip" class="col2" type="tel" maxlength="7" placeholder="1234567">
+              <a class="btn -sizeSS -left" href=""><span class="fsize14 bold">郵便番号検索</span></a>
+            </label>
+            <ul class="list -notes fsize10 mt5">
+              <li>ハイフンなし</li>
+            </ul>
+            <span class="alertmessage">入力してください</span>
+            <pre class="fsize14 mt20 left"><code class="html">&lt;dl class=&quot;column&quot;&gt;
+  &lt;dt&gt;&lt;label for=&quot;zip&quot; class=&quot;head01 mb10&quot;&gt;郵便番号&lt;span class=&quot;fsize14&quot;&gt;（半角数字）&lt;/span&gt;&lt;span class=&quot;required&quot;&gt;必須&lt;/span&gt;&lt;/label&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;label class=&quot;columnInner -noStretch&quot;&gt;
+      &lt;input id=&quot;zip&quot; class=&quot;col2&quot; type=&quot;tel&quot; maxlength=&quot;7&quot; placeholder=&quot;1234567&quot;&gt;
+      &lt;a class=&quot;btn -sizeSS -left&quot; href=&quot;&quot;&gt;&lt;span class=&quot;fsize14 bold&quot;&gt;郵便番号検索&lt;/span&gt;&lt;/a&gt;
+    &lt;/label&gt;
+    &lt;ul class=&quot;list -notes fsize10 mt5&quot;&gt;
+      &lt;li&gt;ハイフンなし&lt;/li&gt;
+    &lt;/ul>
+    &lt;span class=&quot;alertmessage&quot;&gt;入力してください&lt;/span&gt;
+  &lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+            <ul class="list fsize14 mt15">
+              <li>クラス<span class="code">columnInner</span>について
+              <ul class="list fsize14">
+                <li>クラス<span class="code">-noStretch</span>でalign-items:center;になります（デフォルト:stretch）</li>
+              </ul>
+              </li>
+              <li>郵便番号はtype=&quot;tel&quot;でmaxlength=&quot;7&quot;を指定します</li>
+            </ul>
+          </dd>
+        </dl>
+        <dl class="column">
+          <dt><label for="pref" class="head01 mb10">お住まいの都道府県を選んでください。<span class="required">必須</span></label></dt>
+          <dd>
+            <div class="columnInner">
+              <label class="selectCol -col2">
+                <select name="pref" id="pref">
+                  <option value="北海道">北海道</option>
+                  <option value="青森県">青森県</option>
+                  <option value="岩手県">岩手県</option>
+                  <option value="宮城県">宮城県</option>
+                  <option value="秋田県">秋田県</option>
+                  <option value="山形県">山形県</option>
+                  <option value="福島県">福島県</option>
+                  <option value="茨城県">茨城県</option>
+                  <option value="栃木県">栃木県</option>
+                  <option value="群馬県">群馬県</option>
+                  <option value="埼玉県">埼玉県</option>
+                  <option value="千葉県">千葉県</option>
+                  <option value="" selected="">選択してください</option>
+                  <option value="東京都">東京都</option>
+                  <option value="神奈川県">神奈川県</option>
+                  <option value="新潟県">新潟県</option>
+                  <option value="富山県">富山県</option>
+                  <option value="石川県">石川県</option>
+                  <option value="福井県">福井県</option>
+                  <option value="山梨県">山梨県</option>
+                  <option value="長野県">長野県</option>
+                  <option value="岐阜県">岐阜県</option>
+                  <option value="静岡県">静岡県</option>
+                  <option value="愛知県">愛知県</option>
+                  <option value="三重県">三重県</option>
+                  <option value="滋賀県">滋賀県</option>
+                  <option value="京都府">京都府</option>
+                  <option value="大阪府">大阪府</option>
+                  <option value="兵庫県">兵庫県</option>
+                  <option value="奈良県">奈良県</option>
+                  <option value="和歌山県">和歌山県</option>
+                  <option value="鳥取県">鳥取県</option>
+                  <option value="島根県">島根県</option>
+                  <option value="岡山県">岡山県</option>
+                  <option value="広島県">広島県</option>
+                  <option value="山口県">山口県</option>
+                  <option value="徳島県">徳島県</option>
+                  <option value="香川県">香川県</option>
+                  <option value="愛媛県">愛媛県</option>
+                  <option value="高知県">高知県</option>
+                  <option value="福岡県">福岡県</option>
+                  <option value="佐賀県">佐賀県</option>
+                  <option value="長崎県">長崎県</option>
+                  <option value="熊本県">熊本県</option>
+                  <option value="大分県">大分県</option>
+                  <option value="宮崎県">宮崎県</option>
+                  <option value="鹿児島県">鹿児島県</option>
+                  <option value="沖縄県">沖縄県</option>
+                </select>
+              </label>
+            </div>
+            <span class="alertmessage">選択してください</span>
+            <pre class="fsize14 mt20 left"><code class="html">&lt;dl class=&quot;column&quot;&gt;
+  &lt;dt&gt;&lt;label for=&quot;pref&quot; class=&quot;head01 mb10&quot;&gt;お住まいの都道府県を選んでください。&lt;span class=&quot;required&quot;&gt;必須&lt;/span&gt;&lt;/label&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;div class=&quot;columnInner&quot;&gt;
+      &lt;label class=&quot;selectCol -col2&quot;&gt;
+        &lt;select name=&quot;pref&quot; id=&quot;pref&quot;&gt;
+          &lt;option value=&quot;北海道&quot;&gt;北海道&lt;/option&gt;
+          &lt;option value=&quot;青森県&quot;&gt;青森県&lt;/option&gt;
+          &lt;option value=&quot;岩手県&quot;&gt;岩手県&lt;/option&gt;
+          &lt;option value=&quot;宮城県&quot;&gt;宮城県&lt;/option&gt;
+          &lt;option value=&quot;秋田県&quot;&gt;秋田県&lt;/option&gt;
+          &lt;option value=&quot;山形県&quot;&gt;山形県&lt;/option&gt;
+          &lt;option value=&quot;福島県&quot;&gt;福島県&lt;/option&gt;
+          &lt;option value=&quot;茨城県&quot;&gt;茨城県&lt;/option&gt;
+          &lt;option value=&quot;栃木県&quot;&gt;栃木県&lt;/option&gt;
+          &lt;option value=&quot;群馬県&quot;&gt;群馬県&lt;/option&gt;
+          &lt;option value=&quot;埼玉県&quot;&gt;埼玉県&lt;/option&gt;
+          &lt;option value=&quot;千葉県&quot;&gt;千葉県&lt;/option&gt;
+          &lt;option value=&quot;&quot; selected=&quot;&quot;&gt;選択してください&lt;/option&gt;
+          &lt;option value=&quot;東京都&quot;&gt;東京都&lt;/option&gt;
+          &lt;option value=&quot;神奈川県&quot;&gt;神奈川県&lt;/option&gt;
+          &lt;option value=&quot;新潟県&quot;&gt;新潟県&lt;/option&gt;
+          &lt;option value=&quot;富山県&quot;&gt;富山県&lt;/option&gt;
+          &lt;option value=&quot;石川県&quot;&gt;石川県&lt;/option&gt;
+          &lt;option value=&quot;福井県&quot;&gt;福井県&lt;/option&gt;
+          &lt;option value=&quot;山梨県&quot;&gt;山梨県&lt;/option&gt;
+          &lt;option value=&quot;長野県&quot;&gt;長野県&lt;/option&gt;
+          &lt;option value=&quot;岐阜県&quot;&gt;岐阜県&lt;/option&gt;
+          &lt;option value=&quot;静岡県&quot;&gt;静岡県&lt;/option&gt;
+          &lt;option value=&quot;愛知県&quot;&gt;愛知県&lt;/option&gt;
+          &lt;option value=&quot;三重県&quot;&gt;三重県&lt;/option&gt;
+          &lt;option value=&quot;滋賀県&quot;&gt;滋賀県&lt;/option&gt;
+          &lt;option value=&quot;京都府&quot;&gt;京都府&lt;/option&gt;
+          &lt;option value=&quot;大阪府&quot;&gt;大阪府&lt;/option&gt;
+          &lt;option value=&quot;兵庫県&quot;&gt;兵庫県&lt;/option&gt;
+          &lt;option value=&quot;奈良県&quot;&gt;奈良県&lt;/option&gt;
+          &lt;option value=&quot;和歌山県&quot;&gt;和歌山県&lt;/option&gt;
+          &lt;option value=&quot;鳥取県&quot;&gt;鳥取県&lt;/option&gt;
+          &lt;option value=&quot;島根県&quot;&gt;島根県&lt;/option&gt;
+          &lt;option value=&quot;岡山県&quot;&gt;岡山県&lt;/option&gt;
+          &lt;option value=&quot;広島県&quot;&gt;広島県&lt;/option&gt;
+          &lt;option value=&quot;山口県&quot;&gt;山口県&lt;/option&gt;
+          &lt;option value=&quot;徳島県&quot;&gt;徳島県&lt;/option&gt;
+          &lt;option value=&quot;香川県&quot;&gt;香川県&lt;/option&gt;
+          &lt;option value=&quot;愛媛県&quot;&gt;愛媛県&lt;/option&gt;
+          &lt;option value=&quot;高知県&quot;&gt;高知県&lt;/option&gt;
+          &lt;option value=&quot;福岡県&quot;&gt;福岡県&lt;/option&gt;
+          &lt;option value=&quot;佐賀県&quot;&gt;佐賀県&lt;/option&gt;
+          &lt;option value=&quot;長崎県&quot;&gt;長崎県&lt;/option&gt;
+          &lt;option value=&quot;熊本県&quot;&gt;熊本県&lt;/option&gt;
+          &lt;option value=&quot;大分県&quot;&gt;大分県&lt;/option&gt;
+          &lt;option value=&quot;宮崎県&quot;&gt;宮崎県&lt;/option&gt;
+          &lt;option value=&quot;鹿児島県&quot;&gt;鹿児島県&lt;/option&gt;
+          &lt;option value=&quot;沖縄県&quot;&gt;沖縄県&lt;/option&gt;
+        &lt;/select&gt;
+      &lt;/label&gt;
+    &lt;/div&gt;
+    &lt;span class=&quot;alertmessage&quot;&gt;選択してください&lt;/span&gt;
+  &lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+          </dd>
+        </dl>
+        <dl class="column">
+          <dt><label for="address1" class="head01 mb10">市区郡町村<span class="required">必須</span></label></dt>
+          <dd>
+            <label class="columnInner">
+              <input id="address1" class="full" type="text">
+            </label>
+            <span class="alertmessage">入力してください</span>
+            <pre class="fsize14 mt20 left"><code class="html">&lt;dl class=&quot;column&quot;&gt;
+  &lt;dt&gt;&lt;label for=&quot;address1&quot; class=&quot;head01 mb10&quot;&gt;市区郡町村&lt;span class=&quot;required&quot;&gt;必須&lt;/span&gt;&lt;/label&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;label class=&quot;columnInner&quot;&gt;
+      &lt;input id=&quot;address1&quot; class=&quot;full&quot; type=&quot;text&quot;&gt;
+    &lt;/label&gt;
+    &lt;span class=&quot;alertmessage&quot;&gt;入力してください&lt;/span&gt;
+  &lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+          </dd>
+        </dl>
+        <dl class="column">
+          <dt><label for="address2" class="head01 mb10">番地<span class="fsize14">（全角数字）</span><span class="required">必須</span></label></dt>
+          <dd>
+            <label class="columnInner">
+              <input id="address2" class="full" type="text">
+            </label>
+            <span class="alertmessage">入力してください</span>
+            <pre class="fsize14 mt20 left"><code class="html">&lt;dl class=&quot;column&quot;&gt;
+  &lt;dt&gt;&lt;label for=&quot;address2&quot; class=&quot;head01 mb10&quot;&gt;番地&lt;span class=&quot;fsize14&quot;&gt;（全角数字）&lt;/span&gt;&lt;span class=&quot;required&quot;&gt;必須&lt;/span&gt;&lt;/label&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;label class=&quot;columnInner&quot;&gt;
+      &lt;input id=&quot;address2&quot; class=&quot;full&quot; type=&quot;text&quot;&gt;
+    &lt;/label&gt;
+    &lt;span class=&quot;alertmessage&quot;&gt;入力してください&lt;/span&gt;
+  &lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+          </dd>
+        </dl>
+        <dl class="column">
+          <dt><label for="address3" class="head01 mb10">建物名・部屋番号</label></dt>
+          <dd>
+            <label class="columnInner">
+              <input id="address3" class="full" type="text">
+            </label>
+            <ul class="list -notes fsize10 mt5">
+              <li>部屋番号まで入力してください。</li>
+            </ul>
+            <pre class="fsize14 mt20 left"><code class="html">&lt;dl class=&quot;column&quot;&gt;
+  &lt;dt&gt;&lt;label for=&quot;address3&quot; class=&quot;head01 mb10&quot;&gt;建物名・部屋番号&lt;/label&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;label class=&quot;columnInner&quot;&gt;
+      &lt;input id=&quot;address3&quot; class=&quot;full&quot; type=&quot;text&quot;&gt;
+    &lt;/label&gt;
+    &lt;ul class=&quot;list -notes fsize10 mt5&quot;&gt;
+      &lt;li&gt;部屋番号まで入力してください。&lt;/li&gt;
+    &lt;/ul>
+  &lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+          </dd>
+        </dl>
+        <dl class="column">
+          <dt>
+            <label for="contact" class="head01 mb10">お問い合わせ内容<span class="fsize14">（全角半角問わず1000字以内）</span><span class="required">必須</span></label>
+          </dt>
+          <dd>
+            <div class="columnInner">
+              <textarea class="formContact full js-textarea" id="contact" name="contact" rows="4" cols="40" placeholder="お問い合わせ内容を入力してください"></textarea>
+              <p class="fsize14 mt5">
+                <span class="js-default">入力文字数：<span class="num">0</span></span>
+                <span class="js-over colorAlert bold hdn">入力文字数をオーバーしています。</span>
+              </p>
+            </div>
+            <p class="alertmessage">お問い合わせ内容を入力してください</p>
+            <pre class="fsize14 mt20 left"><code class="html">&lt;dl class=&quot;column&quot;&gt;
+  &lt;dt&gt;
+    &lt;label for=&quot;contact&quot; class=&quot;head01 mb10&quot;&gt;お問い合わせ内容&lt;span class=&quot;fsize14&quot;&gt;（全角半角問わず1000字以内）&lt;/span&gt;&lt;span class=&quot;required&quot;&gt;必須&lt;/span&gt;&lt;/label&gt;
+  &lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;div class=&quot;columnInner&quot;&gt;
+      &lt;textarea class=&quot;formContact full js-textarea&quot; id=&quot;contact&quot; name=&quot;contact&quot; rows=&quot;4&quot; cols=&quot;40&quot; placeholder=&quot;お問い合わせ内容を入力してください&quot;&gt;&lt;/textarea&gt;
+      &lt;p class=&quot;fsize14 mt5&quot;&gt;
+        &lt;span class=&quot;js-default&quot;&gt;入力文字数：&lt;span class=&quot;num&quot;&gt;0&lt;/span&gt;&lt;/span&gt;
+        &lt;span class=&quot;js-over colorAlert bold hdn&quot;&gt;入力文字数をオーバーしています。&lt;/span&gt;
+      &lt;/p&gt;
+    &lt;/div&gt;
+    &lt;p class=&quot;alertmessage&quot;&gt;お問い合わせ内容を入力してください&lt;/p&gt;
+  &lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+            <ul class="list fsize14 mt15">
+              <li>txtareaの文字数チェックをクラス<span class="code">js-textarea</span>をトリガーにJSで制御しています。</li>
+            </ul>
+          </dd>
+        </dl>
+        <ul class="list -notes fsize12 mt10">
+          <li>機種依存文字はご使用になれません</li>
+        </ul>
+    
+        <section class="block mt40 left">
+          <p class="fsize12">当社はご記入いただいたお客様の氏名・住所・電話番号などの個人情報を、賞品発送、本キャンペーンに関するお問合わせの対応、及び個人を特定しない統計資料の作成の目的で使用させていただきます。また、その個人情報を、お客様の同意を得ないで業務委託先以外の第三者に開示・提供することはありません（法令により開示・提供を認められた場合を除きます）。個人情報の考え方に関しましては、〇〇〇〇〇〇〇〇内の「<a class="txtLink -blank hover" href="" target="_blank">プライバシーポリシー</a>」に記載されております。</p>
+        </section>
+    
+        <p class="fsize18 mt40">入力内容をご確認の上、<br>「確認する」ボタンを押してください。</p>
+    
+        <div class="btnArea mt40">
+          <a class="btn -sizeS -sub" href=""><span class="fsize20 bold">戻る</span></a>
+          <button type="submit" class="btn"><span class="fsize20 bold">確認する</span></button>
+        </div>
+
+        <pre class="fsize14 mt20 left"><code class="html">&lt;ul class=&quot;list -notes fsize12 mt10&quot;&gt;
+  &lt;li&gt;機種依存文字はご使用になれません&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;section class=&quot;block mt40 left&quot;&gt;
+  &lt;p class=&quot;fsize12&quot;&gt;当社はご記入いただいたお客様の氏名・住所・電話番号などの個人情報を、賞品発送、本キャンペーンに関するお問合わせの対応、及び個人を特定しない統計資料の作成の目的で使用させていただきます。また、その個人情報を、お客様の同意を得ないで業務委託先以外の第三者に開示・提供することはありません（法令により開示・提供を認められた場合を除きます）。個人情報の考え方に関しましては、〇〇〇〇〇〇〇〇内の「&lt;a class=&quot;txtLink -blank hover&quot; href=&quot;&quot; target=&quot;_blank&quot;&gt;プライバシーポリシー&lt;/a&gt;」に記載されております。&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;p class=&quot;fsize18 mt40&quot;&gt;入力内容をご確認の上、&lt;br&gt;「確認する」ボタンを押してください。&lt;/p&gt;
+
+&lt;div class=&quot;btnArea mt40&quot;&gt;
+  &lt;a class=&quot;btn -sizeS -sub&quot; href=&quot;&quot;&gt;&lt;span class=&quot;fsize20 bold&quot;&gt;戻る&lt;/span&gt;&lt;/a&gt;
+  &lt;button type=&quot;submit&quot; class=&quot;btn&quot;&gt;&lt;span class=&quot;fsize20 bold&quot;&gt;確認する&lt;/span&gt;&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+      </section>
+    </form>
+  
+    <section class="center pt100" id="sec14">
+      <h2 class="head03 mb20">確認画面</h2>
+      <p class="fsize20 mb40">入力内容をご確認ください。</p>
+      <dl class="column">
+        <dt><p class="head01 mb10">お名前</p></dt>
+        <dd>
+          <div class="confirm">
+            <p class="fsize18 bold">山田 太郎</p>
+          </div>
+        </dd>
+      </dl>
+      <dl class="column">
+        <dt><p class="head01 mb10">フリガナ</p></dt>
+        <dd>
+          <div class="confirm">
+            <p class="fsize18 bold">ヤマダ タロウ</p>
+          </div>
+        </dd>
+      </dl>
+
+      <pre class="fsize14 mt20 left"><code class="html">&lt;h2 class=&quot;head03 mb20&quot;&gt;確認画面&lt;/h2&gt;
+&lt;p class=&quot;fsize20 mb40&quot;&gt;入力内容をご確認ください。&lt;/p&gt;
+&lt;dl class=&quot;column&quot;&gt;
+  &lt;dt&gt;&lt;p class=&quot;head01 mb10&quot;&gt;お名前&lt;/p&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;div class=&quot;confirm&quot;&gt;
+      &lt;p class=&quot;fsize18 bold&quot;&gt;山田 太郎&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/dd&gt;
+&lt;/dl&gt;
+&lt;dl class=&quot;column&quot;&gt;
+  &lt;dt&gt;&lt;p class=&quot;head01 mb10&quot;&gt;フリガナ&lt;/p&gt;&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;div class=&quot;confirm&quot;&gt;
+      &lt;p class=&quot;fsize18 bold&quot;&gt;ヤマダ タロウ&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+    </section>
+  
+    <section class="center pt100" id="sec15">
+      <h2 class="head03 mb40">応募要項・お問い合わせ</h2>
+      <div class="btnArea">
+      <a class="btn js-modalOpen" data-modal="1__iframe__cpinfo_term.html" href=""><span class="fsize20 bold">応募要項はこちら</span></a>
+      <a class="btn js-modalOpen" data-modal="2__iframe__cpinfo_contact.html" href=""><span class="fsize20 bold">お問い合わせはこちら</span></a>
+      </div>
+
+      <h3 class="head01 mt20">応募要項のコード（一部抜粋）</h3>
+      <pre class="fsize14 left mt5"><code class="html">&lt;dl class=&quot;column&quot;&gt;
+  &lt;dt&gt;
+    &lt;p class=&quot;head01 mb10&quot;&gt;賞品&lt;/p&gt;
+  &lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;p class=&quot;fsize14&quot;&gt;ダミーテキストダミーテキストダミーテキスト&lt;/p&gt;
+    &lt;ul class=&quot;list -notes fsize12&quot;&gt;
+      &lt;li&gt;ダミーテキストダミーテキストダミーテキスト&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+
+      <h3 class="head01 mt20">お問い合わせのコード</h3>
+      <pre class="fsize14 left mt5"><code class="html">&lt;div class=&quot;inner pb40&quot;&gt;
+  &lt;h1 class=&quot;head03 mt20 mb20&quot;&gt;お問い合わせ&lt;/h1&gt;
+  &lt;p class=&quot;fsize16 bold&quot;&gt;「〇〇〇〇〇〇〇〇〇〇」事務局&lt;/p&gt;
+  &lt;section class=&quot;block left mt20&quot;&gt;
+    &lt;p class=&quot;tel js-telCall rem&quot; x-ms-format-detection=&quot;none&quot;&gt;03-0000-0000&lt;/p&gt;
+    &lt;h2 class=&quot;head02 left&quot;&gt;&lt;span class=&quot;fsize12&quot;&gt;メールアドレス：&lt;/span&gt;&lt;span class=&quot;rem&quot;&gt;abc＠defghijk.com&lt;/span&gt;&lt;/h2&gt;
+    &lt;p class=&quot;fsize12 left&quot;&gt;対応時間：9：00～18：00（土・日・祝日を除く）&lt;/p&gt;
+    &lt;ul class=&quot;list -notes fsize10 mt10&quot;&gt;
+      &lt;li&gt;お電話での問い合わせは受け付けておりません。&lt;/li&gt;
+      &lt;li&gt;メールの受信は24時間受け付けておりますが、ご返答にはお時間をいただいております。ご了承ください。&lt;/li&gt;
+      &lt;li&gt;メールアドレスは、お間違いのないようにご注意ください。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/section&gt;
+  &lt;a class="btn -sizeS -sub -close mt40 js-modalClose" href=""&gt;&lt;span class="fsize18 bold"&gt;閉じる&lt;/span&gt;&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+    </section>
+
+    <section class="left pt100" id="sec16">
+      <h2 class="head03 mb20">テーブル</h2>
+      <p class="fsize16 mb20">スマホ時などには横スクロールも実装します。</p>
+      <div class="tableScroller">
+        <table class="table -w140">
+          <tbody>
+            <tr>
+              <th class="fsize14 center">見出し</th>
+              <td class="fsize14 center">テキストが入ります</td>
+              <td class="fsize14 center">テキストが入ります</td>
+              <td class="fsize14 center">テキストが入ります</td>
+              <td class="fsize14 center">テキストが入ります</td>
+            </tr>
+            <tr>
+              <th class="fsize14 center">見出し</th>
+              <td colspan="4" class="fsize14 left">テキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入ります</td>
+            </tr>
+            <tr>
+              <th rowspan="3" class="fsize14 center">見出し</th>
+              <td class="fsize14 center">テキストが入ります</td>
+              <td class="fsize14 center">テキストが入ります</td>
+              <td rowspan="3" class="fsize14 center">テキストが入ります</td>
+              <td class="fsize14 center">テキストが入ります</td>
+            </tr>
+            <tr>
+              <td class="fsize14 center">テキストが入ります</td>
+              <td class="fsize14 center">テキストが入ります</td>
+              <td class="fsize14 center">テキストが入ります</td>
+            </tr>
+            <tr>
+              <td class="fsize14 center">テキストが入ります</td>
+              <td class="fsize14 center">テキストが入ります</td>
+              <td class="fsize14 center">テキストが入ります</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <pre class="fsize14 mt20 left"><code class="html">&lt;div class=&quot;tableScroller&quot;&gt;
+  &lt;table class=&quot;table -w140&quot;&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;th class=&quot;fsize14 center&quot;&gt;見出し&lt;/th&gt;
+        &lt;td class=&quot;fsize14 center&quot;&gt;テキストが入ります&lt;/td&gt;
+        &lt;td class=&quot;fsize14 center&quot;&gt;テキストが入ります&lt;/td&gt;
+        &lt;td class=&quot;fsize14 center&quot;&gt;テキストが入ります&lt;/td&gt;
+        &lt;td class=&quot;fsize14 center&quot;&gt;テキストが入ります&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;th class=&quot;fsize14 center&quot;&gt;見出し&lt;/th&gt;
+        &lt;td colspan=&quot;4&quot; class=&quot;fsize14 left&quot;&gt;テキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入ります&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;th rowspan=&quot;3&quot; class=&quot;fsize14 center&quot;&gt;見出し&lt;/th&gt;
+        &lt;td class=&quot;fsize14 center&quot;&gt;テキストが入ります&lt;/td&gt;
+        &lt;td class=&quot;fsize14 center&quot;&gt;テキストが入ります&lt;/td&gt;
+        &lt;td rowspan=&quot;3&quot; class=&quot;fsize14 center&quot;&gt;テキストが入ります&lt;/td&gt;
+        &lt;td class=&quot;fsize14 center&quot;&gt;テキストが入ります&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td class=&quot;fsize14 center&quot;&gt;テキストが入ります&lt;/td&gt;
+        &lt;td class=&quot;fsize14 center&quot;&gt;テキストが入ります&lt;/td&gt;
+        &lt;td class=&quot;fsize14 center&quot;&gt;テキストが入ります&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td class=&quot;fsize14 center&quot;&gt;テキストが入ります&lt;/td&gt;
+        &lt;td class=&quot;fsize14 center&quot;&gt;テキストが入ります&lt;/td&gt;
+        &lt;td class=&quot;fsize14 center&quot;&gt;テキストが入ります&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+    </section>
+  
+    <section class="left pt100" id="sec17">
+      <h2 class="head03 mb20">アコーディオン・Q&A</h2>
+      <p class="fsize16 mb20">JSで実装しています。</p>
+      <dl class="accorBlock mb10">
+        <dt class="accorBtn fsize16 bold js-accorBtn">アコーディオンを開く<span class="accorIco"></span></dt>
+        <dd class="accorArea js-accorArea">
+          <p class="inner fsize14">テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+        </dd>
+      </dl>
+      <dl class="accorBlock mb20">
+        <dt class="accorBtn fsize16 bold js-accorBtn">アコーディオンを開く<span class="accorIco"></span></dt>
+        <dd class="accorArea js-accorArea">
+          <p class="inner fsize14">テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+        </dd>
+      </dl>
+      <p class="fsize16 mb20">.accorBtnに.-q○を付与することでQ&A形式になります。</p>
+      <dl class="accorBlock mb10">
+        <dt class="accorBtn -q1 fsize16 bold js-accorBtn">Q&Aのサンプル<span class="accorIco"></span></dt>
+        <dd class="accorArea js-accorArea">
+          <p class="inner fsize14">テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+        </dd>
+      </dl>
+      <dl class="accorBlock">
+        <dt class="accorBtn -q20 fsize16 bold js-accorBtn">Q&Aのサンプル<span class="accorIco"></span></dt>
+        <dd class="accorArea js-accorArea">
+          <p class="inner fsize14">テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+        </dd>
+      </dl>
+
+      <pre class="fsize14 mt20 left"><code class="html">&lt;dl class=&quot;accorBlock mb10&quot;&gt;
+  &lt;dt class=&quot;accorBtn fsize16 bold js-accorBtn&quot;&gt;アコーディオンを開く&lt;span class=&quot;accorIco&quot;&gt;&lt;/span&gt;&lt;/dt&gt;
+  &lt;dd class=&quot;accorArea js-accorArea&quot;&gt;
+    &lt;p class=&quot;inner fsize14&quot;&gt;テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト&lt;/p&gt;
+  &lt;/dd&gt;
+&lt;/dl&gt;
+&lt;dl class=&quot;accorBlock mb20&quot;&gt;
+  &lt;dt class=&quot;accorBtn fsize16 bold js-accorBtn&quot;&gt;アコーディオンを開く&lt;span class=&quot;accorIco&quot;&gt;&lt;/span&gt;&lt;/dt&gt;
+  &lt;dd class=&quot;accorArea js-accorArea&quot;&gt;
+    &lt;p class=&quot;inner fsize14&quot;&gt;テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト&lt;/p&gt;
+  &lt;/dd&gt;
+&lt;/dl&gt;
+&lt;p class=&quot;fsize16 mb20&quot;&gt;.accorBtnに.-q○を付与することでQ&A形式になります。&lt;/p&gt;
+&lt;dl class=&quot;accorBlock mb10&quot;&gt;
+  &lt;dt class=&quot;accorBtn -q1 fsize16 bold js-accorBtn&quot;&gt;Q&Aのサンプル&lt;span class=&quot;accorIco&quot;&gt;&lt;/span&gt;&lt;/dt&gt;
+  &lt;dd class=&quot;accorArea js-accorArea&quot;&gt;
+    &lt;p class=&quot;inner fsize14&quot;&gt;テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト&lt;/p&gt;
+  &lt;/dd&gt;
+&lt;/dl&gt;
+&lt;dl class=&quot;accorBlock&quot;&gt;
+  &lt;dt class=&quot;accorBtn -q20 fsize16 bold js-accorBtn&quot;&gt;Q&Aのサンプル&lt;span class=&quot;accorIco&quot;&gt;&lt;/span&gt;&lt;/dt&gt;
+  &lt;dd class=&quot;accorArea js-accorArea&quot;&gt;
+    &lt;p class=&quot;inner fsize14&quot;&gt;テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト&lt;/p&gt;
+  &lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+    </section>
+  
+    <section class="left pt100 pb100" id="sec18">
+      <h2 class="head03 mb20">電話番号</h2>
+      <p class="fsize16 mb20">クラス<span class="code">.tel</span>で記述します。また電話番号リンク設定をJSで実装しています。</p>
+      <p class="tel js-telCall rem" x-ms-format-detection="none">03-0000-0000</p>
+      <p class="fsize16 mt10">スマホ・タブレット時でもリンクさせない場合 ⇒ <span class="rem bold disableTel" x-ms-format-detection="none">03-0000-0000</span></p>
+
+      <pre class="fsize14 mt20 left"><code class="html">&lt;p class=&quot;tel js-telCall rem&quot; x-ms-format-detection=&quot;none&quot;&gt;03-0000-0000&lt;/p&gt;
+&lt;p class=&quot;fsize16 mt10&quot;&gt;スマホ・タブレット時でもリンクさせない場合 ⇒ &lt;span class=&quot;rem bold disableTel&quot; x-ms-format-detection=&quot;none&quot;&gt;03-0000-0000&lt;/span&gt;&lt;/p&gt;</code></pre>
+      <ul class="list fsize14 mt15">
+        <li>電話番号リンクありの場合、<span class="code">js-telCall</span>を指定。</li>
+        <li>電話番号リンク無しの場合、<span class="code">disableTel</span>を指定。</li>
+      </ul>
+    </section>
+  </main>
+</div>
+
+<script type="text/javascript" src="scripts/appTemplate.min.js"></script><!--通常js-->
+</body>
+</html>

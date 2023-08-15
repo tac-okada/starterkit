@@ -1,5 +1,6 @@
 @use "../../../styles/setting";
 @use "../../../styles/reset";
+@use "../../../styles/common";
 
 #filters {
   position: absolute;
@@ -20,7 +21,7 @@
     width: 25%;
     position: relative;
     cursor: pointer;
-    transition: background .3s setting.$easeOutMoment;
+    transition: background .3s var(--easeOutMoment);
     overflow: hidden;
 
     picture{

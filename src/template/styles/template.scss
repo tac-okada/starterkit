@@ -1,0 +1,71 @@
+@use "../../styles/setting";
+@use "../../styles/reset";
+@use "../../styles/common";
+@use "../../styles/util";
+@use "../../styles/modal";
+
+.wrap{
+  width: 100%;
+  margin: 0 auto;
+}
+
+.modal_1,
+.modal_2{
+  width: 768px;
+  height: 600px;
+  max-width: none;
+}
+
+
+code{
+  border-radius: var(--radius1);
+  @include setting.notScrollbar;
+  max-height: 200px;
+}
+
+.util{
+  position: relative;
+
+  nav{
+    position: fixed;
+    top: 0;
+    right: 0;
+    text-align: left;
+    padding: 20px 40px 0 0;
+  }
+
+  .ptop{
+    position: fixed;
+    bottom: 20px;
+    right: 40px;
+  }
+}
+
+@media screen and (max-width: 1280px){
+  .util{
+    .inner{
+      margin: 0 0 0 40px;
+    }
+  }
+}
+
+@media screen and (max-width: 767px){
+  .modal_1,
+  .modal_2{
+    width: 90%;
+  }
+
+  .util{
+    .inner{
+      margin: 0 auto;
+    }
+
+    nav{
+      display: none;
+    }
+  
+    .ptop{
+      display: none;
+    }
+  }
+}

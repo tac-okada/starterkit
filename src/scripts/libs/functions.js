@@ -143,6 +143,98 @@ const setTelCall = core => {
 
 
 /*
+  enterキー無効/setNoEnterkey/  -----------------------------------------------
+*/
+const setNoEnterkey = () => {
+  if( document.querySelector('form') != null ){
+    const input = document.querySelector('form');
+    input.onkeypress = e => {
+      //console.info(e);
+      const key = e.keyCode || e.charCode || 0;
+      if (key === 13) {
+        e.preventDefault();
+      }
+    };
+  }
+};
+
+
+/*
+  チェックボックス・ラジオボタン切り替え/setLabelChanger/  -----------------------------------------------
+*/
+const setLabelChanger = () => {
+  if( document.querySelector('.js-labelchange') != null ){
+    const btn = document.querySelectorAll('.js-labelchange');
+
+    const checker = () => {
+      for (let i = 0; i < btn.length; i++) {
+        if( btn[i].checked ){
+          btn[i].parentNode.classList.add('checked');
+        }else{
+          btn[i].parentNode.classList.remove('checked');
+        }
+      };
+    };
+
+    for (let i = 0; i < btn.length; i++) {
+      btn[i].addEventListener('change', () => {
+        checker();
+      });
+    };
+
+    checker();
+  }
+};
+
+
+/*
+  テキストエリアの文字数チェック/lengthChecker/  -----------------------------------------------
+*/
+const setLengthChecker = () => {
+  if( document.querySelector('.js-textarea') != null ){
+    let strLength = 1000;
+    const textarea = document.querySelector('.js-textarea'),
+      msgDefault = document.querySelector('.js-default'),
+      msgNum = document.querySelector('.js-default .num'),
+      msgOver = document.querySelector('.js-over');
+  
+    textarea.addEventListener('input', e => {
+      checker(e);
+    });
+  
+    textarea.addEventListener('change', e => {
+      checker(e);
+    });
+  
+    const checker = e => {
+      //console.info(e.target.value.length)
+      if( e.target.value.length <= strLength ){
+        if( textarea.classList.contains('error') ){
+          textarea.classList.remove('error');
+        }
+        if( msgDefault.classList.contains('hdn') ){
+          msgDefault.classList.remove('hdn');
+        }
+        if( !msgOver.classList.contains('hdn') ){
+          msgOver.classList.add('hdn');
+        }
+        msgNum.textContent = e.target.value.length;
+      } else {
+        if( !textarea.classList.contains('error') ){
+          textarea.classList.add('error');
+        }
+        if( !msgDefault.classList.contains('hdn') ){
+          msgDefault.classList.add('hdn');
+        }
+        if( msgOver.classList.contains('hdn') ){
+          msgOver.classList.remove('hdn');
+        }
+      }
+    };
+  }
+};
+
+/*
   マウス追従/setCrsl/  -----------------------------------------------
 */
 const setCrsl = core => {
@@ -172,4 +264,4 @@ const setCrsl = core => {
 };
 
 
-export { setConsoleIe, setPopupWin, setScrollTo, setAccordion, setTelCall, setCrsl }
+export const functions = { setConsoleIe, setPopupWin, setScrollTo, setAccordion, setTelCall, setNoEnterkey, setLabelChanger, setLengthChecker, setCrsl }

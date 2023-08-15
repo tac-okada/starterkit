@@ -1,3 +1,4 @@
+@use "sass:math";
 @use "setting";
 
 /*============================================================
@@ -8,12 +9,10 @@
 /*  web font
 ------------------------------------------------*/
 // CDNにて読み込み
-// Noto Sans
-//@import url(//fonts.googleapis.com/earlyaccess/notosansjapanese.css);
 // fontawesome
 //@import url(//use.fontawesome.com/releases/v5.1.0/css/all.css);
-
-@import url('//fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+// Noto Sans
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=REM:wght@400;700&display=swap');
 
 // サーバー設置から読み込み
 // NotoSansJP
@@ -35,20 +34,14 @@
   font-display: swap;
 }
 */
-// fontawesome
-//@import '__fontawesome/fontawesome.scss';
-// 以下必要に応じて
-//@import '__fontawesome/fa-brands.scss';
-//@import '__fontawesome/fa-regular.scss';
-//@import '__fontawesome/fa-solid.scss';
 
 
 html {
   width: 100%;
   height: 100%;
   //overflow-y: scroll;
-  font-size: 62.5%;
-  font-family: setting.$fontset_noto;
+  font-size: 100%;
+  font-family: var(--fontset_noto);
 
   // iOS15用：ここから
   &.ios{
@@ -58,13 +51,14 @@ html {
 }
 body {
   font-feature-settings: 'palt' 1;
-  color: #000000;
+  color: var(--txt-color);
   width: 100%;
   height: 100%;
-  line-height: 1.6;
+  line-height: 1.8;
   text-align: center;
   //font-size: 16px;
   font-size: 1.6rem;
+  letter-spacing: 0.05em;
 
   -webkit-text-size-adjust: 100%;
      -moz-text-size-adjust: 100%;
@@ -82,17 +76,30 @@ body {
   }
 }
 
+.rem{
+  font-family: 'REM';
+}
+
+html:not(.ios) input[type=radio] {
+  background: none;
+  border: none;
+  border-radius: 0;
+}
+
 /*  a
 ------------------------------------------------*/
 a {
   outline: 0;
   text-decoration: none;
   cursor: pointer;
-  color: setting.$colorLink;
+  color: var(--link-color);
 }
 
 a:link { text-decoration: none;}
-a:visited { text-decoration: none;}
+a:visited {
+  color: var(--linkVisited-color);
+  text-decoration: none;
+}
 a:hover { text-decoration: none;}
 a:focus { text-decoration: none;}
 a:active { text-decoration: none;}
@@ -101,18 +108,11 @@ a[href^="tel"]{
   color: inherit;
 }
 
-// 電話番号非リンク「disable-tel」
-.disableTel a[href^="tel:"] {
-  color: inherit;
-  text-decoration: none;
-  pointer-events: none;
-}
-
 .hover:hover{
   opacity: 1;
 }
 
-@media (min-width: setting.$bpPc) {
+@media (min-width: setting.$bpTab) {
   .hover{
     transition: opacity .3s;
   }
@@ -121,43 +121,26 @@ a[href^="tel"]{
   }
 }
 
-.txtLink{
-  position: relative;
-  padding-left: 14px;
-
-  &:before{
-    content: '';
-    position: absolute;
-    left: 4px;
-    top: calc( 50% - 3px );
-    @include setting.sankaku(6px, setting.$colorLink, 'right');
-  }
-
-  &.-r{
-    background: url(/images/ico_ar_r.svg) no-repeat 5px .7em;
-    background-size: 5px auto;
-  }
-
-  &.-blank{
-    margin-right: 4px;
-    padding-right: 12px;
-    background: url(/images/ico_ar_b.svg) no-repeat 5px .5em,
-    url(/images/ico_blank_b.svg) no-repeat right .45em;
-    background-size: 5px auto, 10px;
-  }
-}
 
 /*  img
 ------------------------------------------------*/
 .imgOuter{
   font-size: 0;
   line-height: 0;
+
+  img{
+    width: 100%;
+    height: auto;
+  }
+
+  &.-height{
+    img{
+      height: 100%;
+      width: auto;
+    }
+  }
 }
 
-img {
-  width: 100%;
-  height: auto;
-}
 
 /*  loader
 ------------------------------------------------*/
@@ -364,7 +347,7 @@ img {
       position: absolute;
       left: calc( 50% - 40px );
       top: calc( 50% - 40px );
-      animation: rotate 1.6s setting.$easeOutCubic infinite;
+      animation: rotate 1.6s var(--easeOutCubic) infinite;
 
       .circ{
         fill: none;
@@ -373,7 +356,7 @@ img {
         stroke-miterlimit: 10;
         stroke-width: 8px;
         stroke-dasharray: 240px;
-        animation: stroke 1.6s setting.$easeOutCubic infinite;
+        animation: stroke 1.6s var(--easeOutCubic) infinite;
       }
     }
     
@@ -399,7 +382,7 @@ img {
       top: calc( 50% - 4px );
       border-radius: 4px;
       background: #999;
-      animation: slide 1.6s setting.$easeInOutCirc infinite;
+      animation: slide 1.6s var(--easeOutCubic) infinite;
     }
     
     &:before{
@@ -487,21 +470,21 @@ img {
         &:nth-child(1){
           left: calc( 50% - 30px );
           &:before{
-            animation: 1.4s setting.$easeOutCirc infinite ball1;
+            animation: 1.4s var(--easeOutCubic) infinite ball1;
           }
         }
 
         &:nth-child(2){
           left: calc( 50% - 5px );
           &:before{
-            animation: 1.4s setting.$easeOutCirc infinite ball2;
+            animation: 1.4s var(--easeOutCubic) infinite ball2;
           }
         }
 
         &:nth-child(3){
           left: calc( 50% + 20px );
           &:before{
-            animation: 1.4s setting.$easeOutCirc infinite ball3;
+            animation: 1.4s var(--easeOutCubic) infinite ball3;
           }
         }
       }
@@ -539,12 +522,12 @@ img {
   position: fixed;
   z-index: 9999;
   pointer-events: none;
-  transition: transform .3s setting.$easeOutQuad,
-    top .5s setting.$easeOutQuad,
-    left .5s setting.$easeOutQuad,
-    width .5s setting.$easeOutQuad,
-    height .5s setting.$easeOutQuad,
-    opacity .5s setting.$easeOutQuad;
+  transition: transform .3s var(--easeOutQuad),
+    top .5s var(--easeOutQuad),
+    left .5s var(--easeOutQuad),
+    width .5s var(--easeOutQuad),
+    height .5s var(--easeOutQuad),
+    opacity .5s var(--easeOutQuad);
 
   &.areaOnly{
     opacity: 0;
@@ -562,74 +545,6 @@ img {
   }
 }
 
-
-/*  アコーディオン
-------------------------------------------------*/
-.js-accorBtn{
-  cursor: pointer;
-  position: relative;
-
-  &.open{
-    .accorIco{
-/*
-      transform: rotateZ(45deg);
-
-      &:before{
-        transform: rotateZ(-45deg);
-      }
-*/
-
-      &:after{
-        transform: rotateZ(90deg);
-      }
-    }
-  }
-}
-
-.js-accorArea{
-  height: 0;
-  &.open{
-    .inner{
-      opacity: 1;
-    }
-  }
-
-  .inner{
-    opacity: 0;
-    transition: opacity .1s;
-  }
-}
-
-.accorIco{
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  right: 15px;
-  top: calc( 50% - 6px );
-  transition: transform .2s;
-
-  &:before{
-    content: '';
-    width: 12px;
-    height: 2px;
-    background: #000;
-    position: absolute;
-    left: 0;
-    top: calc( 50% - 1px );
-    transition: transform .2s;
-  }
-
-  &:after{
-    content: '';
-    width: 2px;
-    height: 12px;
-    background: #000;
-    position: absolute;
-    left: calc( 50% - 1px );
-    top: 0;
-    transition: transform .2s;
-  }
-}
 
 /*  br
 ------------------------------------------------*/
@@ -713,37 +628,4 @@ br.spS{
   overflow: hidden !important;
   padding: 0 !important;
   margin: 0 !important;
-}
-
-
-/*  text
-------------------------------------------------*/
-.txt{
-  &.-bold,
-  .bold{
-    font-weight: bold;
-  }
-  
-  &.-center{
-    text-align: center;
-  }
-  
-  &.-left{
-    text-align: left;
-  }
-  
-  &.-right{
-    text-align: right;
-  }
-
-  strong,
-  em,
-  span,
-  b,
-  sup{
-    color: inherit;
-    font-weight: inherit;
-    letter-spacing: inherit;
-    line-height: inherit;
-  }
 }

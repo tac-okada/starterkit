@@ -4,7 +4,7 @@ gsap.registerPlugin(ScrollToPlugin);
 import $ from 'jquery';
 
 import { UserAgent, MediaQueries } from './util.js';
-import { setConsoleIe, setPopupWin, setScrollTo, setAccordion, setTelCall, setCrsl } from './functions.js';
+import { functions } from './functions.js';
 
 /*
 
@@ -116,14 +116,18 @@ export class Core {
   }
 
   loadEvents () {
-    //console.info(this)
+    console.info(functions)
     /* よく使う関数ここで実行 */
-    setConsoleIe();
-    setPopupWin(this)
-    setScrollTo(this);
-    setAccordion();
-    setTelCall(this);
-    //setCrsl(this);
+    functions.setConsoleIe();
+    functions.setPopupWin(this)
+    functions.setScrollTo(this);
+    functions.setAccordion();
+    functions.setTelCall(this);
+    // フォームまわり
+    functions.setNoEnterkey(this);
+    functions.setLabelChanger(this);
+    functions.setLengthChecker(this);
+    //functions.setCrsl(this);
 
     /* 個別JSハンドラ */
     if ( typeof( this.loadHandler ) !== 'undefined' ){

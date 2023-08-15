@@ -31,7 +31,7 @@ exports.reload = bsReload;
 
 /*  clean  */
 const compileClean = (done) => {
-  del(['.tmp', 'public' + _path + '**/*', '!public/.git']);
+  del(['.tmp', 'public' + _path + '**/*.{html,css,js,json,jpg,png,gif,svg,webp}', '!**/*.git']);
   done();
 };
 exports.clean = compileClean;

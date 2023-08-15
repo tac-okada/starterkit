@@ -1,141 +1,168 @@
 @use "sass:math";
 @use "sass:meta";
-// 画像パス
-$imgPath : "/images/";
 
-// フォントファミリー
-// NotoSansを使用する場合
-$fontset_noto: /* YakuHanJP,  */'Noto Sans JP',-apple-system, BlinkMacSystemFont, "Helvetica Neue", YuGothic, "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif;
-// 最新ゴシック-游ゴシック
-$fontset1:-apple-system, BlinkMacSystemFont, "Helvetica Neue", YuGothic, "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif;
-// 旧ゴシック
-$fontset2:'Lucida Grande','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ Pro W3',Meiryo,メイリオ,Osaka,sans-serif;
-// 旧ゴシック-シンプル
-$fontset3:'Lucida Grande','Hiragino Kaku Gothic ProN',Meiryo,sans-serif;
-// 英ゴシック-var1
-$fontset4:'Helvetica Neue',Helvetica,Arial,sans-serif;
-// 英ゴシック-var2
-$fontset5:Verdana,Geneva,sans-serif;
-// 英-等幅
-$fontset6:'Courier New',Courier,monospace;
-// 最新明朝-游明朝
-$fontset7:'Times New Roman','游明朝',YuMincho,'ヒラギノ明朝 ProN W3','Hiragino Mincho ProN',HG明朝E,'ＭＳ Ｐ明朝','ＭＳ 明朝',serif;
-// 旧明朝
-$fontset8:'Times New Roman','ヒラギノ明朝 Pro W3','Hiragino Mincho Pro',HG明朝E,'ＭＳ Ｐ明朝','ＭＳ 明朝',serif;
-// 英明朝-var1
-$fontset9:'Times New Roman',Times,serif;
-// 英明朝-var2
-$fontset10:Georgia,'Times New Roman',Times,serif;
+:root {
+  // ページの横幅
+  --base-width : 740px;
+  --inner-width : 690px;
 
+  // カラー
+  --txt-color: #000;
+  --alert-color: #ff0000;
 
-// フォントサイズ
-$px8:0.5rem;
-$px9:0.56rem;
-$px10:0.63rem;
-$px11:0.69rem;
-$px12:0.75rem;
-$px13:0.82rem;
-$px14:0.88rem;
-$px15:0.94rem;
-$px16:1rem;
-$px17:1.07rem;
-$px18:1.13rem;
-$px19:1.19rem;
-$px20:1.25rem;
-$px21:1.32rem;
-$px22:1.38rem;
-$px23:1.44rem;
-$px24:1.50rem;
-$px25:1.57rem;
-$px26:1.63rem;
-$px27:1.69rem;
-$px28:1.75rem;
-$px29:1.82rem;
-$px30:1.88rem;
-$px31:1.94rem;
-$px32:2rem;
-$px33:2.07rem;
-$px34:2.13rem;
-$px35:2.19rem;
-$px36:2.25rem;
-$px37:2.32rem;
-$px38:2.38rem;
-$px39:2.44rem;
-$px40:2.50rem;
-$px41:2.57rem;
-$px42:2.63rem;
-$px43:2.69rem;
-$px44:2.75rem;
-$px45:2.82rem;
-$px46:2.88rem;
-$px47:2.94rem;
-$px48:3.00rem;
-$px49:3.07rem;
-$px50:3.13rem;
-$px51:3.19rem;
-$px52:3.25rem;
-$px53:3.32rem;
-$px54:3.38rem;
-$px55:3.44rem;
-$px56:3.50rem;
-$px57:3.57rem;
-$px58:3.63rem;
-$px59:3.69rem;
-$px60:3.75rem;
-$px61:3.82rem;
-$px62:3.88rem;
-$px63:3.94rem;
-$px64:4.00rem;
-$px65:4.07rem;
-$px66:4.13rem;
-$px67:4.19rem;
-$px68:4.25rem;
-$px69:4.32rem;
-$px70:4.38rem;
-$px71:4.44rem;
-$px72:4.50rem;
+  // リンクカラー
+  --link-color : #0f41af;
+  --linkVisited-color : #7540ea;
+  --linkHover-color : #0f41af;
 
-// Sine（最も弱い）
-$easeInSine: cubic-bezier(0.12, 0, 0.39, 0);
-$easeOutSine: cubic-bezier(0.61, 1, 0.88, 1);
-$easeInOutSine: cubic-bezier(0.37, 0, 0.63, 1);
-// Quad（弱め。Sineより強く、Cubicより弱い）
-$easeInQuad: cubic-bezier(0.11, 0, 0.5, 0);
-$easeOutQuad: cubic-bezier(0.5, 1, 0.89, 1);
-$easeInOutQuad: cubic-bezier(0.45, 0, 0.55, 1);
-// Cubic（Quadより強く、Quartより弱い）
-$easeInCubic: cubic-bezier(0.32, 0, 0.67, 0);
-$easeOutCubic: cubic-bezier(0.33, 1, 0.68, 1);
-$easeInOutCubic: cubic-bezier(0.65, 0, 0.35, 1);
-// Quart（Cubicより強く、Quintより弱い）
-$easeInQuart: cubic-bezier(0.5, 0, 0.75, 0);
-$easeOutQuart: cubic-bezier(0.25, 1, 0.5, 1);
-$easeInOutQuart: cubic-bezier(0.76, 0, 0.24, 1);
-// Quint（Quartより強く、Expoより弱い）
-$easeInQuint: cubic-bezier(0.64, 0, 0.78, 0);
-$easeOutQuint: cubic-bezier(0.22, 1, 0.36, 1);
-$easeInOutQuint: cubic-bezier(0.83, 0, 0.17, 1);
-// Expo（最も強い）
-$easeInExpo: cubic-bezier(0.7, 0, 0.84, 0);
-$easeOutExpo: cubic-bezier(0.16, 1, 0.3, 1);
-$easeInOutExpo: cubic-bezier(0.87, 0, 0.13, 1);
-// Circ（Expoのような強さを持つが、加速や減速の時間がよりゆるやか。）
-$easeInCirc: cubic-bezier(0.55, 0, 1, 0.45);
-$easeOutCirc: cubic-bezier(0, 0.55, 0.45, 1);
-$easeInOutCirc: cubic-bezier(0.85, 0, 0.15, 1);
-// Back（少し行き過ぎてから戻ってくるような動き）
-$easeInBack: cubic-bezier(0.36, 0, 0.66, -0.56);
-$easeOutBack: cubic-bezier(0.34, 1.56, 0.64, 1);
-$easeInOutBack: cubic-bezier(0.68, -0.6, 0.32, 1.6);
-// 最初かなり強く最後かなり弱く（動画サムネなど）
-$easeOutMoment: cubic-bezier(0, 0.8, 0, 1);
-// 真ん中ゆっくり
-$linearCenter: linear(0, 0.45, 0.48, 0.52, 0.55, 1);
-// 真ん中はやく
-$linearInOut: linear(0, 0.08, 0.32, 0.68, 0.92, 1);
-// ぼよんぼよんする動き
-$linearBounce: linear(0, 1.32, 0.87, 1.05, 0.98, 1.01, 1, 1);
+  // ボタン
+  --btn-color : #0f41af;
+  --btn-width : 450px;
+  --btn-height : 70px;
 
+  // 角丸
+  --radius1: 10px;
+  --radius2: 20px;
+
+  // フォントファミリー
+  // NotoSansを使用する場合
+  --fontset_noto: 'Noto Sans JP',-apple-system, BlinkMacSystemFont, "Helvetica Neue", YuGothic, "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif;
+  // 最新ゴシック-游ゴシック
+//  --fontset1:-apple-system, BlinkMacSystemFont, "Helvetica Neue", YuGothic, "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif;
+  // 旧ゴシック
+//  --fontset2:'Lucida Grande','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ Pro W3',Meiryo,メイリオ,Osaka,sans-serif;
+  // 旧ゴシック-シンプル
+//  --fontset3:'Lucida Grande','Hiragino Kaku Gothic ProN',Meiryo,sans-serif;
+  // 英ゴシック-var1
+//  --fontset4:'Helvetica Neue',Helvetica,Arial,sans-serif;
+  // 英ゴシック-var2
+//  --fontset5:Verdana,Geneva,sans-serif;
+  // 英-等幅
+//  --fontset6:'Courier New',Courier,monospace;
+  // 最新明朝-游明朝
+//  --fontset7:'Times New Roman','游明朝',YuMincho,'ヒラギノ明朝 ProN W3','Hiragino Mincho ProN',HG明朝E,'ＭＳ Ｐ明朝','ＭＳ 明朝',serif;
+  // 旧明朝
+//  --fontset8:'Times New Roman','ヒラギノ明朝 Pro W3','Hiragino Mincho Pro',HG明朝E,'ＭＳ Ｐ明朝','ＭＳ 明朝',serif;
+  // 英明朝-var1
+//  --fontset9:'Times New Roman',Times,serif;
+  // 英明朝-var2
+//  --fontset10:Georgia,'Times New Roman',Times,serif;
+
+  // フォントサイズ
+  --fsize8: 0.5rem;
+  --fsize9: 0.56rem;
+  --fsize10: 0.63rem;
+  --fsize11: 0.69rem;
+  --fsize12: 0.75rem;
+  --fsize13: 0.82rem;
+  --fsize14: 0.88rem;
+  --fsize15: 0.94rem;
+  --fsize16: 1rem;
+  --fsize17: 1.07rem;
+  --fsize18: 1.13rem;
+  --fsize19: 1.19rem;
+  --fsize20: 1.25rem;
+  --fsize21: 1.32rem;
+  --fsize22: 1.38rem;
+  --fsize23: 1.44rem;
+  --fsize24: 1.50rem;
+  --fsize25: 1.57rem;
+  --fsize26: 1.63rem;
+  --fsize27: 1.69rem;
+  --fsize28: 1.75rem;
+  --fsize29: 1.82rem;
+  --fsize30: 1.88rem;
+  --fsize31: 1.94rem;
+  --fsize32: 2rem;
+  --fsize33: 2.07rem;
+  --fsize34: 2.13rem;
+  --fsize35: 2.19rem;
+  --fsize36: 2.25rem;
+  --fsize37: 2.32rem;
+  --fsize38: 2.38rem;
+  --fsize39: 2.44rem;
+  --fsize40: 2.50rem;
+  --fsize41: 2.57rem;
+  --fsize42: 2.63rem;
+  --fsize43: 2.69rem;
+  --fsize44: 2.75rem;
+  --fsize45: 2.82rem;
+  --fsize46: 2.88rem;
+  --fsize47: 2.94rem;
+  --fsize48: 3.00rem;
+  --fsize49: 3.07rem;
+  --fsize50: 3.13rem;
+  --fsize51: 3.19rem;
+  --fsize52: 3.25rem;
+  --fsize53: 3.32rem;
+  --fsize54: 3.38rem;
+  --fsize55: 3.44rem;
+  --fsize56: 3.50rem;
+  --fsize57: 3.57rem;
+  --fsize58: 3.63rem;
+  --fsize59: 3.69rem;
+  --fsize60: 3.75rem;
+  --fsize61: 3.82rem;
+  --fsize62: 3.88rem;
+  --fsize63: 3.94rem;
+  --fsize64: 4.00rem;
+  --fsize65: 4.07rem;
+  --fsize66: 4.13rem;
+  --fsize67: 4.19rem;
+  --fsize68: 4.25rem;
+  --fsize69: 4.32rem;
+  --fsize70: 4.38rem;
+  --fsize71: 4.44rem;
+  --fsize72: 4.50rem;
+
+  // イージング
+  // Sine（最も弱い）
+  --easeInSine: cubic-bezier(0.12, 0, 0.39, 0);
+  --easeOutSine: cubic-bezier(0.61, 1, 0.88, 1);
+  --easeInOutSine: cubic-bezier(0.37, 0, 0.63, 1);
+  // Quad（弱め。Sineより強く、Cubicより弱い）
+  --easeInQuad: cubic-bezier(0.11, 0, 0.5, 0);
+  --easeOutQuad: cubic-bezier(0.5, 1, 0.89, 1);
+  --easeInOutQuad: cubic-bezier(0.45, 0, 0.55, 1);
+  // Cubic（Quadより強く、Quartより弱い）
+  --easeInCubic: cubic-bezier(0.32, 0, 0.67, 0);
+  --easeOutCubic: cubic-bezier(0.33, 1, 0.68, 1);
+  --easeInOutCubic: cubic-bezier(0.65, 0, 0.35, 1);
+  // Quart（Cubicより強く、Quintより弱い）
+  --easeInQuart: cubic-bezier(0.5, 0, 0.75, 0);
+  --easeOutQuart: cubic-bezier(0.25, 1, 0.5, 1);
+  --easeInOutQuart: cubic-bezier(0.76, 0, 0.24, 1);
+  // Quint（Quartより強く、Expoより弱い）
+  --easeInQuint: cubic-bezier(0.64, 0, 0.78, 0);
+  --easeOutQuint: cubic-bezier(0.22, 1, 0.36, 1);
+  --easeInOutQuint: cubic-bezier(0.83, 0, 0.17, 1);
+  // Expo（最も強い）
+  --easeInExpo: cubic-bezier(0.7, 0, 0.84, 0);
+  --easeOutExpo: cubic-bezier(0.16, 1, 0.3, 1);
+  --easeInOutExpo: cubic-bezier(0.87, 0, 0.13, 1);
+  // Circ（Expoのような強さを持つが、加速や減速の時間がよりゆるやか。）
+  --easeInCirc: cubic-bezier(0.55, 0, 1, 0.45);
+  --easeOutCirc: cubic-bezier(0, 0.55, 0.45, 1);
+  --easeInOutCirc: cubic-bezier(0.85, 0, 0.15, 1);
+  // Back（少し行き過ぎてから戻ってくるような動き）
+  --easeInBack: cubic-bezier(0.36, 0, 0.66, -0.56);
+  --easeOutBack: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --easeInOutBack: cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  // 最初かなり強く最後かなり弱く（動画サムネなど）
+  --easeOutMoment: cubic-bezier(0, 0.8, 0, 1);
+  // 真ん中ゆっくり
+  --linearCenter: linear(0, 0.45, 0.48, 0.52, 0.55, 1);
+  // 真ん中はやく
+  --linearInOut: linear(0, 0.08, 0.32, 0.68, 0.92, 1);
+  // ぼよんぼよんする動き
+  --linearBounce: linear(0, 1.32, 0.87, 1.05, 0.98, 1.01, 1, 1);
+}
+
+// ブレイクポイント
+$bpPc : 960px;
+$bpTab : 1024px;
+$bpSp : 767px;
+$bpSpS : 374px;
 
 // 小数点以下の計算関連 ▼ここから▼
 // Round (四捨五入)
@@ -172,34 +199,17 @@ $linearBounce: linear(0, 1.32, 0.87, 1.05, 0.98, 1.01, 1, 1);
     $n: $n * 10;
   }
   @if $round == 'round' {
-    @return math.round($number * $n) / $n;
+    @return math.div(math.round($number * $n) , $n);
   } @else if $round == 'ceil' {
-    @return math.ceil($number * $n) / $n;
+    @return math.div(math.ceil($number * $n) , $n);
   } @else if $round == 'floor' {
-    @return math.floor($number * $n) / $n;
+    @return math.div(math.floor($number * $n) , $n);
   } @else {
     @warn '#{ $round } is undefined keyword.';
     @return $number;
   }
 }
 // 小数点以下の計算関連 ▲ここまで▲
-
-// ページの横幅
-$baseWidth : 940px;
-
-// 標準テキストカラー
-$colorText : #000;
-
-// 標準リンクカラー
-$colorLink : #0c477e;
-$colorLink_visited : #0c477e;
-$colorLink_hover : #0c477e;
-
-// ブレイクポイント
-$bpPc : 960px;
-$bpTab : 960px;
-$bpSp : 767px;
-$bpSpS : 374px;
 
 // clearfix
 @mixin clearfix {
@@ -238,7 +248,7 @@ $bpSpS : 374px;
 
 // サイズ vw変換
 @function px-to-vw($px, $width){
-  @return round-decimal(($px / $width) * 100, 2) (+vw);
+  @return round-decimal(calc( $px / $width ) * 100, 2) + (vw);
 }
 // width: px-to-vw(100px,1400px);
 
@@ -314,4 +324,12 @@ $bpSpS : 374px;
     $color 1px -2px, $color -1px -2px,
     $color 2px 1px,  $color -2px 1px,
     $color 2px -1px, $color -2px -1px;
+}
+
+@mixin notScrollbar{
+  scrollbar-width: none;// ff用
+  -ms-overflow-style: none; // ie用
+  &::-webkit-scrollbar{// chrome,safari,edge用
+    display: none;
+  }
 }

@@ -11,90 +11,60 @@
 <meta name="keywords" content="" > 
 <meta name="description" content="" >
 <link href="/styles/contents.css" rel="stylesheet">
-<style type="text/css" media="screen">
-  main{
-    margin: 0 auto;
-    text-align: center;
-    padding: 80px;
-  }
-  h1{
-    margin-bottom: 60px;
-    font-size: 32px;
-    font-weight: bold;
-  }
-  h2{
-    font-size: 24px;
-    font-weight: bold;
-  }
-  section{
-    margin-bottom: 60px;
-  }
-  
-  .grp_list{
-    letter-spacing: -1em;
-    word-spacing: 0.1em;
-    font-size: 0;
-  }
-  .grp_list li{
-    display: inline-block;
-    letter-spacing: normal;
-    font-size: 16px;
-    margin-left: 20px;
-  }
-</style>
 </head>
 <body>
 
 <div class="modal_dom hdn">
-  <p>.modal_domの内容を表示しています。</p>
-  <p><a class="js-modalClose" href="">閉じる</a></p>
+  <div class="base_wrapper">
+    <p class="fsize16">.modal_domの内容を表示しています。</p>
+    <p class="fsize16"><a class="txtLink" class="js-modalClose" href="">閉じる</a></p>
+  </div>
 </div>
 
-<main>
-  <h1>モーダルサンプル</h1>
-  
-  <section>
-    <h2>1：画像</h2>
-    <a class="js-modalOpen" data-modal="1__img__images/modal_dummy.gif" href="">→モーダルを開く</a><br>
-  </section>
-  
-  <section>
-    <h2>2：html内の要素から</h2>
-    <a class="js-modalOpen" data-modal="2__dom__modal_dom" href="">→モーダルを開く</a><br>
-  </section>
+<div class="base_wrapper util">
+  <h1 class="head -size48 pt60">モーダルサンプル</h1>
 
-  <section>
-    <h2>3：iframe</h2>
-    <a class="js-modalOpen" data-modal="3__iframe__iframe_sample.html" href="">→モーダルを開く</a><br>
+  <section class="mt60">
+    <h2 class="head01 mb10">1：画像</h2>
+    <p class="fsize16"><a class="txtLink js-modalOpen" data-modal="1__img__images/modal_dummy.gif" href="">モーダルを開く</a></p>
   </section>
   
-  <section>
-    <h2>4：youtube</h2>
-    <a class="js-modalOpen" data-modal="4__yt__t1rFmJMFdKw" data-ytnum="1" href="">→モーダルを開く</a><br>
+  <section class="mt60">
+    <h2 class="head01 mb10">2：html内の要素から</h2>
+    <p class="fsize16"><a class="txtLink js-modalOpen" data-modal="2__dom__modal_dom" href="">モーダルを開く</a></p>
   </section>
 
-  <section>
-    <h2>5：domのyoutubeへの置換</h2>
-    <a id="movie01" data-ytnum="2" href="">youtubeに置き換え</a>
+  <section class="mt60">
+    <h2 class="head01 mb10">3：iframe</h2>
+    <p class="fsize16"><a class="txtLink js-modalOpen" data-modal="3__iframe__iframe_sample.html" href="">モーダルを開く</a></p>
+  </section>
+  
+  <section class="mt60">
+    <h2 class="head01 mb10">4：youtube</h2>
+    <p class="fsize16"><a class="txtLink js-modalOpen" data-modal="4__yt__t1rFmJMFdKw" data-ytnum="1" href="">モーダルを開く</a></p>
   </section>
 
-  <section>
-    <h2>2：html内の要素から</h2>
-    <a class="js-modalOpen" data-modal="2__dom__modal_dom" href="">→モーダルを開く</a><br>
+  <section class="mt60">
+    <h2 class="head01 mb10">5：domのyoutubeへの置換</h2>
+    <p class="fsize16"><a class="txtLink" id="movie01" data-ytnum="2" href="">youtubeに置き換え</a></p>
   </section>
 
-  <section>
-    <h2>1：画像</h2>
-    <a class="js-modalOpen" data-modal="1__img__images/modal_dummy.gif" href="">→モーダルを開く</a><br>
+  <section class="mt60">
+    <h2 class="head01 mb10">2：html内の要素から</h2>
+    <p class="fsize16"><a class="txtLink js-modalOpen" data-modal="2__dom__modal_dom" href="">モーダルを開く</a></p>
   </section>
 
-  <section>
-    <h2>4：youtube</h2>
-    <a class="js-modalOpen" data-modal="4__yt__t1rFmJMFdKw" data-ytnum="1" href="">→モーダルを開く</a><br>
+  <section class="mt60">
+    <h2 class="head01 mb10">1：画像</h2>
+    <p class="fsize16"><a class="txtLink js-modalOpen" data-modal="1__img__images/modal_dummy.gif" href="">モーダルを開く</a></p>
   </section>
 
-</main>
+  <section class="mt60 pb60">
+    <h2 class="head01 mb10">4：youtube</h2>
+    <p class="fsize16"><a class="txtLink js-modalOpen" data-modal="4__yt__t1rFmJMFdKw" data-ytnum="1" href="">モーダルを開く</a></p>
+  </section>
+</div>
 
-<script type="text/javascript" src="scripts/appModal.min.js"></script><!--モーダル確認用js-->
+<script type="text/javascript" src="scripts/appModal.min.js"></script>
 </body>
 </html>

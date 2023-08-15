@@ -21,7 +21,7 @@ export const compileImages = async (done) => {
       return output.replace(/legacy\//, 'webp/')
     }
   });
-  await imagemin( ['src' + _path + '**/images/*.{gif,jpg,png,webp,svg}'], {
+  await imagemin( ['src' + _path + '**/images/**/*.{gif,jpg,png,webp,svg}'], {
     plugins: [
       imageminMozjpeg({ quality: 75 }),
       imageminPngquant({ quality: [0.3, 0.5] }),
@@ -33,6 +33,7 @@ export const compileImages = async (done) => {
       })
     ],
     replaceOutputDir: output => {
+      //console.info(output)
       return output.replace(/src\//, 'public/')
     }
   });

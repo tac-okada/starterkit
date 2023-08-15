@@ -214,6 +214,7 @@ export class Modal {
           'top' : ( ( this.core.win.height - this.state.height ) / 2 ) + 'px'
         });
       } else if( $active.hasClass('modal_iframe') ) {
+        //console.info(this.core.win.width,this.state.width)
         $active.css({ 
           'height' : this.core.win.height - activeHeightDiff,
           'top' : '60px',

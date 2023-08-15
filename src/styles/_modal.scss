@@ -92,6 +92,10 @@
   animation-name: fade_out, zoom_out_contents;
 }
 
+// モーダル内スクロールOFF
+body.iframe{
+  @include setting.notScrollbar();
+}
 
 // 表示エリア-共通
 .modal_contents {
@@ -300,7 +304,7 @@
   right: 0;
   bottom: -30px;
   color: #ffffff;
-  font-size: setting.$px16;
+  font-size: var(--fsize16);
 }
 
 .modal_1{

@@ -38,7 +38,7 @@ html {
   height: 100%;
   //overflow-y: scroll;
   font-size: 100%;
-  font-family: $fontset_noto;
+  font-family: var(--fontset_noto);
 
   @media (min-width: 1400px) {
     font-size: calc( 16 / 1400 * 100vw );
@@ -97,14 +97,14 @@ section{
 }
 
 h1{
-  font-size: $px40;
+  font-size: var(--fsize40);
   line-height: 1.4;
 }
 ul{
   >li{
     text-indent: -1em;
     padding-left: 1em;
-    font-size: $px16;
+    font-size: var(--fsize16);
     line-height: 1.4;
     margin-top: 1rem;
 
@@ -116,11 +116,11 @@ ul{
 
 @media screen and (max-width:1399px) {
   h1{
-    font-size: $px36;
+    font-size: var(--fsize36);
   }
   ul{
     >li{
-      font-size: $px14;
+      font-size: var(--fsize14);
     }
   }
 }
@@ -144,11 +144,11 @@ ul{
   }
 
   h1{
-    font-size: $px60;
+    font-size: var(--fsize60);
   }
   ul{
     >li{
-      font-size: $px24;
+      font-size: var(--fsize24);
     }
   }
 }
