@@ -13,8 +13,6 @@ class AppVideo extends Core {
   ● UAなど：this.USER
   ● 画面サイズなど：this.win
   ● メディアクエリ：this.mql（指定したブレイクポイントに基づく現在のデバイスを返す：pc/tb/sp）
-  ● transitionEndイベント：this.transitionEnd
-  ● animationEndイベント：this.animationEnd
 */
 
   /* スクロール時に実行 */
@@ -42,14 +40,18 @@ class AppVideo extends Core {
     mov.addEventListener('loadeddata', (e) => {
       console.info(e)
       console.info(mov.duration)
-      $('.loader').addClass('fo').on(this.animationEnd, () => {
-        $('.loader').addClass('hdn').off(this.animationEnd);
-  
-        /* ここでスクロールとブラウザイベントを有効にする */
-        this.enableScroll();
-        //mov.play();
 
-      })
+      const loader = document.querySelector('.loader');
+  
+      loader.classList.add('fo');
+      loader.addEventListener('animationend', {obj: this, handleEvent: setVideo}, { once: true });
+  
+      function setVideo(){
+        loader.classList.add('hdn');
+
+        /* ここでスクロールとブラウザイベントを有効にする */
+        this.obj.enableScroll();
+      }
     })
 
     console.info(movCol.getBoundingClientRect().top + window.pageYOffset,movCol.parentNode.offsetHeight)
@@ -110,17 +112,6 @@ class AppVideo extends Core {
       }
     })
 
-/*
-      const lottieSampleControl = () => {
-        //console.info(flames)
-        if( flames < totalFrames ){
-          flames++;
-        } else {
-          flames = 0;
-        }
-        lottieSample.seek(flames);
-      }
-*/
   }
 };
 

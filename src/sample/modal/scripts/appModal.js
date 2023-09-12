@@ -12,8 +12,6 @@ class AppModal extends Core {
   ● UAなど：this.USER
   ● 画面サイズなど：this.win
   ● メディアクエリ：this.mql（指定したブレイクポイントに基づく現在のデバイスを返す：pc/tb/sp）
-  ● transitionEndイベント：this.transitionEnd
-  ● animationEndイベント：this.animationEnd
 */
 
   /* スクロール時に実行 */
@@ -37,16 +35,17 @@ class AppModal extends Core {
     modal.initialize(this);
 
     /* domのyoutubeへの置換 */
-    $('#movie01').on('click', function(e){
+    document.getElementById('movie01').addEventListener('click', function(e){
       e.preventDefault();
+      //console.info(e.target.getAttribute('data-ytnum'),e.target.id)
       youtubeAPI.youtubeData.push({
-        num: $(this).attr('data-ytnum'),
+        num: e.target.getAttribute('data-ytnum'),
         youtubeId: 't1rFmJMFdKw',
-        embedArea: $(this).attr('id'),
+        embedArea: e.target.id,
         playerReady: false
       });
       //console.info(youtubeData,youtubeData.length)
-      youtubeAPI.playerNum = $(this).attr('data-ytnum') - 1;
+      youtubeAPI.playerNum = e.target.getAttribute('data-ytnum') - 1;
       youtubeAPI.setYoutube();
     });
   }

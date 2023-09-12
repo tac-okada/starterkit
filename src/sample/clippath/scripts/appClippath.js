@@ -12,8 +12,6 @@ class AppClippath extends Core {
   ● UAなど：this.USER
   ● 画面サイズなど：this.win
   ● メディアクエリ：this.mql（指定したブレイクポイントに基づく現在のデバイスを返す：pc/tb/sp）
-  ● transitionEndイベント：this.transitionEnd
-  ● animationEndイベント：this.animationEnd
 */
 
   /* スクロール時に実行 */
@@ -30,11 +28,16 @@ class AppClippath extends Core {
   loadHandler () {
     gsap.registerPlugin(ScrollTrigger);
 
-    $('.loader').addClass('fo').on(this.animationEnd, () => {
-      $('.loader').addClass('hdn').off(this.animationEnd);
+    const loader = document.querySelector('.loader');
+
+    loader.classList.add('fo');
+    loader.addEventListener('animationend', {obj: this, handleEvent: setClippath}, { once: true });
+
+    function setClippath(){
+      loader.classList.add('hdn');
 
       /* ここでスクロールとブラウザイベントを有効にする */
-      this.enableScroll();
+      this.obj.enableScroll();
 
       gsap.timeline({
         scrollTrigger: {
@@ -53,10 +56,10 @@ class AppClippath extends Core {
       } ,'scene1')
 */
       .to('#path1 polygon', {
-        x: /* $('.face').innerWidth() * .82 */ 940
+        x: 940
       } ,'scene1')
       .to('#path1 polyline', {
-        x: - /* $('.face').innerWidth() * .82 */ 940
+        x: - 940
       } ,'scene1')
       .add('scene2')
 /*
@@ -65,10 +68,10 @@ class AppClippath extends Core {
       } ,'scene2')
 */
       .to('#path2 polygon', {
-        y: /* $('.face').innerWidth() * .5*/ 500
+        y: 500
       } ,'scene2')
       .to('#path2 polyline', {
-        y: - /*$('.face').innerWidth() * .5*/ 500
+        y: - 500
       } ,'scene2')
       //.call(scene3)
       .add('scene3')
@@ -97,7 +100,7 @@ class AppClippath extends Core {
         //opacity: 0
       } ,'scene4')
 
-    });
+    };
   }
 };
 

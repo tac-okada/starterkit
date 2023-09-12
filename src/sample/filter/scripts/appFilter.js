@@ -12,8 +12,6 @@ class AppFilter extends Core {
   ● UAなど：this.USER
   ● 画面サイズなど：this.win
   ● メディアクエリ：this.mql（指定したブレイクポイントに基づく現在のデバイスを返す：pc/tb/sp）
-  ● transitionEndイベント：this.transitionEnd
-  ● animationEndイベント：this.animationEnd
 */
 
   /* スクロール時に実行 */
@@ -29,11 +27,16 @@ class AppFilter extends Core {
   /* ページ読み込み時に実行 */
   loadHandler () {
 
-    $('.loader').addClass('fo').on(this.animationEnd, () => {
-      $('.loader').addClass('hdn').off(this.animationEnd);
+    const loader = document.querySelector('.loader');
+
+    loader.classList.add('fo');
+    loader.addEventListener('animationend', {obj: this, handleEvent: setFilter}, { once: true });
+
+    function setFilter(){
+      loader.classList.add('hdn');
 
       /* ここでスクロールとブラウザイベントを有効にする */
-      this.enableScroll();
+      this.obj.enableScroll();
 
       const _random = (min, max) => {
         return Math.random() * (max - min) + min;
@@ -459,7 +462,7 @@ class AppFilter extends Core {
         offsetTl.reverse();
       });
 
-    });
+    };
   }
 };
 

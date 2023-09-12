@@ -26,7 +26,7 @@
       <li><a class="txtLink hover" href="#sec5">余白</a></li>
       <li><a class="txtLink hover" href="#sec6">見出し</a></li>
       <li><a class="txtLink hover" href="#sec7">テキストの装飾</a></li>
-      <li><a class="txtLink hover" href="#sec8">ブロック</a></li>
+      <li><a class="txtLink hover" href="#sec8">ブロック（囲み）</a></li>
       <li><a class="txtLink hover" href="#sec9">リスト・注釈</a></li>
       <li><a class="txtLink hover" href="#sec10">配置</a></li>
       <li><a class="txtLink hover" href="#sec11">テキストリンク</a></li>
@@ -34,9 +34,10 @@
       <li><a class="txtLink hover" href="#sec13">フォーム</a></li>
       <li><a class="txtLink hover" href="#sec14">確認画面</a></li>
       <li><a class="txtLink hover" href="#sec15">応募要項・お問い合わせ</a></li>
-      <li><a class="txtLink hover" href="#sec16">テーブル</a></li>
-      <li><a class="txtLink hover" href="#sec17">アコーディオン・Q&A</a></li>
-      <li><a class="txtLink hover" href="#sec18">電話番号</a></li>
+      <li><a class="txtLink hover" href="#sec16">応募履歴</a></li>
+      <li><a class="txtLink hover" href="#sec17">テーブル</a></li>
+      <li><a class="txtLink hover" href="#sec18">アコーディオン・Q&A</a></li>
+      <li><a class="txtLink hover" href="#sec19">電話番号</a></li>
     </ul>
   </nav>
   <p class="ptop fsize16"><a class="txtLink -up" href="#">ページの先頭へ</a></p>
@@ -166,7 +167,7 @@ padding-bottom: 15px !important;</code></pre>
     </section>
   
     <section class="left pt100" id="sec8">
-      <h2 class="head03 mb20">ブロック</h2>
+      <h2 class="head03 mb20">ブロック（囲み）</h2>
       <p class="fsize16 mb20">クラス<span class="code">block</span>で指定します。デフォルトで灰色の背景色とpaddingだけ定義しています。</p>
   
       <section class="block">
@@ -1224,7 +1225,159 @@ padding-bottom: 15px !important;</code></pre>
 &lt;/div&gt;</code></pre>
     </section>
 
-    <section class="left pt100" id="sec16">
+    <section class="pt100" id="sec16">
+      <h2 class="head03 mb40">応募履歴</h2>
+      <ul class="history_tab mt40">
+        <li><a class="hover" href="">応募履歴</a></li>
+        <li class="active"><span>当選賞品</span></li>
+      </ul>
+
+      <ul class="history_lists">
+
+        <li>
+          <dl class="history_col">
+            <dt>当選日時</dt>
+            <dd>
+              <p class="fsize14">2023年X月XX日(X) 00:00</p>
+            </dd>
+          </dl>
+          <dl class="history_col">
+            <dt>賞品</dt>
+            <dd>
+              <p class="history_course">1ポイントコース</p>
+              <p class="fsize14">ダミーテキストダミーテキストダミーテキスト</p>
+            </dd>
+          </dl>
+        </li>
+
+        <li>
+          <dl class="history_col">
+            <dt>当選日時</dt>
+            <dd>
+              <p class="fsize14">2023年X月XX日(X) 00:00</p>
+            </dd>
+          </dl>
+          <dl class="history_col">
+            <dt>賞品</dt>
+            <dd>
+              <p class="history_course">48ポイントコース</p>
+              <p class="fsize14">ダミーテキストダミーテキストダミーテキスト</p>
+            </dd>
+          </dl>
+          <a href="" class="btn -blank fsize20 bold mt20" target="_blank">受け取る</a>
+          <p class="fsize14 mt10"><a href="" class="js-link txtLink -blank hover" target="_blank">ページが開かない場合はこちら</a></p>
+          <div class="centerParent mt10">
+            <ul class="list -notes fsize12 left">
+              <li>当選賞品の確認／受け取りは外部サイト(株式会社ギフティ)に移動します。</li>
+              <li>デジタル賞品に関しましては、当選後1ヶ月以内にお受け取りいただけない場合、<br class="tab">当選の権利が無効となる場合がございます。</li>
+            </ul>
+          </div>
+        </li>
+
+        <li>
+          <dl class="history_col">
+            <dt>当選日時</dt>
+            <dd>
+              <p class="fsize14">2023年X月XX日(X) 00:00</p>
+            </dd>
+          </dl>
+          <dl class="history_col">
+            <dt>賞品</dt>
+            <dd>
+              <p class="history_course">フードコース</p>
+              <p class="fsize14">ダミーテキストダミーテキストダミーテキスト</p>
+            </dd>
+          </dl>
+          <a href="" class="btn -blank fsize20 bold mt20" target="_blank">当選賞品の確認／受け取り</a>
+          <p class="fsize14 mt10"><a href="" class="js-link txtLink -blank hover" target="_blank">ページが開かない場合はこちら</a></p>
+          <div class="centerParent mt10">
+            <ul class="list -notes fsize12 left">
+              <li>当選賞品の確認／受け取りは外部サイト(株式会社ギフティ)に移動します。</li>
+              <li>デジタル賞品に関しましては、当選後1ヶ月以内にお受け取りいただけない場合、<br class="tab">当選の権利が無効となる場合がございます。</li>
+            </ul>
+          </div>
+        </li>
+
+        <li>
+          <dl class="history_col">
+            <dt>当選日時</dt>
+            <dd>
+              <p class="fsize14">2023年X月XX日(X) 00:00</p>
+            </dd>
+          </dl>
+          <dl class="history_col">
+            <dt>賞品</dt>
+            <dd>
+              <p class="history_course">アウトドアコース</p>
+              <p class="fsize14">ダミーテキストダミーテキストダミーテキスト</p>
+            </dd>
+          </dl>
+        </li>
+
+        <li>
+          <dl class="history_col">
+            <dt>当選日時</dt>
+            <dd>
+              <p class="fsize14">2023年X月XX日(X) 00:00</p>
+            </dd>
+          </dl>
+          <dl class="history_col">
+            <dt>賞品</dt>
+            <dd>
+              <p class="history_course">ヘルシーコース</p>
+              <p class="fsize14">ダミーテキストダミーテキストダミーテキスト</p>
+            </dd>
+          </dl>
+        </li>
+
+        <li>
+          <dl class="history_col">
+            <dt>当選日時</dt>
+            <dd>
+              <p class="fsize14">2023年X月XX日(X) 00:00</p>
+            </dd>
+          </dl>
+          <dl class="history_col">
+            <dt>賞品</dt>
+            <dd>
+              <p class="history_course">フードコース</p>
+              <p class="fsize14">ダミーテキストダミーテキストダミーテキスト</p>
+            </dd>
+          </dl>
+          <a href="" class="btn -blank fsize20 bold mt20" target="_blank">当選賞品の確認／受け取り</a>
+          <p class="fsize14 mt10"><a href="" class="js-link txtLink -blank hover" target="_blank">ページが開かない場合はこちら</a></p>
+          <div class="centerParent mt10">
+            <ul class="list -notes fsize12 left">
+              <li>当選賞品の確認／受け取りは外部サイト(株式会社ギフティ)に移動します。</li>
+              <li>デジタル賞品に関しましては、当選後1ヶ月以内にお受け取りいただけない場合、<br class="tab">当選の権利が無効となる場合がございます。</li>
+            </ul>
+          </div>
+        </li>
+
+      </ul>
+
+      <div class="history_pn mt20">
+        <div class="history_pn1">
+          <div class="prev -none"></div>
+          <div class="page">
+            <span class="page_this">1</span>
+            <span class="page_txt">/</span>
+            <span class="page_all">3</span>
+          </div>
+          <a class="next hover" href=""></a>
+        </div>
+
+        <div class="history_pn2 mt20">
+          <input type="tel" id="historyinput" class="historyinput" maxlength="3">
+          <div class="txt">ページに</div>
+          <a class="btn hover" href="">移動</a>
+        </div>
+      </div>
+
+      <a href="" class="btn mt40 fsize20 bold">マイページへ戻る</a>
+    </section>
+
+    <section class="left pt100" id="sec17">
       <h2 class="head03 mb20">テーブル</h2>
       <p class="fsize16 mb20">スマホ時などには横スクロールも実装します。</p>
       <div class="tableScroller">
@@ -1298,7 +1451,7 @@ padding-bottom: 15px !important;</code></pre>
 &lt;/div&gt;</code></pre>
     </section>
   
-    <section class="left pt100" id="sec17">
+    <section class="left pt100" id="sec18">
       <h2 class="head03 mb20">アコーディオン・Q&A</h2>
       <p class="fsize16 mb20">JSで実装しています。</p>
       <dl class="accorBlock mb10">
@@ -1354,7 +1507,7 @@ padding-bottom: 15px !important;</code></pre>
 &lt;/dl&gt;</code></pre>
     </section>
   
-    <section class="left pt100 pb100" id="sec18">
+    <section class="left pt100 pb100" id="sec19">
       <h2 class="head03 mb20">電話番号</h2>
       <p class="fsize16 mb20">クラス<span class="code">.tel</span>で記述します。また電話番号リンク設定をJSで実装しています。</p>
       <p class="tel js-telCall rem" x-ms-format-detection="none">03-0000-0000</p>

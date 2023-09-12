@@ -70,8 +70,10 @@
 }
 
 #modal_close.active.in{
-  opacity: 1;
-  transform: scale(1);
+  animation: .3s cubic-bezier(.15,.29,.62,.99) both;
+  animation-name: fade_in, zoom_in_btn;
+  //opacity: 1;
+  //transform: scale(1);
 
   &:hover{
     opacity: .7;
@@ -79,7 +81,8 @@
 }
 
 #modal_close.active.out{
-  opacity: 0;
+  animation: .3s cubic-bezier(.15,.29,.62,.99) both;
+  animation-name: fade_out, zoom_out_contents;
 }
 
 .modal_contents.active.in{
@@ -116,6 +119,16 @@ body.iframe{
 }
 .modal_contents.active {
   display: block;
+}
+
+.modal_iframe{
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: auto;
+
+  &.-ios{
+    overflow-y: y;
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
 // 閉じるボタン

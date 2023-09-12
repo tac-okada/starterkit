@@ -2113,6 +2113,240 @@ br.spS {
   padding: 12px;
   line-height: 1.4;
 }
+.util .history_tab {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  gap: 0 2%;
+  border-bottom: 2px solid var(--btn-color);
+  text-align: center;
+}
+.util .history_tab > li {
+  width: 49%;
+  margin-bottom: -2px;
+}
+.util .history_tab > li > a,
+.util .history_tab > li > span {
+  display: block;
+  width: 100%;
+  font-size: var(--fsize16);
+  font-weight: bold;
+  line-height: 1;
+  letter-spacing: 0.05em;
+  position: relative;
+  box-sizing: border-box;
+}
+.util .history_tab > li > a,
+.util .history_tab > li > span {
+  color: #fff;
+  background: var(--btn-color);
+  border-radius: 8px 8px 0 0;
+  padding: 14px 0 15px;
+  pointer-events: auto;
+}
+.util .history_tab > li > a:before,
+.util .history_tab > li > span:before {
+  content: "";
+  background-color: #fff;
+  height: 8px;
+  -webkit-clip-path: polygon(0 0, 100% 50%, 0 100%);
+          clip-path: polygon(0 0, 100% 50%, 0 100%);
+  width: calc(4px * tan(60deg));
+  position: absolute;
+  right: 10px;
+  top: calc(50% - 4px);
+}
+.util .history_tab > li.active > a,
+.util .history_tab > li.active > span {
+  color: var(--btn-color);
+  border-top: 2px solid var(--btn-color);
+  border-right: 2px solid var(--btn-color);
+  border-left: 2px solid var(--btn-color);
+  background: #fff;
+  border-radius: 8px 8px 0 0;
+  padding: 14px 0 15px;
+  pointer-events: none;
+}
+.util .history_lists > li {
+  box-sizing: border-box;
+  padding: 15px 0;
+  border-bottom: 2px solid #efefef;
+}
+.util .history_lists > li .history_col:not(:first-child) {
+  margin-top: 5px;
+}
+.util .history_lists > li.border-top {
+  border-top: 2px solid #dfddd1;
+}
+.util .history_col {
+  display: table;
+}
+.util .history_col dt {
+  display: table-cell;
+  vertical-align: middle;
+  box-sizing: border-box;
+  font-size: var(--fsize12);
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+  font-weight: bold;
+  background: #efefef;
+  border-radius: 4px;
+  min-width: 80px;
+  padding: 10px 0;
+}
+.util .history_col dd {
+  display: table-cell;
+  vertical-align: middle;
+  box-sizing: border-box;
+  padding: 5px 0 5px 10px;
+  line-height: 1.2;
+  text-align: left;
+}
+.util .history_course {
+  font-size: var(--fsize12);
+  letter-spacing: 0.05em;
+  font-weight: bold;
+  line-height: 1;
+  display: table;
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  text-align: center;
+  background: #efefef;
+}
+.util .history_pn1 {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  gap: 0 10px;
+}
+.util .history_pn1 > .prev,
+.util .history_pn1 > .next {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  background: var(--btn-color);
+  border-radius: 4px;
+  font-size: var(--fsize14);
+  letter-spacing: 0;
+  line-height: 1;
+  color: #fff;
+}
+.util .history_pn1 > .prev.-none,
+.util .history_pn1 > .next.-none {
+  opacity: 0.3;
+}
+.util .history_pn1 > .prev:before,
+.util .history_pn1 > .next:before {
+  content: "";
+  position: absolute;
+  left: calc(50% - 3px);
+  top: calc(50% - 4px);
+}
+.util .history_pn1 > .prev:before {
+  background-color: #fff;
+  height: 8px;
+  -webkit-clip-path: polygon(0 50%, 100% 0, 100% 100%);
+          clip-path: polygon(0 50%, 100% 0, 100% 100%);
+  width: calc(4px * tan(60deg));
+}
+.util .history_pn1 > .next:before {
+  background-color: #fff;
+  height: 8px;
+  -webkit-clip-path: polygon(0 0, 100% 50%, 0 100%);
+          clip-path: polygon(0 0, 100% 50%, 0 100%);
+  width: calc(4px * tan(60deg));
+}
+.util .history_pn1 > .page {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  gap: 0 5px;
+  line-height: 1;
+}
+.util .history_pn1 > .page > span {
+  letter-spacing: 0.05em;
+}
+.util .history_pn1 > .page > .page_this {
+  font-size: var(--fsize16);
+}
+.util .history_pn1 > .page > .page_txt {
+  font-size: var(--fsize14);
+}
+.util .history_pn1 > .page > .page_all {
+  font-size: var(--fsize16);
+}
+.util .history_pn2 {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  gap: 0 10px;
+}
+.util .history_pn2 > input[type=tel] {
+  padding: 10px;
+  font-size: var(--fsize16);
+  text-align: center;
+  width: 80px;
+}
+.util .history_pn2 > .txt {
+  font-size: var(--fsize16);
+  letter-spacing: 0.05em;
+}
+.util .history_pn2 > .btn {
+  height: 42px;
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  box-sizing: border-box;
+  background: var(--btn-color);
+  width: auto;
+  margin: 0;
+  border-radius: 8px;
+  font-size: var(--fsize14);
+  letter-spacing: 0.05em;
+  line-height: 1;
+  color: #fff;
+  padding: 0 24px 0 20px;
+}
+.util .history_pn2 > .btn:before {
+  content: "";
+  position: absolute;
+  background-color: #fff;
+  height: 8px;
+  -webkit-clip-path: polygon(0 0, 100% 50%, 0 100%);
+          clip-path: polygon(0 0, 100% 50%, 0 100%);
+  width: calc(4px * tan(60deg));
+  right: 6px;
+  top: calc(50% - 4px);
+}
 .util .accorBlock {
   background: #efefef;
   border-radius: var(--radius1);
@@ -3177,6 +3411,108 @@ br.spS {
   .util .confirm {
     padding: 3.13vw;
   }
+  .util .history_tab > li > a,
+  .util .history_tab > li > span {
+    font-size: 4.17vw;
+    padding: 3.65vw 0 3.91vw;
+  }
+  .util .history_tab > li > a:before,
+  .util .history_tab > li > span:before {
+    background-color: #fff;
+    height: 2.09vw;
+    -webkit-clip-path: polygon(0 0, 100% 50%, 0 100%);
+            clip-path: polygon(0 0, 100% 50%, 0 100%);
+    width: calc(2.09vw / 2 * tan(60deg));
+    right: 2.61vw;
+    top: calc(50% - 1.04vw);
+  }
+  .util .history_tab > li.active > a,
+  .util .history_tab > li.active > span {
+    padding: 3.65vw 0 3.91vw;
+  }
+  .util .history_lists > li {
+    padding: 3.91vw 0;
+  }
+  .util .history_lists > li .history_col:not(:first-child) {
+    margin-top: 1.3vw;
+  }
+  .util .history_col dt {
+    font-size: 3.13vw;
+    min-width: 20.86vw;
+    padding: 2.61vw 0;
+  }
+  .util .history_col dd {
+    padding: 1.3vw 0 1.3vw 2.61vw;
+  }
+  .util .history_course {
+    font-size: 3.13vw;
+    padding: 1.04vw 2.61vw;
+    margin-bottom: 1.3vw;
+  }
+  .util .history_pn1 {
+    gap: 0 2.61vw;
+  }
+  .util .history_pn1 > .prev,
+  .util .history_pn1 > .next {
+    width: 7.82vw;
+    height: 7.82vw;
+  }
+  .util .history_pn1 > .prev:before,
+  .util .history_pn1 > .next:before {
+    left: calc(50% - 0.78vw);
+    top: calc(50% - 1.04vw);
+  }
+  .util .history_pn1 > .prev:before {
+    background-color: #fff;
+    height: 2.09vw;
+    -webkit-clip-path: polygon(0 50%, 100% 0, 100% 100%);
+            clip-path: polygon(0 50%, 100% 0, 100% 100%);
+    width: calc(2.09vw / 2 * tan(60deg));
+  }
+  .util .history_pn1 > .next:before {
+    background-color: #fff;
+    height: 2.09vw;
+    -webkit-clip-path: polygon(0 0, 100% 50%, 0 100%);
+            clip-path: polygon(0 0, 100% 50%, 0 100%);
+    width: calc(2.09vw / 2 * tan(60deg));
+  }
+  .util .history_pn1 > .page {
+    gap: 0 1.3vw;
+  }
+  .util .history_pn1 > .page > .page_this {
+    font-size: 4.17vw;
+  }
+  .util .history_pn1 > .page > .page_txt {
+    font-size: 3.65vw;
+  }
+  .util .history_pn1 > .page > .page_all {
+    font-size: 4.17vw;
+  }
+  .util .history_pn2 {
+    gap: 0 2.61vw;
+  }
+  .util .history_pn2 > input[type=tel] {
+    padding: 2.61vw;
+    font-size: 4.17vw;
+    width: 20.86vw;
+  }
+  .util .history_pn2 > .txt {
+    font-size: 4.17vw;
+  }
+  .util .history_pn2 > .btn {
+    height: 10.95vw;
+    font-size: 3.65vw;
+    padding: 0 6.26vw 0 5.22vw;
+  }
+  .util .history_pn2 > .btn:before {
+    background-color: #fff;
+    height: 2.09vw;
+    -webkit-clip-path: polygon(0 0, 100% 50%, 0 100%);
+            clip-path: polygon(0 0, 100% 50%, 0 100%);
+    width: calc(2.09vw / 2 * tan(60deg));
+    right: 1.56vw;
+    top: calc(50% - 1.04vw);
+  }
   .util .accorBtn {
     padding: 3.91vw 10.43vw 3.91vw 5.22vw;
   }
@@ -3434,15 +3770,16 @@ br.spS {
 }
 
 #modal_close.active.in {
-  opacity: 1;
-  transform: scale(1);
+  animation: 0.3s cubic-bezier(0.15, 0.29, 0.62, 0.99) both;
+  animation-name: fade_in, zoom_in_btn;
 }
 #modal_close.active.in:hover {
   opacity: 0.7;
 }
 
 #modal_close.active.out {
-  opacity: 0;
+  animation: 0.3s cubic-bezier(0.15, 0.29, 0.62, 0.99) both;
+  animation-name: fade_out, zoom_out_contents;
 }
 
 .modal_contents.active.in {
@@ -3481,6 +3818,15 @@ body.iframe::-webkit-scrollbar {
 
 .modal_contents.active {
   display: block;
+}
+
+.modal_iframe {
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: auto;
+}
+.modal_iframe.-ios {
+  overflow-y: y;
+  -webkit-overflow-scrolling: touch;
 }
 
 #modal_close {

@@ -12,8 +12,6 @@ class AppScrolltriger extends Core {
   ● UAなど：this.USER
   ● 画面サイズなど：this.win
   ● メディアクエリ：this.mql（指定したブレイクポイントに基づく現在のデバイスを返す：pc/tb/sp）
-  ● transitionEndイベント：this.transitionEnd
-  ● animationEndイベント：this.animationEnd
 */
 
   /* スクロール時に実行 */
@@ -138,7 +136,6 @@ class AppScrolltriger extends Core {
 
 
     gsap.utils.toArray('.js-trigger-pin').forEach( (_this) => {
-      console.info($(_this.querySelector('.obj')))
       let _x = window.innerWidth - _this.querySelector('.obj').clientWidth;
       if( _this.classList.contains('-sec7') || _this.classList.contains('-sec9') ){
         _x = - _x

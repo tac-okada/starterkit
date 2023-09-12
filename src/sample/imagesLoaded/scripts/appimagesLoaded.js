@@ -13,8 +13,6 @@ class AppImagesLoaded extends Core {
   ● UAなど：this.USER
   ● 画面サイズなど：this.win
   ● メディアクエリ：this.mql（指定したブレイクポイントに基づく現在のデバイスを返す：pc/tb/sp）
-  ● transitionEndイベント：this.transitionEnd
-  ● animationEndイベント：this.animationEnd
 */
 
   /* スクロール時に実行 */
@@ -31,13 +29,31 @@ class AppImagesLoaded extends Core {
   loadHandler () {
     //console.info(this)
 
-    let $loader = $('#loader');
-    let $loadingText = $loader.children('div.block-loader').children('p.txt-loader').children('span.txt-number');
-    let $loadingBar = $loader.children('div.block-loader').children('p.bar-loader').children('span.bar');
+    let loader = document.getElementById('loader');
+    
+    let loadingText = loader.querySelector('.txt-number');
+    let loadingBar = loader.querySelector('.bar');
     let percentage = 0;
     let imgCount = 0;
     let imgLoad = imagesLoaded('body');
-    $('body').addClass('loading');
+    document.body.classList.add('loading');
+
+    function transitionEnd(){
+      loadingText.textContent = '100';
+      /* 念の為再度this.setupEvents実行（現在のwindowサイズなどを取得のため） */
+      this.obj.setupEvents();
+
+      document.body.classList.toggle('loading','active');
+      document.documentElement.classList.add('active');
+
+      loader.addEventListener('animationend', {obj: this.obj, handleEvent: animationEnd}, {once: true});
+    }
+
+    function animationEnd(){
+      /* ここでスクロールとブラウザイベントを有効にする */
+      this.obj.enableScroll();
+    }
+
     imgLoad.on('progress', ( instance, image ) => {
       imgCount++;
 /*
@@ -46,25 +62,13 @@ class AppImagesLoaded extends Core {
 */
       percentage = parseInt( ( 100/imgLoad.images.length ) * imgCount );
       //console.info(imgCount,imgLoad.images.length,percentage);
-      $loadingBar.stop().css('width', percentage +'%');
-      $loadingText.stop().text(percentage);
+      loadingBar.style.width = percentage + '%';
+      loadingText.textContent = percentage;
     });
     imgLoad.on('always', ( instance, image ) => {
       //console.info(imgCount,imgLoad.images.length,percentage);
-      $loadingBar.stop().css('width', '100%').on(this.transitionEnd, () => {
-        $(this).off(this.transitionEnd);
-        $loadingText.stop().text(100);
-        /* 念の為再度this.setupEvents実行（現在のwindowサイズなどを取得のため） */
-        this.setupEvents();
-
-        $('body').toggleClass('loading active');
-        $('html').addClass('active');
-        $loader.on(this.animationEnd, () => {
-          $(this).off(this.animationEnd).remove();
-          /* ここでスクロールとブラウザイベントを有効にする */
-          this.enableScroll();
-        });
-      });
+      loadingBar.style.width = '100%';
+      loadingBar.addEventListener('transitionend', {obj: this, handleEvent: transitionEnd}, {once: true});
     });
   }
 };

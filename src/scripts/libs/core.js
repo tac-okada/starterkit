@@ -1,7 +1,7 @@
 import gsap from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin.js';
 gsap.registerPlugin(ScrollToPlugin);
-import $ from 'jquery';
+//import $ from 'jquery';
 
 import { UserAgent, MediaQueries } from './util.js';
 import { functions } from './functions.js';
@@ -19,8 +19,6 @@ export class Core {
     this.ua = new UserAgent,
     this.USER = {},
     this.mediaQueries = new MediaQueries(),
-    this.transitionEnd = 'webkitTransitionEnd mozTransitionEnd oTransitionEnd transitionend',
-    this.animationEnd = 'webkitAnimationEnd mozAnimationEnd oAnimationEnd animationend',
     this.mql = '',
     this.win = {
       width : 0,
@@ -67,8 +65,8 @@ export class Core {
     window.gsap = gsap;
     
     /* jQuery */
-    window.$ = $;
-    window.jQuery = $;
+    //window.$ = $;
+    //window.jQuery = $;
   }
 
   setupEvents () {

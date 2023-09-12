@@ -16,8 +16,6 @@ class AppLottie extends Core {
   ● UAなど：this.USER
   ● 画面サイズなど：this.win
   ● メディアクエリ：this.mql（指定したブレイクポイントに基づく現在のデバイスを返す：pc/tb/sp）
-  ● transitionEndイベント：this.transitionEnd
-  ● animationEndイベント：this.animationEnd
 */
 
   /* スクロール時に実行 */
@@ -34,11 +32,16 @@ class AppLottie extends Core {
   loadHandler () {
     gsap.registerPlugin(ScrollTrigger);
 
-    $('.loader').addClass('fo').on(this.animationEnd, () => {
-      $('.loader').addClass('hdn').off(this.animationEnd);
+    const loader = document.querySelector('.loader');
+
+    loader.classList.add('fo');
+    loader.addEventListener('animationend', {obj: this, handleEvent: setLottie}, { once: true });
+
+    function setLottie(){
+      loader.classList.add('hdn');
 
       /* ここでスクロールとブラウザイベントを有効にする */
-      this.enableScroll();
+      this.obj.enableScroll();
 
       let lottieSample = document.querySelector("lottie-player"); //アニメーションを格納するDOM要素
       let totalFrames;
@@ -281,7 +284,7 @@ class AppLottie extends Core {
       .to('.lottieSample', {
         y: '0vw'
       }, 'scene11')
-    });
+    };
   }
 };
 
