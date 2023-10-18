@@ -1,8 +1,8 @@
 # starterkit
 ビルドツールは、基本的にgulpを使用、JSのみwepackを使用しています。
 ## 動作環境
-* node 14.21.1
-* npm 6.14.17
+* node 20.8.1
+* npm 10.1.0
 * gulp 4.0.2
 
 ## はじめに
