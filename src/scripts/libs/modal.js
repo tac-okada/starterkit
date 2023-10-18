@@ -248,9 +248,15 @@ export class Modal {
         active.style.top = ( ( this.core.win.height - this.state.height ) / 2 ) + 'px';
 
       } else if ( active.classList.contains('modal_iframe') ) {
-        //console.info(this.core.win.width,this.state.width)
-        active.style.height = this.core.win.height - activeHeightDiff;
-        active.style.top = '60px';
+        let iframeH = active.querySelector('iframe').contentDocument.body.clientHeight;
+        //console.info(iframeH,this.core.win.height - activeHeightDiff)
+        if( iframeH < this.core.win.height - activeHeightDiff * 1.5 ){
+          active.style.height = iframeH + 'px';
+          active.style.top = ( ( this.core.win.height - iframeH ) / 2 ) + 'px';
+        } else {
+          active.style.height = this.core.win.height - activeHeightDiff + 'px';
+          active.style.top = '60px';
+        }
         active.style.left = ( ( this.core.win.width - this.state.width ) / 2 ) + 'px';
       } else {
         active.style.left = ( ( this.core.win.width - this.state.width ) / 2 ) + 'px';

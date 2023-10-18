@@ -96,8 +96,11 @@
 }
 
 // モーダル内スクロールOFF
-body.iframe{
-  @include setting.notScrollbar();
+body{
+  &.iframe{
+    @include setting.notScrollbar();
+    height: auto;
+  }
 }
 
 // 表示エリア-共通

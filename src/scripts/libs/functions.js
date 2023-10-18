@@ -102,10 +102,14 @@ const setAccordion = () => {
         gsap.to(target, {
           height: 0,
           duration: 0.2,
+          onComplete: () => {
+            target.classList.add('hdn');
+          }
         });
       }else{
         /* 開く */
         this.classList.add('open');
+        target.classList.remove('hdn');
         gsap.to(target,{
           height: 'auto',
           duration: 0.2,
@@ -170,8 +174,10 @@ const setLabelChanger = () => {
       for (let i = 0; i < btn.length; i++) {
         if( btn[i].checked ){
           btn[i].parentNode.classList.add('checked');
+          btn[i].setAttribute('checked','');
         }else{
           btn[i].parentNode.classList.remove('checked');
+          btn[i].removeAttribute('checked');
         }
       };
     };
@@ -307,4 +313,52 @@ const setLine = core => {
   }
 };
 
-export const functions = { setConsoleIe, setPopupWin, setScrollTo, setAccordion, setTelCall, setNoEnterkey, setLabelChanger, setLengthChecker, setCrsl, setLine }
+const setCopy = core => {
+  const copy = document.querySelector('.js-copy');
+  const target = document.querySelector('.js-copyTarget');
+  //const input = document.querySelector('.js-copySelect');
+  const comp = document.querySelector('.js-copyComp');
+
+  function copyTxt (e) {
+    e.preventDefault();
+    let txt = target.textContent;
+    //input.value = txt;
+    //input.focus();
+    //input.select();
+    //document.execCommand('copy');
+    navigator.clipboard.writeText(txt);
+
+    let compTl = gsap.timeline().pause()
+      .add('scene1')
+      .fromTo(comp, {
+        y: '5px'
+      }, {
+        y: 0,
+        autoAlpha: 1,
+        ease: 'Power4.easeOut',
+        duration: .5,
+        onStart: () => {
+          comp.classList.remove('hdn');
+        }
+      },'scene1')
+      .add('scene2')
+      .to(comp, {
+        y: '-5px',
+        autoAlpha: 0,
+        ease: 'Power4.easeOut',
+        duration: .5,
+        onComplete: () => {
+          comp.classList.add('hdn');
+        }
+      },'scene2')
+
+    compTl.play();
+  }
+
+  //console.info(copy != undefined)
+  if( copy != undefined ){
+    copy.addEventListener('click', copyTxt);
+  }
+}
+
+export const functions = { setConsoleIe, setPopupWin, setScrollTo, setAccordion, setTelCall, setNoEnterkey, setLabelChanger, setLengthChecker, setCrsl, setLine, setCopy }
