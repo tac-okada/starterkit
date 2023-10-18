@@ -1357,28 +1357,28 @@ br.spS {
   height: 6px;
   -webkit-clip-path: polygon(0 0, 100% 50%, 0 100%);
           clip-path: polygon(0 0, 100% 50%, 0 100%);
-  width: calc(3px * tan(60deg));
+  width: 5.1961524227px;
 }
 .util .txtLink.-left:before {
   background-color: var(--link-color);
   height: 6px;
   -webkit-clip-path: polygon(0 50%, 100% 0, 100% 100%);
           clip-path: polygon(0 50%, 100% 0, 100% 100%);
-  width: calc(3px * tan(60deg));
+  width: 5.1961524227px;
 }
 .util .txtLink.-up:before {
   background-color: var(--link-color);
   width: 6px;
   -webkit-clip-path: polygon(50% 0, 100% 100%, 0 100%);
           clip-path: polygon(50% 0, 100% 100%, 0 100%);
-  height: calc(3px * tan(60deg));
+  height: 5.1961524227px;
 }
 .util .txtLink.-down:before {
   background-color: var(--link-color);
   width: 6px;
   -webkit-clip-path: polygon(0 0, 100% 0, 50% 100%);
           clip-path: polygon(0 0, 100% 0, 50% 100%);
-  height: calc(3px * tan(60deg));
+  height: 5.1961524227px;
 }
 .util .txtLink.-noar {
   padding-left: 0;
@@ -2156,7 +2156,7 @@ br.spS {
   height: 8px;
   -webkit-clip-path: polygon(0 0, 100% 50%, 0 100%);
           clip-path: polygon(0 0, 100% 50%, 0 100%);
-  width: calc(4px * tan(60deg));
+  width: 6.9282032303px;
   position: absolute;
   right: 10px;
   top: calc(50% - 4px);
@@ -2260,14 +2260,14 @@ br.spS {
   height: 8px;
   -webkit-clip-path: polygon(0 50%, 100% 0, 100% 100%);
           clip-path: polygon(0 50%, 100% 0, 100% 100%);
-  width: calc(4px * tan(60deg));
+  width: 6.9282032303px;
 }
 .util .history_pn1 > .next:before {
   background-color: #fff;
   height: 8px;
   -webkit-clip-path: polygon(0 0, 100% 50%, 0 100%);
           clip-path: polygon(0 0, 100% 50%, 0 100%);
-  width: calc(4px * tan(60deg));
+  width: 6.9282032303px;
 }
 .util .history_pn1 > .page {
   display: -ms-flexbox;
@@ -2343,7 +2343,7 @@ br.spS {
   height: 8px;
   -webkit-clip-path: polygon(0 0, 100% 50%, 0 100%);
           clip-path: polygon(0 0, 100% 50%, 0 100%);
-  width: calc(4px * tan(60deg));
+  width: 6.9282032303px;
   right: 6px;
   top: calc(50% - 4px);
 }
@@ -3174,28 +3174,28 @@ br.spS {
     height: 1.56vw;
     -webkit-clip-path: polygon(0 0, 100% 50%, 0 100%);
             clip-path: polygon(0 0, 100% 50%, 0 100%);
-    width: calc(1.56vw / 2 * tan(60deg));
+    width: calc(1.56vw / 2 * 1.7320508076);
   }
   .util .txtLink.-left:before {
     background-color: var(--link-color);
     height: 1.56vw;
     -webkit-clip-path: polygon(0 50%, 100% 0, 100% 100%);
             clip-path: polygon(0 50%, 100% 0, 100% 100%);
-    width: calc(1.56vw / 2 * tan(60deg));
+    width: calc(1.56vw / 2 * 1.7320508076);
   }
   .util .txtLink.-up:before {
     background-color: var(--link-color);
     width: 1.56vw;
     -webkit-clip-path: polygon(50% 0, 100% 100%, 0 100%);
             clip-path: polygon(50% 0, 100% 100%, 0 100%);
-    height: calc(1.56vw / 2 * tan(60deg));
+    height: calc(1.56vw / 2 * 1.7320508076);
   }
   .util .txtLink.-down:before {
     background-color: var(--link-color);
     width: 1.56vw;
     -webkit-clip-path: polygon(0 0, 100% 0, 50% 100%);
             clip-path: polygon(0 0, 100% 0, 50% 100%);
-    height: calc(1.56vw / 2 * tan(60deg));
+    height: calc(1.56vw / 2 * 1.7320508076);
   }
   .util .txtLink.-blank {
     padding-right: 3.65vw;
@@ -3422,7 +3422,7 @@ br.spS {
     height: 2.09vw;
     -webkit-clip-path: polygon(0 0, 100% 50%, 0 100%);
             clip-path: polygon(0 0, 100% 50%, 0 100%);
-    width: calc(2.09vw / 2 * tan(60deg));
+    width: calc(2.09vw / 2 * 1.7320508076);
     right: 2.61vw;
     top: calc(50% - 1.04vw);
   }
@@ -3467,14 +3467,14 @@ br.spS {
     height: 2.09vw;
     -webkit-clip-path: polygon(0 50%, 100% 0, 100% 100%);
             clip-path: polygon(0 50%, 100% 0, 100% 100%);
-    width: calc(2.09vw / 2 * tan(60deg));
+    width: calc(2.09vw / 2 * 1.7320508076);
   }
   .util .history_pn1 > .next:before {
     background-color: #fff;
     height: 2.09vw;
     -webkit-clip-path: polygon(0 0, 100% 50%, 0 100%);
             clip-path: polygon(0 0, 100% 50%, 0 100%);
-    width: calc(2.09vw / 2 * tan(60deg));
+    width: calc(2.09vw / 2 * 1.7320508076);
   }
   .util .history_pn1 > .page {
     gap: 0 1.3vw;
@@ -3509,7 +3509,7 @@ br.spS {
     height: 2.09vw;
     -webkit-clip-path: polygon(0 0, 100% 50%, 0 100%);
             clip-path: polygon(0 0, 100% 50%, 0 100%);
-    width: calc(2.09vw / 2 * tan(60deg));
+    width: calc(2.09vw / 2 * 1.7320508076);
     right: 1.56vw;
     top: calc(50% - 1.04vw);
   }

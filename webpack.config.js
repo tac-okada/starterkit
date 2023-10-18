@@ -42,7 +42,7 @@ module.exports = {
   mode: 'production',
 
   optimization: {
-    minimize: true,/* 圧縮 */
+    minimize: false,/* 圧縮 */
     minimizer: [new TerserPlugin({
       extractComments: false,/* ライセンステキスト出力しない */
     })],
