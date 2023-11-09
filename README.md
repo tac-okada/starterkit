@@ -90,6 +90,9 @@ modal.initialize(this);
 
 <!--youtube（youtubeiframeAPIを使用してiframeとして開く）-->
 <a class="js-modalOpen" data-modal="4__yt__t1rFmJMFdKw" data-ytnum="1" href="">→モーダルを開く</a>
+
+<!--背景を押しても閉じない・強制視認（「data-noClose="true"」を指定する）-->
+<a class="js-modalOpen" data-modal="3__iframe__iframe_sample.html" data-noClose="true" href="">モーダルを開く</a></p>
 ```
 * モーダル内に閉じるボタンを実装する場合はクラス`js-modalClose`を付与してください
 * [0]：固有番号はhtml内に一つだけです。重複するとエラーになります。スライダー系のプラグインでトリガーが複製された場合を考慮しています。

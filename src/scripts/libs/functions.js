@@ -313,50 +313,43 @@ const setLine = core => {
   }
 };
 
-const setCopy = core => {
+const setCopy = () => {
   const copy = document.querySelector('.js-copy');
   const target = document.querySelector('.js-copyTarget');
-  //const input = document.querySelector('.js-copySelect');
   const comp = document.querySelector('.js-copyComp');
+
+  const compTl = gsap.timeline().pause()
+    .fromTo(comp, {
+      y: '5px',
+      autoAlpha: 0
+    }, {
+      y: 0,
+      autoAlpha: 1,
+      ease: 'Power4.easeOut',
+      duration: .5
+    })
+    .to(comp, {
+      y: '-5px',
+      autoAlpha: 0,
+      ease: 'Power4.easeOut',
+      duration: .5
+    })
 
   function copyTxt (e) {
     e.preventDefault();
-    let txt = target.textContent;
-    //input.value = txt;
-    //input.focus();
-    //input.select();
-    //document.execCommand('copy');
-    navigator.clipboard.writeText(txt);
-
-    let compTl = gsap.timeline().pause()
-      .add('scene1')
-      .fromTo(comp, {
-        y: '5px'
-      }, {
-        y: 0,
-        autoAlpha: 1,
-        ease: 'Power4.easeOut',
-        duration: .5,
-        onStart: () => {
-          comp.classList.remove('hdn');
+    navigator.clipboard.writeText( target.textContent )
+      .then(
+        (success) => {
+          // コピー成功時の処理
+          compTl.restart()
+        },
+        (error) => {
+          // エラー時の処理（なにもしない）
         }
-      },'scene1')
-      .add('scene2')
-      .to(comp, {
-        y: '-5px',
-        autoAlpha: 0,
-        ease: 'Power4.easeOut',
-        duration: .5,
-        onComplete: () => {
-          comp.classList.add('hdn');
-        }
-      },'scene2')
-
-    compTl.play();
+      )
   }
 
-  //console.info(copy != undefined)
-  if( copy != undefined ){
+  if( copy ){
     copy.addEventListener('click', copyTxt);
   }
 }

@@ -2671,6 +2671,7 @@ br.spS {
   opacity: 0;
   position: relative;
   transition: opacity 0.1s;
+  margin: 0;
 }
 .util .accorArea .inner:before {
   content: "";
@@ -2718,6 +2719,40 @@ br.spS {
   left: calc(50% - 1px);
   top: 0;
   transition: transform 0.2s;
+}
+.util .copyParent {
+  position: relative;
+  display: table;
+}
+.util .copyParent.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+.util .copyComp {
+  position: absolute;
+  font-size: var(--fsize16);
+  text-align: center;
+  line-height: 1;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  top: -2em;
+  padding: 4px 0 8px;
+  width: 140px;
+  border-radius: 5px;
+  left: calc(50% - 70px);
+  opacity: 0;
+  visibility: hidden;
+}
+.util .copyComp:before {
+  content: "";
+  position: absolute;
+  left: calc(50% - 6px);
+  bottom: -5px;
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 12px;
+  -webkit-clip-path: polygon(0 0, 100% 0, 50% 100%);
+          clip-path: polygon(0 0, 100% 0, 50% 100%);
+  height: 6px;
 }
 
 @media screen and (max-width: 1024px) {

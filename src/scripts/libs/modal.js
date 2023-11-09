@@ -359,7 +359,8 @@ export class Modal {
         _player_num = that.btn[i].getAttribute('data-ytnum'),
         _yt_id = '',
         _modal_outer,
-        _modal_inner;
+        _modal_inner,
+        _bg_click = true;
         //_flg_exist = false;
 
       /* すでにモーダル作成済の場合dom生成しない */
@@ -423,7 +424,13 @@ export class Modal {
             youtubeAPI.setYoutube(that.autoPlay);
           }
         }
-  
+
+        //console.info(that.btn[i].getAttribute('data-noClose'))
+        // data-noClose属性が存在する場合、bg_clickをOFFにする
+        if( that.btn[i].getAttribute('data-noClose') ){
+          _bg_click = false;
+        }
+
         if( that.state.response ){
           //console.info(i,that.proto.contents[Number(that.btn[i].getAttribute('data-modal').split( '__' )[0]) - 1])
           //console.info(that.btn[i],_player_num,youtubeAPI.ytPlayer)
@@ -433,7 +440,7 @@ export class Modal {
             num : Number(that.btn[i].getAttribute('data-modal').split( '__' )[0]),
             type : _type,
             player_num : _player_num,
-            bg_click : true
+            bg_click : _bg_click
           });
         }
       }
@@ -459,28 +466,67 @@ export class Modal {
 
   */
   setCloseBtn = {
-    initialize ( that, obj ) {
+    // #modal_closeと#modal_bg用
+    closeBtnListeners: [],
+    that: null,
+    obj: null,
 
-      const setEvent = target => {
-        const closeBtn = target.querySelectorAll('.js-modalClose');
-        for( let i = 0; i < closeBtn.length; i++ ){
-          //console.info(closeBtn[i])
-          //that.close.push(closeBtn[i])
-          closeBtn[i].addEventListener('click', { that: that, obj: obj, handleEvent: that.setCloseBtn.setupEvent });
+    initialize ( that, obj ) {
+      this.that = that;
+      this.obj = obj;
+      //console.info(this)
+
+      //let closeBtnListeners = [];
+
+      const addEvent = closeBtn => {
+        //console.info(closeBtn.getAttribute('id'))
+
+        // #modal_closeと#modal_bgのみ関数を配列に格納、removeできるようにする
+        if( closeBtn.getAttribute('id') === 'modal_close' ){
+          //console.info('AddBtn')
+          this.closeBtnListeners[0] = e => that.setCloseBtn.setupEvent(e);
+          closeBtn.addEventListener('click', this.closeBtnListeners[0]);
+        }
+        if( closeBtn.getAttribute('id') === 'modal_bg' ){
+          //console.info('AddBg')
+          this.closeBtnListeners[1] = e => that.setCloseBtn.setupEvent(e);
+          closeBtn.addEventListener('click', this.closeBtnListeners[1]);
         }
       }
 
-      //console.info(obj.target)
-      /* パラメータ「bg_click」がfalseの場合 */
-      if( !obj.bg_click ){
-        that.bg.classList.remove('js-modalClose');
-        that.closeBtn.classList.remove('js-modalClose');
+      const removeEvent = closeBtn => {
+        if( closeBtn.getAttribute('id') === 'modal_close' ){
+          //console.info('RemoveBtn')
+          closeBtn.removeEventListener('click', this.closeBtnListeners[0]);
+        }
+        if( closeBtn.getAttribute('id') === 'modal_bg' ){
+          //console.info('RemoveBg')
+          closeBtn.removeEventListener('click', this.closeBtnListeners[1]);
+          this.closeBtnListeners = [];
+        }
+        //console.info(this.closeBtnListeners)
       }
 
-      //console.info(that.firstClick)
-      if( that.firstClick ){
-        //that.close = document.querySelectorAll('.js-modalClose');
-        setEvent(document);
+      const addEventOther = target => {
+        const closeBtn = target.querySelectorAll('.js-modalClose');
+        for( let i = 0; i < closeBtn.length; i++ ){
+          //console.info(closeBtn[i])
+          closeBtn[i].addEventListener('click', { that: that, obj: obj, handleEvent: that.setCloseBtn.setupEvent});
+        }
+      }
+
+      /* パラメータ「bg_click」がfalseの場合 */
+      if( obj.bg_click ){
+        if( this.closeBtnListeners.length === 0 ){
+          addEvent(document.getElementById('modal_close'));
+          addEvent(document.getElementById('modal_bg'));
+        }
+      } else {
+        //console.info( this.closeBtnListeners.length !== 0,this.closeBtnListeners )
+        if( this.closeBtnListeners.length !== 0 ){
+          removeEvent(document.getElementById('modal_close'));
+          removeEvent(document.getElementById('modal_bg'));
+        }
       }
 
       /* iframe内閉じるボタン */
@@ -491,7 +537,7 @@ export class Modal {
             num: obj.num,
             content: obj.target.children[0]
           })
-          setEvent(obj.target.children[0].contentDocument)
+          addEventOther(obj.target.children[0].contentDocument)
         }
 
         // 2回目以降
@@ -505,7 +551,7 @@ export class Modal {
               num: obj.num,
               content: obj.target.children[0]
             });
-            setEvent(obj.target.children[0].contentDocument);
+            addEventOther(obj.target.children[0].contentDocument);
             //console.info( that.iframe )
           }
         }
@@ -516,7 +562,7 @@ export class Modal {
         // 最初
         if( !that.dom.length ){
           that.dom.push( obj.num );
-          setEvent(obj.target.children[0])
+          addEventOther(obj.target.children[0])
         }
 
         // 2回目以降
@@ -526,16 +572,26 @@ export class Modal {
           }
           if( that.dom.length === i+1 ){
             that.dom.push( obj.num );
-            setEvent(obj.target.children[0]);
+            addEventOther(obj.target.children[0]);
           }
         }
       }
 
     },
+
+    // 呼び出しによってthisが違うので注意
     setupEvent (e) {
       e.preventDefault();
-      //console.info(this.that.state.response);
-      
+      //console.info(e,this);
+      // 年齢認証
+/*
+      if (e.target.classList.contains('js-agecheck')) {
+        if (document.getElementById('ageCheck').checked) {
+          document.cookie = 'AGE_CHECK = true; max-age = 31536000';
+        }
+      }
+*/
+
       if( this.that.state.response ){
         //console.info(this.that)
         this.that.animationEvents.close(this.that);

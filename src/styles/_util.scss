@@ -1275,7 +1275,8 @@
       opacity: 0;
       position: relative;
       transition: opacity .1s;
-  
+      margin: 0;
+
       &:before{
         content: '';
         position: absolute;
@@ -1326,6 +1327,40 @@
       left: calc( 50% - 1px );
       top: 0;
       transition: transform .2s;
+    }
+  }
+
+  .copyParent{
+    position: relative;
+    display: table;
+
+    &.center{
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  .copyComp{
+    position: absolute;
+    font-size: var(--fsize16);
+    text-align: center;
+    line-height: 1;
+    background: rgba(0,0,0,.8);
+    color: #fff;
+    top: -2em;
+    padding: 4px 0 8px;
+    width: 140px;
+    border-radius: 5px;
+    left: calc( 50% - 70px );
+    opacity: 0;
+    visibility: hidden;
+  
+    &:before{
+      content: '';
+      position: absolute;
+      left: calc( 50% - 6px );
+      bottom: -5px;
+      @include setting.sankaku(12px, rgba(0,0,0,.8), 'down', true);
     }
   }
 }

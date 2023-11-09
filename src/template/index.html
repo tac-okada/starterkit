@@ -37,7 +37,8 @@
       <li><a class="txtLink hover" href="#sec16">応募履歴</a></li>
       <li><a class="txtLink hover" href="#sec17">テーブル</a></li>
       <li><a class="txtLink hover" href="#sec18">アコーディオン・Q&A</a></li>
-      <li><a class="txtLink hover" href="#sec19">電話番号</a></li>
+      <li><a class="txtLink hover" href="#sec19">テキストのコピー</a></li>
+      <li><a class="txtLink hover" href="#sec20">電話番号</a></li>
     </ul>
   </nav>
   <p class="ptop fsize16"><a class="txtLink -up" href="#">ページの先頭へ</a></p>
@@ -1506,8 +1507,24 @@ padding-bottom: 15px !important;</code></pre>
   &lt;/dd&gt;
 &lt;/dl&gt;</code></pre>
     </section>
-  
-    <section class="left pt100 pb100" id="sec19">
+
+    <section class="left pt100" id="sec19">
+      <h2 class="head03 mb20">テキストのコピー</h2>
+      <p class="fsize16 mb20">JSで実装しています。</p>
+      <div class="copyParent">
+        <p class="copyComp js-copyComp">コピーしました</p>
+        <p class="fsize18"><a class="txtLink js-copy" href="">コピーする</a></p>
+      </div>
+      <p class="fsize18 bold mt20"><span class="js-copyTarget">コピーされるテキスト</span></p>
+
+      <pre class="fsize14 mt20 left"><code class="html">&lt;div class=&quot;copyParent&quot;&gt;
+  &lt;p class=&quot;copyComp js-copyComp hdn&quot;&gt;コピーしました&lt;/p&gt;
+  &lt;p class=&quot;fsize18&quot;&gt;&lt;a class=&quot;txtLink js-copy&quot; href=&quot;&quot;&gt;コピーする&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;p class=&quot;fsize18 bold mt20&quot;&gt;&lt;span class=&quot;js-copyTarget&quot;&gt;コピーされるテキスト&lt;/span&gt;&lt;/p&gt;</code></pre>
+    </section>
+
+    <section class="left pt100 pb100" id="sec20">
       <h2 class="head03 mb20">電話番号</h2>
       <p class="fsize16 mb20">クラス<span class="code">.tel</span>で記述します。また電話番号リンク設定をJSで実装しています。</p>
       <p class="tel js-telCall rem" x-ms-format-detection="none">03-0000-0000</p>
