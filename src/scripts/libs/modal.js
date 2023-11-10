@@ -467,45 +467,16 @@ export class Modal {
   */
   setCloseBtn = {
     // #modal_closeと#modal_bg用
-    closeBtnListeners: [],
+    uiBtn: null,
+    uiBtnListeners: [],
     that: null,
     obj: null,
 
     initialize ( that, obj ) {
       this.that = that;
       this.obj = obj;
-      //console.info(this)
-
-      //let closeBtnListeners = [];
-
-      const addEvent = closeBtn => {
-        //console.info(closeBtn.getAttribute('id'))
-
-        // #modal_closeと#modal_bgのみ関数を配列に格納、removeできるようにする
-        if( closeBtn.getAttribute('id') === 'modal_close' ){
-          //console.info('AddBtn')
-          this.closeBtnListeners[0] = e => that.setCloseBtn.setupEvent(e);
-          closeBtn.addEventListener('click', this.closeBtnListeners[0]);
-        }
-        if( closeBtn.getAttribute('id') === 'modal_bg' ){
-          //console.info('AddBg')
-          this.closeBtnListeners[1] = e => that.setCloseBtn.setupEvent(e);
-          closeBtn.addEventListener('click', this.closeBtnListeners[1]);
-        }
-      }
-
-      const removeEvent = closeBtn => {
-        if( closeBtn.getAttribute('id') === 'modal_close' ){
-          //console.info('RemoveBtn')
-          closeBtn.removeEventListener('click', this.closeBtnListeners[0]);
-        }
-        if( closeBtn.getAttribute('id') === 'modal_bg' ){
-          //console.info('RemoveBg')
-          closeBtn.removeEventListener('click', this.closeBtnListeners[1]);
-          this.closeBtnListeners = [];
-        }
-        //console.info(this.closeBtnListeners)
-      }
+      this.uiBtn = document.querySelectorAll('.js-modalClose#modal_close, .js-modalClose#modal_bg');
+      //console.info(this.uiBtn)
 
       const addEventOther = target => {
         const closeBtn = target.querySelectorAll('.js-modalClose');
@@ -515,17 +486,22 @@ export class Modal {
         }
       }
 
-      /* パラメータ「bg_click」がfalseの場合 */
+      /* UI 閉じるボタン（BGと右上x）イベント登録・削除 */
       if( obj.bg_click ){
-        if( this.closeBtnListeners.length === 0 ){
-          addEvent(document.getElementById('modal_close'));
-          addEvent(document.getElementById('modal_bg'));
+        if( this.uiBtnListeners.length === 0 ){// リスナー未登録の場合のみ、リスナー登録
+          for( let i = 0; i < this.uiBtn.length; i++ ){
+            this.uiBtnListeners[i] = e => that.setCloseBtn.setupEvent(e);
+            this.uiBtn[i].addEventListener('click', this.uiBtnListeners[i]);
+          }
         }
       } else {
-        //console.info( this.closeBtnListeners.length !== 0,this.closeBtnListeners )
-        if( this.closeBtnListeners.length !== 0 ){
-          removeEvent(document.getElementById('modal_close'));
-          removeEvent(document.getElementById('modal_bg'));
+        if( this.uiBtnListeners.length !== 0 ){// リスナー登録済の場合のみ、リスナー削除
+          for( let i = 0; i < this.uiBtn.length; i++ ){
+            this.uiBtn[i].removeEventListener('click', this.uiBtnListeners[i]);
+            if( i === this.uiBtn.length - 1 ){
+              this.uiBtnListeners = [];
+            }
+          }
         }
       }
 
@@ -599,7 +575,7 @@ export class Modal {
 
         // Youtube stop
         if ( this.obj.type === 'yt' ) {
-          that.setPlayer({
+          this.that.setPlayer({
             player : youtubeAPI.ytPlayer[ this.obj.player_num - 1 ],
             event : 'stop'
           });
