@@ -346,7 +346,15 @@ const setCopy = () => {
           compTl.restart()
         },
         (error) => {
-          // エラー時の処理（なにもしない）
+          // エラー時の処理（document.execCommandを使用する）
+          const input = document.createElement('input');
+          input.classList.add('copyInput');
+          input.value = target.textContent;
+          document.body.appendChild(input);
+          input.select();
+          const result = document.execCommand('copy');
+          document.body.removeChild(input);
+          compTl.restart()
         }
       )
   }

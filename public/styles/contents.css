@@ -1849,6 +1849,13 @@ br.spS {
 .util .table th {
   background-color: #f0f0f0;
 }
+.util .copyInput {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  left: 0 !important;
+  bottom: 0 !important;
+}
 .util label {
   display: block;
 }

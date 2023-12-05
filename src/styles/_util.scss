@@ -692,6 +692,14 @@
 
 
   // form --------------------------------- 
+  .copyInput{
+    opacity: 0 !important;
+    pointer-events: none !important;
+    position: absolute !important;
+    left: 0 !important;
+    bottom: 0 !important;
+  }
+
   label{
     display: block;
   }
