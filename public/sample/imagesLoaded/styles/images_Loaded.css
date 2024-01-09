@@ -1273,6 +1273,9 @@ br.spS {
 .util .fsize22 {
   font-size: 1.38rem !important;
 }
+.util .italic {
+  font-style: italic !important;
+}
 .util .lh10 {
   line-height: 1 !important;
 }
