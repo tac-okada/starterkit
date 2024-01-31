@@ -294,6 +294,8 @@ export class Modal {
         that.setCloseBtn.initialize( that, obj );
         /* resizeEvent */
         that.resizeEvent();
+        /* offLoading */
+        that.bg.classList.add('-offLoading');
       }
 
       function openEventObj(event){
@@ -319,6 +321,9 @@ export class Modal {
           //console.info(that.state.response);
         } else if ( event.target.id === 'modal_close' || event.target.id === 'modal_bg' ){
           event.target.classList.add('hdn');
+          if ( event.target.id === 'modal_bg' ){
+            event.target.classList.remove('-offLoading');
+          }
         }
       }
 

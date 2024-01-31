@@ -202,6 +202,12 @@ body{
     top: 40%;
     width: 50px;
   }
+
+  &.-offLoading{
+    &:before{
+      display: none;
+    }
+  }
 }
 
 #modal_loading {

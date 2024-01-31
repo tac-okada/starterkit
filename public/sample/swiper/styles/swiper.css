@@ -3937,6 +3937,9 @@ body.iframe::-webkit-scrollbar {
   top: 40%;
   width: 50px;
 }
+#modal_bg.-offLoading:before {
+  display: none;
+}
 
 #modal_loading {
   width: 50px;
