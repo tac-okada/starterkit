@@ -299,21 +299,27 @@ export class Modal {
         that.proto.obj.classList.add('in');
         that.proto.obj.addEventListener('animationend', setResponse, {once: true});
 
-        that.setCloseBtn.initialize( that, obj );
         /* resizeEvent */
         that.resizeEvent();
-        /* offLoading */
-        that.bg.classList.add('-offLoading');
       }
 
       function setResponse(event){
         that.state.response = true;
+
+        that.setCloseBtn.initialize( that, obj );
+        /* offLoading */
+        that.bg.classList.add('-offLoading');
 
         // アクセシビリティ対応 //////////////////////////////////////////////
         that.modal.setAttribute('aria-modal', true);
         that.modal.setAttribute('aria-hidden', false);
         that.modal.setAttribute('tabindex', '-1');
         that.modal.focus();
+        //console.info(obj.target,that.btn)
+        // トリガーのtabindexを全て削除
+        for( let y = 0; y < that.btn.length; y++ ){
+          that.btn[y].removeAttribute('tabindex');
+        }
         that.proto.obj.setAttribute('aria-hidden', false);
         that.focustrap.addEvent(that.modal, 0)
         that.escapekey.addEvent(that, that.animationEvents, 0)
@@ -509,11 +515,6 @@ export class Modal {
           //console.info(i,that.proto.contents[Number(that.btn[i].getAttribute('data-modal').split( '__' )[0]) - 1])
           //console.info(that.btn[i],_player_num,youtubeAPI.ytPlayer)
           that.trigger = that.btn[i];
-
-          // トリガーのtabindexを全て削除
-          for( let y = 0; y < that.btn.length; y++ ){
-            that.btn[y].removeAttribute('tabindex');
-          }
 
           that.openEvent({
             target : that.btn[i],
