@@ -1,3 +1,4 @@
+import { FocusTrap, Escapekey } from './util.js';
 import { youtubeAPI } from './youtubeAPI.js';
 youtubeAPI.initialize();
 
@@ -5,11 +6,17 @@ export class Modal {
 
   constructor () {
     this.core = {},
+    this.focustrap = new FocusTrap,
+    this.escapekey = new Escapekey,
     this.btn = '',
     this.eventListeners = [],
     this.body = document.body,
     this.iframepath = '',
     this.autoPlay = false,/* Youtube autoPlay */
+    this.modal = '',
+    this.other = '',
+    this.otherList = [],
+    this.trigger = '',
     this.bg = '',
     this.closeBtn = '',
     this.iframe = [],
@@ -110,7 +117,7 @@ export class Modal {
 
     /* close_btn */
     } else if ( _obj.type === 'close' ){
-      _html = document.createElement('div');
+      _html = document.createElement('button');
       _html.id = 'modal_close';
       _html.className = 'js-modalClose hdn';
     }
@@ -192,10 +199,11 @@ export class Modal {
 
     /* for firstOnly & not：modal_bg */
     if( document.getElementById('modal_bg') === null ){
-      this.body.append( this.proto.bg );
-      this.body.prepend( this.proto.closeBtn );
-      this.bg = document.getElementById('modal_bg');
+      document.getElementById('modal').append( this.proto.closeBtn );
+      document.getElementById('modal').append( this.proto.bg );
       this.closeBtn = document.getElementById('modal_close');
+      //this.closeBtn.setAttribute('aria-label', 'モーダルウィンドウを閉じる')
+      this.bg = document.getElementById('modal_bg');
       if( this.core.mql === 'tb' ){// タブレット時のみ位置調整
         this.closeBtn.classList.add('tb');
       }
@@ -300,6 +308,24 @@ export class Modal {
 
       function openEventObj(event){
         that.state.response = true;
+
+        // アクセシビリティ対応 //////////////////////////////////////////////
+        that.modal.setAttribute('aria-modal', true);
+        that.modal.setAttribute('aria-hidden', false);
+        that.modal.setAttribute('tabindex', '-1');
+        that.modal.focus();
+        that.proto.obj.setAttribute('aria-hidden', false);
+        that.focustrap.addEvent(that.modal, 0)
+        that.escapekey.addEvent(that, that.animationEvents, 0)
+        //console.info(that.body.querySelectorAll(':scope > :not(#modal, script)'))
+        // モーダル以外のエリアを読み取りから除外
+        that.other = that.body.querySelectorAll(':scope > :not(#modal, script)');
+        for( let i = 0; i < that.other.length; i++ ){
+          //console.info(that.other[i],that.otherList)
+          that.otherList.push(that.other[i])
+          that.otherList[i].setAttribute('aria-hidden', true);
+        }
+        // アクセシビリティ対応 //////////////////////////////////////////////
       }
 
       that.bg.classList.remove('hdn', 'out');
@@ -308,7 +334,7 @@ export class Modal {
       that.bg.addEventListener('animationend', openEventBg, {once: true});
     },
 
-    close ( that/* , _obj */ ) {
+    close ( that /*, obj */ ) {
       function closeEvent(event){
         //console.timeEnd('close');
         event.target.classList.remove('active', 'out');
@@ -318,6 +344,24 @@ export class Modal {
           event.target.classList.add('hdn');
           event.target.removeAttribute('style');
           that.state.response = true;
+
+          // アクセシビリティ対応 //////////////////////////////////////////////
+          //console.info(that.trigger)
+          that.modal.setAttribute('aria-modal', false);
+          that.modal.setAttribute('aria-hidden', true);
+          that.modal.removeAttribute('tabindex');
+          that.trigger.setAttribute('tabindex', '-1');
+          that.trigger.focus();
+          that.proto.obj.setAttribute('aria-hidden', true);
+          that.closeBtn.removeAttribute('aria-label');
+          that.bg.removeAttribute('aria-label');
+          that.focustrap.removeEvent(that.modal, 0);
+          that.escapekey.removeEvent(that, 0);
+          for( let i = 0; i < that.otherList.length; i++ ){
+            that.otherList[i].setAttribute('aria-hidden', false);
+          }
+          // アクセシビリティ対応 //////////////////////////////////////////////
+
           //console.info(that.state.response);
         } else if ( event.target.id === 'modal_close' || event.target.id === 'modal_bg' ){
           event.target.classList.add('hdn');
@@ -363,6 +407,7 @@ export class Modal {
         _param = that.btn[i].getAttribute('data-modal').split( '__' )[2],
         _player_num = that.btn[i].getAttribute('data-ytnum'),
         _yt_id = '',
+        _modal,
         _modal_outer,
         _modal_inner,
         _bg_click = true;
@@ -412,6 +457,15 @@ export class Modal {
         //console.info(that.proto.contents[Number(that.btn[i].getAttribute('data-modal').split( '__' )[0]) - 1])
       }
 
+      /* モーダルを一まとめにする要素「div#modal」追加 */
+      if( document.getElementById('modal') === null ){
+        _modal = document.createElement('div');
+        _modal.id = 'modal';
+        _modal.role = 'dialog';
+        that.body.prepend(_modal);
+        that.modal = _modal;
+      }
+
       function clickEvent(event){
         //console.info(_num)
         event.preventDefault();
@@ -419,7 +473,7 @@ export class Modal {
   
         //console.info(event,that.btn[i].getAttribute('data-modal').split( '__' )[0],that.proto.contents[Number(that.btn[i].getAttribute('data-modal').split( '__' )[0]) - 1])
         if( !that.proto.setdom[Number(that.btn[i].getAttribute('data-modal').split( '__' )[0]) - 1] ){
-          that.body.prepend(that.proto.contents[Number(that.btn[i].getAttribute('data-modal').split( '__' )[0]) - 1]);
+          that.modal.prepend(that.proto.contents[Number(that.btn[i].getAttribute('data-modal').split( '__' )[0]) - 1]);
           that.proto.setdom[Number(that.btn[i].getAttribute('data-modal').split( '__' )[0]) - 1] = true;
   
           if ( _type === 'yt' ){
@@ -439,6 +493,13 @@ export class Modal {
         if( that.state.response ){
           //console.info(i,that.proto.contents[Number(that.btn[i].getAttribute('data-modal').split( '__' )[0]) - 1])
           //console.info(that.btn[i],_player_num,youtubeAPI.ytPlayer)
+          that.trigger = that.btn[i];
+
+          // トリガーのtabindexを全て削除
+          for( let y = 0; y < that.btn.length; y++ ){
+            that.btn[y].removeAttribute('tabindex');
+          }
+
           that.openEvent({
             target : that.btn[i],
             event : 'click',
@@ -487,14 +548,19 @@ export class Modal {
         const closeBtn = target.querySelectorAll('.js-modalClose');
         for( let i = 0; i < closeBtn.length; i++ ){
           //console.info(closeBtn[i])
+          //closeBtn[i].setAttribute('aria-label', 'モーダルウィンドウを閉じる');
           closeBtn[i].addEventListener('click', { that: that, obj: obj, handleEvent: that.setCloseBtn.setupEvent});
         }
       }
 
       /* UI 閉じるボタン（BGと右上x）イベント登録・削除 */
       if( obj.bg_click ){
+        for( let i = 0; i < this.uiBtn.length; i++ ){
+          this.uiBtn[i].setAttribute('aria-label', 'モーダルウィンドウを閉じる');
+        }
         if( this.uiBtnListeners.length === 0 ){// リスナー未登録の場合のみ、リスナー登録
           for( let i = 0; i < this.uiBtn.length; i++ ){
+            //this.uiBtn[i].setAttribute('aria-label', 'モーダルウィンドウを閉じる');
             this.uiBtnListeners[i] = e => that.setCloseBtn.setupEvent(e);
             this.uiBtn[i].addEventListener('click', this.uiBtnListeners[i]);
           }
@@ -502,6 +568,8 @@ export class Modal {
       } else {
         if( this.uiBtnListeners.length !== 0 ){// リスナー登録済の場合のみ、リスナー削除
           for( let i = 0; i < this.uiBtn.length; i++ ){
+            //console.info(this.uiBtn[i])
+            //this.uiBtn[i].removeAttribute('aria-label');
             this.uiBtn[i].removeEventListener('click', this.uiBtnListeners[i]);
             if( i === this.uiBtn.length - 1 ){
               this.uiBtnListeners = [];
@@ -576,7 +644,7 @@ export class Modal {
       if( this.that.state.response ){
         //console.info(this.that)
         this.that.animationEvents.close(this.that);
-        //console.info(this.obj.target)
+        //console.info(this.obj)
 
         // Youtube stop
         if ( this.obj.type === 'yt' ) {

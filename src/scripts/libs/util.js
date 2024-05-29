@@ -247,3 +247,101 @@ export class MediaQueries {
     }
   }
 };
+
+
+/*
+
+  FocusTrap  -----------------------------------------------
+
+*/
+export class FocusTrap {
+
+  constructor () {
+    this.ELEMENTS = [
+      'a[href]',
+      'area[href]',
+      'input:not([disabled]):not([type="hidden"]):not([aria-hidden])',
+      'select:not([disabled]):not([aria-hidden])',
+      'textarea:not([disabled]):not([aria-hidden])',
+      'button:not([disabled]):not([aria-hidden])',
+      'iframe',
+      'object',
+      'embed',
+      '[contenteditable]',
+      '[tabindex]:not([tabindex="-1"])'
+    ],
+    this.elements
+    this.eventListeners = []
+  }
+
+  keydownEvents (e) {
+    //console.info(this.elements)
+    const focusableElementsFirst = this.elements[0];
+    const focusableElementsLast = this.elements[this.elements.length - 1];
+    if (e.code === 'Tab') {
+      if (e.shiftKey) {
+        if (document.activeElement === focusableElementsFirst) {
+          e.preventDefault();
+          focusableElementsLast.focus();
+        }
+      } else {
+        // Tab
+        if (document.activeElement === focusableElementsLast) {
+          e.preventDefault();
+          focusableElementsFirst.focus();
+        }
+      }
+    }
+  }
+
+  addEvent (target,i) {
+    this.elements = [
+      ...target.querySelectorAll(this.ELEMENTS.join(','))
+    ];
+    //console.info(target,i)
+    this.eventListeners[i] = e => this.keydownEvents(e);
+    target.addEventListener('keydown', this.eventListeners[i]);
+    //target.addEventListener('keydown', { obj: this, handleEvent: this.keydownEvents });
+  }
+
+  removeEvent (target,i) {
+    //console.info(target,this.eventListeners)
+    target.removeEventListener('keydown', this.eventListeners[i]);
+    //target.addEventListener('keydown', this.keydownEvents);
+  }
+}
+
+
+/*
+
+  Escapekey  -----------------------------------------------
+
+*/
+export class Escapekey {
+
+  constructor () {
+    this.eventListeners = [],
+    this.event,
+    this.obj
+  }
+
+  keydownEvents (e) {
+    //console.info(e,this)
+    if(e.code === 'Escape'){
+      this.event.close(this.obj);
+    }
+  }
+
+  addEvent (obj,event,i) {
+    //console.info(event,i)
+    this.event = event;
+    this.obj = obj;
+    this.eventListeners[i] = e => this.keydownEvents(e);
+    obj.modal.addEventListener('keydown', this.eventListeners[i]);
+    //target.addEventListener('keydown', { obj: this, handleEvent: this.keydownEvents });
+  }
+
+  removeEvent (obj,i) {
+    obj.modal.removeEventListener('keydown', this.eventListeners[i]);
+  }
+}
