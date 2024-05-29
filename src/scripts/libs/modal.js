@@ -280,7 +280,7 @@ export class Modal {
       //console.info(that.proto.obj,that.state.next)
       //console.info(that.bg.classList,that.core.animationEnd)
 
-      function openEventBg(event){
+      function openEventObj(event){
         //console.timeEnd('open');
         //console.info(event)
         if( obj.bg_click ){/* パラメータ「bg_click」がtrueの場合 */
@@ -297,7 +297,7 @@ export class Modal {
         //console.info(that.proto.obj)
         that.proto.obj.classList.remove('hdn', 'out');
         that.proto.obj.classList.add('in');
-        that.proto.obj.addEventListener('animationend', openEventObj, {once: true});
+        that.proto.obj.addEventListener('animationend', setResponse, {once: true});
 
         that.setCloseBtn.initialize( that, obj );
         /* resizeEvent */
@@ -306,7 +306,7 @@ export class Modal {
         that.bg.classList.add('-offLoading');
       }
 
-      function openEventObj(event){
+      function setResponse(event){
         that.state.response = true;
 
         // アクセシビリティ対応 //////////////////////////////////////////////
@@ -330,8 +330,24 @@ export class Modal {
 
       that.bg.classList.remove('hdn', 'out');
       that.bg.classList.add('active', 'in');
-      //console.time('open');
-      that.bg.addEventListener('animationend', openEventBg, {once: true});
+
+      //console.info(that.proto.setdom,obj.num)
+      if( !that.proto.setdom[obj.num - 1] ){
+        // iframe初回読み込み時のみonloadイベントを入れる
+        if( obj.target.classList.contains('modal_iframe') ){
+          //console.time('onload')
+          obj.target.firstElementChild.onload = function () {
+            //console.timeEnd('onload')
+            openEventObj();
+          }
+        } else {
+          openEventObj();
+        }
+        // setdomここで
+        that.proto.setdom[obj.num - 1] = true;
+      } else {
+        openEventObj();
+      }
     },
 
     close ( that /*, obj */ ) {
@@ -474,7 +490,6 @@ export class Modal {
         //console.info(event,that.btn[i].getAttribute('data-modal').split( '__' )[0],that.proto.contents[Number(that.btn[i].getAttribute('data-modal').split( '__' )[0]) - 1])
         if( !that.proto.setdom[Number(that.btn[i].getAttribute('data-modal').split( '__' )[0]) - 1] ){
           that.modal.prepend(that.proto.contents[Number(that.btn[i].getAttribute('data-modal').split( '__' )[0]) - 1]);
-          that.proto.setdom[Number(that.btn[i].getAttribute('data-modal').split( '__' )[0]) - 1] = true;
   
           if ( _type === 'yt' ){
             youtubeAPI.playerNum = that.btn[i].getAttribute('data-ytnum') - 1;
