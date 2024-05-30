@@ -162,17 +162,35 @@ export class Modal {
   }
 
   openEvent ( obj ) {
-    //console.info(_obj)
-    /* for clickEvent */
-    if( obj.event === 'click' ){
-      this.proto.obj = document.querySelector('.modal_' + obj.num);
-      //console.info(this.proto.obj)
-      obj.target = this.proto.obj;
-      
-    /* for otherEvent */
-    } else if ( obj.event === 'ready' ) {
-      this.proto.obj = obj.target;
+    this.state.scrollPos = window.pageYOffset;
+
+    // モーダルdomを追加
+    if( !this.proto.setdom[ obj.num - 1] ){
+
+      // モーダルが存在しない場合（ボタンから開く場合）
+      if( document.querySelector(obj.target) === null ){
+        obj.target = this.proto.contents[obj.num - 1];
+        this.modal.prepend(obj.target);
+
+      // モーダルが存在する場合（onloadイベントなどで開く場合）
+      } else {
+        obj.target = document.querySelector(obj.target);
+        this.modal.prepend(obj.target);
+        this.proto.contents[obj.num - 1] = obj.target;
+      }
+
+      if ( obj.type === 'yt' ){
+        youtubeAPI.playerNum = obj.player_num - 1;
+        //console.info(youtubeAPI.playerNum,_player_num)
+        //console.info(youtubeAPI.youtubeData[playerNum].playerReady)
+        youtubeAPI.setYoutube(this.autoPlay);
+      }
+    // 2回目に開く場合
+    } else {
+      obj.target = document.querySelector(obj.target);
     }
+
+    this.proto.obj = obj.target;
 
     /* for Youtube setAutoPlay */
     if ( this.autoPlay ) {
@@ -191,9 +209,9 @@ export class Modal {
 
     //console.info('bbb',this)
     /* for iOS iframeScroll */
-    if ( this.proto.obj.classList.contains('modal_iframe') ) {
+    if ( obj.target.classList.contains('modal_iframe') ) {
       if( this.core.USER.os === 'ios' ){
-        this.proto.obj.classList.add('-ios');
+        obj.target.classList.add('-ios');
       }
     }
 
@@ -212,7 +230,7 @@ export class Modal {
       this.firstClick = false;
     }
 
-    this.proto.obj.classList.add('active');
+    obj.target.classList.add('active');
     this.animationEvents.open( this, obj );
   }
 
@@ -281,8 +299,6 @@ export class Modal {
       //console.info(that.bg.classList,that.core.animationEnd)
 
       function openEventObj(event){
-        //console.timeEnd('open');
-        //console.info(event)
         if( obj.bg_click ){/* パラメータ「bg_click」がtrueの場合 */
           that.closeBtn.classList.remove('hdn', 'out');
           that.closeBtn.classList.add('active', 'in');
@@ -337,7 +353,6 @@ export class Modal {
       that.bg.classList.remove('hdn', 'out');
       that.bg.classList.add('active', 'in');
 
-      //console.info(that.proto.setdom,obj.num)
       if( !that.proto.setdom[obj.num - 1] ){
         // iframe初回読み込み時のみonloadイベントを入れる
         if( obj.target.classList.contains('modal_iframe') ){
@@ -372,8 +387,11 @@ export class Modal {
           that.modal.setAttribute('aria-modal', false);
           that.modal.setAttribute('aria-hidden', true);
           that.modal.removeAttribute('tabindex');
-          that.trigger.setAttribute('tabindex', '-1');
-          that.trigger.focus();
+          //console.info(that.trigger === '')
+          if( that.trigger !== '' ){
+            that.trigger.setAttribute('tabindex', '-1');
+            that.trigger.focus();
+          }
           that.proto.obj.setAttribute('aria-hidden', true);
           that.closeBtn.removeAttribute('aria-label');
           that.bg.removeAttribute('aria-label');
@@ -489,23 +507,8 @@ export class Modal {
       }
 
       function clickEvent(event){
-        //console.info(_num)
         event.preventDefault();
-        that.state.scrollPos = window.pageYOffset;
-  
-        //console.info(event,that.btn[i].getAttribute('data-modal').split( '__' )[0],that.proto.contents[Number(that.btn[i].getAttribute('data-modal').split( '__' )[0]) - 1])
-        if( !that.proto.setdom[Number(that.btn[i].getAttribute('data-modal').split( '__' )[0]) - 1] ){
-          that.modal.prepend(that.proto.contents[Number(that.btn[i].getAttribute('data-modal').split( '__' )[0]) - 1]);
-  
-          if ( _type === 'yt' ){
-            youtubeAPI.playerNum = that.btn[i].getAttribute('data-ytnum') - 1;
-            //console.info(youtubeAPI.playerNum,_player_num)
-            //console.info(youtubeAPI.youtubeData[playerNum].playerReady)
-            youtubeAPI.setYoutube(that.autoPlay);
-          }
-        }
 
-        //console.info(that.btn[i].getAttribute('data-noClose'))
         // data-noClose属性が存在する場合、bg_clickをOFFにする
         if( that.btn[i].getAttribute('data-noClose') ){
           _bg_click = false;
@@ -517,8 +520,7 @@ export class Modal {
           that.trigger = that.btn[i];
 
           that.openEvent({
-            target : that.btn[i],
-            event : 'click',
+            target : '.modal_' + Number(that.btn[i].getAttribute('data-modal').split( '__' )[0]),
             num : Number(that.btn[i].getAttribute('data-modal').split( '__' )[0]),
             type : _type,
             player_num : _player_num,
@@ -677,7 +679,6 @@ export class Modal {
   open ( obj ) {
     this.openEvent({
       target : obj.target,
-      event : obj.event,
       num : obj.num,
       type : obj.type,
       player_num : obj.player_num,
