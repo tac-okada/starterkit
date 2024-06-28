@@ -54,16 +54,28 @@ const setScrollTo = core => {
 
   const scroll = hash => {
     const targetName = hash.replace('#', '');
+    let target;
 
     if ( targetName.length ) {
-      const target = document.getElementById(targetName);
+      target = document.getElementById(targetName);
       const targetRect = target.getBoundingClientRect();
       targetOffset = targetRect.top + core.win.scrollTop;
       //console.info(targetOffset)
     } else {
+      target = document.body;
       targetOffset = 0;
     }
-    gsap.to(window, {duration: scrollSpeed, scrollTo: targetOffset});
+    gsap.to(window,
+    {
+      duration: scrollSpeed,
+      scrollTo: targetOffset,
+      onComplete: () => {
+        //console.info(focus)
+        target.setAttribute('tabindex', '-1');
+        target.focus();
+      }
+    }
+    );
     return false;
   }
 

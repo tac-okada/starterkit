@@ -84,6 +84,75 @@ body {
   }
 }
 
+.swiper-play{
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 10px;
+  bottom: 20px;
+  z-index: 10;
+
+  &:before{
+    content: '';
+    @include setting.sankaku(10px, #000, 'right', false);
+    position: absolute;
+    left: calc( 50% - 5px );
+    top: calc( 50% - 5px );
+  }
+
+  &.-paused{
+    &:before{
+      content: '';
+      clip-path: none;
+      width: 4px;
+      height: 10px;
+      position: absolute;
+      left: 5px;
+      top: calc( 50% - 5px );
+      background: #000;
+    }
+  
+    &:after{
+      content: '';
+      width: 4px;
+      height: 10px;
+      position: absolute;
+      right: 5px;
+      top: calc( 50% - 5px );
+      background: #000;
+    }
+  }
+}
+
+.swiper-pause{
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 30px;
+  bottom: 20px;
+  z-index: 10;
+
+  &:before{
+    content: '';
+    width: 4px;
+    height: 10px;
+    position: absolute;
+    left: 5px;
+    top: calc( 50% - 5px );
+    background: #000;
+  }
+
+  &:after{
+    content: '';
+    width: 4px;
+    height: 10px;
+    position: absolute;
+    right: 5px;
+    top: calc( 50% - 5px );
+    background: #000;
+  }
+}
+
 @media screen and (max-width:1399px) {
 
 }

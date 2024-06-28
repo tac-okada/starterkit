@@ -4222,3 +4222,70 @@ body.absolute {
 .swiper-slide.-num3 {
   background: #b0d0ff;
 }
+
+.swiper-play {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 10px;
+  bottom: 20px;
+  z-index: 10;
+}
+.swiper-play:before {
+  content: "";
+  background-color: #000;
+  height: 10px;
+  -webkit-clip-path: polygon(0 0, 100% 50%, 0 100%);
+          clip-path: polygon(0 0, 100% 50%, 0 100%);
+  width: 8.6602540378px;
+  position: absolute;
+  left: calc(50% - 5px);
+  top: calc(50% - 5px);
+}
+.swiper-play.-paused:before {
+  content: "";
+  -webkit-clip-path: none;
+          clip-path: none;
+  width: 4px;
+  height: 10px;
+  position: absolute;
+  left: 5px;
+  top: calc(50% - 5px);
+  background: #000;
+}
+.swiper-play.-paused:after {
+  content: "";
+  width: 4px;
+  height: 10px;
+  position: absolute;
+  right: 5px;
+  top: calc(50% - 5px);
+  background: #000;
+}
+
+.swiper-pause {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 30px;
+  bottom: 20px;
+  z-index: 10;
+}
+.swiper-pause:before {
+  content: "";
+  width: 4px;
+  height: 10px;
+  position: absolute;
+  left: 5px;
+  top: calc(50% - 5px);
+  background: #000;
+}
+.swiper-pause:after {
+  content: "";
+  width: 4px;
+  height: 10px;
+  position: absolute;
+  right: 5px;
+  top: calc(50% - 5px);
+  background: #000;
+}
