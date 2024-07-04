@@ -120,6 +120,7 @@ export class Core {
     functions.setPopupWin(this)
     functions.setScrollTo(this);
     functions.setAccordion();
+    functions.setTab();
     functions.setTelCall(this);
     functions.setCopy();
     // フォームまわり

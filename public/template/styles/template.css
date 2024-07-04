@@ -2089,7 +2089,8 @@ br.spS {
 }
 .util .btnLabel > input[type=radio],
 .util .btnLabel > input[type=checkbox] {
-  display: none;
+  opacity: 0;
+  position: absolute;
 }
 .util .selectCol {
   position: relative;
@@ -2140,8 +2141,7 @@ br.spS {
   width: 49%;
   margin-bottom: -2px;
 }
-.util .history_tab > li > a,
-.util .history_tab > li > span {
+.util .history_tab > li > button {
   display: block;
   width: 100%;
   font-size: var(--fsize16);
@@ -2151,16 +2151,14 @@ br.spS {
   position: relative;
   box-sizing: border-box;
 }
-.util .history_tab > li > a,
-.util .history_tab > li > span {
+.util .history_tab > li > button {
   color: #fff;
   background: var(--btn-color);
   border-radius: 8px 8px 0 0;
   padding: 14px 0 15px;
   pointer-events: auto;
 }
-.util .history_tab > li > a:before,
-.util .history_tab > li > span:before {
+.util .history_tab > li > button:before {
   content: "";
   background-color: #fff;
   height: 8px;
@@ -2171,8 +2169,7 @@ br.spS {
   right: 10px;
   top: calc(50% - 4px);
 }
-.util .history_tab > li.active > a,
-.util .history_tab > li.active > span {
+.util .history_tab > li > button.active {
   color: var(--btn-color);
   border-top: 2px solid var(--btn-color);
   border-right: 2px solid var(--btn-color);
@@ -3456,13 +3453,11 @@ br.spS {
   .util .confirm {
     padding: 3.13vw;
   }
-  .util .history_tab > li > a,
-  .util .history_tab > li > span {
+  .util .history_tab > li > button {
     font-size: 4.17vw;
     padding: 3.65vw 0 3.91vw;
   }
-  .util .history_tab > li > a:before,
-  .util .history_tab > li > span:before {
+  .util .history_tab > li > button:before {
     background-color: #fff;
     height: 2.09vw;
     -webkit-clip-path: polygon(0 0, 100% 50%, 0 100%);
@@ -3471,8 +3466,7 @@ br.spS {
     right: 2.61vw;
     top: calc(50% - 1.04vw);
   }
-  .util .history_tab > li.active > a,
-  .util .history_tab > li.active > span {
+  .util .history_tab > li > button.active > button {
     padding: 3.65vw 0 3.91vw;
   }
   .util .history_lists > li {

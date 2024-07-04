@@ -941,7 +941,8 @@
 
     >input[type="radio"],
     >input[type="checkbox"]{
-      display: none;
+      opacity: 0;
+      position: absolute;
     }
   }
 
@@ -994,8 +995,7 @@
       width: 49%;
       margin-bottom: -2px;
   
-      >a,
-      >span{
+      >button{
         display: block;
         width: 100%;
         font-size: var(--fsize16);
@@ -1006,8 +1006,7 @@
         box-sizing: border-box;
       }
 
-      >a,
-      >span{
+      >button{
         color: #fff;
         background: var(--btn-color);
         border-radius: 8px 8px 0 0;
@@ -1021,11 +1020,8 @@
           right: 10px;
           top: calc( 50% - 4px );
         }
-      }
 
-      &.active{
-        >a,
-        >span{
+        &.active{
           color: var(--btn-color);
           border-top: 2px solid var(--btn-color);
           border-right: 2px solid var(--btn-color);
@@ -1881,8 +1877,7 @@
     // history ---------------------------------
     .history_tab{
       >li{
-        >a,
-        >span{
+        >button{
           font-size:  setting.px-to-vw(32px, 767px);
           padding: setting.px-to-vw(28px, 767px) 0 setting.px-to-vw(30px, 767px);
           &:before{
@@ -1890,12 +1885,11 @@
             right: setting.px-to-vw(20px, 767px);
             top: calc( 50% - setting.px-to-vw(8px, 767px) );
           }
-        }
 
-        &.active{
-          >a,
-          >span{
-            padding: setting.px-to-vw(28px, 767px) 0 setting.px-to-vw(30px, 767px);
+          &.active{
+            >button{
+              padding: setting.px-to-vw(28px, 767px) 0 setting.px-to-vw(30px, 767px);
+            }
           }
         }
       }
