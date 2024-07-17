@@ -227,9 +227,8 @@ input[type=button] {
   background: none;
   border: none;
   border-radius: 0;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  -moz-appearance: none;
+       appearance: none;
 }
 
 input[type=submit],
@@ -245,9 +244,8 @@ select {
   border-radius: 0;
   outline: none;
   vertical-align: middle;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  -moz-appearance: none;
+       appearance: none;
 }
 
 select::-ms-expand {
@@ -261,9 +259,8 @@ textarea {
   border: none;
   border-radius: 0;
   outline: none;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  -moz-appearance: none;
+       appearance: none;
 }
 
 button {
@@ -275,9 +272,8 @@ button {
   margin: 0;
   padding: 0;
   vertical-align: middle;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  -moz-appearance: none;
+       appearance: none;
   cursor: pointer;
 }
 

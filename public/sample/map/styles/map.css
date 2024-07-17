@@ -868,132 +868,27 @@ br.spS {
   margin: 0 !important;
 }
 
-#filters {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 0;
-  pointer-events: none;
-}
-
-.unko {
-  width: 100%;
+.map_outer {
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  margin-bottom: 60px;
-}
-.unko li {
-  width: 25%;
-  position: relative;
-  cursor: pointer;
-  transition: background 0.3s var(--easeOutMoment);
-  overflow: hidden;
-  /*
-      &:hover{
-        background: #f6f6f6;
-      }
-  */
-}
-.unko li picture {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-.unko li img {
-  width: 100%;
-  height: auto;
-  opacity: 0.3;
-}
-.unko li:before {
-  content: "unko.png";
-  position: absolute;
-  left: 0;
-  top: 0;
-  font-size: 10px;
-  line-height: 1;
-  background: #000;
-  color: #fff;
-  z-index: 2;
-  pointer-events: none;
-}
-.unko li:nth-child(1):after {
-  content: "";
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  border: 10px solid #fff;
-  pointer-events: none;
-  box-sizing: border-box;
-}
-.unko li:nth-child(1) img {
-  filter: url(#rgbFlicker);
-  opacity: 1;
-}
-.unko li:nth-child(1):before {
-  content: "RGBずらし";
-}
-.unko li:nth-child(2) img {
-  filter: url(#noise);
-  opacity: 1;
-}
-.unko li:nth-child(2):before {
-  content: "ノイズ";
-}
-.unko li:nth-child(3) img {
-  filter: url(#duotone);
-  opacity: 1;
-}
-.unko li:nth-child(3):before {
-  content: "ランダムトーンチェンジ";
-}
-.unko li:nth-child(4) img {
-  filter: url(#handWriting);
-  opacity: 1;
-}
-.unko li:nth-child(4):before {
-  content: "手書き風ノイズ";
-}
-.unko li:nth-child(5) img {
-  filter: url(#nega);
-  opacity: 1;
-}
-.unko li:nth-child(5):before {
-  content: "ネガ反転";
-}
-.unko li:nth-child(6) img {
-  filter: url(#morphology);
-  opacity: 1;
-}
-.unko li:nth-child(6):before {
-  content: "侵食（濃い色の拡大）＋ぼかし（縦軸）";
-}
-.unko li:nth-child(7) img {
-  filter: url(#distantLight);
-  opacity: 1;
-}
-.unko li:nth-child(7):before {
-  content: "光源の移動";
-}
-.unko li:nth-child(8) img {
-  filter: url(#offset);
-  opacity: 1;
-}
-.unko li:nth-child(8):before {
-  content: "手書きノイズ＋画像ずらし";
+  max-width: 960px;
+  margin: 0 auto;
 }
 
-@media screen and (max-width: 1024px) {
-  .unko li {
-    width: 50%;
-  }
+.map {
+  width: 300px;
+  height: 300px;
 }
-@media screen and (max-width: 767px) {
-  .unko li {
-    width: 100%;
-  }
+.map iframe {
+  width: 100%;
+  height: 100%;
+}
+.map iframe .leaflet-left {
+  display: none !important;
 }
