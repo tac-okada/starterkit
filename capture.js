@@ -1,30 +1,19 @@
-/*
-const puppeteer = require('puppeteer');
-
-(async () => {
-  const browser = await puppeteer.launch({
-    headless: true,
-    executablePath: '/Applications/Chromium.app'
-  });
-  const page = await browser.newPage();
-  page.setViewport({width: 1024, height: 800})
-  const url = 'https://www.yahoo.co.jp/'
-  await page.goto(url, { waitUntil: 'domcontentloaded' });
-  await page.screenshot({path: 'capture.png', fullPage:true})
-  console.log("save screenshot: " + url)
-  await browser.close()
-})();
-*/
-
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 
 // URLの一覧を読み込むファイルパス.
 const URL_LIST_PATH = 'screenshot/url-list.txt';
+
 // スクリーンショット出力先.
 const SCREENSHOT_DIR = 'screenshot/capture';
+
 // ビューポート設定.
-const VIEWPORT = { width: 750, height: 1080, deviceScaleFactor: 1 };
+const VIEWPORT = {
+  width: 750,
+  height: 1080,
+  deviceScaleFactor: 1
+};
+
 // 時間差設定用
 function wait(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -43,7 +32,11 @@ function wait(ms) {
     fs.mkdirSync(SCREENSHOT_DIR);
     
     // Puppeteer 起動！
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+      headless: true,
+      //slowMo: 1000
+      //executablePath: '/Applications/Chromium.app/Contents/MacOS/Chromium'
+    });
     
     // ページごとにスクショ作成
     let index = 1;
@@ -59,34 +52,58 @@ function wait(ms) {
         if(!url) {
             continue;
         }
-        await page.goto(url);
+        await page.goto(url, { waitUntil: 'domcontentloaded' });
 
-        await wait(1000);
+        // 2秒待つ（ローディングが終わるまで）
+        await wait(2000);
 
         // ページ内でJS実行.
         await page.evaluate(_ => {
-            // クッキー同意ボタン押す.
+          // MYページのボタンを下に固定
+          const myScan = document.querySelector('.myScan');
+          if( myScan ){
+            myScan.classList.remove('stiky_area');
+          }
+
+          // TOPページのボタンを下に固定
+          const topEntry = document.querySelector('.topEntry');
+          if( topEntry ){
+            topEntry.classList.remove('stiky_area');
+          }
+
+          // モーダルが開いていたら消す
+          const modal = document.querySelector('.modal_contents.active');
+          const modalClose = document.querySelector('#modal_close');
+          const modalBg = document.querySelector('#modal_bg');
+          if( modal ){
+            modal.parentNode.removeChild(modal);
+            modalClose.parentNode.removeChild(modalClose);
+            modalBg.parentNode.removeChild(modalBg);
+            document.body.classList.remove('fixed');
+          }
+
+          // 下までスクロール
 /*
-            const button = document.querySelector('[data-action="enable"]');
-            if(button) {
-                button.click();
-            }
+          setTimeout(() => {
+            window.scrollTo(0, document.body.scrollHeight);
+          }, 100);
 */
-            // 下までスクロールして戻す.
-            scroll(0, 0);
-/*
-            setTimeout(() => {
-                scroll(0, 0);
-            }, 200);
-*/
+
         });
 
+        // 1秒待つ
+        await wait(1000);
+
+        // スクリーンショット撮影！
         await page.screenshot({
             path: filePath,
-            fullPage: true,
+            fullPage: true
         });
         console.log(`screenshot: ${url}`);
         index++;
+
+        // ページ閉じる
+        await page.close();
     }
 
     await browser.close();
