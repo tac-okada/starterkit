@@ -27,6 +27,8 @@
   height: 100%;
   overflow: hidden;
 
+  @include setting.notScrollbar;
+
   >img{
     position: absolute;
     left: 0;
@@ -38,13 +40,6 @@
     &:first-child{
       z-index: 2;
     }
-  }
-
-  scrollbar-width: none;// ff用
-  -ms-overflow-style: none; // ie用
-
-  &::-webkit-scrollbar{// chrome,safari,edge用
-    display: none;
   }
 }
 

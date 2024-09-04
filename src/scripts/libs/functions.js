@@ -1,21 +1,4 @@
 /*
-  ie対応consolelog/setConsoleIe/  -----------------------------------------------
-  consoleを仕込むとIEでエラーが出るのを回避
-*/
-const setConsoleIe = () => {
-  if( ! ( 'console' in window ) ){
-    window.console = {};
-    window.console.info = function ( str ) {
-      return str;
-    };
-    window.console.log = function ( str ) {
-      return str;
-    };
-  };
-};
-
-
-/*
   ポップアップ制御/setPopupWin/  -----------------------------------------------
   ポップアップ時のサイズなどの制御
   スマホ・タブレット時はtarget='_blank'に置換する
@@ -446,4 +429,4 @@ const setCopy = () => {
   }
 }
 
-export const functions = { setConsoleIe, setPopupWin, setScrollTo, setAccordion, setTab, setTelCall, setNoEnterkey, setLabelChanger, setLengthChecker, setCrsl, setLine, setCopy }
+export const functions = { setPopupWin, setScrollTo, setAccordion, setTab, setTelCall, setNoEnterkey, setLabelChanger, setLengthChecker, setCrsl, setLine, setCopy }

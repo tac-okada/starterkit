@@ -116,7 +116,6 @@ export class Core {
   loadEvents () {
     //console.info(functions)
     /* よく使う関数ここで実行 */
-    functions.setConsoleIe();
     functions.setPopupWin(this)
     functions.setScrollTo(this);
     functions.setAccordion();

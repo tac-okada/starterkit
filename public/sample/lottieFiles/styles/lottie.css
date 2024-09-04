@@ -895,6 +895,9 @@ br.spS {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
+.bg_img::-webkit-scrollbar {
+  display: none;
+}
 .bg_img > img {
   position: absolute;
   left: 0;
@@ -905,9 +908,6 @@ br.spS {
 }
 .bg_img > img:first-child {
   z-index: 2;
-}
-.bg_img::-webkit-scrollbar {
-  display: none;
 }
 
 .lottieSample {
