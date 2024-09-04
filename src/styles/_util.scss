@@ -72,8 +72,8 @@
     font-weight: bold;
   }
 
-  // size：10px〜22px
-  @for $i from 1 through 13 {
+  // size：10px〜72px
+  @for $i from 1 through 63 {
     .fsize#{ $i + 9 }{
       font-size: 0.5675 + setting.round-decimal( $i * 0.0625, 4) + rem !important;
     }
@@ -672,9 +672,9 @@
 
   // table ---------------------------------
   .tableScroller{
-    @include setting.notScrollbar();
     width: 100%;
     overflow-x: scroll; 
+    @include setting.notScrollbar();
   }
 
   .table{
@@ -723,6 +723,8 @@
     transition: background .3s var(--easeOutCubic);
     background-color: #fff;
 
+    @include setting.notScrollbar();
+
     &:focus{
       background: #fff;
     }
@@ -738,8 +740,6 @@
     &.error{
       background: rgba(255,0,0,.1);
     }
-
-    @include setting.notScrollbar();
   }
 
   select{
@@ -1516,8 +1516,8 @@
     }
 
     // font ---------------------------------
-    // size：20px〜44px
-    @for $i from 1 through 13 {
+    // size：20px〜72px
+    @for $i from 1 through 63 {
       .fsize#{ $i + 9 }{
         $i: $i + 9;
         font-size: setting.px-to-vw(2px * $i, 767px) !important;

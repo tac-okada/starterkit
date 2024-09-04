@@ -19,8 +19,8 @@
 
 code{
   border-radius: var(--radius1);
-  @include setting.notScrollbar;
   max-height: 200px;
+  @include setting.notScrollbar;
 }
 
 .util{

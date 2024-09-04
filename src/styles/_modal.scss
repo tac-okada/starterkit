@@ -98,8 +98,8 @@
 // モーダル内スクロールOFF
 body{
   &.iframe{
-    @include setting.notScrollbar();
     height: auto;
+    @include setting.notScrollbar();
   }
 }
 
