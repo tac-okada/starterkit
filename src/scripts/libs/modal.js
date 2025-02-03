@@ -469,7 +469,7 @@ export class Modal {
         that.proto.num.push(Number(that.btn[i].getAttribute('data-modal').split( '__' )[0]));
         //console.info(that.proto)
         if ( _type === 'yt' ){
-          _yt_id = that.btn[i].getAttribute('data-modal').split( '__' )[2];	
+          _yt_id = that.btn[i].getAttribute('data-modal').split( 'yt__')[1];
           youtubeAPI.youtubeData.push({
             num: Number(_player_num),
             youtubeId: _yt_id,

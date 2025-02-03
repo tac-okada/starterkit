@@ -31,7 +31,7 @@ const setPopupWin = core => {
   URLに「#」が付く場合も、ディレイ後にアニメーションして指定位置までスクロールする
 */
 const setScrollTo = core => {
-  const trigger = document.querySelectorAll('a[href*="#"],area[href*="#"]');
+  const trigger = document.querySelectorAll('a[href^="#"],area[href^="#"]');
   const scrollSpeed = .5;// スクロール速度
   let targetOffset;
 
