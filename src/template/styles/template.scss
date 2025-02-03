@@ -1,8 +1,5 @@
-@use "../../styles/setting";
-@use "../../styles/reset";
+@use "../../styles/mixin";
 @use "../../styles/common";
-@use "../../styles/util";
-@use "../../styles/modal";
 
 .wrap{
   width: 100%;
@@ -20,7 +17,7 @@
 code{
   border-radius: var(--radius1);
   max-height: 200px;
-  @include setting.notScrollbar;
+  @include mixin.notScrollbar;
 }
 
 .util{

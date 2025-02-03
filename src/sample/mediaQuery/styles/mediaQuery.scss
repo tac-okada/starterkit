@@ -1,0 +1,39 @@
+@use "../../../styles/mixin";
+
+.btnHOVER,
+.btnNOTHOVER,
+.btnPC,
+.btnSP,
+.btnPEN{
+  display: none !important;
+}
+
+@media (any-hover: hover){
+  .btnHOVER{
+    display: flex !important;
+  }
+}
+
+@media (any-hover: none){
+  .btnNOTHOVER{
+    display: flex !important;
+  }
+}
+
+@media (hover: hover) and (pointer: fine){
+  .btnPC{
+    display: flex !important;
+  }
+}
+
+@media (hover: none) and (any-pointer: coarse){
+  .btnSP{
+    display: flex !important;
+  }
+}
+
+@media (hover: none) and (any-pointer: fine){
+  .btnPEN{
+    display: flex !important;
+  }
+}

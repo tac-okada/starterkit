@@ -1,5 +1,8 @@
-@use "sass:math";
-@use "setting";
+@use "mixin";
+@use "variable";
+@use "reset";
+@use "util";
+@use "modal";
 
 /*============================================================
   common
@@ -50,7 +53,7 @@ html {
   // iOS15用：ここまで
 }
 body {
-  font-feature-settings: 'palt' 1;
+  font-feature-mixins: 'palt' 1;
   color: var(--txt-color);
   width: 100%;
   height: 100%;
@@ -93,31 +96,31 @@ a {
   text-decoration: none;
   cursor: pointer;
   color: var(--link-color);
+
+  &:link { text-decoration: none;}
+  &:visited {
+    color: var(--linkVisited-color);
+    text-decoration: none;
+  }
+  &:focus { text-decoration: none;}
+  &:active { text-decoration: none;}
+  
+  &[href^="tel"]{
+    color: inherit;
+  }
+
+  @media (any-hover: hover){
+    &:hover { text-decoration: underline; }
+  }
 }
 
-a:link { text-decoration: none;}
-a:visited {
-  color: var(--linkVisited-color);
-  text-decoration: none;
-}
-a:hover { text-decoration: none;}
-a:focus { text-decoration: none;}
-a:active { text-decoration: none;}
-
-a[href^="tel"]{
-  color: inherit;
-}
-
-.hover:hover{
-  opacity: 1;
-}
-
-@media (min-width: setting.$bpTab) {
+@media (any-hover: hover){
   .hover{
     transition: opacity .3s;
-  }
-  .hover:hover{
-    opacity: .7;
+
+    &:hover{
+      opacity: .7;
+    }
   }
 }
 
@@ -568,7 +571,7 @@ br.spS{
   display: none !important;
 }
 
-@media screen and (max-width: setting.$bpTab) {
+@media screen and (max-width: mixin.$bpTab) {
   br.pc{
     display: none !important;
   }
@@ -590,7 +593,7 @@ br.spS{
   }
 }
 
-@media screen and (max-width: setting.$bpSp) {
+@media screen and (max-width: mixin.$bpSp) {
   br.pc{
     display: none !important;
   }
@@ -612,7 +615,7 @@ br.spS{
   }
 }
 
-@media screen and (max-width: setting.$bpSpS) {
+@media screen and (max-width: mixin.$bpSpS) {
   br.spS{
     display: inline !important;
   }

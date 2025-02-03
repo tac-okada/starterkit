@@ -1,8 +1,5 @@
-@use "../../../styles/setting";
-@use "../../../styles/reset";
+@use "../../../styles/mixin";
 @use "../../../styles/common";
-@use "../../../styles/util";
-@use "../../../styles/modal";
 
 /*============================================================
   common
@@ -94,7 +91,7 @@ body {
 
   &:before{
     content: '';
-    @include setting.sankaku(10px, #000, 'right', false);
+    @include mixin.sankaku(10px, #000, 'right', false);
     position: absolute;
     left: calc( 50% - 5px );
     top: calc( 50% - 5px );

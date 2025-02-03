@@ -1,0 +1,178 @@
+@use "sass:math";
+@use "sass:meta";
+
+// ブレイクポイント
+$bpPc : 960px;
+$bpTab : 1024px;
+$bpSp : 767px;
+$bpSpS : 374px;
+
+// 小数点以下の計算関連 ▼ここから▼
+// Round (四捨五入)
+@function round-decimal ($number, $digits: 0) {
+	@return to-fixed($number, $digits, 'round');
+}
+
+// Ceil (切り上げ)
+@function ceil-decimal ($number, $digits: 0) {
+	@return to-fixed($number, $digits, 'ceil');
+}
+
+// Floor (切り捨て)
+@function floor-decimal ($number, $digits: 0) {
+	@return to-fixed($number, $digits, 'floor');
+}
+
+@function to-fixed ($number, $digits: 0, $round: 'round') {
+  $n: 1;
+  // $number must be a number
+  @if meta.type-of($number) != number {
+    @warn '#{ $number } is not a number.';
+    @return $number;
+  }
+  // $digits must be a unitless number
+  @if meta.type-of($digits) != number {
+    @warn '#{ $digits } is not a number.';
+    @return $number;
+  } @else if not math.is-unitless($digits) {
+    @warn '#{ $digits } has a unit.';
+    @return $number;
+  }
+  @for $i from 1 through $digits {
+    $n: $n * 10;
+  }
+  @if $round == 'round' {
+    @return math.div(math.round($number * $n) , $n);
+  } @else if $round == 'ceil' {
+    @return math.div(math.ceil($number * $n) , $n);
+  } @else if $round == 'floor' {
+    @return math.div(math.floor($number * $n) , $n);
+  } @else {
+    @warn '#{ $round } is undefined keyword.';
+    @return $number;
+  }
+}
+// 小数点以下の計算関連 ▲ここまで▲
+
+// clearfix
+@mixin clearfix {
+  zoom: 1;
+  &:before,
+  &:after {
+    display: block;
+    height: 0;
+    visibility: hidden;
+    content: "\0020";
+  }
+  &:after {
+    clear: both;
+  }
+}
+// @include clearfix();
+
+
+// レティナ対応 背景画像 mixin ここから
+@mixin retinaBg() {
+  @media only screen and (-webkit-min-device-pixel-ratio: 2),
+         only screen and (   min--moz-device-pixel-ratio: 2),
+         only screen and (     -o-min-device-pixel-ratio: 2/1),
+         only screen and (        min-device-pixel-ratio: 2),
+         only screen and (                min-resolution: 192dpi),
+         only screen and (                min-resolution: 2dppx){
+    @content;
+  }
+}
+
+// レティナ対応 サイズ算出
+@function retinaImg($width) {
+  @return $width / 2;
+}
+// width: retinaImg(100px);
+
+// サイズ vw変換
+@function px-to-vw($px, $width){
+  @return round-decimal(calc( $px / $width ) * 100, 2) + (vw);
+}
+// width: px-to-vw(100px,1400px);
+
+// サイズ パーセント変換
+@function px-to-per($px, $parent_width){
+  @return round-decimal( math.percentage( $px / $parent_width ) , 2);
+}
+// width: px-to-per(100px,950px);
+
+// 三角形 生成
+@mixin sankaku($width, $color, $dir, $isHalf:false){
+  background-color: $color;
+
+  @if ($dir == 'up'){
+    width: $width;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+
+    @if ($isHalf){
+      height: calc($width / 2);
+    } @else {
+      height: calc($width / 2 * tan(60deg));
+    }
+  }
+
+  @if ($dir == 'right'){
+    height: $width;
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+
+    @if ($isHalf){
+      width: calc($width / 2);
+    } @else {
+      width: calc($width / 2 * tan(60deg));
+    }
+  }
+
+  @if ($dir == 'down'){
+    width: $width;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+
+    @if ($isHalf){
+      height: calc($width / 2);
+    } @else {
+      height: calc($width / 2 * tan(60deg));
+    }
+  }
+
+  @if ($dir == 'left'){
+    height: $width;
+    clip-path: polygon(0 50%, 100% 0, 100% 100%);
+
+    @if ($isHalf){
+      width: calc($width / 2);
+    } @else {
+      width: calc($width / 2 * tan(60deg));
+    }
+  }
+}
+// @include setting.sankaku(10px, #000, 'right', true);
+
+@mixin ibBox {
+  letter-spacing: -1em;
+  word-spacing: 0.1em;
+  font-size: 0;
+}
+
+@mixin textShadow($color) {
+  text-shadow: 
+    $color 2px 0px,  $color -2px 0px,
+    $color 0px -2px, $color 0px 2px,
+    $color 2px 2px , $color -2px 2px,
+    $color 2px -2px, $color -2px -2px,
+    $color 1px 2px,  $color -1px 2px,
+    $color 1px -2px, $color -1px -2px,
+    $color 2px 1px,  $color -2px 1px,
+    $color 2px -1px, $color -2px -1px;
+}
+
+@mixin notScrollbar{
+  scrollbar-width: none;// ff用
+  -ms-overflow-style: none; // ie用
+  &::-webkit-scrollbar{// chrome,safari,edge用
+    display: none;
+  }
+}

@@ -1,0 +1,38 @@
+.btnHOVER,
+.btnNOTHOVER,
+.btnPC,
+.btnSP,
+.btnPEN {
+  display: none !important;
+}
+
+@media (any-hover: hover) {
+  .btnHOVER {
+    display: -ms-flexbox !important;
+    display: flex !important;
+  }
+}
+@media (any-hover: none) {
+  .btnNOTHOVER {
+    display: -ms-flexbox !important;
+    display: flex !important;
+  }
+}
+@media (hover: hover) and (pointer: fine) {
+  .btnPC {
+    display: -ms-flexbox !important;
+    display: flex !important;
+  }
+}
+@media (hover: none) and (any-pointer: coarse) {
+  .btnSP {
+    display: -ms-flexbox !important;
+    display: flex !important;
+  }
+}
+@media (hover: none) and (any-pointer: fine) {
+  .btnPEN {
+    display: -ms-flexbox !important;
+    display: flex !important;
+  }
+}

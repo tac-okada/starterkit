@@ -1,5 +1,5 @@
 @use "sass:math";
-@use "setting";
+@use "mixin";
 
 /*  baseTmpl
 ------------------------------------------------*/
@@ -75,7 +75,7 @@
   // size：10px〜72px
   @for $i from 1 through 63 {
     .fsize#{ $i + 9 }{
-      font-size: 0.5675 + setting.round-decimal( $i * 0.0625, 4) + rem !important;
+      font-size: 0.5675 + mixin.round-decimal( $i * 0.0625, 4) + rem !important;
     }
   }
 
@@ -187,24 +187,24 @@
       position: absolute;
       left: 6px;
       top: .6em;
-      @include setting.sankaku(6px, var(--link-color), 'right');
+      @include mixin.sankaku(6px, var(--link-color), 'right');
     }
 
     &.-left{
       &:before{
-        @include setting.sankaku(6px, var(--link-color), 'left');
+        @include mixin.sankaku(6px, var(--link-color), 'left');
       }
     }
 
     &.-up{
       &:before{
-        @include setting.sankaku(6px, var(--link-color), 'up');
+        @include mixin.sankaku(6px, var(--link-color), 'up');
       }
     }
 
     &.-down{
       &:before{
-        @include setting.sankaku(6px, var(--link-color), 'down');
+        @include mixin.sankaku(6px, var(--link-color), 'down');
       }
     }
 
@@ -272,58 +272,77 @@
       margin-right: 0;
     }
 
-    &:hover{
+    &:active{
       background-color: #fff;
       color: var(--btn-color);
+    }
 
-      &.-sub{
+    @media (any-hover: hover){
+      &:hover{
         background-color: #fff;
         color: var(--btn-color);
-
+  
+        &.-sub{
+          background-color: #fff;
+          color: var(--btn-color);
+  
+          &.-file{
+            &:before{
+              background-image: url(/images/ico_file_gray.svg);
+            }
+          }
+    
+          &.-blank{
+            &:before{
+              background-image: url(/images/ico_blank_gray.svg);
+            }
+          }
+        }
+  
         &.-file{
           &:before{
-            background-image: url(/images/ico_file_gray.svg);
+            background-image: url(/images/ico_file.svg);
           }
         }
   
         &.-blank{
           &:before{
-            background-image: url(/images/ico_blank_gray.svg);
+            background-image: url(/images/ico_blank.svg);
           }
         }
-      }
-
-      &.-file{
-        &:before{
-          background-image: url(/images/ico_file.svg);
+  
+        &.-close{
+          &:before{
+            transform: rotate(0);
+            background-color: var(--btn-color);
+          }
+          &:after{
+            transform: rotate(0);
+            background-color: var(--btn-color);
+          }
         }
-      }
-
-      &.-blank{
-        &:before{
-          background-image: url(/images/ico_blank.svg);
-        }
-      }
-
-      &.-close{
-        &:before{
-          transform: rotate(0);
-          background-color: var(--btn-color);
-        }
-        &:after{
-          transform: rotate(0);
-          background-color: var(--btn-color);
-        }
-      }
-
-      &.-nega{
-        background-color: var(--btn-color);
-        color: #fff;
-
-        &.-sub{
+  
+        &.-nega{
           background-color: var(--btn-color);
           color: #fff;
-
+  
+          &.-sub{
+            background-color: var(--btn-color);
+            color: #fff;
+  
+            &.-file{
+              &:before{
+                background-image: url(/images/ico_file_w.svg);
+              }
+            }
+      
+            &.-blank{
+              &:before{
+                background-image: url(/images/ico_blank_w.svg);
+              }
+            }
+          }
+  
           &.-file{
             &:before{
               background-image: url(/images/ico_file_w.svg);
@@ -335,26 +354,14 @@
               background-image: url(/images/ico_blank_w.svg);
             }
           }
-        }
-
-        &.-file{
-          &:before{
-            background-image: url(/images/ico_file_w.svg);
-          }
-        }
   
-        &.-blank{
-          &:before{
-            background-image: url(/images/ico_blank_w.svg);
-          }
-        }
-
-        &.-close{
-          &:before{
-            background-color: #fff;
-          }
-          &:after{
-            background-color: #fff;
+          &.-close{
+            &:before{
+              background-color: #fff;
+            }
+            &:after{
+              background-color: #fff;
+            }
           }
         }
       }
@@ -642,7 +649,7 @@
     @for $i from 1 through 6 {
       $x: $i * 6;
       &0#{$i}{
-        font-size: 0.755 + setting.round-decimal( $x * 0.0625, 4) + rem;
+        font-size: 0.755 + mixin.round-decimal( $x * 0.0625, 4) + rem;
         line-height: 1.4;
         font-weight: bold;
         position: relative;
@@ -674,7 +681,7 @@
   .tableScroller{
     width: 100%;
     overflow-x: scroll; 
-    @include setting.notScrollbar();
+    @include mixin.notScrollbar();
   }
 
   .table{
@@ -723,7 +730,7 @@
     transition: background .3s var(--easeOutCubic);
     background-color: #fff;
 
-    @include setting.notScrollbar();
+    @include mixin.notScrollbar();
 
     &:focus{
       background: #fff;
@@ -754,8 +761,10 @@
     width: 100%;
     transition:  background .2s var(--easeOutCubic);
 
-    &:hover{
-      background: #f9f9f9;
+    @media (any-hover: hover){
+      &:hover{
+        background: #f9f9f9;
+      }
     }
   }
 
@@ -869,10 +878,12 @@
     transition: border .2s var(--easeOutCubic),
       background .2s var(--easeOutCubic);
 
-    &:hover{
-      &:not(.checked){
-        background: #f9f9f9;
-        border: 2px solid #c6c6c6;
+    @media (any-hover: hover){
+      &:hover{
+        &:not(.checked){
+          background: #f9f9f9;
+          border: 2px solid #c6c6c6;
+        }
       }
     }
 
@@ -952,7 +963,7 @@
 
     &:before{
       content: '';
-      @include setting.sankaku(12px, #000, 'down', true);
+      @include mixin.sankaku(12px, #000, 'down', true);
       position: absolute;
       right: 15px;
       top: calc( 50% - 3px );
@@ -1015,7 +1026,7 @@
   
         &:before{
           content: '';
-          @include setting.sankaku(8px, #fff, 'right');
+          @include mixin.sankaku(8px, #fff, 'right');
           position: absolute;
           right: 10px;
           top: calc( 50% - 4px );
@@ -1126,13 +1137,13 @@
   
     >.prev{
       &:before{
-        @include setting.sankaku(8px, #fff, 'left');
+        @include mixin.sankaku(8px, #fff, 'left');
       }
     }
   
     >.next{
       &:before{
-        @include setting.sankaku(8px, #fff, 'right');
+        @include mixin.sankaku(8px, #fff, 'right');
       }
     }
   
@@ -1200,7 +1211,7 @@
       &:before{
         content: '';
         position: absolute;
-        @include setting.sankaku(8px, #fff, 'right');
+        @include mixin.sankaku(8px, #fff, 'right');
         right: 6px;
         top: calc( 50% - 4px );
       }
@@ -1368,124 +1379,18 @@
       position: absolute;
       left: calc( 50% - 6px );
       bottom: -5px;
-      @include setting.sankaku(12px, rgba(0,0,0,.8), 'down', true);
+      @include mixin.sankaku(12px, rgba(0,0,0,.8), 'down', true);
     }
   }
 }
 
 
-@media screen and (max-width: setting.$bpTab){
-  .util{
-    // btn ---------------------------------
-    .btn{
-      &:hover{
-        background-color: var(--btn-color);
-        color: #fff;
-  
-        &.-sub{
-          background-color: var(--btn-color);
-          color: #fff;
+@media screen and (max-width: mixin.$bpTab){
 
-          &.-file{
-            &:before{
-              background-image: url(/images/ico_file_w.svg);
-            }
-          }
-    
-          &.-blank{
-            &:before{
-              background-image: url(/images/ico_blank_w.svg);
-            }
-          }
-        }
-
-        &.-nega{
-          background-color: #fff;
-          color: var(--btn-color);
-  
-          &.-sub{
-            background-color: #fff;
-            color: var(--btn-color);
-
-            &.-file{
-              &:before{
-                background-image: url(/images/ico_file_gray.svg);
-              }
-            }
-      
-            &.-blank{
-              &:before{
-                background-image: url(/images/ico_blank_gray.svg);
-              }
-            }
-          }
-
-          &.-file{
-            &:before{
-              background-image: url(/images/ico_file.svg);
-            }
-          }
-    
-          &.-blank{
-            &:before{
-              background-image: url(/images/ico_blank.svg);
-            }
-          }
-    
-          &.-close{
-            &:before{
-              background-color: var(--btn-color);
-            }
-            &:after{
-              background-color: var(--btn-color);
-            }
-          }
-        }
-
-        &.-file{
-          &:before{
-            background-image: url(/images/ico_file_w.svg);
-          }
-        }
-  
-        &.-blank{
-          &:before{
-            background-image: url(/images/ico_blank_w.svg);
-          }
-        }
-  
-        &.-close{
-          &:before{
-            transform: rotate(-45deg);
-            background-color: #fff;
-          }
-          &:after{
-            transform: rotate(45deg);
-            background-color: #fff;
-          }
-        }
-      }
-    }
-
-    // form --------------------------------- 
-    select{
-      &:hover{
-        background: none;
-      }
-    }
-    .btnLabel{
-      &:hover{
-        &:not(.checked){
-          background: none;
-          border: 2px solid #efefef;
-        }
-      }
-    }
-  }
 }
 
 
-@media screen and (max-width: setting.$bpSp){
+@media screen and (max-width: mixin.$bpSp){
   :root{
     --inner-width: 90%;
     --radius1: 2.61vw;
@@ -1497,16 +1402,16 @@
     // margin padding
     @for $i from 0 through 20 {
       .mt#{ $i * 5 }{
-        margin-top: setting.px-to-vw(10px * $i, 767px) !important;
+        margin-top: mixin.px-to-vw(10px * $i, 767px) !important;
       }
       .mb#{ $i * 5 }{
-        margin-bottom: setting.px-to-vw(10px * $i, 767px) !important;
+        margin-bottom: mixin.px-to-vw(10px * $i, 767px) !important;
       }
       .pt#{ $i * 5 }{
-        padding-top: setting.px-to-vw(10px * $i, 767px) !important;
+        padding-top: mixin.px-to-vw(10px * $i, 767px) !important;
       }
       .pb#{ $i * 5 }{
-        padding-bottom: setting.px-to-vw(10px * $i, 767px) !important;
+        padding-bottom: mixin.px-to-vw(10px * $i, 767px) !important;
       }
     }
 
@@ -1520,15 +1425,15 @@
     @for $i from 1 through 63 {
       .fsize#{ $i + 9 }{
         $i: $i + 9;
-        font-size: setting.px-to-vw(2px * $i, 767px) !important;
+        font-size: mixin.px-to-vw(2px * $i, 767px) !important;
       }
     }
 
     // 電話番号 ---------------------------------
     .tel{
-      font-size: setting.px-to-vw(60px, 767px);
-      padding-left: setting.px-to-vw(50px, 767px);
-      background-size: setting.px-to-vw(44px, 767px) auto;
+      font-size: mixin.px-to-vw(60px, 767px);
+      padding-left: mixin.px-to-vw(50px, 767px);
+      background-size: mixin.px-to-vw(44px, 767px) auto;
     }
 
     // head ---------------------------------
@@ -1538,16 +1443,16 @@
         $x: $i * 6;
         &0#{$i}{
           $y: 30 + $x;
-          font-size: setting.px-to-vw(1px * $y, 767px) !important;
+          font-size: mixin.px-to-vw(1px * $y, 767px) !important;
       
           &.-dot{
-            padding-left: setting.px-to-vw(40px, 767px);
+            padding-left: mixin.px-to-vw(40px, 767px);
       
             &:before{
-              width: setting.px-to-vw(24px, 767px);
-              height: setting.px-to-vw(24px, 767px);
-              left: setting.px-to-vw(2px, 767px);
-              top: calc( 50% - setting.px-to-vw(14px, 767px) );
+              width: mixin.px-to-vw(24px, 767px);
+              height: mixin.px-to-vw(24px, 767px);
+              left: mixin.px-to-vw(2px, 767px);
+              top: calc( 50% - mixin.px-to-vw(14px, 767px) );
             }
           }
         }
@@ -1556,69 +1461,69 @@
 
     // block ---------------------------------
     .block{
-      padding: setting.px-to-vw(30px, 767px) setting.px-to-vw(34px, 767px);
+      padding: mixin.px-to-vw(30px, 767px) mixin.px-to-vw(34px, 767px);
     }
 
     // txtLink ---------------------------------
     .txtLink{
-      padding-left: setting.px-to-vw(32px, 767px);
-      margin: 0 setting.px-to-vw(8px, 767px);
+      padding-left: mixin.px-to-vw(32px, 767px);
+      margin: 0 mixin.px-to-vw(8px, 767px);
     
       &:before{
-        left: setting.px-to-vw(12px, 767px);
-        @include setting.sankaku(setting.px-to-vw(12px, 767px), var(--link-color), 'right');
+        left: mixin.px-to-vw(12px, 767px);
+        @include mixin.sankaku(mixin.px-to-vw(12px, 767px), var(--link-color), 'right');
       }
   
       &.-left{
         &:before{
-          @include setting.sankaku(setting.px-to-vw(12px, 767px), var(--link-color), 'left');
+          @include mixin.sankaku(mixin.px-to-vw(12px, 767px), var(--link-color), 'left');
         }
       }
   
       &.-up{
         &:before{
-          @include setting.sankaku(setting.px-to-vw(12px, 767px), var(--link-color), 'up');
+          @include mixin.sankaku(mixin.px-to-vw(12px, 767px), var(--link-color), 'up');
         }
       }
   
       &.-down{
         &:before{
-          @include setting.sankaku(setting.px-to-vw(12px, 767px), var(--link-color), 'down');
+          @include mixin.sankaku(mixin.px-to-vw(12px, 767px), var(--link-color), 'down');
         }
       }
 
 
       &.-blank{
-        padding-right: setting.px-to-vw(28px, 767px);
-        background-size: setting.px-to-vw(20px, 767px) auto;
+        padding-right: mixin.px-to-vw(28px, 767px);
+        background-size: mixin.px-to-vw(20px, 767px) auto;
       }
     
       &.-file{
-        padding-right: setting.px-to-vw(24px, 767px);
-        background-size: auto setting.px-to-vw(20px, 767px);
+        padding-right: mixin.px-to-vw(24px, 767px);
+        background-size: auto mixin.px-to-vw(20px, 767px);
       }
     }
 
     // btn ---------------------------------
     .btn{
       &.-sizeSS{
-        padding: setting.px-to-vw(20px, 767px) setting.px-to-vw(64px, 767px) setting.px-to-vw(24px, 767px);
+        padding: mixin.px-to-vw(20px, 767px) mixin.px-to-vw(64px, 767px) mixin.px-to-vw(24px, 767px);
   
         &.-file{
           &:before{
-            right: setting.px-to-vw(20px, 767px);
-            width: setting.px-to-vw(16px, 767px);
-            height: setting.px-to-vw(20px, 767px);
-            top: calc( 50% - setting.px-to-vw(10px, 767px) );
+            right: mixin.px-to-vw(20px, 767px);
+            width: mixin.px-to-vw(16px, 767px);
+            height: mixin.px-to-vw(20px, 767px);
+            top: calc( 50% - mixin.px-to-vw(10px, 767px) );
           }
         }
   
         &.-blank{
           &:before{
-            right: setting.px-to-vw(20px, 767px);
-            width: setting.px-to-vw(20px, 767px);
-            height: setting.px-to-vw(20px, 767px);
-            top: calc( 50% - setting.px-to-vw(10px, 767px) );
+            right: mixin.px-to-vw(20px, 767px);
+            width: mixin.px-to-vw(20px, 767px);
+            height: mixin.px-to-vw(20px, 767px);
+            top: calc( 50% - mixin.px-to-vw(10px, 767px) );
           }
         }
       }
@@ -1628,13 +1533,13 @@
 
         &.-file{
           &:before{
-            right: setting.px-to-vw(30px, 767px);
+            right: mixin.px-to-vw(30px, 767px);
           }
         }
   
         &.-blank{
           &:before{
-            right: setting.px-to-vw(30px, 767px);
+            right: mixin.px-to-vw(30px, 767px);
           }
         }
       }
@@ -1648,34 +1553,34 @@
         &:before{
           content: '';
           position: absolute;
-          right: setting.px-to-vw(40px, 767px);
-          top: calc( 50% - setting.px-to-vw(14px, 767px));
-          width: setting.px-to-vw(24px, 767px);
-          height: setting.px-to-vw(28px, 767px);
+          right: mixin.px-to-vw(40px, 767px);
+          top: calc( 50% - mixin.px-to-vw(14px, 767px));
+          width: mixin.px-to-vw(24px, 767px);
+          height: mixin.px-to-vw(28px, 767px);
         }
       }
   
       &.-blank{
         &:before{
-          right: setting.px-to-vw(40px, 767px);
-          top: calc( 50% - setting.px-to-vw(14px, 767px));
-          width: setting.px-to-vw(28px, 767px);
-          height: setting.px-to-vw(28px, 767px);
+          right: mixin.px-to-vw(40px, 767px);
+          top: calc( 50% - mixin.px-to-vw(14px, 767px));
+          width: mixin.px-to-vw(28px, 767px);
+          height: mixin.px-to-vw(28px, 767px);
         }
       }
 
       &.-close{
         &:before{
-          right: setting.px-to-vw(40px, 767px);
-          top: calc( 50% - setting.px-to-vw(2px, 767px) );
-          width: setting.px-to-vw(24px, 767px);
-          height: setting.px-to-vw(4px, 767px);
+          right: mixin.px-to-vw(40px, 767px);
+          top: calc( 50% - mixin.px-to-vw(2px, 767px) );
+          width: mixin.px-to-vw(24px, 767px);
+          height: mixin.px-to-vw(4px, 767px);
         }
         &:after{
-          right: setting.px-to-vw(40px, 767px);
-          top: calc( 50% - setting.px-to-vw(2px, 767px) );
-          width: setting.px-to-vw(24px, 767px);
-          height: setting.px-to-vw(4px, 767px);
+          right: mixin.px-to-vw(40px, 767px);
+          top: calc( 50% - mixin.px-to-vw(2px, 767px) );
+          width: mixin.px-to-vw(24px, 767px);
+          height: mixin.px-to-vw(4px, 767px);
         }
       }
     }
@@ -1688,7 +1593,7 @@
 
         &:first-child{
           margin-right: 0;
-          margin-top: setting.px-to-vw(40px, 767px);
+          margin-top: mixin.px-to-vw(40px, 767px);
           order: 1;
         }
   
@@ -1719,26 +1624,26 @@
   
       >li{
         &:before{
-          width: setting.px-to-vw(12px, 767px);
-          height: setting.px-to-vw(12px, 767px);
-          //left: setting.px-to-vw(16px, 767px);
+          width: mixin.px-to-vw(12px, 767px);
+          height: mixin.px-to-vw(12px, 767px);
+          //left: mixin.px-to-vw(16px, 767px);
         }
       }
   
       &.-notes{
         >li{
-          padding-left: setting.px-to-vw(24px, 767px);
+          padding-left: mixin.px-to-vw(24px, 767px);
           &:before{
-            font-size: setting.px-to-vw(20px, 767px);
+            font-size: mixin.px-to-vw(20px, 767px);
           }
         }
       }
   
       &.-asterisk{
         >li{
-          padding-left: setting.px-to-vw(24px, 767px);
+          padding-left: mixin.px-to-vw(24px, 767px);
           &:before{
-            font-size: setting.px-to-vw(20px, 767px);
+            font-size: mixin.px-to-vw(20px, 767px);
           }
         }
       }
@@ -1747,7 +1652,7 @@
     // table ---------------------------------
     .table{
       th,td {
-        padding: setting.px-to-vw(20px, 767px);
+        padding: mixin.px-to-vw(20px, 767px);
       }
 
       @for $i from 1 through 5 {
@@ -1772,38 +1677,38 @@
     input[type="email"],
     input[type="tel"],
     textarea{
-      font-size: setting.px-to-vw(36px, 767px);
-      padding: setting.px-to-vw(30px, 767px);
+      font-size: mixin.px-to-vw(36px, 767px);
+      padding: mixin.px-to-vw(30px, 767px);
     }
   
     select{
-      font-size: setting.px-to-vw(36px, 767px);
-      padding: setting.px-to-vw(30px, 767px) setting.px-to-vw(76px, 767px) setting.px-to-vw(30px, 767px) setting.px-to-vw(30px, 767px);
+      font-size: mixin.px-to-vw(36px, 767px);
+      padding: mixin.px-to-vw(30px, 767px) mixin.px-to-vw(76px, 767px) mixin.px-to-vw(30px, 767px) mixin.px-to-vw(30px, 767px);
     }
   
     .required{
-      font-size: setting.px-to-vw(24px, 767px);
-      padding: setting.px-to-vw(6px, 767px) setting.px-to-vw(12px, 767px) setting.px-to-vw(8px, 767px);
+      font-size: mixin.px-to-vw(24px, 767px);
+      padding: mixin.px-to-vw(6px, 767px) mixin.px-to-vw(12px, 767px) mixin.px-to-vw(8px, 767px);
     }
   
     .alerthead {
-      font-size: setting.px-to-vw(36px, 767px);
-      padding: setting.px-to-vw(20px, 767px) 0;
-      background-size: setting.px-to-vw(36px, 767px) auto, setting.px-to-vw(36px, 767px) auto;
+      font-size: mixin.px-to-vw(36px, 767px);
+      padding: mixin.px-to-vw(20px, 767px) 0;
+      background-size: mixin.px-to-vw(36px, 767px) auto, mixin.px-to-vw(36px, 767px) auto;
     }
   
     .alertmessage{
-      font-size: setting.px-to-vw(28px, 767px);
-      padding: setting.px-to-vw(12px, 767px) setting.px-to-vw(20px, 767px);
-      margin-top: setting.px-to-vw(10px, 767px);
+      font-size: mixin.px-to-vw(28px, 767px);
+      padding: mixin.px-to-vw(12px, 767px) mixin.px-to-vw(20px, 767px);
+      margin-top: mixin.px-to-vw(10px, 767px);
     }
 
     .column{
-      padding: setting.px-to-vw(30px, 767px) 0;
+      padding: mixin.px-to-vw(30px, 767px) 0;
     }
 
     .columnInner{
-      gap: setting.px-to-vw(20px, 767px) 2%;
+      gap: mixin.px-to-vw(20px, 767px) 2%;
     }
 
     .nameLabel{
@@ -1811,35 +1716,35 @@
     }
 
     .btnLabel{
-      font-size: setting.px-to-vw(28px, 767px);
-      padding: setting.px-to-vw(20px, 767px) setting.px-to-vw(10px, 767px) setting.px-to-vw(20px, 767px) setting.px-to-vw(52px, 767px);
-      min-height: setting.px-to-vw(124px, 767px);
+      font-size: mixin.px-to-vw(28px, 767px);
+      padding: mixin.px-to-vw(20px, 767px) mixin.px-to-vw(10px, 767px) mixin.px-to-vw(20px, 767px) mixin.px-to-vw(52px, 767px);
+      min-height: mixin.px-to-vw(124px, 767px);
 
       &.-radio{
         &:before{
-          width: setting.px-to-vw(20px, 767px);
-          height: setting.px-to-vw(20px, 767px);
-          left: setting.px-to-vw(20px, 767px);
-          top: calc( 50% - setting.px-to-vw(10px, 767px) );
+          width: mixin.px-to-vw(20px, 767px);
+          height: mixin.px-to-vw(20px, 767px);
+          left: mixin.px-to-vw(20px, 767px);
+          top: calc( 50% - mixin.px-to-vw(10px, 767px) );
         }
       }
   
       &.-check{
         &:before{
-          width: setting.px-to-vw(20px, 767px);
-          height: setting.px-to-vw(20px, 767px);
+          width: mixin.px-to-vw(20px, 767px);
+          height: mixin.px-to-vw(20px, 767px);
           border-radius: 2px;
-          left: setting.px-to-vw(20px, 767px);
-          top: calc( 50% - setting.px-to-vw(10px, 767px) );
+          left: mixin.px-to-vw(20px, 767px);
+          top: calc( 50% - mixin.px-to-vw(10px, 767px) );
         }
   
         &.checked{
           &:after{
             content: "";
-            width: setting.px-to-vw(16px, 767px);
-            height: setting.px-to-vw(8px, 767px);
-            left: setting.px-to-vw(20px, 767px);
-            top: calc( 50% - setting.px-to-vw(10px, 767px) );
+            width: mixin.px-to-vw(16px, 767px);
+            height: mixin.px-to-vw(8px, 767px);
+            left: mixin.px-to-vw(20px, 767px);
+            top: calc( 50% - mixin.px-to-vw(10px, 767px) );
           }
         }
       }
@@ -1855,9 +1760,9 @@
 
     .selectCol{
       &:before{
-        @include setting.sankaku( setting.px-to-vw(24px, 767px), #000, 'down', true);
-        right: setting.px-to-vw(30px, 767px);
-        top: calc( 50% - setting.px-to-vw(6px, 767px) );
+        @include mixin.sankaku( mixin.px-to-vw(24px, 767px), #000, 'down', true);
+        right: mixin.px-to-vw(30px, 767px);
+        top: calc( 50% - mixin.px-to-vw(6px, 767px) );
       }
 
       &.-spCol2{
@@ -1870,7 +1775,7 @@
     }
 
     .confirm{
-      padding: setting.px-to-vw(24px, 767px);
+      padding: mixin.px-to-vw(24px, 767px);
     }
 
 
@@ -1878,17 +1783,17 @@
     .history_tab{
       >li{
         >button{
-          font-size:  setting.px-to-vw(32px, 767px);
-          padding: setting.px-to-vw(28px, 767px) 0 setting.px-to-vw(30px, 767px);
+          font-size:  mixin.px-to-vw(32px, 767px);
+          padding: mixin.px-to-vw(28px, 767px) 0 mixin.px-to-vw(30px, 767px);
           &:before{
-            @include setting.sankaku(setting.px-to-vw(16px, 767px), #fff, 'right');
-            right: setting.px-to-vw(20px, 767px);
-            top: calc( 50% - setting.px-to-vw(8px, 767px) );
+            @include mixin.sankaku(mixin.px-to-vw(16px, 767px), #fff, 'right');
+            right: mixin.px-to-vw(20px, 767px);
+            top: calc( 50% - mixin.px-to-vw(8px, 767px) );
           }
 
           &.active{
             >button{
-              padding: setting.px-to-vw(28px, 767px) 0 setting.px-to-vw(30px, 767px);
+              padding: mixin.px-to-vw(28px, 767px) 0 mixin.px-to-vw(30px, 767px);
             }
           }
         }
@@ -1897,94 +1802,94 @@
 
     .history_lists{
       >li{
-        padding: setting.px-to-vw(30px, 767px) 0;
+        padding: mixin.px-to-vw(30px, 767px) 0;
         .history_col:not(:first-child){
-          margin-top: setting.px-to-vw(10px, 767px);
+          margin-top: mixin.px-to-vw(10px, 767px);
         }
       }
     }
     
     .history_col{
       dt{
-        font-size: setting.px-to-vw(24px, 767px);
-        min-width: setting.px-to-vw(160px, 767px);
-        padding: setting.px-to-vw(20px, 767px) 0;
+        font-size: mixin.px-to-vw(24px, 767px);
+        min-width: mixin.px-to-vw(160px, 767px);
+        padding: mixin.px-to-vw(20px, 767px) 0;
       }
     
       dd{
-        padding: setting.px-to-vw(10px, 767px) 0 setting.px-to-vw(10px, 767px) setting.px-to-vw(20px, 767px);
+        padding: mixin.px-to-vw(10px, 767px) 0 mixin.px-to-vw(10px, 767px) mixin.px-to-vw(20px, 767px);
       }
     }
   
     .history_course{
-      font-size: setting.px-to-vw(24px, 767px);
-      padding: setting.px-to-vw(8px, 767px) setting.px-to-vw(20px, 767px);
-      margin-bottom: setting.px-to-vw(10px, 767px);
+      font-size: mixin.px-to-vw(24px, 767px);
+      padding: mixin.px-to-vw(8px, 767px) mixin.px-to-vw(20px, 767px);
+      margin-bottom: mixin.px-to-vw(10px, 767px);
     }
   
     .history_pn1{
-      gap: 0 setting.px-to-vw(20px, 767px);
+      gap: 0 mixin.px-to-vw(20px, 767px);
   
       >.prev,
       >.next{
-        width: setting.px-to-vw(60px, 767px);
-        height: setting.px-to-vw(60px, 767px);
+        width: mixin.px-to-vw(60px, 767px);
+        height: mixin.px-to-vw(60px, 767px);
 
         &:before{
-          left: calc( 50% - setting.px-to-vw(6px, 767px) );
-          top: calc( 50% - setting.px-to-vw(8px, 767px) );
+          left: calc( 50% - mixin.px-to-vw(6px, 767px) );
+          top: calc( 50% - mixin.px-to-vw(8px, 767px) );
         }
       }
     
       >.prev{
         &:before{
-          @include setting.sankaku(setting.px-to-vw(16px, 767px), #fff, 'left');
+          @include mixin.sankaku(mixin.px-to-vw(16px, 767px), #fff, 'left');
         }
       }
     
       >.next{
         &:before{
-          @include setting.sankaku(setting.px-to-vw(16px, 767px), #fff, 'right');
+          @include mixin.sankaku(mixin.px-to-vw(16px, 767px), #fff, 'right');
         }
       }
     
       >.page{
-        gap: 0 setting.px-to-vw(10px, 767px);
+        gap: 0 mixin.px-to-vw(10px, 767px);
 
         >.page_this{
-          font-size: setting.px-to-vw(32px, 767px);
+          font-size: mixin.px-to-vw(32px, 767px);
         }
         >.page_txt{
-          font-size: setting.px-to-vw(28px, 767px);
+          font-size: mixin.px-to-vw(28px, 767px);
         }
         >.page_all{
-          font-size: setting.px-to-vw(32px, 767px);
+          font-size: mixin.px-to-vw(32px, 767px);
         }
       }
     }
     
     .history_pn2{
-      gap: 0 setting.px-to-vw(20px, 767px);
+      gap: 0 mixin.px-to-vw(20px, 767px);
   
       >input[type="tel"]{
-        padding: setting.px-to-vw(20px, 767px);
-        font-size: setting.px-to-vw(32px, 767px);
-        width: setting.px-to-vw(160px, 767px);
+        padding: mixin.px-to-vw(20px, 767px);
+        font-size: mixin.px-to-vw(32px, 767px);
+        width: mixin.px-to-vw(160px, 767px);
       }
   
       >.txt{
-        font-size: setting.px-to-vw(32px, 767px);
+        font-size: mixin.px-to-vw(32px, 767px);
       }
     
       >.btn{
-        height: setting.px-to-vw(84px, 767px);
-        font-size: setting.px-to-vw(28px, 767px);
-        padding: 0 setting.px-to-vw(48px, 767px) 0 setting.px-to-vw(40px, 767px);
+        height: mixin.px-to-vw(84px, 767px);
+        font-size: mixin.px-to-vw(28px, 767px);
+        padding: 0 mixin.px-to-vw(48px, 767px) 0 mixin.px-to-vw(40px, 767px);
     
         &:before{
-          @include setting.sankaku(setting.px-to-vw(16px, 767px), #fff, 'right');
-          right: setting.px-to-vw(12px, 767px);
-          top: calc( 50% - setting.px-to-vw(8px, 767px) );
+          @include mixin.sankaku(mixin.px-to-vw(16px, 767px), #fff, 'right');
+          right: mixin.px-to-vw(12px, 767px);
+          top: calc( 50% - mixin.px-to-vw(8px, 767px) );
         }
       }
     }
@@ -1992,22 +1897,22 @@
 
     // accordion ---------------------------------
     .accorBtn{
-      padding: setting.px-to-vw(30px, 767px) setting.px-to-vw(80px, 767px) setting.px-to-vw(30px, 767px) setting.px-to-vw(40px, 767px);
+      padding: mixin.px-to-vw(30px, 767px) mixin.px-to-vw(80px, 767px) mixin.px-to-vw(30px, 767px) mixin.px-to-vw(40px, 767px);
     
       &:before{
-        left: setting.px-to-vw(30px, 767px);
-        font-size: setting.px-to-vw(28px, 767px);
-        padding: setting.px-to-vw(4px, 767px) 0;
+        left: mixin.px-to-vw(30px, 767px);
+        font-size: mixin.px-to-vw(28px, 767px);
+        padding: mixin.px-to-vw(4px, 767px) 0;
         border-radius: 2px;
-        min-width: setting.px-to-vw(80px, 767px);
+        min-width: mixin.px-to-vw(80px, 767px);
       }
     
       @for $i from 1 through 20 {
         &.-q#{ $i }{
-          padding-left: setting.px-to-vw(130px, 767px);
+          padding-left: mixin.px-to-vw(130px, 767px);
           & + .accorArea{
             .inner{
-              padding-left: setting.px-to-vw(130px, 767px);
+              padding-left: mixin.px-to-vw(130px, 767px);
             }
           }
         }
@@ -2016,36 +1921,36 @@
     
     .accorArea{
       .inner{
-        padding: 0 setting.px-to-vw(40px, 767px) setting.px-to-vw(30px, 767px);
+        padding: 0 mixin.px-to-vw(40px, 767px) mixin.px-to-vw(30px, 767px);
 
         &:before{
-          left: setting.px-to-vw(30px, 767px);
-          font-size: setting.px-to-vw(28px, 767px);
-          padding: setting.px-to-vw(4px, 767px) 0;
+          left: mixin.px-to-vw(30px, 767px);
+          font-size: mixin.px-to-vw(28px, 767px);
+          padding: mixin.px-to-vw(4px, 767px) 0;
           border-radius: 2px;
-          min-width: setting.px-to-vw(80px, 767px);
+          min-width: mixin.px-to-vw(80px, 767px);
         }
       }
     }
     
     .accorIco{
       position: absolute;
-      width: setting.px-to-vw(24px, 767px);
-      height: setting.px-to-vw(24px, 767px);
-      right: setting.px-to-vw(30px, 767px);
-      top: calc( 50% - setting.px-to-vw(12px, 767px) );
+      width: mixin.px-to-vw(24px, 767px);
+      height: mixin.px-to-vw(24px, 767px);
+      right: mixin.px-to-vw(30px, 767px);
+      top: calc( 50% - mixin.px-to-vw(12px, 767px) );
     
       &:before{
-        width: setting.px-to-vw(24px, 767px);
-        height: setting.px-to-vw(4px, 767px);
-        top: calc( 50% - setting.px-to-vw(2px, 767px) );
+        width: mixin.px-to-vw(24px, 767px);
+        height: mixin.px-to-vw(4px, 767px);
+        top: calc( 50% - mixin.px-to-vw(2px, 767px) );
       }
     
       &:after{
         content: '';
-        width: setting.px-to-vw(4px, 767px);
-        height: setting.px-to-vw(24px, 767px);
-        left: calc( 50% - setting.px-to-vw(2px, 767px) );
+        width: mixin.px-to-vw(4px, 767px);
+        height: mixin.px-to-vw(24px, 767px);
+        left: calc( 50% - mixin.px-to-vw(2px, 767px) );
       }
     }
   }

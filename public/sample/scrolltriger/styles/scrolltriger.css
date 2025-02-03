@@ -108,6 +108,21 @@
   --linearBounce: linear(0, 1.32, 0.87, 1.05, 0.98, 1.01, 1, 1);
 }
 
+@media screen and (max-width: 1024px) {
+  :root {
+    --btn-height: 140px;
+  }
+}
+@media screen and (max-width: 767px) {
+  :root {
+    --btn-width: 75.61929vw;
+    --btn-height: 18.25293vw;
+    --radius1: 1.30378vw;
+    --radius2: 2.60756vw;
+    --radius3: 3.91134vw;
+    --radius4: 5.21512vw;
+  }
+}
 /*============================================================
   reset
 ============================================================*/
