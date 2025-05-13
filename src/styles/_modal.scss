@@ -53,20 +53,10 @@
   animation: .3s cubic-bezier(.15,.29,.62,.99) both;
   animation-name: fade_in, slide_in_bg;
 }
-.ie11 #modal_bg.active.in,
-.ie10 #modal_bg.active.in{
-  animation: .3s cubic-bezier(.15,.29,.62,.99) both;
-  animation-name: fade_in, slide_in_bg_ie;
-}
 
 #modal_bg.active.out{
   animation: .3s cubic-bezier(.15,.29,.62,.99) both;
   animation-name: fade_out, slide_out_bg;
-}
-.ie11 #modal_bg.active.out,
-.ie10 #modal_bg.active.out{
-  animation: .3s cubic-bezier(.15,.29,.62,.99) both;
-  animation-name: fade_out, slide_out_bg_ie;
 }
 
 #modal_close.active.in{
@@ -131,6 +121,21 @@ body{
   &.-ios{
     overflow-y: y;
     -webkit-overflow-scrolling: touch;
+  }
+}
+
+// タブレットからスクロールさせる
+.modal_dom{
+  .scroller{
+    @mixin setting.notScrollbar();
+  }
+
+  .inner{
+    max-width: 760px;
+    width: 92%;
+    padding: 60px 0 70px;
+    margin: 0 auto;
+    text-align: center;
   }
 }
 
@@ -383,6 +388,18 @@ body{
 
   #modal_close:hover{
     opacity: 1;
+  }
+
+  .modal_dom{
+    .scroller{
+      height: 100%;
+      overflow-y: auto;
+    }
+
+    .inner{
+      padding: 40px 0;
+      text-align: left;
+    }
   }
 
   .modal_ar{

@@ -33,7 +33,7 @@ const setPopupWin = core => {
 const setScrollTo = core => {
   const trigger = document.querySelectorAll('a[href^="#"],area[href^="#"]');
   const scrollSpeed = .5;// スクロール速度
-  let targetOffset;
+  let targetOffset, scrollFlg;
 
   const scroll = hash => {
     const targetName = hash.replace('#', '');
@@ -41,24 +41,35 @@ const setScrollTo = core => {
 
     if ( targetName.length ) {
       target = document.getElementById(targetName);
-      const targetRect = target.getBoundingClientRect();
-      targetOffset = targetRect.top + core.win.scrollTop;
+      if( target !== null ){// 指定IDが存在する場合スクロールする
+        scrollFlg = true;
+        const targetRect = target.getBoundingClientRect();
+        targetOffset = targetRect.top + core.win.scrollTop;
+      } else {// 指定IDが存在しない場合スクロールしない
+        scrollFlg = false;
+      }
       //console.info(targetOffset)
-    } else {
-      target = document.body;
+    } else {// ページTOP「#」の場合スクロールする
+      //console.info('aaa')
+      scrollFlg = true;
       targetOffset = 0;
     }
-    gsap.to(window,
-    {
-      duration: scrollSpeed,
-      scrollTo: targetOffset,
-      onComplete: () => {
-        //console.info(focus)
-        target.setAttribute('tabindex', '-1');
-        target.focus();
+
+    if( scrollFlg ){
+      gsap.to(window,
+      {
+        duration: scrollSpeed,
+        scrollTo: targetOffset,
+        onComplete: () => {
+          if( target !== null ){
+            target.setAttribute('tabindex', '-1');
+            target.focus();
+          }
+        }
       }
+      );
     }
-    );
+
     return false;
   }
 

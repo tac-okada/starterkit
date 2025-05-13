@@ -174,6 +174,14 @@ export class Modal {
 
       // モーダルが存在する場合（onloadイベントなどで開く場合）
       } else {
+        /* モーダルを一まとめにする要素「div#modal」追加 */
+        if( document.getElementById('modal') === null ){
+          let _modal = document.createElement('div');
+            _modal.id = 'modal';
+            _modal.role = 'dialog';
+          this.body.prepend(_modal);
+          this.modal = _modal;
+        }
         obj.target = document.querySelector(obj.target);
         this.modal.prepend(obj.target);
         this.proto.contents[obj.num - 1] = obj.target;
@@ -284,6 +292,21 @@ export class Modal {
           active.style.top = '60px';
         }
         active.style.left = ( ( this.core.win.width - this.state.width ) / 2 ) + 'px';
+
+      // リダイレクトモーダル用追記ここから
+      } else if ( active.classList.contains('modal_dom') ) {
+        let iframeH = active.querySelector('.scroller').clientHeight;
+        //console.info(iframeH,this.core.win.height - activeHeightDiff)
+        if( iframeH < this.core.win.height - activeHeightDiff * 1.5 ){
+          active.style.height = iframeH + 'px';
+          active.style.top = ( ( this.core.win.height - iframeH ) / 2 ) + 'px';
+        } else {
+          active.style.height = this.core.win.height - activeHeightDiff + 'px';
+          active.style.top = '60px';
+        }
+        active.style.left = ( ( this.core.win.width - this.state.width ) / 2 ) + 'px';
+      // リダイレクトモーダル用追記ここまで
+
       } else {
         active.style.left = ( ( this.core.win.width - this.state.width ) / 2 ) + 'px';
         active.style.top = ( ( this.core.win.height - this.state.height ) / 2 ) + 'px';
@@ -629,7 +652,7 @@ export class Modal {
         // 最初
         if( !that.dom.length ){
           that.dom.push( obj.num );
-          addEventOther(obj.target.children[0])
+          addEventOther(obj.target)
         }
 
         // 2回目以降
@@ -639,7 +662,7 @@ export class Modal {
           }
           if( that.dom.length === i+1 ){
             that.dom.push( obj.num );
-            addEventOther(obj.target.children[0]);
+            addEventOther(obj.target);
           }
         }
       }
