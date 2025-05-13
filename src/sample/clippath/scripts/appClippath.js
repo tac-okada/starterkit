@@ -26,81 +26,78 @@ class AppClippath extends Core {
 
   /* ページ読み込み時に実行 */
   loadHandler () {
+    super.loadHandler();
+  }
+
+  /* ローディング完了後に実行 */
+  loaded () {
+    super.loaded();
+    this.setClippath();
+  }
+
+  setClippath () {
     gsap.registerPlugin(ScrollTrigger);
 
-    const loader = document.querySelector('.loader');
-
-    loader.classList.add('fo');
-    loader.addEventListener('animationend', {obj: this, handleEvent: setClippath}, { once: true });
-
-    function setClippath(){
-      loader.classList.add('hdn');
-
-      /* ここでスクロールとブラウザイベントを有効にする */
-      this.obj.enableScroll();
-
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: '.face',
-          start: 'center center',
-          end: 'bottom top-=1000',
-          scrub: .5,
-          pin: true,
-          //markers: true
-        }
-      })
-      .add('scene1')
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: '.face',
+        start: 'center center',
+        end: 'bottom top-=1000',
+        scrub: .5,
+        pin: true,
+        //markers: true
+      }
+    })
+    .add('scene1')
 /*
-      .to('.face_svg', {
-        scale: 1.2,
-      } ,'scene1')
+    .to('.face_svg', {
+      scale: 1.2,
+    } ,'scene1')
 */
-      .to('#path1 polygon', {
-        x: 940
-      } ,'scene1')
-      .to('#path1 polyline', {
-        x: - 940
-      } ,'scene1')
-      .add('scene2')
+    .to('#path1 polygon', {
+      x: 940
+    } ,'scene1')
+    .to('#path1 polyline', {
+      x: - 940
+    } ,'scene1')
+    .add('scene2')
 /*
-      .to('.face_svg', {
-        scale: 1.4,
-      } ,'scene2')
+    .to('.face_svg', {
+      scale: 1.4,
+    } ,'scene2')
 */
-      .to('#path2 polygon', {
-        y: 500
-      } ,'scene2')
-      .to('#path2 polyline', {
-        y: - 500
-      } ,'scene2')
-      //.call(scene3)
-      .add('scene3')
+    .to('#path2 polygon', {
+      y: 500
+    } ,'scene2')
+    .to('#path2 polyline', {
+      y: - 500
+    } ,'scene2')
+    //.call(scene3)
+    .add('scene3')
 /*
-      .to('.face_svg', {
-        scale: 1.6,
-      } ,'scene3')
+    .to('.face_svg', {
+      scale: 1.6,
+    } ,'scene3')
 */
-      .to('#path3 rect', {
-        rotation: -90,
-        scale: 0,
-        transformOrigin: 'center center',
-        //transformOrigin: center,
-        //duration: -0.5,
-        stagger: {
-          amount: .5,
-          //each: .02,
-          from: 'center',
-          //grid: [0, 4],
-          //axis: 'y',
-        }
-      } ,'scene3')
-      .add('scene4')
-      .to('.face .txt', {
-        scale: 2,
-        //opacity: 0
-      } ,'scene4')
-
-    };
+    .to('#path3 rect', {
+      rotation: -90,
+      scale: 0,
+      transformOrigin: 'center center',
+      //transformOrigin: center,
+      //duration: -0.5,
+      stagger: {
+        amount: .5,
+        //each: .02,
+        from: 'center',
+        //grid: [0, 4],
+        //axis: 'y',
+      }
+    } ,'scene3')
+    .add('scene4')
+    .to('.face .txt', {
+      scale: 2,
+      //opacity: 0
+    } ,'scene4')
   }
 };
 

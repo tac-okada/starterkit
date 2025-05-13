@@ -5,6 +5,7 @@ gsap.registerPlugin(ScrollToPlugin);
 
 import { UserAgent, MediaQueries } from './util.js';
 import { functions } from './functions.js';
+import imagesLoaded from 'imagesloaded';
 
 /*
 
@@ -150,5 +151,35 @@ export class Core {
   enableScroll () {
     this.win.response = true;
     window.removeEventListener(this.scroll, this.disableEvents, { passive: false });
+  }
+
+  // ページ読み込み時に実行
+  loadHandler () {
+    const loader = document.querySelector('.loader');
+
+    const setLoaded = () => {
+      this.loaded();
+    };
+
+    // loaderがある場合のみローディング実装
+    if( loader !== null ){
+      imagesLoaded( document.body, { background: true }, () => {
+        loader.classList.add('fo');
+        loader.addEventListener('animationend', ( e ) => {
+          setLoaded();
+        }, { once: true });
+      });
+    } else {
+      this.enableScroll();
+    }
+  }
+
+  // ローディング完了後に実行
+  loaded () {
+    const loader = document.querySelector('.loader');
+    loader.classList.add('hdn');
+
+    /* ここでスクロールとブラウザイベントを有効にする */
+    this.enableScroll();
   }
 }

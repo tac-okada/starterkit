@@ -30,261 +30,262 @@ class AppLottie extends Core {
 
   /* ページ読み込み時に実行 */
   loadHandler () {
-    gsap.registerPlugin(ScrollTrigger);
+    super.loadHandler();
+  }
 
-    const loader = document.querySelector('.loader');
+  /* ローディング完了後に実行 */
+  loaded () {
+    super.loaded();
+    this.setLottie();
+  }
 
-    loader.classList.add('fo');
-    loader.addEventListener('animationend', {obj: this, handleEvent: setLottie}, { once: true });
+  setLottie () {
+    loader.classList.add('hdn');
 
-    function setLottie(){
-      loader.classList.add('hdn');
+    /* ここでスクロールとブラウザイベントを有効にする */
+    this.obj.enableScroll();
 
-      /* ここでスクロールとブラウザイベントを有効にする */
-      this.obj.enableScroll();
-
-      let lottieSample = document.querySelector("lottie-player"); //アニメーションを格納するDOM要素
-      let totalFrames;
-      let flames = 0;
-      let scroll = 0;
-      let prevScroll = 0;
-      
+    let lottieSample = document.querySelector("lottie-player"); //アニメーションを格納するDOM要素
+    let totalFrames;
+    let flames = 0;
+    let scroll = 0;
+    let prevScroll = 0;
+    
 /*
-      usagi = lottieWeb.loadAnimation({
-        container: lottieSample,// アニメーションを格納するDOM要素 
-        renderer: 'svg',
-        loop: true,
-        autoplay: true,
-        path: 'lotties-sample.json' // JSONファイルのパス
-      });
+    usagi = lottieWeb.loadAnimation({
+      container: lottieSample,// アニメーションを格納するDOM要素 
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: 'lotties-sample.json' // JSONファイルのパス
+    });
 */
 
-      // ここでjsonを読み込むことでコントロール可能になる
-      lottieSample.load('lottie-sample.json');
+    // ここでjsonを読み込むことでコントロール可能になる
+    lottieSample.load('lottie-sample.json');
 
-      lottieSample.addEventListener('ready', () => {
-        totalFrames = lottieSample.getLottie().totalFrames;
-        //lottieSample.getLottie().loop = true;
-        console.info(lottieSample.getLottie())
-      });
+    lottieSample.addEventListener('ready', () => {
+      totalFrames = lottieSample.getLottie().totalFrames;
+      //lottieSample.getLottie().loop = true;
+      console.info(lottieSample.getLottie())
+    });
 
 /*
-      window.addEventListener('click', () => {
-        lottieSampleControl();
-      })
+    window.addEventListener('click', () => {
+      lottieSampleControl();
+    })
 */
 
-      const lottieSampleControl = () => {
-        //console.info(flames)
-        if( flames < totalFrames ){
-          flames++;
-        } else {
-          flames = 0;
-        }
-        lottieSample.seek(flames);
+    const lottieSampleControl = () => {
+      //console.info(flames)
+      if( flames < totalFrames ){
+        flames++;
+      } else {
+        flames = 0;
       }
+      lottieSample.seek(flames);
+    }
 
 /*
-      // これだとscrollTriggerと共存できない
-      // scrollTriggerのonUpdateでseekする
-      const lottieSampleControl = () => {
-        create({
-          player: lottieSample,
-          mode: 'scroll',
-          actions: [
-            {
-              visibility: [0, 1],
-              type: 'seek',
-              frames: [0, 20],
-            },
-          ]
-        });
-      }
+    // これだとscrollTriggerと共存できない
+    // scrollTriggerのonUpdateでseekする
+    const lottieSampleControl = () => {
+      create({
+        player: lottieSample,
+        mode: 'scroll',
+        actions: [
+          {
+            visibility: [0, 1],
+            type: 'seek',
+            frames: [0, 20],
+          },
+        ]
+      });
+    }
 */
-      gsap.set('.lottieSample',{
-        autoAlpha: 0
-      })
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: '.bg',
-          start: 'center center',
-          end: 'bottom top-=5000',// ここの数値で演出時間が決まる（スクロール距離=時間）
-          scrub: .5,
-          pin: true,
-          //markers: true,
-          onEnter: () => {
-            gsap.to('.lottieSample',{
-              autoAlpha: 1
-            })
-          },
-          onEnterBack: () => {
-            gsap.to('.lottieSample',{
-              autoAlpha: 1
-            })
-          },
-          onLeave: () => {
-            gsap.to('.lottieSample',{
-              autoAlpha: 0,
+    gsap.set('.lottieSample',{
+      autoAlpha: 0
+    })
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: '.bg',
+        start: 'center center',
+        end: 'bottom top-=5000',// ここの数値で演出時間が決まる（スクロール距離=時間）
+        scrub: .5,
+        pin: true,
+        //markers: true,
+        onEnter: () => {
+          gsap.to('.lottieSample',{
+            autoAlpha: 1
+          })
+        },
+        onEnterBack: () => {
+          gsap.to('.lottieSample',{
+            autoAlpha: 1
+          })
+        },
+        onLeave: () => {
+          gsap.to('.lottieSample',{
+            autoAlpha: 0,
 /*
-              onComplete: () => {
-                gsap.set('.lottieSample',{
-                  scaleX: -1
-                })
-              }
-*/
-            })
-
-          },
-          onLeaveBack: () => {
-            gsap.to('.lottieSample',{
-              autoAlpha: 0,
-/*
-              onComplete: () => {
-                gsap.set('.lottieSample',{
-                  scaleX: 1
-                })
-              }
-*/
-            })
-          },
-          onUpdate: () => {
-            //console.info(window.pageYOffset)
-
-            // 左右反転
-            scroll = window.pageYOffset;
-            if( scroll > prevScroll ){
-              gsap.set('.lottieSample',{
-                scaleX: 1
-              })
-            } else {
+            onComplete: () => {
               gsap.set('.lottieSample',{
                 scaleX: -1
               })
             }
-            prevScroll = scroll;
+*/
+          })
 
-            lottieSampleControl()
+        },
+        onLeaveBack: () => {
+          gsap.to('.lottieSample',{
+            autoAlpha: 0,
+/*
+            onComplete: () => {
+              gsap.set('.lottieSample',{
+                scaleX: 1
+              })
+            }
+*/
+          })
+        },
+        onUpdate: () => {
+          //console.info(window.pageYOffset)
+
+          // 左右反転
+          scroll = window.pageYOffset;
+          if( scroll > prevScroll ){
+            gsap.set('.lottieSample',{
+              scaleX: 1
+            })
+          } else {
+            gsap.set('.lottieSample',{
+              scaleX: -1
+            })
           }
+          prevScroll = scroll;
+
+          lottieSampleControl()
         }
-      })
-      .add('scene1')
-      .to('.bg_img img:nth-child(2)', {
-        x: '-30vw'
-      }, 'scene1')
-      .to('.bg_img img:nth-child(1)', {
-        x: '-40vw'
-      }, 'scene1')
+      }
+    })
+    .add('scene1')
+    .to('.bg_img img:nth-child(2)', {
+      x: '-30vw'
+    }, 'scene1')
+    .to('.bg_img img:nth-child(1)', {
+      x: '-40vw'
+    }, 'scene1')
 
-      .add('scene2')
-      .to('.bg_img img:nth-child(2)', {
-        x: '-60vw'
-      }, 'scene2')
-      .to('.bg_img img:nth-child(1)', {
-        x: '-80vw'
-      }, 'scene2')
-      .to('.lottieSample', {
-        y: '-5vw'
-      }, 'scene2')
+    .add('scene2')
+    .to('.bg_img img:nth-child(2)', {
+      x: '-60vw'
+    }, 'scene2')
+    .to('.bg_img img:nth-child(1)', {
+      x: '-80vw'
+    }, 'scene2')
+    .to('.lottieSample', {
+      y: '-5vw'
+    }, 'scene2')
 
-      .add('scene3')
-      .to('.bg_img img:nth-child(2)', {
-        x: '-90vw'
-      }, 'scene3')
-      .to('.bg_img img:nth-child(1)', {
-        x: '-120vw'
-      }, 'scene3')
-      .to('.lottieSample', {
-        y: '-5vw'
-      }, 'scene3')
+    .add('scene3')
+    .to('.bg_img img:nth-child(2)', {
+      x: '-90vw'
+    }, 'scene3')
+    .to('.bg_img img:nth-child(1)', {
+      x: '-120vw'
+    }, 'scene3')
+    .to('.lottieSample', {
+      y: '-5vw'
+    }, 'scene3')
 
-      .add('scene4')
-      .to('.bg_img img:nth-child(2)', {
-        x: '-120vw'
-      }, 'scene4')
-      .to('.bg_img img:nth-child(1)', {
-        x: '-160vw'
-      }, 'scene4')
-      .to('.lottieSample', {
-        y: '-5vw'
-      }, 'scene4')
+    .add('scene4')
+    .to('.bg_img img:nth-child(2)', {
+      x: '-120vw'
+    }, 'scene4')
+    .to('.bg_img img:nth-child(1)', {
+      x: '-160vw'
+    }, 'scene4')
+    .to('.lottieSample', {
+      y: '-5vw'
+    }, 'scene4')
 
-      .add('scene5')
-      .to('.bg_img img:nth-child(2)', {
-        x: '-150vw'
-      }, 'scene5')
-      .to('.bg_img img:nth-child(1)', {
-        x: '-200vw'
-      }, 'scene5')
-      .to('.lottieSample', {
-        y: '0vw'
-      }, 'scene5')
+    .add('scene5')
+    .to('.bg_img img:nth-child(2)', {
+      x: '-150vw'
+    }, 'scene5')
+    .to('.bg_img img:nth-child(1)', {
+      x: '-200vw'
+    }, 'scene5')
+    .to('.lottieSample', {
+      y: '0vw'
+    }, 'scene5')
 
-      .add('scene6')
-      .to('.bg_img img:nth-child(2)', {
-        x: '-180vw'
-      }, 'scene6')
-      .to('.bg_img img:nth-child(1)', {
-        x: '-240vw'
-      }, 'scene6')
-      .to('.lottieSample', {
-        y: '-3vw'
-      }, 'scene6')
+    .add('scene6')
+    .to('.bg_img img:nth-child(2)', {
+      x: '-180vw'
+    }, 'scene6')
+    .to('.bg_img img:nth-child(1)', {
+      x: '-240vw'
+    }, 'scene6')
+    .to('.lottieSample', {
+      y: '-3vw'
+    }, 'scene6')
 
-      .add('scene7')
-      .to('.bg_img img:nth-child(2)', {
-        x: '-210vw'
-      }, 'scene7')
-      .to('.bg_img img:nth-child(1)', {
-        x: '-280vw'
-      }, 'scene7')
-      .to('.lottieSample', {
-        y: '-3vw'
-      }, 'scene7')
+    .add('scene7')
+    .to('.bg_img img:nth-child(2)', {
+      x: '-210vw'
+    }, 'scene7')
+    .to('.bg_img img:nth-child(1)', {
+      x: '-280vw'
+    }, 'scene7')
+    .to('.lottieSample', {
+      y: '-3vw'
+    }, 'scene7')
 
-      .add('scene8')
-      .to('.bg_img img:nth-child(2)', {
-        x: '-240vw'
-      }, 'scene8')
-      .to('.bg_img img:nth-child(1)', {
-        x: '-320vw'
-      }, 'scene8')
-      .to('.lottieSample', {
-        y: '3vw'
-      }, 'scene8')
+    .add('scene8')
+    .to('.bg_img img:nth-child(2)', {
+      x: '-240vw'
+    }, 'scene8')
+    .to('.bg_img img:nth-child(1)', {
+      x: '-320vw'
+    }, 'scene8')
+    .to('.lottieSample', {
+      y: '3vw'
+    }, 'scene8')
 
-      .add('scene9')
-      .to('.bg_img img:nth-child(2)', {
-        x: '-270vw'
-      }, 'scene9')
-      .to('.bg_img img:nth-child(1)', {
-        x: '-360vw'
-      }, 'scene9')
-      .to('.lottieSample', {
-        y: '0vw'
-      }, 'scene9')
+    .add('scene9')
+    .to('.bg_img img:nth-child(2)', {
+      x: '-270vw'
+    }, 'scene9')
+    .to('.bg_img img:nth-child(1)', {
+      x: '-360vw'
+    }, 'scene9')
+    .to('.lottieSample', {
+      y: '0vw'
+    }, 'scene9')
 
-      .add('scene10')
-      .to('.bg_img img:nth-child(2)', {
-        x: '-300vw'
-      }, 'scene10')
-      .to('.bg_img img:nth-child(1)', {
-        x: '-400vw'
-      }, 'scene10')
-      .to('.lottieSample', {
-        y: '5vw'
-      }, 'scene10')
+    .add('scene10')
+    .to('.bg_img img:nth-child(2)', {
+      x: '-300vw'
+    }, 'scene10')
+    .to('.bg_img img:nth-child(1)', {
+      x: '-400vw'
+    }, 'scene10')
+    .to('.lottieSample', {
+      y: '5vw'
+    }, 'scene10')
 
-      .add('scene11')
-      .to('.bg_img img:nth-child(2)', {
-        x: '-330vw'
-      }, 'scene11')
-      .to('.bg_img img:nth-child(1)', {
-        x: '-440vw'
-      }, 'scene11')
-      .to('.lottieSample', {
-        y: '0vw'
-      }, 'scene11')
-    };
+    .add('scene11')
+    .to('.bg_img img:nth-child(2)', {
+      x: '-330vw'
+    }, 'scene11')
+    .to('.bg_img img:nth-child(1)', {
+      x: '-440vw'
+    }, 'scene11')
+    .to('.lottieSample', {
+      y: '0vw'
+    }, 'scene11')
   }
 };
 

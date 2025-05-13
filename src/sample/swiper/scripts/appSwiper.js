@@ -28,10 +28,6 @@ class AppSwiper extends Core {
 
   /* ページ読み込み時に実行 */
   loadHandler () {
-
-    /* ここでスクロールとブラウザイベントを有効にする */
-    this.enableScroll();
-
     this.setSwiper();
   }
 
