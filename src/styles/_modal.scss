@@ -127,7 +127,7 @@ body{
 // タブレットからスクロールさせる
 .modal_dom{
   .scroller{
-    @mixin setting.notScrollbar();
+    @include mixin.notScrollbar();
   }
 
   .inner{

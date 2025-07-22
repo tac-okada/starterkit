@@ -3474,21 +3474,9 @@ textarea {
   animation-name: fade_in, slide_in_bg;
 }
 
-.ie11 #modal_bg.active.in,
-.ie10 #modal_bg.active.in {
-  animation: 0.3s cubic-bezier(0.15, 0.29, 0.62, 0.99) both;
-  animation-name: fade_in, slide_in_bg_ie;
-}
-
 #modal_bg.active.out {
   animation: 0.3s cubic-bezier(0.15, 0.29, 0.62, 0.99) both;
   animation-name: fade_out, slide_out_bg;
-}
-
-.ie11 #modal_bg.active.out,
-.ie10 #modal_bg.active.out {
-  animation: 0.3s cubic-bezier(0.15, 0.29, 0.62, 0.99) both;
-  animation-name: fade_out, slide_out_bg_ie;
 }
 
 #modal_close.active.in {
@@ -3550,6 +3538,21 @@ body.iframe::-webkit-scrollbar {
 .modal_iframe.-ios {
   overflow-y: y;
   -webkit-overflow-scrolling: touch;
+}
+
+.modal_dom .scroller {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.modal_dom .scroller::-webkit-scrollbar {
+  display: none;
+}
+.modal_dom .inner {
+  max-width: 760px;
+  width: 92%;
+  padding: 60px 0 70px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 #modal_close {
@@ -3773,6 +3776,14 @@ body.iframe::-webkit-scrollbar {
   }
   #modal_close:hover {
     opacity: 1;
+  }
+  .modal_dom .scroller {
+    height: 100%;
+    overflow-y: auto;
+  }
+  .modal_dom .inner {
+    padding: 40px 0;
+    text-align: left;
   }
   .modal_ar {
     display: none;

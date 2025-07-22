@@ -4,7 +4,7 @@ gsap.registerPlugin(ScrollToPlugin);
 //import $ from 'jquery';
 
 import { UserAgent, MediaQueries } from './util.js';
-import { functions } from './functions.js';
+import * as functions from './functions/index.js';
 import imagesLoaded from 'imagesloaded';
 
 /*
@@ -115,14 +115,14 @@ export class Core {
   }
 
   loadEvents () {
-    //console.info(functions)
+    console.info(functions)
     /* よく使う関数ここで実行 */
     functions.setPopupWin(this)
     functions.setScrollTo(this);
     functions.setAccordion();
     functions.setTab();
     functions.setTelCall(this);
-    functions.setCopy();
+    functions.setTextCopy();
     // フォームまわり
     functions.setNoEnterkey(this);
     functions.setLabelChanger(this);
