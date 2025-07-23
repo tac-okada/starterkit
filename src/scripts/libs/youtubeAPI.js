@@ -1,112 +1,85 @@
 export const youtubeAPI = {
+  flgYtTag: false,
+  ytPlayer: [],
+  youtubeData: [],
 
-  initialize () {
-    /* youtubeAPI用グローバル関数 */
+  initialize() {
     window.onYouTubeIframeAPIReady = () => {
-      if( !this.youtubeData[this.playerNum].playerReady ){
-        this.embedYoutube(this.playerNum);
-      }
+      this.youtubeData.forEach((data, index) => {
+        if (!data.playerReady) {
+          this.embedYoutube(index);
+        }
+      });
     };
 
-    //console.info(this)
     window.youtubeAPI = this;
   },
 
-  /* Youtubeのscriptタグを設置済か否かの判定フラグ */
-  flgYtTag : false,
-  
-  /* YouTubeプレーヤーを格納する配列 */
-  ytPlayer : [],
-  
-  playerNum : 0,
-
-  /*
-  
-    youtubeData  -----------------------------------------------
-  
-  */
-  youtubeData : [
-    /*{
-      youtubeId: 'QOVglXRdo0Y',
-      embedArea: 'player1',
-      playerReady: false
-    }*/
-  ],
-
-  /*
-  
-    setYoutube  -----------------------------------------------
-  
-  */
-  setYoutube ( flg ) {
-    if( flg ){
-      this.autoPlay = 1;
-    }
-    if( this.flgYtTag ){
-      onYouTubeIframeAPIReady();
+  setYoutube() {
+    if (this.flgYtTag) {
+      if (window.YT && window.YT.Player && typeof window.onYouTubeIframeAPIReady === 'function') {
+        window.onYouTubeIframeAPIReady();
+      }
     } else {
-      let tag = document.createElement('script');
+      const tag = document.createElement('script');
       tag.src = "https://www.youtube.com/iframe_api";
-      let firstScriptTag = document.getElementsByTagName('script')[0];
+      const firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
       this.flgYtTag = true;
     }
   },
 
-  /*
-  
-    embedYoutube  -----------------------------------------------
-  
-  */
-  embedYoutube ( _num ) {
-    this.ytPlayer[_num] = new YT.Player(
-      this.youtubeData[_num].embedArea,
-  
-      // width：プレーヤーの幅、height：プレーヤーの高さ、YouTubeのID
-      {
-        // width: 640,
-        // height: 480,
-        videoId: this.youtubeData[_num].youtubeId,
-        playerVars: {
-        // wmode：プレーヤーを背面に表示する
-        // rel：再生終了後に関連動画を表示するかどうか設定
-        // autoplay：自動再生するかどうか設定
-        // showinfo：動画再生前にタイトルなどを表示するかどうか設定
-        // loop：ループの設定
-        // controls：コントロールバー表示設定 0:非表示、1:表示、2:動画再生後に表示
-        // wmode: transparent,
+  embedYoutube(index) {
+    if (!window.YT || !window.YT.Player) {
+      console.warn('YouTube API not ready');
+      return;
+    }
+
+    const data = this.youtubeData[index];
+    if (!data) {
+      console.warn(`youtubeData[${index}] undefined`);
+      return;
+    }
+
+    this.ytPlayer[index] = new YT.Player(data.embedArea, {
+      videoId: data.youtubeId,
+      playerVars: {
         rel: 0,
-        autoplay: this.autoPlay,// autoPlayはiOSで機能しないので、onPlayerReadyでかつsetTimeoutでやる
-        mute: this.autoPlay,// iOSで自動再生時必須。setVolume(0)だと自動再生しない
+        autoplay: data.autoPlay ? 1 : 0,
+        mute: data.autoPlay ? 1 : 0,
         showinfo: 0,
         loop: 0,
         controls: 1
-        },
-        events: {
-          // onReady：プレーヤーの準備ができたときに実行
-          // onStateChange：プレーヤーの状態が変化したときに実行
-          onReady: this.onPlayerReady( _num )
-          // onStateChange: onPlayerStateChange
-        }
+      },
+      events: {
+        onReady: (event) => this.onPlayerReady(event, index),
       }
-    );
+    });
   },
 
-  /*
-  
-    onPlayerReady  -----------------------------------------------
-  
-  */
-  onPlayerReady ( _num ) {
-    this.youtubeData[_num].playerReady = true;
+  onPlayerReady(event, index) {
+    this.youtubeData[index].playerReady = true;
+    console.info(this.youtubeData[index])
+    // ここで自動再生判定して再生
+    if (this.youtubeData[index].autoPlay) {
+      console.info('再生')
+      event.target.playVideo();
+    }
   },
 
-  /*
-  
-    onPlayerStateChange  -----------------------------------------------
-  
-  */
-  onPlayerStateChange ( e ) {
-    //console.info(e)
+  stopPlayer(index) {
+    if (this.ytPlayer[index]) {
+      this.ytPlayer[index].stopVideo();
+    }
+  },
+
+  destroyPlayer(index) {
+    if (this.ytPlayer[index]) {
+      this.ytPlayer[index].destroy();
+      delete this.ytPlayer[index];
+      if (this.youtubeData[index]) {
+        this.youtubeData[index].playerReady = false;
+      }
+    }
   }
 };

@@ -1,5 +1,7 @@
 import { Core } from '/src/scripts/libs/core.js';
-import { Modal } from '/src/scripts/libs/modal.js';
+import { youtubeAPI } from '/src/scripts/libs/youtubeAPI.js';
+import modalController from '/src/scripts/libs/modal/index.js';
+
 
 window.addEventListener('load', () => {
   /* ブレイクポイント指定：タブレット,スマホ */
@@ -30,22 +32,30 @@ class AppModal extends Core {
     /* ここでスクロールとブラウザイベントを有効にする */
     this.enableScroll();
 
-    /* モーダルJS実行 */
-    let modal = new Modal;
-    modal.initialize(this);
+    // モーダル強制視認
+    modalController.onTriggerClick({
+      num: 8,// モーダルID（固有番号）
+      type: 'yt',// 種類: img, iframe, dom, yt
+      param: 't1rFmJMFdKw',// 表示内容
+      noClose: false,// 背景クリックで閉じるか
+      ytNum: 3,// YouTubeなら指定（固有番号）
+      autoPlay: false// 自動再生（YouTubeなら指定）: true, false
+    });
 
     /* domのyoutubeへの置換 */
     document.getElementById('movie01').addEventListener('click', function(e){
       e.preventDefault();
+
+      youtubeAPI.initialize();
+
       //console.info(e.target.getAttribute('data-ytnum'),e.target.id)
-      youtubeAPI.youtubeData.push({
-        num: e.target.getAttribute('data-ytnum'),
+      youtubeAPI.youtubeData[e.target.getAttribute('data-ytnum')] = {
         youtubeId: 't1rFmJMFdKw',
         embedArea: e.target.id,
-        playerReady: false
-      });
-      //console.info(youtubeData,youtubeData.length)
-      youtubeAPI.playerNum = e.target.getAttribute('data-ytnum') - 1;
+        playerReady: false,
+        autoPlay: false
+      };
+      //youtubeAPI.playerNum = e.target.getAttribute('data-ytnum') - 1;
       youtubeAPI.setYoutube();
     });
   }
