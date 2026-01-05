@@ -167,21 +167,24 @@ export default class ModalView {
 
   setCloseEvents(onCloseCallback) {
     if (!this.modalContainer) return;
-  
-    const content = this.modalContainer.querySelector('.modal_contents.active');
-    if (!content) return;
 
-    // モーダル内の.js-modalClose
+    // モーダル内の.js-modalCloseにイベント追加
     const closables = this.modalContainer.querySelectorAll('.js-modalClose');
-  
     closables.forEach(el => {
-      el.onclick = (e) => {
-        if (el.id === 'modal_bg' && content.dataset.noClose === 'true') return;
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const content = this.modalContainer.querySelector('.modal_contents.active');
+
+        if (el.id === 'modal_bg' && content.dataset.noClose === 'true') {
+          e.stopPropagation();
+          return;
+        }
         onCloseCallback?.();
-      };
+      });
     });
   
-    // iframe内の.js-modalCloseも（クロスオリジンなら無視）
+    // iframe内の.js-modalCloseにもイベント追加（同一ドメインのみ）
     const iframes = this.modalContainer.querySelectorAll('iframe');
     iframes.forEach(iframe => {
       try {
@@ -189,9 +192,10 @@ export default class ModalView {
         if (iframeDoc) {
           const iframeClosables = iframeDoc.querySelectorAll('.js-modalClose');
           iframeClosables.forEach(el => {
-            el.onclick = (e) => {
+            el.addEventListener('click', (e) => {
+              e.preventDefault();
               onCloseCallback?.();
-            };
+            });
           });
         }
       } catch (err) {

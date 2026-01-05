@@ -1,6 +1,6 @@
 import ModalController from '/src/scripts/libs/modal/ModalController.js';
 
-const modalController = new ModalController();
-modalController.init();
+const modal = new ModalController();
+modal.init();
 
-export default modalController;
+export default modal;

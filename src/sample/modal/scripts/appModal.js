@@ -1,6 +1,6 @@
 import { Core } from '/src/scripts/libs/core.js';
 import { youtubeAPI } from '/src/scripts/libs/youtubeAPI.js';
-import modalController from '/src/scripts/libs/modal/index.js';
+import modal from '/src/scripts/libs/modal/index.js';
 
 
 window.addEventListener('load', () => {
@@ -33,7 +33,7 @@ class AppModal extends Core {
     this.enableScroll();
 
     // モーダル強制視認
-    modalController.onTriggerClick({
+    modal.onTriggerClick({
       num: 8,// モーダルID（固有番号）
       type: 'yt',// 種類: img, iframe, dom, yt
       param: 't1rFmJMFdKw',// 表示内容
