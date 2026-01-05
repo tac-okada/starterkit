@@ -16,7 +16,7 @@ export const compileCopy = (done) => {
     '!src' + _path + '**/*.ejs',
     '!src' + _path + '**/scripts/**/*',
     '!src' + _path + '**/images/**/*',
-    '!src' + _path + '**/styles/*'// font/があるので一階層のみ
+    '!src' + _path + '**/styles/**/*'
 /*,
     'node_modules/apache-server-configs/public/.htaccess'
 */

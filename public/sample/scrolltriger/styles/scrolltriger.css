@@ -236,8 +236,9 @@ input[type=button] {
   background: none;
   border: none;
   border-radius: 0;
-  -moz-appearance: none;
-       appearance: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
 }
 
 input[type=submit],
@@ -253,8 +254,9 @@ select {
   border-radius: 0;
   outline: none;
   vertical-align: middle;
-  -moz-appearance: none;
-       appearance: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
 }
 
 select::-ms-expand {
@@ -268,8 +270,9 @@ textarea {
   border: none;
   border-radius: 0;
   outline: none;
-  -moz-appearance: none;
-       appearance: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
 }
 
 button {
@@ -281,8 +284,9 @@ button {
   margin: 0;
   padding: 0;
   vertical-align: middle;
-  -moz-appearance: none;
-       appearance: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   cursor: pointer;
 }
 
@@ -294,6 +298,9 @@ img {
   vertical-align: top;
   font-size: 0;
   line-height: 0;
+  display: block;
+  width: 100%;
+  height: auto;
   -ms-interpolation-mode: bicubic;
 }
 
@@ -407,14 +414,10 @@ body.absolute {
   height: auto;
   width: 100%;
   padding: 50vw 0;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -ms-flex-pack: center;
-      justify-content: center;
-  -ms-flex-line-pack: center;
-      align-content: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
 }
 .sec.-sec5 > div {
   width: 30vw;

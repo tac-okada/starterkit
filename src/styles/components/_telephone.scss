@@ -1,0 +1,34 @@
+@use "sass:math";
+@use "../foundation/mixin";
+
+.util{
+  // 電話番号 ---------------------------------
+  .tel{
+    font-size: var(--fsize50);
+    line-height: 1;
+    letter-spacing: 0;
+    font-weight: bold;
+    padding-left: 42px;
+    background: url(/images/ico_tel_bl.svg) no-repeat left center;
+    background-size: 36px auto;
+  }
+
+  // 電話番号非リンク「disable-tel」
+  .disableTel a[href^="tel:"] {
+    color: inherit;
+    text-decoration: none;
+    pointer-events: none;
+  }
+}
+
+
+@media screen and (max-width: mixin.$bpSp){
+  .util{
+    // 電話番号 ---------------------------------
+    .tel{
+      font-size: mixin.px-to-vw(60px, 767px);
+      padding-left: mixin.px-to-vw(50px, 767px);
+      background-size: mixin.px-to-vw(44px, 767px) auto;
+    }
+  }
+}

@@ -40,10 +40,12 @@ class AppLottie extends Core {
   }
 
   setLottie () {
-    loader.classList.add('hdn');
+
+    console.info(this)
+    //loader.classList.add('hdn');
 
     /* ここでスクロールとブラウザイベントを有効にする */
-    this.obj.enableScroll();
+    //this.obj.enableScroll();
 
     let lottieSample = document.querySelector("lottie-player"); //アニメーションを格納するDOM要素
     let totalFrames;

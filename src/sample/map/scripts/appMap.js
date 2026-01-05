@@ -6,11 +6,11 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger.js';
 
 window.addEventListener('load', () => {
   /* ブレイクポイント指定：タブレット,スマホ */
-  appLottie.initialize(1024,767);
+  appMap.initialize(1024,767);
   
 });
 
-class AppLottie extends Core {
+class AppMap extends Core {
 /*
   使用可能な定数・変数一覧  -----------------------------------------------
   ● UAなど：this.USER
@@ -290,4 +290,4 @@ class AppLottie extends Core {
 
 };
 
-window.appLottie = window.appLottie || new AppLottie;
+window.appMap = window.appMap || new AppMap;

@@ -180,14 +180,10 @@ body.absolute {
 }
 
 section {
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -ms-flex-pack: center;
-      justify-content: center;
-  -ms-flex-align: center;
-      align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   text-align: left;
   width: 100%;
   background: #efefef;

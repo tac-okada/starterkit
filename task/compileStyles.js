@@ -9,9 +9,9 @@ import autoprefixer from 'autoprefixer';
 import stylelint from 'stylelint';
 import size from 'gulp-size';
 import changed from 'gulp-changed';
+import tailwindcss from 'tailwindcss';
 import path from 'path';
 import { _path } from '../package.json';
-import { browserslist } from '../package.json';
 let pubricPath;
 
 const getPath = file => {
@@ -33,11 +33,11 @@ export const compileStyles = (done) => {
   // For best performance, don't add Sass partials to `gulp.src`
   return src([
     'src' + _path + '**/*.scss',
-    'src' + _path + '**/*.css'
+    'src' + _path + '**/*.css',
   ], { sourcemaps: true })
     .pipe(plumber({
       errorHandler: function(err) {
-        console.log(err.messageFormatted);
+        console.log(err);
         this.emit('end');
       }
     }))
@@ -48,9 +48,9 @@ export const compileStyles = (done) => {
       onError: console.error.bind(console, 'Sass error:')
     }))
     .pipe(postcss([
-      autoprefixer({
-        browsers: browserslist
-      }),
+      tailwindcss(),
+      autoprefixer(),
+/*
       stylelint({
         "rules": { 
           // 16進数が正しいか
@@ -65,6 +65,7 @@ export const compileStyles = (done) => {
           "declaration-block-trailing-semicolon": "always"
         }
       })
+*/
     ]))
     //.pipe(dest('.tmp' + _path + 'styles'))
     .pipe(dest( file => {

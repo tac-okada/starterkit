@@ -1,5 +1,5 @@
 import { Core } from '/src/scripts/libs/core.js';
-import { Modal } from '/src/scripts/libs/modal.js';
+import modal from '/src/scripts/libs/modal/index.js';
 import hljs from 'highlight.js';
 
 window.addEventListener('load', () => {
@@ -30,10 +30,6 @@ class AppTemplate extends Core {
 
     /* ここでスクロールとブラウザイベントを有効にする */
     this.enableScroll();
-
-    /* モーダルJS実行 */
-    let modal = new Modal;
-    modal.initialize(this);
 
     hljs.highlightAll();
 

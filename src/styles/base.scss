@@ -1,0 +1,104 @@
+@use "foundation/variable";
+@use "foundation/mixin";
+@use "foundation/reset";
+
+@use "components/loader";
+@use "components/layout";
+@use "components/font";
+@use "components/list";
+@use "components/form";
+@use "components/btn";
+@use "components/link";
+@use "components/accordion";
+@use "components/table";
+@use "components/modal";
+@use "components/telephone";
+@use "components/history";
+@use "components/copy";
+
+@use "tailwind/base";
+
+/*============================================================
+  common
+============================================================*/
+
+
+/*  web font
+------------------------------------------------*/
+// CDNにて読み込み
+// fontawesome
+//@import url(//use.fontawesome.com/releases/v5.1.0/css/all.css);
+// Noto Sans
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=REM:wght@400;700&display=swap');
+
+// サーバー設置から読み込み
+// NotoSansJP
+/*
+@font-face {
+  font-family: 'Noto Sans Japanese';
+  font-weight: 400;
+  font-style: normal;
+  src: url('fonts/NotoSansCJKjp-Regular.woff2') format('woff2'),
+    url('fonts/NotoSansCJKjp-Regular.woff') format('woff');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Noto Sans Japanese';
+  font-weight: 700;
+  font-style: bold;
+  src: url('fonts/NotoSansCJKjp-Bold.woff2') format('woff2'),
+    url('fonts/NotoSansCJKjp-Bold.woff') format('woff');
+  font-display: swap;
+}
+*/
+
+
+html {
+  width: 100%;
+  height: 100%;
+  //overflow-y: scroll;
+  font-size: 100%;
+  font-family: var(--fontset_noto);
+
+  // iOS15用：ここから
+  &.ios{
+    height: 100vh;
+  }
+  // iOS15用：ここまで
+}
+body {
+  font-feature-mixins: 'palt' 1;
+  color: var(--txt-color);
+  width: 100%;
+  height: 100%;
+  line-height: 1.8;
+  text-align: center;
+  //font-size: 16px;
+  font-size: 1.6rem;
+  letter-spacing: 0.05em;
+
+  -webkit-text-size-adjust: 100%;
+     -moz-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+
+  &.fixed{
+    position: fixed;
+    overflow-y: hidden;
+  }
+  &.absolute{
+    position: absolute;
+  }
+}
+
+.rem{
+  font-family: 'REM';
+}
+
+html:not(.ios) input[type=radio] {
+  background: none;
+  border: none;
+  border-radius: 0;
+}

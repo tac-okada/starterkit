@@ -1,0 +1,404 @@
+@use "sass:math";
+@use "../foundation/mixin";
+
+.util{
+  // form --------------------------------- 
+  .copyInput{
+    opacity: 0 !important;
+    pointer-events: none !important;
+    position: absolute !important;
+    left: 0 !important;
+    bottom: 0 !important;
+  }
+
+  label{
+    display: block;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea{
+    border: 2px solid #000;
+    font-size: var(--fsize18);
+    line-height: 1;
+    letter-spacing: 0.05em;
+    padding: 15px;
+    border-radius: var(--radius1);
+    box-sizing: border-box;
+    color: #000;
+    transition: background .3s var(--easeOutCubic);
+    background-color: #fff;
+
+    @include mixin.notScrollbar();
+
+    &:focus{
+      background: #fff;
+    }
+
+    &.full{
+      width: 100%;
+    }
+
+    &.col2{
+      width: 49%;
+    }
+
+    &.error{
+      background: rgba(255,0,0,.1);
+    }
+  }
+
+  select{
+    border: 2px solid #000;
+    font-size: var(--fsize18);
+    line-height: 1.2;
+    padding: 15px 38px 15px 15px;
+    border-radius: var(--radius1);
+    box-sizing: border-box;
+    color: #000;
+    cursor: pointer;
+    width: 100%;
+    transition:  background .2s var(--easeOutCubic);
+
+    @media (any-hover: hover){
+      &:hover{
+        background: #f9f9f9;
+      }
+    }
+  }
+
+  .required{
+    background: var(--alert-color);
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: var(--fsize12);
+    line-height: 1;
+    letter-spacing: 0.05em;
+    color: #fff;
+    border-radius: 3px;
+    padding: 3px 6px 4px;
+    margin-left: .5em;
+    margin-right: .5em;
+  }
+
+  .alerthead{
+    font-size: var(--fsize18);
+    letter-spacing: 0;
+    line-height: 1.4;
+    font-weight: bold;
+    color: #fff;
+    border-radius: var(--radius1);
+    padding: 10px 0;
+    background: url(/images/ico_alert_w.svg) no-repeat 3% center, url(/images/ico_alert_w.svg) no-repeat 97% center var(--alert-color);
+    background-size: 18px auto, 18px auto;
+  }
+
+  .alertmessage{
+    font-size: var(--fsize14);
+    line-height: 1.4;
+    font-weight: bold;
+    background: var(--alert-color);
+    display: table;
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: var(--radius1);
+    margin-top: 5px;
+
+    &.-name{
+      margin-left: 10%;
+    }
+  }
+
+  .column{
+    border-bottom: 2px solid #efefef;
+    padding: 15px 0;
+    box-sizing: border-box;
+    
+    &:first-of-type{
+      border-top: 2px solid #efefef;
+    }
+
+    &.-noborder{
+      border-bottom: none;
+    }
+  
+    dt,dd{
+      text-align: left;
+    }
+  }
+
+  .columnInner{
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: 10px 2%;
+    width: 100%;
+    position: relative;
+
+    &.-noGap{
+      gap: 0;
+    }
+
+    &.-noStretch{
+      align-items: center;
+    }
+  }
+
+  .nameLabel{
+    width: 10%;
+    text-align: right;
+    box-sizing: border-box;
+    padding-right: .5em;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .formName{
+    width: 90%;
+  }
+
+  .btnLabel{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    font-size: var(--fsize14);
+    line-height: 1.2;
+    padding: 10px 5px 10px 26px;
+    min-height: 62px;
+    border: 2px solid #efefef;
+    border-radius: var(--radius1);
+    box-sizing: border-box;
+    position: relative;
+    cursor: pointer;
+    transition: border .2s var(--easeOutCubic),
+      background .2s var(--easeOutCubic);
+
+    @media (any-hover: hover){
+      &:hover{
+        &:not(.checked){
+          background: #f9f9f9;
+          border: 2px solid #c6c6c6;
+        }
+      }
+    }
+
+    &.-radio{
+      &:before{
+        content: "";
+        width: 10px;
+        height: 10px;
+        background: #efefef;
+        border-radius: 50%;
+        box-sizing: border-box;
+        position: absolute;
+        left: 10px;
+        top: calc( 50% - 5px );
+      }
+  
+      &.checked{
+        border-color: #000;
+        &:before{
+          border: 3px solid #000;
+          background: #fff;
+        }
+      }
+    }
+
+    &.-check{
+      &:before{
+        content: "";
+        width: 10px;
+        height: 10px;
+        border-radius: 3px;
+        border: 2px solid #efefef;
+        box-sizing: border-box;
+        position: absolute;
+        left: 10px;
+        top: calc( 50% - 5px );
+      }
+
+      &.checked{
+        border-color: #000;
+        &:after{
+          content: "";
+          width: 8px;
+          height: 4px;
+          border-left: 2px solid #000;
+          border-bottom: 2px solid #000;
+          position: absolute;
+          left: 10px;
+          top: calc( 50% - 5px );
+          transform: rotate(-45deg);
+        }
+      }
+    }
+
+    &.-col3{
+      width: 32%;
+    }
+
+    &.-col2{
+      width: 49%;
+    }
+
+    &.-full{
+      width: 100%;
+    }
+
+    >input[type="radio"],
+    >input[type="checkbox"]{
+      opacity: 0;
+      position: absolute;
+    }
+  }
+
+  .selectCol{
+    position: relative;
+    width: 100%;
+
+    &:before{
+      content: '';
+      @include mixin.sankaku(12px, #000, 'down', true);
+      position: absolute;
+      right: 15px;
+      top: calc( 50% - 3px );
+      pointer-events: none;
+    }
+
+    &.-col3{
+      width: 32%;
+    }
+
+    &.-col2{
+      width: 49%;
+    }
+
+    &.-full{
+      width: 100%;
+    }
+  }
+
+  .confirm{
+    border-radius: var(--radius1);
+    box-sizing: border-box;
+    background-color: #f4f4f4;
+    padding: 12px;
+    line-height: 1.4;
+  }
+}
+
+
+@media screen and (max-width: mixin.$bpSp){
+  .util{
+    // form --------------------------------- 
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea{
+      font-size: mixin.px-to-vw(36px, 767px);
+      padding: mixin.px-to-vw(30px, 767px);
+    }
+  
+    select{
+      font-size: mixin.px-to-vw(36px, 767px);
+      padding: mixin.px-to-vw(30px, 767px) mixin.px-to-vw(76px, 767px) mixin.px-to-vw(30px, 767px) mixin.px-to-vw(30px, 767px);
+    }
+  
+    .required{
+      font-size: mixin.px-to-vw(24px, 767px);
+      padding: mixin.px-to-vw(6px, 767px) mixin.px-to-vw(12px, 767px) mixin.px-to-vw(8px, 767px);
+    }
+  
+    .alerthead {
+      font-size: mixin.px-to-vw(36px, 767px);
+      padding: mixin.px-to-vw(20px, 767px) 0;
+      background-size: mixin.px-to-vw(36px, 767px) auto, mixin.px-to-vw(36px, 767px) auto;
+    }
+  
+    .alertmessage{
+      font-size: mixin.px-to-vw(28px, 767px);
+      padding: mixin.px-to-vw(12px, 767px) mixin.px-to-vw(20px, 767px);
+      margin-top: mixin.px-to-vw(10px, 767px);
+    }
+
+    .column{
+      padding: mixin.px-to-vw(30px, 767px) 0;
+    }
+
+    .columnInner{
+      gap: mixin.px-to-vw(20px, 767px) 2%;
+    }
+
+    .nameLabel{
+      letter-spacing: 0;
+    }
+
+    .btnLabel{
+      font-size: mixin.px-to-vw(28px, 767px);
+      padding: mixin.px-to-vw(20px, 767px) mixin.px-to-vw(10px, 767px) mixin.px-to-vw(20px, 767px) mixin.px-to-vw(52px, 767px);
+      min-height: mixin.px-to-vw(124px, 767px);
+
+      &.-radio{
+        &:before{
+          width: mixin.px-to-vw(20px, 767px);
+          height: mixin.px-to-vw(20px, 767px);
+          left: mixin.px-to-vw(20px, 767px);
+          top: calc( 50% - mixin.px-to-vw(10px, 767px) );
+        }
+      }
+  
+      &.-check{
+        &:before{
+          width: mixin.px-to-vw(20px, 767px);
+          height: mixin.px-to-vw(20px, 767px);
+          border-radius: 2px;
+          left: mixin.px-to-vw(20px, 767px);
+          top: calc( 50% - mixin.px-to-vw(10px, 767px) );
+        }
+  
+        &.checked{
+          &:after{
+            content: "";
+            width: mixin.px-to-vw(16px, 767px);
+            height: mixin.px-to-vw(8px, 767px);
+            left: mixin.px-to-vw(20px, 767px);
+            top: calc( 50% - mixin.px-to-vw(10px, 767px) );
+          }
+        }
+      }
+
+      &.-spCol2{
+        width: 49%;
+      }
+
+      &.-spFull{
+        width: 100%;
+      }
+    }
+
+    .selectCol{
+      &:before{
+        @include mixin.sankaku( mixin.px-to-vw(24px, 767px), #000, 'down', true);
+        right: mixin.px-to-vw(30px, 767px);
+        top: calc( 50% - mixin.px-to-vw(6px, 767px) );
+      }
+
+      &.-spCol2{
+        width: 49%;
+      }
+
+      &.-spFull{
+        width: 100%;
+      }
+    }
+
+    .confirm{
+      padding: mixin.px-to-vw(24px, 767px);
+    }
+  }
+}

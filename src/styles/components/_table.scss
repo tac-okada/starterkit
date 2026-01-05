@@ -1,0 +1,56 @@
+@use "sass:math";
+@use "../foundation/mixin";
+
+.util{
+  // table ---------------------------------
+  .tableScroller{
+    width: 100%;
+    overflow-x: scroll; 
+    @include mixin.notScrollbar();
+  }
+
+  .table{
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+
+    th,td {
+      border: 1px solid #b3b3b3;
+      empty-cells: show;
+      padding: 10px;
+      line-height: 1.4;
+    }
+
+    th{
+      background-color: #f0f0f0;
+    }
+  }
+}
+
+
+@media screen and (max-width: mixin.$bpSp){
+  .util{
+    // table ---------------------------------
+    .table{
+      th,td {
+        padding: mixin.px-to-vw(20px, 767px);
+      }
+
+      @for $i from 1 through 5 {
+        $i: 100 + ( $i * 20 );
+        &.-w#{ $i }{
+          width: $i * 1%;
+        }
+      }
+
+/*
+      &.-w120{
+        width: 120%;
+      }
+      &.-w140{
+        width: 140%;
+      }
+*/
+    }
+  }
+}

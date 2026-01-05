@@ -1,0 +1,115 @@
+@use "sass:math";
+@use "../foundation/mixin";
+
+/*  hidden
+------------------------------------------------*/
+.hdn{
+  display: block !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+}
+
+.util{
+  // margin padding
+  @for $i from 0 through 20 {
+    .mt#{ $i * 5 }{
+      margin-top: 5px * $i !important;
+    }
+    .mt-#{ $i * 5 }{
+      margin-top: -5px * $i !important;
+    }
+    .mb#{ $i * 5 }{
+      margin-bottom: 5px * $i !important;
+    }
+    .pt#{ $i * 5 }{
+      padding-top: 5px * $i !important;
+    }
+    .pb#{ $i * 5 }{
+      padding-bottom: 5px * $i !important;
+    }
+  }
+  
+  
+  // layout ---------------------------------
+  .inner{
+    width: var(--inner-width);
+    margin: 0 auto;
+  }
+  
+  .center{
+    text-align: center !important;
+  }
+  .left{
+    text-align: left !important;
+  }
+  .right{
+    text-align: right !important;
+  }
+  .centerParent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  
+    >*{
+      display: inline-block;
+    }
+  }
+
+  // block ---------------------------------
+  .block{
+    border-radius: var(--radius1);
+    box-sizing: border-box;
+    background-color: #f4f4f4;
+    padding: 20px 24px;
+
+    &.-bgW{
+      background-color: #fff;
+    }
+
+    &.-border{
+      background-color: #fff;
+      border: 2px solid #eaeaea;
+    }
+
+    &.-alert{
+      border: 2px solid var(--alert-color);
+      background: #fff;
+    }
+  }
+}
+
+
+@media screen and (max-width: mixin.$bpSp){
+  .util{
+     // margin padding
+    @for $i from 0 through 20 {
+      .mt#{ $i * 5 }{
+        margin-top: mixin.px-to-vw(10px * $i, 767px) !important;
+      }
+      .mb#{ $i * 5 }{
+        margin-bottom: mixin.px-to-vw(10px * $i, 767px) !important;
+      }
+      .pt#{ $i * 5 }{
+        padding-top: mixin.px-to-vw(10px * $i, 767px) !important;
+      }
+      .pb#{ $i * 5 }{
+        padding-bottom: mixin.px-to-vw(10px * $i, 767px) !important;
+      }
+    }
+
+    // layout ---------------------------------
+    .spLeft{
+      text-align: left !important;
+    }
+
+    // block ---------------------------------
+    .block{
+      padding: mixin.px-to-vw(30px, 767px) mixin.px-to-vw(34px, 767px);
+    }
+  }
+}

@@ -1,0 +1,151 @@
+@use "sass:math";
+@use "../foundation/mixin";
+
+.util{
+  // list ---------------------------------
+  .list{
+    // 中央・右寄せ時はマーカー非表示。htmlで記述する。
+    &.right,
+    &.center{
+      >li{
+        display: block;
+        &:before{
+          display: none;
+        }
+      }
+    }
+
+    &.-noMarker{
+      >li{
+        padding-left: 1em;
+        text-indent: -1em;
+        &:before{
+          display: none;
+        }
+      }
+    }
+
+    >li{
+      position: relative;
+      line-height: 1.4;
+      display: table;
+      padding-left: 1em;
+
+      &:not(:last-child){
+        margin-bottom: .5em;
+      }
+
+      &:before{
+        content: '';
+        width: 6px;
+        height: 6px;
+        position: absolute;
+        left: .3em;
+        top: .5em;
+        background-color: #000;
+        border-radius: 50%;
+        box-sizing: border-box;
+      }
+
+      &:after{
+        content: '';
+        display: block;
+      }
+
+      .list{
+        margin-top: .5em;
+        >li{
+          &:before{
+            background-color: #fff;
+            border: 1px solid #000;
+          }
+        }
+      }
+    }
+
+    &.-notes{
+      >li{
+        padding-left: 12px;
+        &:before{
+          content: '※';
+          font-size: var(--fsize10);
+          width: auto;
+          height: auto;
+          top: 0;
+          left: 0;
+          background: none !important;
+          border-radius: none !important;
+          border: none !important;
+        }
+      }
+    }
+
+    &.-asterisk{
+      >li{
+        padding-left: 12px;
+        &:before{
+          content: '＊';
+          font-size: var(--fsize10);
+          width: auto;
+          height: auto;
+          top: 0;
+          left: 0;
+          background: none !important;
+          border-radius: none !important;
+          border: none !important;
+        }
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width: mixin.$bpSp){
+  .util{
+    // list ---------------------------------
+    .list{
+      // 中央・右寄せ時はマーカー非表示。htmlで記述する。
+      &.right,
+      &.center{
+        >li{
+          display: block;
+          &:before{
+            display: none;
+          }
+        }
+      }
+  
+      &.-noMarker{
+        >li{
+          padding-left: 1em;
+        }
+      }
+  
+      >li{
+        &:before{
+          width: mixin.px-to-vw(12px, 767px);
+          height: mixin.px-to-vw(12px, 767px);
+          //left: mixin.px-to-vw(16px, 767px);
+        }
+      }
+  
+      &.-notes{
+        >li{
+          padding-left: mixin.px-to-vw(24px, 767px);
+          &:before{
+            font-size: mixin.px-to-vw(20px, 767px);
+          }
+        }
+      }
+  
+      &.-asterisk{
+        >li{
+          padding-left: mixin.px-to-vw(24px, 767px);
+          &:before{
+            font-size: mixin.px-to-vw(20px, 767px);
+          }
+        }
+      }
+    }
+  }
+}

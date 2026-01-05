@@ -1,0 +1,198 @@
+@use "sass:math";
+@use "../foundation/mixin";
+
+.util{
+  // accordion ---------------------------------
+  .accorBlock{
+    background: #efefef;
+    border-radius: var(--radius1);
+    box-sizing: border-box;
+  }
+  
+  .accorBtn{
+    cursor: pointer;
+    position: relative;
+    padding: 15px 40px 15px 20px;
+  
+    &:before{
+      content: '';
+      position: absolute;
+      left: 15px;
+      top: 1.4em;
+      color: #fff;
+      font-family: 'REM';
+      font-weight: bold;
+      font-size: var(--fsize14);
+      line-height: 1;
+      letter-spacing: 0;
+      padding: 2px 0;
+      text-align: center;
+      border-radius: 3px;
+      min-width: 40px;
+      background: #dd0000;
+      display: none;
+    }
+  
+    &.open{
+      .accorIco{
+        &:after{
+          transform: rotateZ(90deg);
+        }
+      }
+    }
+  
+    @for $i from 1 through 20 {
+      &.-q#{ $i }{
+        padding-left: 65px;
+        &:before{
+          display: block;
+          content: 'Q' + #{ $i };
+        }
+        & + .accorArea{
+          .inner{
+            padding-left: 65px;
+            &:before{
+              display: block;
+              content: 'A' + #{ $i };
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  .accorArea{
+    height: 0;
+  
+    &.open{
+      .inner{
+        opacity: 1;
+      }
+    }
+  
+    .inner{
+      box-sizing: border-box;
+      width: 100%;
+      padding: 0 20px 15px;
+      opacity: 0;
+      position: relative;
+      transition: opacity .1s;
+      margin: 0;
+
+      &:before{
+        content: '';
+        position: absolute;
+        left: 15px;
+        top: .2em;
+        color: #fff;
+        font-family: 'REM';
+        font-weight: bold;
+        font-size: var(--fsize14);
+        line-height: 1;
+        letter-spacing: 0;
+        padding: 2px 0;
+        text-align: center;
+        border-radius: 3px;
+        min-width: 40px;
+        background: #0047de;
+        display: none;
+      }
+    }
+  }
+  
+  .accorIco{
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    right: 15px;
+    top: calc( 50% - 6px );
+    pointer-events: none;
+    transition: transform .2s;
+  
+    &:before{
+      content: '';
+      width: 12px;
+      height: 2px;
+      background: #000;
+      position: absolute;
+      left: 0;
+      top: calc( 50% - 1px );
+      transition: transform .2s;
+    }
+  
+    &:after{
+      content: '';
+      width: 2px;
+      height: 12px;
+      background: #000;
+      position: absolute;
+      left: calc( 50% - 1px );
+      top: 0;
+      transition: transform .2s;
+    }
+  }
+}
+
+
+@media screen and (max-width: mixin.$bpSp){
+  .util{
+    // accordion ---------------------------------
+    .accorBtn{
+      padding: mixin.px-to-vw(30px, 767px) mixin.px-to-vw(80px, 767px) mixin.px-to-vw(30px, 767px) mixin.px-to-vw(40px, 767px);
+    
+      &:before{
+        left: mixin.px-to-vw(30px, 767px);
+        font-size: mixin.px-to-vw(28px, 767px);
+        padding: mixin.px-to-vw(4px, 767px) 0;
+        border-radius: 2px;
+        min-width: mixin.px-to-vw(80px, 767px);
+      }
+    
+      @for $i from 1 through 20 {
+        &.-q#{ $i }{
+          padding-left: mixin.px-to-vw(130px, 767px);
+          & + .accorArea{
+            .inner{
+              padding-left: mixin.px-to-vw(130px, 767px);
+            }
+          }
+        }
+      }
+    }
+    
+    .accorArea{
+      .inner{
+        padding: 0 mixin.px-to-vw(40px, 767px) mixin.px-to-vw(30px, 767px);
+
+        &:before{
+          left: mixin.px-to-vw(30px, 767px);
+          font-size: mixin.px-to-vw(28px, 767px);
+          padding: mixin.px-to-vw(4px, 767px) 0;
+          border-radius: 2px;
+          min-width: mixin.px-to-vw(80px, 767px);
+        }
+      }
+    }
+    
+    .accorIco{
+      position: absolute;
+      width: mixin.px-to-vw(24px, 767px);
+      height: mixin.px-to-vw(24px, 767px);
+      right: mixin.px-to-vw(30px, 767px);
+      top: calc( 50% - mixin.px-to-vw(12px, 767px) );
+    
+      &:before{
+        width: mixin.px-to-vw(24px, 767px);
+        height: mixin.px-to-vw(4px, 767px);
+        top: calc( 50% - mixin.px-to-vw(2px, 767px) );
+      }
+    
+      &:after{
+        content: '';
+        width: mixin.px-to-vw(4px, 767px);
+        height: mixin.px-to-vw(24px, 767px);
+        left: calc( 50% - mixin.px-to-vw(2px, 767px) );
+      }
+    }
+  }
+}

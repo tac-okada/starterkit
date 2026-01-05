@@ -1,0 +1,134 @@
+@use "sass:math";
+@use "../foundation/mixin";
+
+/*  a
+------------------------------------------------*/
+a {
+  outline: 0;
+  text-decoration: none;
+  cursor: pointer;
+  color: var(--link-color);
+
+  &:link { text-decoration: none;}
+  &:visited {
+    color: var(--linkVisited-color);
+    text-decoration: none;
+  }
+  &:focus { text-decoration: none;}
+  &:active { text-decoration: none;}
+  
+  &[href^="tel"]{
+    color: inherit;
+  }
+
+  @media (any-hover: hover){
+    &:hover { text-decoration: underline; }
+  }
+}
+
+@media (any-hover: hover){
+  .hover{
+    transition: opacity .3s;
+
+    &:hover{
+      opacity: .7;
+    }
+  }
+}
+
+.util{
+  .txtLink{
+    position: relative;
+    padding-left: 16px;
+    margin: 0 4px;
+  
+    &:before{
+      content: '';
+      position: absolute;
+      left: 6px;
+      top: .6em;
+      @include mixin.sankaku(6px, var(--link-color), 'right');
+    }
+  
+    &.-left{
+      &:before{
+        @include mixin.sankaku(6px, var(--link-color), 'left');
+      }
+    }
+  
+    &.-up{
+      &:before{
+        @include mixin.sankaku(6px, var(--link-color), 'up');
+      }
+    }
+  
+    &.-down{
+      &:before{
+        @include mixin.sankaku(6px, var(--link-color), 'down');
+      }
+    }
+  
+    &.-noar{
+      padding-left: 0;
+      &:before{
+        display: none;
+      }
+    }
+  
+    &.-blank{
+      padding-right: 14px;
+      background: url(/images/ico_blank.svg) no-repeat 99.5% .45em;
+      background-size: 10px auto;
+    }
+  
+    &.-file{
+      padding-right: 12px;
+      background: url(/images/ico_file.svg) no-repeat 99.5% .45em;
+      background-size: auto 10px;
+    }
+  }
+}
+
+@media screen and (max-width: mixin.$bpSp){
+  .util{
+    // txtLink ---------------------------------
+    .txtLink{
+      padding-left: mixin.px-to-vw(32px, 767px);
+      margin: 0 mixin.px-to-vw(8px, 767px);
+    
+      &:before{
+        left: mixin.px-to-vw(12px, 767px);
+        @include mixin.sankaku(mixin.px-to-vw(12px, 767px), var(--link-color), 'right');
+      }
+  
+      &.-left{
+        &:before{
+          @include mixin.sankaku(mixin.px-to-vw(12px, 767px), var(--link-color), 'left');
+        }
+      }
+  
+      &.-up{
+        &:before{
+          @include mixin.sankaku(mixin.px-to-vw(12px, 767px), var(--link-color), 'up');
+        }
+      }
+  
+      &.-down{
+        &:before{
+          @include mixin.sankaku(mixin.px-to-vw(12px, 767px), var(--link-color), 'down');
+        }
+      }
+  
+  
+      &.-blank{
+        padding-right: mixin.px-to-vw(28px, 767px);
+        background-size: mixin.px-to-vw(20px, 767px) auto;
+      }
+    
+      &.-file{
+        padding-right: mixin.px-to-vw(24px, 767px);
+        background-size: auto mixin.px-to-vw(20px, 767px);
+      }
+    }
+  }
+}

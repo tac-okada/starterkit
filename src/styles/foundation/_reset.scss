@@ -166,6 +166,9 @@ img {
   vertical-align: top;
   font-size: 0;
   line-height: 0;
+  display: block;
+  width: 100%;
+  height: auto;
   //ie8で縮小画像劣化させない
   -ms-interpolation-mode: bicubic;
 }
